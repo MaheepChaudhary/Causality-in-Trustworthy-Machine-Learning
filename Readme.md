@@ -10,4 +10,3 @@ The repository contains two folders:
 * Cooked papers
 > It contains the papers that are already read.
 
-This is the [link](https://docs.google.com/spreadsheets/d/1xVsTZfnJanM5ATnFSDjKiI0UHxIH1l_ztxRPzPupGBE/edit?usp=sharing) of the google sheet containing the summary of the papers.    
