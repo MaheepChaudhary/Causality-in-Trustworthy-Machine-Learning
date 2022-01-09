@@ -21,7 +21,7 @@ The repository is organized by Maheep Chaudhary and [Haohan Wang](http://www.cs.
          They propose the model to be such that max P (Y = ŷ|X = x + delta) - P(Y = ŷ|do(X = x + delta)), 
          subject to P (Y = ŷ|do(X = x + delta)) = P (Y = ŷ|do(X = x)), in other words they focus on annhilating the confounders using the retinotopic centres as the instrumental variable.
         </details>
-
+---
 <!--- ### Week 2 -->
 
   - [Unbiased Scene Graph Generation from Biased Training](https://arxiv.org/pdf/2002.11949.pdf)
@@ -108,7 +108,7 @@ The repository is organized by Maheep Chaudhary and [Haohan Wang](http://www.cs.
         `Cycle Consistency loss` : The cycle consistency loss is used for producing better multi-way counterfactual maps. However, since the discriminator only classifies the real or fake samples, it does not have the ability to guide the generator to produce multi-way counterfactual maps.
         </details>
 
-        
+---        
 <!--- Week 3 -->
 
    - [Introspective Distillation for Robust Question Answering](https://arxiv.org/pdf/2111.01026.pdf)
@@ -156,7 +156,13 @@ The repository is organized by Maheep Chaudhary and [Haohan Wang](http://www.cs.
         !['Algorithm'](images/2.png)
         </details>
         
-        
+   - [DeDUCE: Generating Counterfactual Explanations At Scale](https://arxiv.org/pdf/2111.15639.pdf)
+      - <details><summary>Maheep's Notes</summary>
+        The paper focues to detect the erroneous behaviour of the models using counterfatctual as when an image classifier outputs a wrong class label, it can be helpful to see what changes in the image would lead to a correct classification. In these cases the counterfactual acrs as the closest alternative that changes the prediction and we also learn about the decision boundary.<br><br>
+        The proposed model is implemented by identifying the Epistemic uncertainity, i.e. the useful features using the Gaussian Mixture Model and therfore only the target class density is increased. The next step would be to change the prediction using a subtle change therefore the most slaient pixel, identified usign the gradient are changed.  
+
+        !['Algorithm'](images/3.png)
+        </details>     
         
         
         
