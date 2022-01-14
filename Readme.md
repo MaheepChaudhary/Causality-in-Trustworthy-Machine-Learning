@@ -168,6 +168,32 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
         !['Algorithm'](images/3.png)
         </details>     
         
+   - [Designing Counterfactual Generators using Deep Model Inversion](https://arxiv.org/pdf/2109.14274.pdf)
+      - <details><summary>Maheep's Notes</summary>
+        The paper focues on the scenario when the we have access only to the trained deep classifier and not the actual training data. The paper proposes a goal to develop a deep inversion approach to generate counterfactual explanations. The paper propses methods to preserve metrics for semantic preservation using the different methods such as ISO and LSO. The author also focuses on manifold consistency for the counterfactual image using the Deep Image Prior model. 
+
+        `argmin(lambda_1*sigma_on_l(layer_l(x'), layer_l(x)) + lambda_2*L_mc(x';F) + lambda_3*L_cf(F(x'), y'))` 
+        <br>
+        where, <br>
+        `layer_l` :The differentiable layer "l" of the neural network, it is basically used for semantic preservation. <br>
+        `L_mc`: It penlaizes x' whcih do not lie near the manifold. L_mc can be Deterministic Uncertainty Quantification (DUQ).<br>
+        `L_fc`: It ensures that the prediction for the counterfactual matches the desired target
+        </details>
+        
+        
+   - [ECINN: Efficient Counterfactuals from Invertible Neural Networks](https://arxiv.org/pdf/2103.13701.pdf)
+      - <details><summary>Maheep's Notes</summary>
+        The paper utilizes the generative capacities of invertible neural networks for image classification to generate counterfactual examples efficiently. The main advantage of this network is that it is fast and invertible, i.e. it has full information preservation between input and output layers, where the other networks are surjective in nature, therfore also making the evaluation easy. The network claims to change only class-dependent features while ignoring the class-independence features succesfully. This happens as the INNs have the property that thier latent spaces are semantically organized. When many latent representations of samples from the same class are averaged, then class-independent information like background and object orientation will cancel out and leaves just class-dependent information<br>
+        
+        `x' = f_inv(f(x) + alpha*delta_x)` 
+        <br>
+        where, <br>
+        `x'` :Counterfactual image. <br>
+        `f`: INN and therfore `f_inv` is the inverse of `f`.<br>
+        `delta_x`: the infoprmation to be added to convert the latent space of image to that of counterfactual image.<br>
+        `||z + alpha_0*delta_x- µ_p || = ||z + alpha_0*delta_x - µ_q ||` where the z + alpha_0*delta_x is the line separating the two classes and µ_q and µ_q are the mean distance from line. Therefore <br>
+        `alpha = alpha_0 + 4/5*(1-alpha_0)`  
+        </details>
         
         
         
@@ -187,9 +213,4 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
         
         
         
-        
-        
-        
-        
-        
-        
+
