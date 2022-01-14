@@ -224,15 +224,25 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
         3.) **Context-aware self-consistency**: To be self-consistent, the explanation function should satisfy three criteria <br>
         > (a) Reconstructing the input image by setting = 0 should return the input image, i.e., G(x, 0) = x. <br> 
         > (b) Applying a reverse perturbation on the explanation image x should recover x. <br> 
+
         To mitigate this conditions the author propose an identity loss. The author argues that there is a chance that the GAN may ignore small or uncommon details therfore the images are compared using semantic segemntation with object detection combined in identity loss. The identity loss is :
         L_identity = L_rec(x, G(x, 0))+ L_rec(x, G(G(x,delta), -delta))
         </details>      
                 
         
+   - [Explaining the Behavior of Black-Box Prediction Algorithms with Causal  Learning](https://arxiv.org/pdf/2006.02482.pdf)
+      - <details><summary>Noting........</summary>
+        The paper 
+        </details>         
         
         
-        
-        
+   - [Explaining Classifiers with Causal Concept Effect (CaCE)](https://arxiv.org/pdf/1907.07165.pdf)
+      - <details><summary>Maheep's Notes</summary>
+        The paper proposes a system CaCE, which focuses on confounding of concepts, i.e higher level unit than low level, individual input features such as pixels by intervening on concepts by taking an important assumption that intervention happens atomically. The effect is taken as 
+
+        `Effect = E(F(I)|do(C = 1)) - E(F(I)|do(C = 0))` where F gives output on image I and C is the concept. This can be done at scale by intervening for a lot of values in a concept and find the spurious corrlation. But due to the insufficient knowlegde of the Causal Graph teh author porposes a VAE which can calculate the precise CaCE by by generating counterfactual image by just changing a concept and hence computing the difference between the prediction score.  
+        </details>         
+                
         
         
         
