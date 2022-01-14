@@ -212,8 +212,20 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
         </details>      
 
    - [Explaining the Black-box Smoothly-A Counterfactual Approach](https://arxiv.org/pdf/2101.04230.pdf)
-      - <details><summary>Maheep Notes</summary>
+      - <details><summary>Maheep's Notes</summary>
+        The paper focuses on explaining the outcome of medical imaging by gradually exaggerating the semantic effect of the given outcome label and also show a counterfactual image by introducing the perturbations to the query image that gradually changes the posterior probability from its original class to its negation. The explanation therfore consist of 3 properties:<br>
+        1.) **Data Consistency**: The resembalance of the generated and orignal data should be same. Therefore cGAN id introduced with a loss as
         
+        `L_cgan = log(P_data(x)/q(x)) + log(P_data(c|x)/q(c|x))` 
+        
+        where P_data(x) is the data distribtion and learned distribution q(x), whreas P_data(c|x)/q(c|x) = r(c|x) is the ratio of the generated image and the condition.  <br>
+        2.) **Classification model consistency**: The generated image should give desired output. Therefore the condition-aware loss is introduced, i.e. 
+        `L := r(c|x) + D_KL (f(x')||f (x) + delta),`, where f(x') is the output of classifier of the counterfactual image is varied only by delta amount when added to original image logit. They take delta as a knob to regularize the genration of counterfactual image. <br>
+        3.) **Context-aware self-consistency**: To be self-consistent, the explanation function should satisfy three criteria <br>
+        > (a) Reconstructing the input image by setting = 0 should return the input image, i.e., G(x, 0) = x. <br> 
+        > (b) Applying a reverse perturbation on the explanation image x should recover x. <br> 
+        To mitigate this conditions the author propose an identity loss. The author argues that there is a chance that the GAN may ignore small or uncommon details therfore the images are compared using semantic segemntation with object detection combined in identity loss. The identity loss is :
+        L_identity = L_rec(x, G(x, 0))+ L_rec(x, G(G(x,delta), -delta))
         </details>      
                 
         
