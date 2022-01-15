@@ -5,15 +5,187 @@ The repository contains lists of papers on causality and how relevant techniques
 The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github.io/maheep.github.io/) and [Haohan Wang](http://www.cs.cmu.edu/~haohanw/) as an effort to collect and read relevant papers and to hopefully serve the public as a collection of relevant resources. 
 
 ## Causality 
-<!--- 
-1.) Not able to absorb properly......... 
-2.) not geting to the desired speed
--->
+
+  - [The Seven Tools of Causal Inference with Reflections on Machine Learning](https://ftp.cs.ucla.edu/pub/stat_ser/r481.pdf) 
+      - <details><summary>Maheep's notes </summary>
+         The author proposes the 7 tools based on the 3 ladder of causation, i.e. Associaion, Intervention and Counterfactual. the paper proposes a diagram which describes that we have some assumptions from which we answer our query and from our data we validate our assumptions, i.e. "Fit Indices".The author proposes the 7 tools as :- 
+         <br>
+         1. Transparency and Testability : Transparency indicates that the encoded form is easily usable and compact. The testability validates that the assumption encoded are compatible with the available data
+         <br>
+         2. Do-Calculas and the control of Confounding : It is used for intervention, mainly used when we are trying to shift from 1st layer to 2nd. 
+         <br>
+         3. The Algorithmization of Counterfactuals : When we can analyse the counterfactual reasoning using the experimental or observational studies. 
+         <br>
+         4.  Mediation Analysis and the Assessment of Direct and  Indirect Effects : We find out the direct and indirect effects, such as what fraction of effect does X on Y mediated by variable Z.
+         <br>
+         5.  Adaptability, External Validity and Sample Selection Bias : Basically it deals with the robustness of the model and offers do-calculas for overcoming the bias due to environmental changes.
+         <br>
+         6. Recovering from Missing Data : The casual inference is made to find out the data-generating principles through probablisitic relationship and therefore promises to fill the missing data. 
+         <br>
+         7. Causal Discovery : The d-separation can ebable us to detect the testable implications of the casual model therefore can prune the set of compatible models
+         significantly to the point where causal queries can be estimated directly from that set.
+        </details>
+
+  - [On Pearl’s Hierarchy and the Foundations of Causal Inference](https://causalai.net/r60.pdf) 
+      - <details><summary>Maheep's notes </summary>
+        The pearl causal hierarchy encodes different concepts like : association. intervention and counterfactual.
+        <br>
+        Corollary1 : It is genrally impossible to draw higher-layer  inferences using only lower-layer informatio but the authors claim that they have atleast developed a framework to move from layer 1 to layer 2 just from the layer 1 data using Causal Bayesian Network that uses do-calculas, i.e. intervention to get insight of layer 2 using the layer 1 data. 
+        <br>
+        A SCM includes 4 variables, i.e. exongenous "U", endogneous "V", set of functions and P(U).
+        <br>
+        A structural model is said to be markovian if the variable in the exogenous part are independent. 
+        <br>
+        Observing : Joint porobability distribution for the Y(u) = y<br>
+        Interventional SCM : SCM computed by fixing some varibales X = x. where X is in V.<br>
+        Potential Response : It is the solution of Y caluclated thorugh the set of eqautions of SCM when we intervene on it.   
+        Intervening : observing just when we do(X  = x)
+        Effectiveness : P(v|do(x)) is effectiveness when for every v, P(v|do(x)) = 1<br>
+        Collapse : The layers collapse when we can compute the results of the upper layer using the lower layer. For ex:- if Layer 2 collapses to layer 1, then it implies that we can draw all possible causal conculsion with mere correlation. 
+        <br>
+        Theorem 1: PCH never collapses. 
+        <br>
+        It could be  easily observed/seen that SCM agrees on all lower layers but disagrees on all higher layers.  A typical rdata-generating SCM encodes rich information at all threee layers but even very small changes might have substantial effect, which is generally seen in the higher layers.  
+        <br>
+        Truncated Factorization Product is the equation stating P(v|do(x)) = pi P(v|pai)
+        <br>
+        When two variables are correlated it does not mean that one is causing the other, i.e. P(y|do(x)) = P(y) and P(x|do(y)) =P(x), in this case what happens is there is another unobserved variable that is influencing both x and y variable which is often indicated by the bi-directed line in the graph.
+        <br>
+        Factorization implied by the semi-markovian model does not act like chain rule, i.e. 
+        P(e|a,b,c,d) = P(a)P(b|a)P(c|b,a)P(d|c,b,a)
+        but the factorization looks something like: P(e|d,c,b,a) = P(a)P(b|a)P(c|a)P(e|b.c) which implies that b and c are only affected by a also seen by a direct edge in SCM. 
+          
+        </details>
+
+  - [Unit selection based on counterfactual logic](https://escholarship.org/content/qt8pw00989/qt8pw00989.pdf) 
+      - <details><summary>Maheep's notes </summary>
+         The unit selection problem entails two sub-problems, evaluation and search. The evaluation problem is to find an objective function that, ensure a counterfactual behaviour when optimized over the set of observed characteristics C for the selected group. The search task is to devise a search algorithm to select individuals based both on their observed characteristics and the objective function devised above. 
+          <br>
+         The paper only focuses on the evaluation sub-problem and focuses on the previous effort to solve this problem, i.e. A/B testing so as to maximizes the percentage of compliers and minimizes the percentages of defiers, always-takers, and never-takers. But the author argues that the proposed term for it does not satisfy the criteria as P(positive response|c, encouraged) - P(positive response|c, not encouraged) represents "compilers + always-takers" - "defiers + always-takers", therefore the author suggest to have two theorems, i.e. "monotonicity" and "gain equality" which can easily optimize the A/B testing. 
+         Monotonicity expresses the assumption that a change from X = false to X = true cannot, under any circumstance make Y change from true to false.
+         Gain-equality states that the benefit of selecting a complier and a defier is the same as the benefit of selecting an always-taker and a never-taker (i.e., β + δ = γ + θ).
+        <br>
+         Taking into account the following theorems the author proposes a alternate term of A/B testing which stands for maximizing the benefit.<br>
+
+         `argmax c βP (complier|c) + γP (always-taker|c) + θP (never-taker|c) + δP (defier|c)`<br>
+         where benefit of selecting a complier is β, the benefit of selecting an always-taker is γ, the benefit of selecting a never-taker is θ, and the benefit of selecting a defier is δ. Our objective, then, should be to find c.<br>
+         Theorem 4 says that if Y is monotonic and satisfies gain equallity then the benefit function may be defined as: -<br>
+         `(β − θ)P (y,x |z) + (γ − β)P (y,x′ |z) + θ`
+          <br>
+         "Third, the proposed approach could be used to evaluate machine learning models as well as to generate labels for machine learning models. The accuracy of such a machine learning model would be higher because it would consider the counterfactual scenarios."
+        </details>
+
+  - [Unit Selection with Causal Diagram](https://arxiv.org/pdf/2109.07556.pdf) 
+      - <details><summary>Maheep's notes </summary>
+         Same as above
+         <br>
+         Additionoal content continues here..........
+         <br>
+         After proposing the technioques to account for unit selection in general the author proposes a new kind of problem by introducing the confounders in the causal Diagram. The following discovery was partially made by the paper "Causes of Effects: Learning Individual responses from Population Data ". The author proposes a new equation to handle these scenarios.<br> 
+
+         `W + σU ≤ f ≤ W + σL if σ < 0`,
+         `W + σL ≤ f ≤ W + σU if σ > 0`,
+         where "f" is the objective function. Previously in normal case the objective fucntion is bounded by the equation: 
+         <br>
+         `max{p 1 , p 2 , p 3 , p 4 } ≤ f ≤ min{p 5 , p 6 , p 7 , p 8 } if σ < 0,`<br>
+         `max{p 5 , p 6 , p 7 , p 8 } ≤ f ≤ min{p 1 , p 2 , p 3 , p 4 } if σ > 0`,<br>
+         In the extension of the same the author proposes the new situations which arise such as the when "z" is partially observable. and if "z" is  a pure mediator. 
+          <br>
+         The author then discusses about the availablity of the observational and experimantal data. If we only have experimantal data then we can simply remove the observationa terms in the theorem <br>
+         `max{p 1 , p 2 } ≤ f ≤ min{p 3 , p 4 } if σ < 0`,<br>
+         `max{p 3 , p 4 } ≤ f ≤ min{p 1 , p 2 } if σ > 0`,<br>
+         but if we have only onservational data then we can take use of the observed back-door and front-door variables to generate the experimental data, but if we have partially observable back-dorr and front-door variables then we can use the equation: <br>
+         `LB ≤ P (y|do(x)) ≤ UB`
+          <br>
+         The last topic which author discusses about is the reduciton of the dimensionality of the variable "z" which satisfies the back-door and front-door variable by substituting the causal graph by substiuting "z" by "W" and "U" which satisfies the condition that "no_of_states_of_W *  no_of_states_of_U = no_of_states_of_z". 
+
+
+        </details>
+
+  - [The Causal-Neural Connection: Expressiveness, Learnability, and Inference](https://causalai.net/r80.pdf) 
+      - <details><summary>Maheep's notes </summary>
+        
+        The author proposes Neural Causal Models, that are a type of SCM but are capable of amending Gradient Descent. The author propses the network to solve two kinds of problems, i.e. "causal effect identification" and "estimation" simultaneously in a Neural Network as genrative model acting as a proxy for SCM.
+        <br>
+        "causal estimation" is the process of identifying the effect of different variables 
+        "Identification" is obtained when we apply backdoor criterion or any other step to get a better insight. The power of identification has been seen by us as seen in the papers of Hanwang Zhang.
+        <br>
+        Theorem 1: There exists a NCM that is in sync with the SCM on ladder 3
+        
+        </details>
+
+  - [The Causal Loss: Driving Correlation to Imply Causation(autonomus)](https://arxiv.org/abs/2110.12066) 
+      - <details><summary>Maheep's notes </summary>
+         The paper introduces a loss function known as causal loss which aims to get the intervening effect of the data and shift the model from rung1 to rung2 of ladder of causation. Also the authors propose a Causal sum Product Network(CaSPN).
+          <br>
+         Basically the causal loss measures the prob of a variable when intervened on another variable. 
+         They extend CaSPN from iSPN be reintroducing the conditional vaaribales, which are obtained when we intervene on the observational data. They argue that the CaSPN are causal losses and also are very expressive.<br>
+         The author suggests a way(taken from iSPN) consitional variables will be passed with adjacency matrix while weight training and target varibales are applied to the leaf node. 
+          <br>
+         They train the CaSPN, NN with causal loss, standard loss and standard loss + alpha*causal loss and produce the results. Also they train a Decision tree to argue that their technique also works on Non-Differential Networks, therefore they propose to  substitute the Gini Index with the Causal Decision Score which measures the average probability of a spit resulting in correct classification. 
+        </details>
+
+  - [Double Machine Learning Density Estimation for Local Treatment Effects with Instruments](https://causalai.net/r75.pdf) 
+      - <details><summary>Maheep's notes </summary>
+         The LTE measures the affect of among compilers under assumptions of monotonicity.  The paper focuses on estimating the LTE Density Function(not expected value) using the binary instrumental variable which are used to basically counteract the effect of unobserved confounders. 
+          <br>
+         Instrumental Variables : These are the variables to counteract the affect of inobserved confounders. To be an instrumental varibale these are the following conditions it should consist of: 
+          <br>
+         Relevance: The instrument Z has a causal effect on the treatment X.<br>
+         Exclusion restriction: The instrument Z affects the outcome Y only through the treatment X.<br>
+         Exchangeability (or independence): The instrument Z
+         is as good as randomly assigned (i.e., there is no confounding for the effect of Z on Y).<br>
+         Monotonicity: For all units i, Xi(z1)⩾Xi(x2) when z1⩾z2 (i.e., there are no units that always defy their assignment).
+          <br>
+         The author develops two methods to approximate the density function, i.e. kernel - smoothing and model-based approximations. For both approaches the author derive double/deboased machine learning estimators. 
+          <br>
+         Kernel Smoothing method: They smoothes the density by convoluting with a smooth kernel function............................<br>
+         Model-based approximators: It projects the density in the dfinite-dimenional density class basedon a distributional distance measure..........<br>
+
+         The author argues that by obtaining the PDF may give very valuable information as compared to only estimating the Cumlative Distribution Function. 
+        </details>
  
 
 ## Causality & Computer Vision
 
 <!--- Week 1 --> 
+
+
+  - [Counterfactual Samples Synthesizing and Training for Robust Visual Question Answering](https://arxiv.org/pdf/2003.06576.pdf) 
+      - <details><summary>Maheep's notes </summary>
+         In this research paper the author focuses on 2 major questions, i.e. <br>
+         1) Visual-explainable: The model should rely on the right visual regions when making decisions.<br>
+         2) Question-sensitive: The model should be sensitive to the linguistic variations in questions.<br>
+         The author proposes a technique, i.e. CSST which consist  of CSS and CST which do counterfactual in VQA as the CSS generates the counterfactual samples by masking critical objects  in the images and words. The CST model tackles the second challenge of sensitivity is handled by  the CST which make the model learn to distinguish between the origianl samples and counterfactal ones. Addtionally it trains the model to learn both kind of samples, i.e. origianl and counterfactual ones, making  the model robust. 
+        </details>
+
+  - [How Should Pre-Trained Language Models Be Fine-Tuned Towards Adversarial Robustness?](https://openreview.net/pdf?id=pl2WX3riyiq) 
+      - <details><summary>Maheep's notes </summary>
+         The fine-tuning of pre-trained language models has a great success in many NLP fields but it is strikingly vulnerable to adversarial examples, as it suffers severely from catastrophic forgetting: failing to retain the generic and robust linguistic features that have already been captured by the pre-trained model. The proposed model maximizes the mutual information between the output of an objective model and that of the pre-trained model conditioned on the class label. It encourages an objective model to continuously retain useful information from the pre-trained one throughout the whole fine-tuning process. <br>
+
+         `I(S; Y, T ) = I(S; Y ) + I(S; T|Y ),`
+         <br>The author proposes by this equation that the two models overlap, i.e. the objective model and the pretrained model. S represents the features extracted the model by the objective model and T is the features extracted by the pretrained model.
+        </details>
+
+  - [Counterfactual Zero-Shot and Open-Set Visual Recognition](https://arxiv.org/pdf/2103.00887.pdf) 
+      - <details><summary>Maheep's notes </summary>
+         The author proposes a novel counterfactual framework for  both Zero-Shot Learning (ZSL) and Open-Set Recognition (OSR), whose common challenge is generalizing to the unseen-classes by only training on the seen-classes. all the unseen-class recognition methods stem from the same grand assumption: attributes (or features) learned from the training seen-classes are transferable to the testing unseen-classes. But this does not happen in practise. <br>
+
+         ZSL is usually provided with an auxiliary set of class attributes to describe each seen- and unseen-class whereas the OSR has open environment setting with no information on the unseen-classes [51, 52], and the goal is to build a classifier for seen-classes. Thae author describers previous works in which the generated samples from the class attribute of an unseen-class, do not lie in the sample domain between the ground truth seen and unseen, i.e., they resemble neither the seen nor the unseen. As a result, the seen/unseen boundary learned from the generated unseen and the true seen samples is imbalanced. <br>
+
+         The author proposes a technique using counterfactual, i.e. to generate samples using the class attributes, i.e. Y and sample attrubute Z by the counterfactual, i.e. 
+         X would be x̃, had Y been y, given the fact that Z = z(X = x) and the consistency rule defines that if the ground truth is Y then x_bar would be x. The proposed genrative causal model P(X|Z, Y ) generate exapmles for ZSL and OSR. 
+        </details>
+
+
+  - [Counterfactual VQA: A Cause-Effect Look at Language Bias](https://arxiv.org/pdf/2006.04315.pdf) 
+      - <details><summary>Maheep's notes </summary>
+         Besides, counterfactual training samples generation [12, 1, 58, 19, 31] helps to balance the training data, and outperform other debiasing methods by large margins on VQA-CP.
+         <br>
+         The statement specifies the reason why the author in the origianl paper mentioned that we can generate missing labels with that  process in Machine Leanring. They formulate the language bias as the direct causal effect of questions on answers, and mitigate the bias by subtracting the direct language effect from the total causal effect. They  proposed a very simple method to debias the  NLP part in VQA using  the Causal Inference, i.e. they perform VQA using different layers for different part, i.e. for visual, question and visual+question which is denoted by Knowledge base K. They argue that if we train a model like this then we would have result with Z_q,k,v, then to get the Total Indirect Effect, they train another model with parameters as Z_q,v*k* and are subtracted from each other. to eliminate the biasness of the language model.     
+        </details>
+
+
   - [CONTERFACTUAL GENERATIVE ZERO-SHOT SEMANTIC SEGMENTATION](https://arxiv.org/pdf/2106.06360.pdf)
       - <details><summary>Maheep's Notes</summary>
         The paper proposes a zero-shot semantic segmentation. One of the popular zero-shot semantic segmentation methods is based on the generative model, but no one has set their eyes on the statstical spurious correlation. In this study the author proposes a counterfactual methods to avoid the confounder in the original model. In the spectrum of unsupervised methods, zero-shot learning always tries to get the visual knowledge of unseen classes by learning the mapping from word embedding to visual features. The contribution of the paper accounts as: 
