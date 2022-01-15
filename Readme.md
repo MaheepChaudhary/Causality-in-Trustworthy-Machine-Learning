@@ -302,17 +302,30 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
         </details> 
 
    - [Training_calibration‐based_counterfactual_explainers_for_deep_learning](https://www.nature.com/articles/s41598-021-04529-5)
-      - <details><summary>Noting.....</summary>
-        The paper   
+      - <details><summary>Maheep's Notes</summary>
+        The paper proposes TraCE for deep medical imaging that trained using callibaration-technique to handle the problem of counterfactual explanation, particularly when the model's prediciton are not well-callibrated due to which it produces irrelevant feature manipulation. The system is implemeted using the 3 methods, i.e. <br>
+        (1.) an auto-encoding convolutional neural network to construct a low-dimensional, continuous latent space for the training data <br>
+        (2.) a predictive model that takes as input the latent representations and outputs the desired target attribute along with its prediction uncertainty<br>
+        (3.) a counterfactual optimization strategy that uses an uncertainty-based calibration objective to reliably elucidate the intricate relationships between image signatures and the target attribute.<br>
+        TraCE works on the following metrics to evaluate the counterfactual images, i.e. <br>
+
+        **Validity**: ratio of the counterfactuals that actually have the desired target attribute to the total number of counterfactuals  
+        The confidence of the **image** and **sparsity**, i.e. ratio of number of pixels altered to total no of pixels. Th eother 2 metrcs are **proximity**, i.e. average l2 distance of each counterfactual to the K-nearest training samples in the latent space and **Realism score** so as to have the generated image is close to the true data manifold.<br>
+        TraCE reveals attribute relationships by generating counterfactual image using the different attribute like age "A" and diagnosis predictor "D". <br>
+        `delta_A_x = x - x_a'` ; `delta_D_x = x - x_d'` <br>
+        The x_a' is the counterfactual image on the basis for age and same for x_d'. <br>
+        `x' = x + delta_A_x + delta_D_x` and hence atlast we evaluate the sensitivity of a feature by `F_d(x') - F_d(x_d')`, i.e. F_d is the classifier of diagnosis. <br>
+
         </details>  
 
    - [Generating Natural Counterfactual Visual Explanations](https://www.ijcai.org/proceedings/2020/0742.pdf)
-      - <details><summary>Noting.....</summary>
-        The paper   
+      - <details><summary>Maheep's Notes</summary>
+        The paper proposes a counterfactual visual explainer that look for counterfactual features belonging to class B that do not exist in class A. They use each counterfactual feature to replace the corresponding class A feature and output a counterfactual text. The counterfactual text contains the B-type features of one part and the A-type features of the remaining parts. Then they use a text-to-image GAN model and the counterfactual text to generate a counterfactual image. They generate the images using the AttGAN and StackGAN and they take the image using the function. <br>
+        `log(P(B)/P(A))` where P(.) is the classifier probability of a class for obtaining the highest-scoring counterfactual image. 
         </details> 
 
    - [On Causally Disentangled Representations](https://arxiv.org/pdf/2112.05746.pdf)
-      - <details><summary>Noting.....</summary>
+      - <details><summary>Maheep's Notes</summary>
         The paper   
         </details>  
 
