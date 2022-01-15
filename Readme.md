@@ -243,13 +243,69 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
         `Effect = E(F(I)|do(C = 1)) - E(F(I)|do(C = 0))` where F gives output on image I and C is the concept. This can be done at scale by intervening for a lot of values in a concept and find the spurious corrlation. But due to the insufficient knowlegde of the Causal Graph teh author porposes a VAE which can calculate the precise CaCE by by generating counterfactual image by just changing a concept and hence computing the difference between the prediction score.  
         </details>         
                 
-        
-        
-        
-        
-        
-        
-        
-        
+   - [Fast Real-time Counterfactual Explanations](https://arxiv.org/pdf/2007.05684.pdf)
+      - <details><summary>Noting....</summary>
+        The paper  
+        </details>         
         
 
+   - [GENERATIVE_COUNTERFACTUAL_INTROSPECTION_FOR_EXPLAINABLE_DEEP_LEARNING](https://arxiv.org/pdf/1907.03077.pdf)
+      - <details><summary>Noting......</summary>
+        The paper   
+        </details>        
+        
+   - [Generative_Counterfactuals_for_Neural_Networks_via_Attribute_Informed](https://arxiv.org/pdf/2101.06930.pdf)
+      - <details><summary>Noting.....</summary>
+        The paper   
+        </details>        
+        
+   - [Question-Conditioned Counterfactual Image Generation for VQA](https://arxiv.org/pdf/1911.06352.pdf)
+      - <details><summary>Noting.....</summary>
+        The paper   
+        </details>           
+        
+
+   - [FINDING AND FIXING SPURIOUS PATTERNS WITH EXPLANATIONS](https://arxiv.org/pdf/2106.02112.pdf)
+      - <details><summary>Noting.....</summary>
+        The paper   
+        </details>  
+
+   - [Contrastive_Counterfactual_Visual_Explanations_With_Overdetermination](https://arxiv.org/pdf/2106.14556.pdf)
+      - <details><summary>Noting.....</summary>
+        The paper   
+        </details> 
+
+   - [Training_calibration‐based_counterfactual_explainers_for_deep_learning](https://www.nature.com/articles/s41598-021-04529-5)
+      - <details><summary>Noting.....</summary>
+        The paper   
+        </details>  
+
+   - [On Causally Disentangled Representations](https://arxiv.org/pdf/2112.05746.pdf)
+      - <details><summary>Noting.....</summary>
+        The paper   
+        </details>  
+
+   - [INTERPRETABILITY_THROUGH_INVERTIBILITY_A_DEEP_CONVOLUTIONAL_NETWORK](https://openreview.net/pdf?id=8YFhXYe1Ps)
+      - <details><summary>Noting.....</summary>
+        The paper   
+        </details>  
+
+   - [Model-Based Counterfactual Synthesizer for Interpretation](https://arxiv.org/pdf/2106.08971.pdf)
+      - <details><summary>Noting.....</summary>
+        The paper   
+        </details>  
+
+   - [Discriminative Attribution from Counterfactuals](https://arxiv.org/pdf/2109.13412.pdff)
+      - <details><summary>Noting.....</summary>
+        The paper   
+        </details>  
+
+   - [Causal Interventional Training for Image Recognition](https://ieeexplore.ieee.org/document/9656623)
+      - <details><summary>Noting.....</summary>
+        The paper   
+        </details>  
+
+   - [Causal Interventional Training for Image Recognition](https://ieeexplore.ieee.org/document/9656623)
+      - <details><summary>Noting.....</summary>
+        The paper   
+        </details>  
