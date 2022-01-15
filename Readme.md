@@ -350,19 +350,22 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
       - <details><summary>Maheep's Notes</summary>
         The paper provides the literature regarding the difference between the Counterfactual and Adverserial Example. Some of the points are: <br>
         1.) AEs are used to fool the classifier whereas the CRs are used to generate constructive explantions. <br> 
-        2.) AEs show where an ML model fails whereas the Explanations sheds light on how ML algorithms can be improved to make them more robust against AEs
-        3.) CEs mainly low-dimensional and semantically meaningful features are used, AEs are mostly considered for high-dimensional image data with little semantic meaning of individual features.
-        4.) Adversarials must be necessarily misclassified while counterfactuals are agnostic in that respect 
+        2.) AEs show where an ML model fails whereas the Explanations sheds light on how ML algorithms can be improved to make them more robust against AEs <br>
+        3.) CEs mainly low-dimensional and semantically meaningful features are used, AEs are mostly considered for high-dimensional image data with little semantic meaning of individual features. <br>
+        4.) Adversarials must be necessarily misclassified while counterfactuals are agnostic in that respect <br> 
         5.) Closeness to the original input is usually a benefit for adversarials to make them less perceptible whereas counterfactuals focus on closeness to the original input as it plays a significant role for the causal interpretation
         </details>  
 
    - [Discriminative Attribution from Counterfactuals](https://arxiv.org/pdf/2109.13412.pdff)
       - <details><summary>Maheep's Notes</summary>
-        The paper   
+        The paper proposes a novel technique to combine feature attribution with counterfactual explanations to generate attribution maps that highlight the most discriminative features between pairs of classes. This is implemented as:<br>
+        <br>They use a cycle-GAN to translate real images x of class i to counterfactual images x'. Then both the images are fed into the Discriminative Attribution model which finds out the most discriminative features separting the 2 image. The most important part is masked out. The part is extracted from the original image x and is combined with the counterfactual image by intiallly masking the region to get the original image. <br>
+      
+        !['Diagram'](images/6.png)  
         </details>  
 
    - [Causal Interventional Training for Image Recognition](https://ieeexplore.ieee.org/document/9656623)
-      - <details><summary>Noting.....</summary>
-        The paper   
+      - <details><summary>Maheep's Notes</summary>
+        The paper focuses on proposing an augmentaiton technique which focuses on eradicating the bias that is bad and keeping the bias that is good for the model. Therefore the author proposes a causal graph consisting of x:image; y:label; C:context; A:good bias and B:bad bias. The author considers B as the confounding variable b/w the x and C, therefore tries to remove it using the backdoor criteria. 
         </details>  
 
