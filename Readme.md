@@ -258,13 +258,16 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
         
 
    - [GENERATIVE_COUNTERFACTUAL_INTROSPECTION_FOR_EXPLAINABLE_DEEP_LEARNING](https://arxiv.org/pdf/1907.03077.pdf)
-      - <details><summary>Noting......</summary>
-        The paper   
+      - <details><summary>Maheep's Notes</summary>
+        The paper propose to generate counterfactual using the Generative Counterfactual Explanation not by replacing a patch of the original image with something but by generating a counterfactual image by replacing minimal attributes uinchanged, i.e. A = {a1, a2, a3, a4, a5....an}. It is implemented by: - <br>
+
+        `min(lambda*loss(I(A')) + ||I - I(A'))`, where loss is cross-entropy for predicting image I(A') to label c'.
+
         </details>        
         
-   - [Generative_Counterfactuals_for_Neural_Networks_via_Attribute_Informed](https://arxiv.org/pdf/2101.06930.pdf)
-      - <details><summary>Noting.....</summary>
-        The paper   
+   - [Generative_Counterfactuals_for_Neural_Networks_via_Attribute_Informed_Perturbations](https://arxiv.org/pdf/2101.06930.pdf)
+      - <details><summary>Maheep's Notes</summary>
+        The paper focues on generating counterfactuals for raw data instances (i.e., text and image) is still in the early stage due to its challenges on high data dimensionality and unsemantic raw features, therfore the author proposes Attribute-Informed-Perturbation(AIP)
         </details>        
         
    - [Question-Conditioned Counterfactual Image Generation for VQA](https://arxiv.org/pdf/1911.06352.pdf)
