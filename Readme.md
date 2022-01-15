@@ -301,6 +301,11 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
         The paper   
         </details>  
 
+   - [Generating Natural Counterfactual Visual Explanations](https://www.ijcai.org/proceedings/2020/0742.pdf)
+      - <details><summary>Noting.....</summary>
+        The paper   
+        </details> 
+
    - [On Causally Disentangled Representations](https://arxiv.org/pdf/2112.05746.pdf)
       - <details><summary>Noting.....</summary>
         The paper   
@@ -316,6 +321,11 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
         The paper   
         </details>  
 
+   - [The Intriguing Relation Between Counterfactual Explanations and Adversarial Examples](https://arxiv.org/pdf/2009.05487.pdf)
+      - <details><summary>Noting.....</summary>
+        The paper   
+        </details>  
+
    - [Discriminative Attribution from Counterfactuals](https://arxiv.org/pdf/2109.13412.pdff)
       - <details><summary>Noting.....</summary>
         The paper   
@@ -326,7 +336,3 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
         The paper   
         </details>  
 
-   - [Causal Interventional Training for Image Recognition](https://ieeexplore.ieee.org/document/9656623)
-      - <details><summary>Noting.....</summary>
-        The paper   
-        </details>  
