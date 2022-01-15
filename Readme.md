@@ -244,8 +244,16 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
         </details>         
                 
    - [Fast Real-time Counterfactual Explanations](https://arxiv.org/pdf/2007.05684.pdf)
-      - <details><summary>Noting....</summary>
-        The paper  
+      - <details><summary>Maheep's Notes</summary>
+        The paper proposes a transformer is trained as a residual generator conditional on a classifier constrained under a proposal perturbation loss which maintains the content information of the query image, but just the class-specific semantic information is changed. The technique is implemented as : <br>
+
+        1.) **Adverserial loss**: It measures whether the generated image is indistinguishable from the real world images <br>
+        2.) **Domain classification loss**: It is used to render the generate image x + G(x,y') conditional on y'. `L = E[-log(D(y'|x + G(x,y')))]` where G(x, y') is the perterbuation introduced by generator to convert image from x to x' <br>
+        3.) **Reconstruction loss**: The Loss focuses to have generator work propoerly so as to produce the image need to be produced as defined by the loss. `L = E[x - (x + G(x,y') + G(x + G(x,y'), y))]`
+        4.) **Explanation loss**: This is to gurantee that the generated fake image produced belongs to the distribution of H. `L = E[-logH(y'|x + G(x,y'))]`        
+        5.) **Perturbation loss**: To have the perturbation as small as possible it is introduced. `L = E[G(x,y') + G(x + G(x,y'),y)]`
+        <br>
+        All these 5 losses are added to make the final loss with different weights.
         </details>         
         
 
