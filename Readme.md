@@ -265,7 +265,7 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
 
         </details>        
         
-   - [Generative_Counterfactuals_for_Neural_Networks_via_Attribute_Informed_Perturbations](https://arxiv.org/pdf/2101.06930.pdf)
+  - [Generative_Counterfactuals_for_Neural_Networks_via_Attribute_Informed_Perturbations](https://arxiv.org/pdf/2101.06930.pdf)
       - <details><summary>Maheep's Notes</summary>
         The paper focues on generating counterfactuals for raw data instances (i.e., text and image) is still in the early stage due to its challenges on high data dimensionality, unsemantic raw features and also in scenario when the effictive counterfactual for certain label are not guranteed, therfore the author proposes Attribute-Informed-Perturbation(AIP) which convert raw features are embedded as low-dimension and data attributes are modeled as joint latent features. To make this process optimized it has two losses: Reconstruction_loss(used to guarantee the quality of the raw feature) + Discrimination loss,(ensure the correct the attribute embedding) i.e.  
 
@@ -274,13 +274,20 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
         </details>        
         
    - [Question-Conditioned Counterfactual Image Generation for VQA](https://arxiv.org/pdf/1911.06352.pdf)
-      - <details><summary>Noting.....</summary>
-        The paper   
+      - <details><summary>Maheep's Notes</summary>
+        The paper on generating the counterfactual images for VQA, s.t. <br>
+        i.) the VQA model outputs a different answer<br>
+        ii.) the new image is minimally different from the original <br>
+        iii) the new image is realistic <br>
+        The author uses a LingUNet model for this and proposes three losses to make the perfect. <br>
+        1.) Negated cross entropy for VQA model. <br> 
+        2.) l2 loss b/w the generated image and the original image.
+        3.) Discriminator that penalizes unrealistic images.  
         </details>           
         
 
    - [FINDING AND FIXING SPURIOUS PATTERNS WITH EXPLANATIONS](https://arxiv.org/pdf/2106.02112.pdf)
-      - <details><summary>Noting.....</summary>
+      - <details><summary>Maheep's Notes</summary>
         The paper   
         </details>  
 
