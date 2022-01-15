@@ -466,8 +466,13 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
                 
         
    - [Explaining the Behavior of Black-Box Prediction Algorithms with Causal  Learning](https://arxiv.org/pdf/2006.02482.pdf)
-      - <details><summary>Noting........</summary>
-        The paper 
+      - <details><summary>Maheep's Notes</summary>
+        The paper using proposes causal graphical models so as to  indicate which of the interpretable features, if any, are possible causes of the prediction outcome and which may be merely associated with prediction outcomes due to confounding. The choose causal graphs consistent with observed data by directly testing focus on type-level explanation rather token-level explanations of particular events. The token-level refers to links between particular events, and the type-level refers to links between kinds of events, or equivalently, variables. Using the causal modelling they focus on obtaining a model that is consistent with the data.<br> <br>
+        They focus on learning a Partial Ancestral Graph(PAG) G, using the FCI algorithm and the predicted outcome Y' whereas Z are the high-level which are human interpretable and not like pixels. <br>
+
+        `V = (Z,Y')`<br>
+        `Y' = g(z1,.....zs, epsilon)` 
+        On the basis of possible edge types, they find out which high level causes, possible causes or non-causes of the balck-box output Y'. 
         </details>         
         
         
