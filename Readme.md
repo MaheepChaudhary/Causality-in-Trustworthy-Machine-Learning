@@ -288,7 +288,11 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
 
    - [FINDING AND FIXING SPURIOUS PATTERNS WITH EXPLANATIONS](https://arxiv.org/pdf/2106.02112.pdf)
       - <details><summary>Maheep's Notes</summary>
-        The paper   
+        The paper proposes an augmeting technique taht resamples the images in such a way to remove the spurious pattern in them, therfore they introduce their framework Spurious Pattern Identification and REpair(SPIRE). They view the dataset as Both, Just Main, Just Spurious, and Neither. SPIRE measures this probability for all (Main, Spurious) pairs, where Main and Spurious are different, and then sorts this list to find the pairs that represent the strongest patterns. After finding the pattern the dataset is redistributes as: <br>
+
+        `P(Spurious | Main) = P(Spurious | not Main) = 0.5`<br>
+        The second step consist of minimizing the potential for new SPs by setting the <br>`P(Main|Artifact) = 0.5)`. <br>
+        SPIRE moves images from {Both, Neither} to {Just Main, Just Spurious} if p > 0.5, i.e. p = P(Main|Spurious) but if p < 0.5 then SPIRE moves images from {Just Main, Just Spurious} to {Both, Neither}. 
         </details>  
 
    - [Contrastive_Counterfactual_Visual_Explanations_With_Overdetermination](https://arxiv.org/pdf/2106.14556.pdf)
