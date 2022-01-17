@@ -609,3 +609,5 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
         The paper focuses on proposing an augmentaiton technique which focuses on eradicating the bias that is bad and keeping the bias that is good for the model. Therefore the author proposes a causal graph consisting of x:image; y:label; C:context; A:good bias and B:bad bias. The author considers B as the confounding variable b/w the x and C, therefore tries to remove it using the backdoor criteria. 
         </details>  
 
+---
+
