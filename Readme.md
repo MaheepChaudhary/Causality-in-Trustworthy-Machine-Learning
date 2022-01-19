@@ -674,7 +674,7 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
       - <details><summary>Maheep's Notes</summary>
         The paper aims to localize objects described in the sentence to visual regions in the video by deconfounding the object-relevant associations given the video-sentence annotations. The author argues that the frame is made up of the content(C), i.e. factors that cause the object’s visual appearances in spatial and temporal throughout the video are grouped into a category and Style(S) is the background or scenes. The author argues that the S does not play any role in object grounding and only act a confounder. In addition to that there exist one more confounder, i.e 
         
-        ![Idenfiability Diagram](images/10.png)
+        !['Idenfiability Diagram'](images/10.png)
 
         `Z` that occurs due to some specific objects occuring frequently. The style confounder is replaced by using the contrastive learning, where the counterfactual examples are created by taking the vectors from a memory bank by taking the top sleected top regions for described object and then the selected regions and frames are grouped together into frame-level content(H_c) and region-level content(U_c), and the rest of the regions are grouped as U_s and H_s. These regions are the converted to counterfactual using these memory vectors which were created by taking the randomly selected regions in training set. The most similar one and replaces the original one, to generate examples to have them hard to distinguish from real ones contrastive learning is used. The equation looks like: <br>
 
@@ -685,12 +685,26 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
 
    - [Towards Unbiased Visual Emotion Recognition via Causal Intervention](https://arxiv.org/abs/2107.12096)   
       - <details><summary>Maheep's Notes</summary>
-        The paper focuses on proposing an augmentaiton technique which focuses on eradicating the bias that is bad and keeping the bias that is good for the model. Therefore the author proposes a causal graph consisting of x:image; y:label; C:context; A:good bias and B:bad bias. The author considers B as the confounding variable b/w the x and C, therefore tries to remove it using the backdoor criteria. 
+        The paper we propose a novel Interventional Emotion Recognition Network (IERN) to achieve
+        the backdoor adjustment on the confounder, i.e. context of the image(C). The author implements it as:<br>
+
+        IERN, which is composed of four parts:<br>
+        1.) **Backbone**<br>
+            > It extracts the feature embedding of the image.<br>
+        2.) **Feature Disentanglement**<br> 
+            > It disentangles the emotions and context from the image, having emotion dicriminator(d_e) and context discriminator(d_c) which ensures that the extracted feature are separated and has the desired feature. The loss comprises as :<br>
+            `L = CE(d_e(g_e(f_b(x))), y_e) + MSE(d_c(g_e(f_b(x))), 1/n)` where g_e is emotion generator and y_e is the emotion label and n is the number of counfounder and the same loss is for context replacing d_e, g_e and d_c by d_c, g_c and d_e, here n represents number of emotions. To ensure that the separated features fall within reason-able domains, IERN should be capable of reconstructing the base feature   f_b(x), i.e. `L =MSE(g_r(g_e(f_b(x)), g_c(f_b(x))), f_b(x))`<br>  
+        3.) **Confounder Builder**<br>
+            > The purpose of the confounder builder is to combine each emotion feature with different context features so as to avoid the bias towards the observed context strata.<br>
+        4.) **Classifier**<br>
+            > It is simply used for prediciton.
+
+        !['Model'](images/11.png)
         </details>  
 
    - [Human Trajectory Prediction via Counterfactual Analysis](https://openaccess.thecvf.com/content/ICCV2021/papers/Chen_Human_Trajectory_Prediction_via_Counterfactual_Analysis_ICCV_2021_paper.pdf)
       - <details><summary>Maheep's Notes</summary>
-        The paper focuses on proposing an augmentaiton technique which focuses on eradicating the bias that is bad and keeping the bias that is good for the model. Therefore the author proposes a causal graph consisting of x:image; y:label; C:context; A:good bias and B:bad bias. The author considers B as the confounding variable b/w the x and C, therefore tries to remove it using the backdoor criteria. 
+        The paper 
         </details>  
 
    - [Proactive Pseudo-Intervention: Contrastive Learning For Interpretable Vision Models](https://arxiv.org/abs/2012.03369)
