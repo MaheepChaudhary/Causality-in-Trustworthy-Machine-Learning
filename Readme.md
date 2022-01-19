@@ -636,12 +636,18 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
         1.) Image datasets carry an observable statistical signal revealing the asymmetric relationship between object categories that results from their causal dispositions.<br>
         2.) There exists an observable statistical dependence between object features and anticausal features, basically anticausal features are those which is caused by the presence of an object in the scene. The statistical dependence between context features and causal features is nonexistent or much weaker.<br>
         The author proposes a Neural Causation Coefficient (NCC), able to learn causation from a corpus of labeled data. The author argues that the for joint distributions that occur in the real world, the different causal interpretations may not be equally likely. That is, the causal direction between typical variables of interest may leave a detectable signature in their joint distribution. Additionally they assume that whenever
-        
+
          `X causes Y` , the cause, noise and mechanism are independent but we can identify the footprints of causality when we try to `Y causes X` as the noise and Y will not be independent.
 
    - [Learning to Contrast the Counterfactual Samples for Robust Visual Question Answering](https://aclanthology.org/2020.emnlp-main.265/)
       - <details><summary>Maheep's Notes</summary>
-        The paper focuses on proposing an augmentaiton technique which focuses on eradicating the bias that is bad and keeping the bias that is good for the model. Therefore the author proposes a causal graph consisting of x:image; y:label; C:context; A:good bias and B:bad bias. The author considers B as the confounding variable b/w the x and C, therefore tries to remove it using the backdoor criteria. 
+        The paper proposes we introduce a novel self-supervised contrastive learning mechanism to learn the relationship between original samples, factual samples and counterfactual samples. They implement it by generating facutal and counterfactual image and try to increase the mutual information between the joint embedding of 
+        
+        `Q` and `V(mm(Q,V) = a)`, and joint embedding of `Q` and `V_+ (factual)(mm(Q,V+) = p)` by taking a cosine similarity b/w them. They also aim to decrease mutual information b/w `mm(Q,V-) = n` and `a` by taking cosine similarity`(s(a,n))`. The final formula becomes:<br>
+        `L_c = E[-log(e^s(a,p)/e^s(a,p)+e^s(a,n))]`
+        <br>
+        The total loss becomes `L = lambda_1*L_c + lambda_2*L_vqa` 
+        !['Model'](images/9.png)
         </details>  
 
    - [Latent Causal Invariant Model](https://arxiv.org/abs/2011.02203)
