@@ -652,7 +652,10 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
 
    - [Latent Causal Invariant Model](https://arxiv.org/abs/2011.02203)
       - <details><summary>Maheep's Notes</summary>
-        The paper focuses on proposing an augmentaiton technique which focuses on eradicating the bias that is bad and keeping the bias that is good for the model. Therefore the author proposes a causal graph consisting of x:image; y:label; C:context; A:good bias and B:bad bias. The author considers B as the confounding variable b/w the x and C, therefore tries to remove it using the backdoor criteria. 
+        The paper focus on issue of generalization and therefore propose Latent Causal Invariance Model(LaCIM). The author introduce variables that are separated into (a) output-causative factors, i.e. 
+        
+        `S` and (b) others that are spuriously correlated `Z` from V(latent variable).<br>
+        There exists a spurious correlation b/w `S` and `Z`. The author argues that we will get a `p(y|do(s*)) = p(y|s*)` 
         </details>  
 
    - [Two Causal Principles for Improving Visual Dialog](https://arxiv.org/abs/1911.10496)
