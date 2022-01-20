@@ -729,7 +729,17 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
 
    - [Interventional Video Grounding with Dual Contrastive Learning](https://arxiv.org/abs/2106.11013)
       - <details><summary>Maheep's Notes</summary>
-        The paper focuses on proposing an augmentaiton technique which focuses on eradicating the bias that is bad and keeping the bias that is good for the model. Therefore the author proposes a causal graph consisting of x:image; y:label; C:context; A:good bias and B:bad bias. The author considers B as the confounding variable b/w the x and C, therefore tries to remove it using the backdoor criteria. 
+        The paper proposes interventional video grounding (IVG) that leverages backdoor adjustment to deconfound the selection bias based on structured causal model.They introduce a dual contrastive learning approach (DCL) to better align the text and video by maximizing the mutual information (MI) between query and video clips so as to deconfounded video grounding that will aim to localize a moment from an untrimmed video for a given textual query after deconfounding it. The author implements the system in major 5 steps:<br>
+        1) Given an input query and video, the two encoders output contextualized visual and textual representations respectively. <br>
+        2) Then, these representations will be fed into two contrastive modules VV-CL and QV-CL respectively to learn high-quality representations with two contrastive losses L_vv and L_qv, where the QV-CL module focuses on increasing the Mutual information of the positive frames of video and the query. The VV-CL aims to increse the mutual information b/w the start and end boundaries of the video, which looks like as shown in the diagram below:<br>
+
+        ![Contrastive Module](images/13.png)
+
+        3) The output of two feature encoders are fed to a fusion module with a context-query attention mechanism to capture the cross-modal interactions between visual and textual features.<br> 
+        4) Next, to mitigate the spurious correlations between textual and visual features, they use causal interventions P (Y |do(X)) with event as surrogate confounders to learn representations.<br> 
+        5) Finally, two losses L_s and L_e for the start and end boundaries are introduced.<br>
+        
+        ![Model](images/14.png)
         </details>  
 
 
