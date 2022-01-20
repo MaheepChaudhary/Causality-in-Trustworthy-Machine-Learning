@@ -708,13 +708,23 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
 
         They Y_causal is defined as `Y_causal = Y_i - Y-i(do(X_i = x_i))`<br>
         They define a generative model which generates trajectory by a noise latent variable Z indicated by `Y*_i`. Finally the loss is defined as:<br>
-        `Y_causal = Y*_i - Y*_i(do(X_i = x_i))`
+        `Y_causal = Y*_i - Y*_i(do(X_i = x_i))`<br>
         `L_causalGAN = L2(Y_i, Y_causal) + log(D(Y_i)) + log(1-D(Y_causal))`, where D is the discriminator.
         </details>  
 
    - [Proactive Pseudo-Intervention: Contrastive Learning For Interpretable Vision Models](https://arxiv.org/abs/2012.03369)
       - <details><summary>Maheep's Notes</summary>
-        The paper focuses on proposing an augmentaiton technique which focuses on eradicating the bias that is bad and keeping the bias that is good for the model. Therefore the author proposes a causal graph consisting of x:image; y:label; C:context; A:good bias and B:bad bias. The author considers B as the confounding variable b/w the x and C, therefore tries to remove it using the backdoor criteria. 
+        The paper present a novel contrastive learning strategy called Proactive Pseudo-Intervention (PPI) that leverages proactive interventions to guard against image features with no causal relevance. The PPI consists of three main components:<br> 
+        (i) a saliency mapping module that highlights causally relevant features which are obtained using the WBP which backpropagates the weights through layers to compute the contributions of each input pixel, which is truly faithful to the model, and WBP tends to highlight the target objects themselves rather than the background<br>
+        (ii) an intervention module that synthesizes contrastive samples<br>
+        (iii) the prediction module, which is standard in recent vision models<br>
+        The prediction module is encouraged to modify its predictions only when provided with causally-relevant synthetic interventions.<br>
+        The saliency map wchich are uniquely determined by the 
+        
+        `f(theta)` are produced and the main features are masked out of the image giving us `x*`. Now the loss becomes `L = sigma(l(x*,not_y;f(theta)))`<br>
+        A trivbial solution can be the saliency maps copvers the whole image therefore L1-norm of saliency map is used to encourage succinct (sparse) representations. The another problem that now arises is that the model can learn a shortcut that when it get a masked image then it has to always give `not_y` as prediction, so as to counter it the author proposes to send images with random masks on them, making the loss `L = sigma(l(x',y;f(theta)))`
+
+        ![Model](images/12.png) 
         </details> 
 
    - [Interventional Video Grounding with Dual Contrastive Learning](https://arxiv.org/abs/2106.11013)
