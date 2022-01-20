@@ -704,7 +704,12 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
 
    - [Human Trajectory Prediction via Counterfactual Analysis](https://openaccess.thecvf.com/content/ICCV2021/papers/Chen_Human_Trajectory_Prediction_via_Counterfactual_Analysis_ICCV_2021_paper.pdf)
       - <details><summary>Maheep's Notes</summary>
-        The paper 
+        The paper propose a counterfactual analysis method for human trajectory prediction. They cut off the inference from environment to trajectory by constructing the counterfactual intervention on the trajectory itself. Finally, they compare the factual and counterfactual trajectory clues to alleviate the effects of environment bias and highlight the trajectory clues.<br>
+
+        They Y_causal is defined as `Y_causal = Y_i - Y-i(do(X_i = x_i))`<br>
+        They define a generative model which generates trajectory by a noise latent variable Z indicated by `Y*_i`. Finally the loss is defined as:<br>
+        `Y_causal = Y*_i - Y*_i(do(X_i = x_i))`
+        `L_causalGAN = L2(Y_i, Y_causal) + log(D(Y_i)) + log(1-D(Y_causal))`, where D is the discriminator.
         </details>  
 
    - [Proactive Pseudo-Intervention: Contrastive Learning For Interpretable Vision Models](https://arxiv.org/abs/2012.03369)
