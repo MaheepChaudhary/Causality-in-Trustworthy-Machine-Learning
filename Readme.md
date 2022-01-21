@@ -762,12 +762,18 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
 
    - [Learning Domain Invariant Relationship with Instrumental Variable for Domain Generalization](https://arxiv.org/pdf/2110.01438.pdf)
       - <details><summary>Maheep's Notes</summary>
-        The paper proposes 
+        The paper proposes an instrumental variable-based approach to learn the domain-invariant relationship between input features and labels contained in the conditional distribution as the input features of one domain are valid instrumental variables for other domains. Therefore they propose a model Domain-invariant Relationship with Instrumental VariablE (DRIVE) via a two-stage IV method. <br>
+        1.) It learns the conditional distribution of input features of one domain given input features of another domain with Maximum Mean Discrepancy(MMD) that minimizes the distance b/w the feature representation of two different domains.<br>
+        2.) In second step it estimates the domain-invariant relationship by predicting labels with the learned conditional distribution by sampling from the first step distribtion.<br>
+
+        ![Model](images/16.png)
         </details>  
 
    - [Latent Space Explanation by Intervention](https://arxiv.org/abs/2112.04895)
       - <details><summary>Maheep's Notes</summary>
-        The paper proposes 
+        The study in this R.P. aims to reveal hidden concepts by employing an intervention mechanism that shifts the predicted class based on discrete variational autoencoders based on the high concepts(human interpretale and not low level features like pixels). We could easily intervene on the latent space of the high concepts to find out the most discriminative concepts but they are not human interpretable therefore they use visualization to make it human interpretable. To accomplish the first step they use discrete variational autoencoder(DVAE). The boolean latent space cosnist of 
+        
+        `Z = {z1, z2,....., zn}` which is intervened to flip the output of the model and are finally vsualized from the hidden representation using the loss `L = l(g(phi'(x), x))`, where `phi'(x)` is the counterfactual model. The next goal is to ensure that the generated concepts follow the same concepts the discriminator employ. They achieve this by maximizing the amount of information that the explanatory learner (i.e., g) extracted from the latent representation with respect to the discriminative learner’s (i.e., f_K) information.  
         </details>  
 
    - [The Blessings of Unlabeled Background in Untrimmed Videos](https://arxiv.org/abs/2103.13183)
