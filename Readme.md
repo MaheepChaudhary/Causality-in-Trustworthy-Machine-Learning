@@ -743,3 +743,42 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
         </details>  
 
 
+   - [Causality matters in medical imaging](https://www.nature.com/articles/s41467-020-17478-w)
+      - <details><summary>Maheep's Notes</summary>
+        The paper proposes 
+        </details>  
+
+   - [TSMOBN GENERALIZATION FOR UNSEEN CLIENTS IN FEDERATED LEARNING](https://arxiv.org/abs/2110.09974)
+      - <details><summary>Maheep's Notes</summary>
+        The paper proposes 
+        </details>  
+
+   - [Learning Domain Invariant Relationship with Instrumental Variable for Domain Generalization](https://arxiv.org/pdf/2110.01438.pdf)
+      - <details><summary>Maheep's Notes</summary>
+        The paper proposes 
+        </details>  
+
+   - [Latent Space Explanation by Intervention](https://arxiv.org/abs/2112.04895)
+      - <details><summary>Maheep's Notes</summary>
+        The paper proposes 
+        </details>  
+
+   - [The Blessings of Unlabeled Background in Untrimmed Videos](https://arxiv.org/abs/2103.13183)
+      - <details><summary>Maheep's Notes</summary>
+        The paper proposes 
+        </details>  
+        
+   - [Selecting Data Augmentation for Simulating Interventions](https://arxiv.org/abs/2005.01856)
+      - <details><summary>Maheep's Notes</summary>
+        The paper proposes 
+        </details>  
+
+   - [Counterfactual Attention Learning for Fine-Grained Visual Categorization and Re-identification](https://arxiv.org/abs/2108.08728)
+      - <details><summary>Maheep's Notes</summary>
+        The paper proposes 
+        </details>  
+
+   - [Counterfactual Debiasing Inference for Compositional Action Recognition](https://dl.acm.org/doi/abs/10.1145/3474085.3475472)
+      - <details><summary>Maheep's Notes</summary>
+        The paper proposes 
+        </details>  
