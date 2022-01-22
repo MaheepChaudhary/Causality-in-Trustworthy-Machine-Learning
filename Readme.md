@@ -801,6 +801,20 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
         `L = L_crossentropy(Y_effect, y) + L_others`, where L_others represents the original objective such as standard classification loss.
         </details>  
 
+   - [Meaningful Explanations of Black Box AI Decision Systems](https://ojs.aaai.org//index.php/AAAI/article/view/5050)
+      - <details><summary>Maheep's Notes</summary>
+        The paper discusses about the Black-box models and how they can be used for explanation. The author proposes 2 different flavours of this problem.<br>
+        1.) **eXplanation by Design (XbD)**: given a dataset of training decision records, how to develop a machine learning decision model together with its explanation;<br>
+        2.) **Black Box eXplanation (BBX)**: given the decision records produced by an obscure black box decision model, how to reconstruct an explanation for it. <br>
+        The author propose a new local-first explanation framework: expressive logic rule languages for inferring local explanations(by local they mean the explanation of data point), together with bottom-up generalization algorithms to aggregate an exhaustive collection of local explanations into a global one, optimizing jointly for simplicity and fidelity in mimicking the black box. The author argues that more informative causal explanation should be provided and the local level information availability can be quite beneficial for the progress of the field. Therefore the author cite it's previous work LORE, a local explanator that builds a focused exploration around the target point, and delivers explanations in the form of highly expressive rules together with counterfactuals, suggesting the changes in the instance’s features that would lead to a different outcome. The athor argues that a black box explanation framework should be: <br>
+        1.) model-agnostic<br>
+        2.) logic-based<br>
+        3.) both local and global explanability<br>
+        4.) high-fidelity: provides a reliable and accurate approximation of black-box behaviour.
+
+        ![Model](images/17.png)
+        </details>  
+
    - [Counterfactual Debiasing Inference for Compositional Action Recognition](https://dl.acm.org/doi/abs/10.1145/3474085.3475472)
       - <details><summary>Maheep's Notes</summary>
         The paper proposes Counterfactual Debiasing Network (CDN) Compositional action recognition by inhibiting the co-occurrence bias in the same action with distinct objects and also to deconfound the direct effect of appearance. The model consist of only 2 simple steps:<br>
@@ -809,7 +823,7 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
         The only losses which gets constituted in the model are: Appearance loss, Structural Loss and fusion Loss by using the cross-entropy.
 
         ![Model](images/17.png)
-        </details>  
+        </details> 
 
    - [Counterfactual Debiasing Inference for Compositional Action Recognition](https://dl.acm.org/doi/abs/10.1145/3474085.3475472)
       - <details><summary>Maheep's Notes</summary>
