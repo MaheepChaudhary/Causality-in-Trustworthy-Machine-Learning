@@ -862,7 +862,7 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
       - <details><summary>Maheep's Notes</summary>
         The paper proposes Deconfounded Cross-modal Matching(DCM) method for a causality-inspired VMR framework that builds structural causal model to capture the true effect of query and video content on the prediction to remove the confounding effects of moment location. It first disentangles moment representation to infer the core feature of visual content, and then applies causal intervention on the disentangled multimodal input based on backdoor adjustment. The feature disentanglement is used to separate the location feature from the visual context feature which act a spurious feature in it and as it act as a spurious feature for the label by directly effecting it the use the second method to eridicate it.
         This is implemented as:<br>
-        1.) The disentanglement is done by using the two fully connected layers. It is ensured by reconstruction loss that the `"l"` vector reconstructs the location and the loss `"L_inde"` so as to force the `l` to be independent of `c`.
+        1.) The disentanglement is done by using the two fully connected layers. It is ensured by reconstruction loss that the `"l"` vector reconstructs the location and the loss `"L_inde"` so as to force the `l` to be independent of `c`.<br>
         2.) As for the second point backdoor method is used to eradicate the spurious correlation.
 
         ![Model](images/20.png)
@@ -870,7 +870,12 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
 
    - [Intervention Video Relation Detection](https://dl.acm.org/doi/pdf/10.1145/3474085.3475540)
       - <details><summary>Maheep's Notes</summary>
-        The paper proposes
+        The paper proposes Interventional video Relation Detection(IVRD) approach that aims just not only to improve the accuracy but to improve the robustness of the model for Video Visual Relation Detection (VidVRD). It contains of 2 components:<br>
+        1.) They first learn the set of predicate prototype where each prototype describes a set of relation references with the same predicate.<br>
+        2.) They apply a causality-inspired intervention to model input <subject,object>, which forces the model to fairly incorporate each possible predicate prototype into consideration using the backdoor method.<br>
+        The model only consist of only 2 types of losses: <br>
+        
+        `L = L_obj + lambda*L_pred`, where `L_obj` is the cross entropy loss function to calculate the loss of classifying video object trajectories and `L_pred` is binary cross entropy loss used for predicate prediciton.
         </details>  
 
    - [Visual Commonsense R-CNN](https://arxiv.org/pdf/2002.12204.pdf)
