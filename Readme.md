@@ -1,4 +1,4 @@
-# When Causality meets Computer Vision
+# Rise of Causality in Computer Vision
 
 The repository contains lists of papers on causality and how relevant techniques are being used to further enhance deep learning era computer vision solutions. 
 
