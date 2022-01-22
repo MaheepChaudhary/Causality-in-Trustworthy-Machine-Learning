@@ -858,113 +858,17 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
         ![Model](images/17.png)
         </details>  
 
-   - [Counterfactual Debiasing Inference for Compositional Action Recognition](https://dl.acm.org/doi/abs/10.1145/3474085.3475472)
+   - [Deconfounded Video Moment Retrieval with Causal Intervention](https://arxiv.org/abs/2106.01534)
       - <details><summary>Maheep's Notes</summary>
-        The paper proposes Counterfactual Debiasing Network (CDN) Compositional action recognition by inhibiting the co-occurrence bias in the same action with distinct objects and also to deconfound the direct effect of appearance. The model consist of only 2 simple steps:<br>
-        1.) Building the model as usual by training it.<br>
-        2.) Taking the prediction from only visual appearance and subtracting it from the output of the model considering both brances.<br>
-        The only losses which gets constituted in the model are: Appearance loss, Structural Loss and fusion Loss by using the cross-entropy.
-
-        ![Model](images/17.png)
+        The paper proposes
         </details>  
 
-   - [Counterfactual Debiasing Inference for Compositional Action Recognition](https://dl.acm.org/doi/abs/10.1145/3474085.3475472)
+   - [Intervention Video Relation Detection](https://dl.acm.org/doi/pdf/10.1145/3474085.3475540)
       - <details><summary>Maheep's Notes</summary>
-        The paper proposes Counterfactual Debiasing Network (CDN) Compositional action recognition by inhibiting the co-occurrence bias in the same action with distinct objects and also to deconfound the direct effect of appearance. The model consist of only 2 simple steps:<br>
-        1.) Building the model as usual by training it.<br>
-        2.) Taking the prediction from only visual appearance and subtracting it from the output of the model considering both brances.<br>
-        The only losses which gets constituted in the model are: Appearance loss, Structural Loss and fusion Loss by using the cross-entropy.
-
-        ![Model](images/17.png)
+        The paper proposes
         </details>  
 
-   - [Counterfactual Debiasing Inference for Compositional Action Recognition](https://dl.acm.org/doi/abs/10.1145/3474085.3475472)
+   - [Visual Commonsense R-CNN](https://arxiv.org/pdf/2002.12204.pdf)
       - <details><summary>Maheep's Notes</summary>
-        The paper proposes Counterfactual Debiasing Network (CDN) Compositional action recognition by inhibiting the co-occurrence bias in the same action with distinct objects and also to deconfound the direct effect of appearance. The model consist of only 2 simple steps:<br>
-        1.) Building the model as usual by training it.<br>
-        2.) Taking the prediction from only visual appearance and subtracting it from the output of the model considering both brances.<br>
-        The only losses which gets constituted in the model are: Appearance loss, Structural Loss and fusion Loss by using the cross-entropy.
-
-        ![Model](images/17.png)
+        The paper proposes 
         </details>  
-
-   - [Counterfactual Debiasing Inference for Compositional Action Recognition](https://dl.acm.org/doi/abs/10.1145/3474085.3475472)
-      - <details><summary>Maheep's Notes</summary>
-        The paper proposes Counterfactual Debiasing Network (CDN) Compositional action recognition by inhibiting the co-occurrence bias in the same action with distinct objects and also to deconfound the direct effect of appearance. The model consist of only 2 simple steps:<br>
-        1.) Building the model as usual by training it.<br>
-        2.) Taking the prediction from only visual appearance and subtracting it from the output of the model considering both brances.<br>
-        The only losses which gets constituted in the model are: Appearance loss, Structural Loss and fusion Loss by using the cross-entropy.
-
-        ![Model](images/17.png)
-        </details>  
-
-   - [Counterfactual Debiasing Inference for Compositional Action Recognition](https://dl.acm.org/doi/abs/10.1145/3474085.3475472)
-      - <details><summary>Maheep's Notes</summary>
-        The paper proposes Counterfactual Debiasing Network (CDN) Compositional action recognition by inhibiting the co-occurrence bias in the same action with distinct objects and also to deconfound the direct effect of appearance. The model consist of only 2 simple steps:<br>
-        1.) Building the model as usual by training it.<br>
-        2.) Taking the prediction from only visual appearance and subtracting it from the output of the model considering both brances.<br>
-        The only losses which gets constituted in the model are: Appearance loss, Structural Loss and fusion Loss by using the cross-entropy.
-
-        ![Model](images/17.png)
-        </details>  
-
-   - [Counterfactual Debiasing Inference for Compositional Action Recognition](https://dl.acm.org/doi/abs/10.1145/3474085.3475472)
-      - <details><summary>Maheep's Notes</summary>
-        The paper proposes Counterfactual Debiasing Network (CDN) Compositional action recognition by inhibiting the co-occurrence bias in the same action with distinct objects and also to deconfound the direct effect of appearance. The model consist of only 2 simple steps:<br>
-        1.) Building the model as usual by training it.<br>
-        2.) Taking the prediction from only visual appearance and subtracting it from the output of the model considering both brances.<br>
-        The only losses which gets constituted in the model are: Appearance loss, Structural Loss and fusion Loss by using the cross-entropy.
-
-        ![Model](images/17.png)
-        </details>  
-
-   - [Counterfactual Debiasing Inference for Compositional Action Recognition](https://dl.acm.org/doi/abs/10.1145/3474085.3475472)
-      - <details><summary>Maheep's Notes</summary>
-        The paper proposes Counterfactual Debiasing Network (CDN) Compositional action recognition by inhibiting the co-occurrence bias in the same action with distinct objects and also to deconfound the direct effect of appearance. The model consist of only 2 simple steps:<br>
-        1.) Building the model as usual by training it.<br>
-        2.) Taking the prediction from only visual appearance and subtracting it from the output of the model considering both brances.<br>
-        The only losses which gets constituted in the model are: Appearance loss, Structural Loss and fusion Loss by using the cross-entropy.
-
-        ![Model](images/17.png)
-        </details>  
-
-   - [Counterfactual Debiasing Inference for Compositional Action Recognition](https://dl.acm.org/doi/abs/10.1145/3474085.3475472)
-      - <details><summary>Maheep's Notes</summary>
-        The paper proposes Counterfactual Debiasing Network (CDN) Compositional action recognition by inhibiting the co-occurrence bias in the same action with distinct objects and also to deconfound the direct effect of appearance. The model consist of only 2 simple steps:<br>
-        1.) Building the model as usual by training it.<br>
-        2.) Taking the prediction from only visual appearance and subtracting it from the output of the model considering both brances.<br>
-        The only losses which gets constituted in the model are: Appearance loss, Structural Loss and fusion Loss by using the cross-entropy.
-
-        ![Model](images/17.png)
-        </details>  
-
-   - [Counterfactual Debiasing Inference for Compositional Action Recognition](https://dl.acm.org/doi/abs/10.1145/3474085.3475472)
-      - <details><summary>Maheep's Notes</summary>
-        The paper proposes Counterfactual Debiasing Network (CDN) Compositional action recognition by inhibiting the co-occurrence bias in the same action with distinct objects and also to deconfound the direct effect of appearance. The model consist of only 2 simple steps:<br>
-        1.) Building the model as usual by training it.<br>
-        2.) Taking the prediction from only visual appearance and subtracting it from the output of the model considering both brances.<br>
-        The only losses which gets constituted in the model are: Appearance loss, Structural Loss and fusion Loss by using the cross-entropy.
-
-        ![Model](images/17.png)
-        </details>  
-
-   - [Counterfactual Debiasing Inference for Compositional Action Recognition](https://dl.acm.org/doi/abs/10.1145/3474085.3475472)
-      - <details><summary>Maheep's Notes</summary>
-        The paper proposes Counterfactual Debiasing Network (CDN) Compositional action recognition by inhibiting the co-occurrence bias in the same action with distinct objects and also to deconfound the direct effect of appearance. The model consist of only 2 simple steps:<br>
-        1.) Building the model as usual by training it.<br>
-        2.) Taking the prediction from only visual appearance and subtracting it from the output of the model considering both brances.<br>
-        The only losses which gets constituted in the model are: Appearance loss, Structural Loss and fusion Loss by using the cross-entropy.
-
-        ![Model](images/17.png)
-        </details>  
-
-   - [Counterfactual Debiasing Inference for Compositional Action Recognition](https://dl.acm.org/doi/abs/10.1145/3474085.3475472)
-      - <details><summary>Maheep's Notes</summary>
-        The paper proposes Counterfactual Debiasing Network (CDN) Compositional action recognition by inhibiting the co-occurrence bias in the same action with distinct objects and also to deconfound the direct effect of appearance. The model consist of only 2 simple steps:<br>
-        1.) Building the model as usual by training it.<br>
-        2.) Taking the prediction from only visual appearance and subtracting it from the output of the model considering both brances.<br>
-        The only losses which gets constituted in the model are: Appearance loss, Structural Loss and fusion Loss by using the cross-entropy.
-
-        ![Model](images/17.png)
-        </details>  
-
