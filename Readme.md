@@ -811,17 +811,15 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
         2.) logic-based<br>
         3.) both local and global explanability<br>
         4.) high-fidelity: provides a reliable and accurate approximation of black-box behaviour.
-
-        ![Model](images/17.png)
         </details>  
 
-   - [Counterfactual Debiasing Inference for Compositional Action Recognition](https://dl.acm.org/doi/abs/10.1145/3474085.3475472)
+   - [Are VQA Systems RAD? Measuring Robustness to Augmented Data with Focused Interventions](https://arxiv.org/abs/2106.04484)
       - <details><summary>Maheep's Notes</summary>
-        The paper proposes Counterfactual Debiasing Network (CDN) Compositional action recognition by inhibiting the co-occurrence bias in the same action with distinct objects and also to deconfound the direct effect of appearance. The model consist of only 2 simple steps:<br>
-        1.) Building the model as usual by training it.<br>
-        2.) Taking the prediction from only visual appearance and subtracting it from the output of the model considering both brances.<br>
-        The only losses which gets constituted in the model are: Appearance loss, Structural Loss and fusion Loss by using the cross-entropy.
-
+        The paper proposes a new robustness measure, Robustness to Augmented Data (RAD), which measures the consistency of model predictions between original and augmented examples. They define it as:<br>
+        
+        `RAD =|J(D;F) and J(D';F)|/|J(D;F)|` <br>, where `J(D;F)`
+        as the set of example indices for which a model `f` correctly predicts `y`. `D'` represents the augmented example which is prepared as *VQA dataset there are three answer types: “yes/no”, “number” and “other”, and 65 question types. In augmentations, they generate “yes/no” questions from “number” and “other” questions, i.e. What color is the <Subj>? <Color> is changed to Is the color of <Subj> is <Color>?*<br>
+        RAD is in [0, 1] and the higher the RAD of f is, the more robust f is.
         ![Model](images/17.png)
         </details> 
 
