@@ -876,9 +876,17 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
         The model only consist of only 2 types of losses: <br>
         
         `L = L_obj + lambda*L_pred`, where `L_obj` is the cross entropy loss function to calculate the loss of classifying video object trajectories and `L_pred` is binary cross entropy loss used for predicate prediciton.
+
+        ![Model](images/21.png)
         </details>  
 
    - [Visual Commonsense R-CNN](https://arxiv.org/pdf/2002.12204.pdf)
       - <details><summary>Maheep's Notes</summary>
-        The paper proposes 
+        The paper proposes VC R-CNN which uses causal intervention for the prediction of label "Y". The author implements it as:<br>
+        The possible confounders are put into a dictionary. From the image objects are detected by Faster R-CNN, where each RoI is then fed into two sibling branches: a Self Predictor to predict its own class, e.g., x_c , and a Context Predictor to predict its context labels, e.g., y_c, where it is used to caluculate the 
+
+        `E[g(z)]` to get the top confounders from the dictionary. Now there is a complexity arise where the confounder is the doctionary act as the colliders therefore they are eridacted through the use of Neural Causation coefficient(NCC).
+
+   
+        ![Model](images/22.png)
         </details>  
