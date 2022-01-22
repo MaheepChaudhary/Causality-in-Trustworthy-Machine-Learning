@@ -860,7 +860,12 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
 
    - [Deconfounded Video Moment Retrieval with Causal Intervention](https://arxiv.org/abs/2106.01534)
       - <details><summary>Maheep's Notes</summary>
-        The paper proposes
+        The paper proposes Deconfounded Cross-modal Matching(DCM) method for a causality-inspired VMR framework that builds structural causal model to capture the true effect of query and video content on the prediction to remove the confounding effects of moment location. It first disentangles moment representation to infer the core feature of visual content, and then applies causal intervention on the disentangled multimodal input based on backdoor adjustment. The feature disentanglement is used to separate the location feature from the visual context feature which act a spurious feature in it and as it act as a spurious feature for the label by directly effecting it the use the second method to eridicate it.
+        This is implemented as:<br>
+        1.) The disentanglement is done by using the two fully connected layers. It is ensured by reconstruction loss that the `"l"` vector reconstructs the location and the loss `"L_inde"` so as to force the `l` to be independent of `c`.
+        2.) As for the second point backdoor method is used to eradicate the spurious correlation.
+
+        ![Model](images/20.png)
         </details>  
 
    - [Intervention Video Relation Detection](https://dl.acm.org/doi/pdf/10.1145/3474085.3475540)
