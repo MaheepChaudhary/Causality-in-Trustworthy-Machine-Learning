@@ -73,8 +73,7 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
          `(β − θ)P (y,x |z) + (γ − β)P (y,x′ |z) + θ`
           <br>
          "Third, the proposed approach could be used to evaluate machine learning models as well as to generate labels for machine learning models. The accuracy of such a machine learning model would be higher because it would consider the counterfactual scenarios."
-        </details>[Sundar et al., 1998; Blumenthal et al., 2001; Winer,
-2001; Resnick et al., 2006; Lewis and Reiley, 2014]
+        </details>
 
   - [Unit Selection with Causal Diagram](https://arxiv.org/pdf/2109.07556.pdf) 
       - <details><summary>Maheep's notes </summary>
