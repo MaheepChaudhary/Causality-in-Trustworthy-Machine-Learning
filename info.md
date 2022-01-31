@@ -249,31 +249,153 @@
         There exists a spurious correlation b/w `S` and `Z`. The author argues that we will get a `p(y|do(s*)) = p(y|s*)` 
         </details> 
 
-* [Two Causal Principles for Improving Visual Dialog](https://arxiv.org/abs/1911.10496)
 
-* [Weakly-Supervised Video Object Grounding via Causal Intervention](https://arxiv.org/pdf/2112.00475.pdf)
+   - [Two Causal Principles for Improving Visual Dialog](https://arxiv.org/abs/1911.10496) [1, 2, 4]
+      - <details><summary>Maheep's Notes</summary>
+        The paper focuses to eliminate the spurious correltaions in the task of Visual Dialogue and therfore proposes 2 principles:<br>
+        1.) The dialog history to the answer model provides a harmful shortcut bias threfore the direct effect of history on answer should be eliminated.<br>
+        2.) There is an unobserved confounder for history, question, and answer, leading to spurious correlations from training data which should be identified and be eliminated using the backdoor method.<br><br>
+        Now the main crunch of the paper arises as the confounder is unobserved so how can we apply the backdoor method? To solve it the author argues that this confounder comes from the annotator and thus can be seen in the 
+        
+        `a_i`(answer) is a sentence observed from the “mind” of user u during dataset collection. Then, `sigma(P(A)*P(u|H))`, `H` is history and `A` is answer can be approximated as `sigma(P(A)P(a_i|H))`.They further use `p(a_i|QT)`, where `QT` is Question Type to approximate `P(a_i|H)` because of two reasons: First, `P (a_i|H)` essentially describes a prior knowledge about `a_i` without comprehending the whole `{Q, H, I} triplet`.
+        
+        </details>  
 
-* [Towards Unbiased Visual Emotion Recognition via Causal Intervention](https://arxiv.org/abs/2107.12096)   
+   - [Weakly-Supervised Video Object Grounding via Causal Intervention](https://arxiv.org/pdf/2112.00475.pdf) [2, 4, 5]
+      - <details><summary>Maheep's Notes</summary>
+        The paper aims to localize objects described in the sentence to visual regions in the video by deconfounding the object-relevant associations given the video-sentence annotations. The author argues that the frame is made up of the content(C), i.e. factors that cause the object’s visual appearances in spatial and temporal throughout the video are grouped into a category and Style(S) is the background or scenes. The author argues that the S does not play any role in object grounding and only act a confounder. In addition to that there exist one more confounder, i.e 
+        
+        !['Idenfiability Diagram'](images/10.png)
 
-* [Human Trajectory Prediction via Counterfactual Analysis](https://openaccess.thecvf.com/content/ICCV2021/papers/Chen_Human_Trajectory_Prediction_via_Counterfactual_Analysis_ICCV_2021_paper.pdf)
+        `Z` that occurs due to some specific objects occuring frequently. The style confounder is replaced by using the contrastive learning, where the counterfactual examples are created by taking the vectors from a memory bank by taking the top sleected top regions for described object and then the selected regions and frames are grouped together into frame-level content(H_c) and region-level content(U_c), and the rest of the regions are grouped as U_s and H_s. These regions are the converted to counterfactual using these memory vectors which were created by taking the randomly selected regions in training set. The most similar one and replaces the original one, to generate examples to have them hard to distinguish from real ones contrastive learning is used. The equation looks like: <br>
 
-* [Interventional Video Grounding with Dual Contrastive Learning](https://arxiv.org/abs/2106.11013)
+        `IE(p|do(U_s = U_s_generated)) < IE(p|do(U_c = U_c_generated))`<br>
+        `IE(p|do(H_s = H_s_generated)) < IE(p|do(H_c = H_c_generated))`<br>
+        where the `IE` is Interventional Effect. As for the next confounder they uses the textual embedding of o_k(object) essentially provides the stable cluster center in common embedding space for its vague and diverse visual region embeddings in different videos. Therefore, by taking the textual embedding of the object as the substitute of every possible object z and apply backdoor adjustment. 
+        </details> 
 
-* [TSMOBN GENERALIZATION FOR UNSEEN CLIENTS IN FEDERATED LEARNING](https://arxiv.org/abs/2110.09974)
+   - [Towards Unbiased Visual Emotion Recognition via Causal Intervention](https://arxiv.org/abs/2107.12096)  [2, 4, 5]
+      - <details><summary>Maheep's Notes</summary>
+        The paper we propose a novel Interventional Emotion Recognition Network (IERN) to achieve
+        the backdoor adjustment on the confounder, i.e. context of the image(C). The author implements it as:<br>
 
-* [Learning Domain Invariant Relationship with Instrumental Variable for Domain Generalization](https://arxiv.org/pdf/2110.01438.pdf)
+        IERN, which is composed of four parts:<br>
+        1.) **Backbone**<br>
+            > It extracts the feature embedding of the image.<br>
+        2.) **Feature Disentanglement**<br> 
+            > It disentangles the emotions and context from the image, having emotion dicriminator(d_e) and context discriminator(d_c) which ensures that the extracted feature are separated and has the desired feature. The loss comprises as :<br>
+            `L = CE(d_e(g_e(f_b(x))), y_e) + MSE(d_c(g_e(f_b(x))), 1/n)` where g_e is emotion generator and y_e is the emotion label and n is the number of counfounder and the same loss is for context replacing d_e, g_e and d_c by d_c, g_c and d_e, here n represents number of emotions. To ensure that the separated features fall within reason-able domains, IERN should be capable of reconstructing the base feature   f_b(x), i.e. `L =MSE(g_r(g_e(f_b(x)), g_c(f_b(x))), f_b(x))`<br>  
+        3.) **Confounder Builder**<br>
+            > The purpose of the confounder builder is to combine each emotion feature with different context features so as to avoid the bias towards the observed context strata.<br>
+        4.) **Classifier**<br>
+            > It is simply used for prediciton.
 
-* [The Blessings of Unlabeled Background in Untrimmed Videos](https://arxiv.org/abs/2103.13183)
+        !['Model'](images/11.png)
+        </details>   
 
-* [Domain Generalization using Causal Matching](https://arxiv.org/abs/2006.07500)
+   - [Human Trajectory Prediction via Counterfactual Analysis](https://openaccess.thecvf.com/content/ICCV2021/papers/Chen_Human_Trajectory_Prediction_via_Counterfactual_Analysis_ICCV_2021_paper.pdf) [4, 5]
+      - <details><summary>Maheep's Notes</summary>
+        The paper propose a counterfactual analysis method for human trajectory prediction. They cut off the inference from environment to trajectory by constructing the counterfactual intervention on the trajectory itself. Finally, they compare the factual and counterfactual trajectory clues to alleviate the effects of environment bias and highlight the trajectory clues.<br>
 
-* [Counterfactual Debiasing Inference for Compositional Action Recognition](https://dl.acm.org/doi/abs/10.1145/3474085.3475472)
+        They Y_causal is defined as `Y_causal = Y_i - Y-i(do(X_i = x_i))`<br>
+        They define a generative model which generates trajectory by a noise latent variable Z indicated by `Y*_i`. Finally the loss is defined as:<br>
+        `Y_causal = Y*_i - Y*_i(do(X_i = x_i))`<br>
+        `L_causalGAN = L2(Y_i, Y_causal) + log(D(Y_i)) + log(1-D(Y_causal))`, where D is the discriminator.
+        </details> 
 
-* [Deconfounded Video Moment Retrieval with Causal Intervention](https://arxiv.org/abs/2106.01534)
+   - [Interventional Video Grounding with Dual Contrastive Learning](https://arxiv.org/abs/2106.11013) [2]
+      - <details><summary>Maheep's Notes</summary>
+        The paper proposes interventional video grounding (IVG) that leverages backdoor adjustment to deconfound the selection bias based on structured causal model.They introduce a dual contrastive learning approach (DCL) to better align the text and video by maximizing the mutual information (MI) between query and video clips so as to deconfounded video grounding that will aim to localize a moment from an untrimmed video for a given textual query after deconfounding it. The author implements the system in major 5 steps:<br>
+        1) Given an input query and video, the two encoders output contextualized visual and textual representations respectively. <br>
+        2) Then, these representations will be fed into two contrastive modules VV-CL and QV-CL respectively to learn high-quality representations with two contrastive losses L_vv and L_qv, where the QV-CL module focuses on increasing the Mutual information of the positive frames of video and the query. The VV-CL aims to increse the mutual information b/w the start and end boundaries of the video, which looks like as shown in the diagram below:<br>
 
-* [Intervention Video Relation Detection](https://dl.acm.org/doi/pdf/10.1145/3474085.3475540)
+        ![Contrastive Module](images/13.png)
 
-* [Visual Commonsense R-CNN](https://arxiv.org/pdf/2002.12204.pdf)
+        3) The output of two feature encoders are fed to a fusion module with a context-query attention mechanism to capture the cross-modal interactions between visual and textual features.<br> 
+        4) Next, to mitigate the spurious correlations between textual and visual features, they use causal interventions P (Y |do(X)) with event as surrogate confounders to learn representations.<br> 
+        5) Finally, two losses L_s and L_e for the start and end boundaries are introduced.<br>
+        
+        ![Model](images/14.png)
+        </details>  
+
+   - [TSMOBN GENERALIZATION FOR UNSEEN CLIENTS IN FEDERATED LEARNING](https://arxiv.org/abs/2110.09974) [2, 5]
+      - <details><summary>Maheep's Notes</summary>
+        The paper proposes TsmoBN method which can reduce divergence between training and testing feature distributions and also achieves a lower generalization gap than standard model testing. The author argues that in Federated Learning the performance degrades during the test phase as a global model trained on heterogeneous feature distributions fails to be an accurate estimation for a different distribution on the unseen client. Therefore the author propose to use test-specific and momentum tracked batch normalization (TsmoBN) to solve the unseen client generalization problem for varying feature distributions. The author implements it as:<br>
+        The author takes the approach of causality and defines a SCM having the terms as 
+        
+        `D_s_i` for datasets of different domain, i.e. coming from different users but used in training, `X` are the samples, `R` are the raw extracted features of `X`, `F` is the normalized feature representaiton of `R` and `Y` is the classifier. To remove the confounding effects brought by `D_u` , a direct way is using causal intervention on normalized features (i.e., do(F)) to let the feature distribution similar to training distributions. This intervention by introducing the surrogate variable `S`, which is test-specific statistics of raw features `R` during testing by obtaining the test normalized features that have similar distributions as the training normalized features. More specifically by calculating the mean and variance pair at test time in BN to normalize features. Additionally they further propose to use momentum to integrate relations among different batches, thus reducing the variances. Precisely by giving the unseen client with M batches of data to be tested in sequential manner.
+
+        ![Model](images/15.png)
+        </details>
+
+   - [Learning Domain Invariant Relationship with Instrumental Variable for Domain Generalization](https://arxiv.org/pdf/2110.01438.pdf) [4, 5]
+      - <details><summary>Maheep's Notes</summary>
+        The paper proposes an instrumental variable-based approach to learn the domain-invariant relationship between input features and labels contained in the conditional distribution as the input features of one domain are valid instrumental variables for other domains. Therefore they propose a model Domain-invariant Relationship with Instrumental VariablE (DRIVE) via a two-stage IV method. <br>
+        1.) It learns the conditional distribution of input features of one domain given input features of another domain with Maximum Mean Discrepancy(MMD) that minimizes the distance b/w the feature representation of two different domains.<br>
+        2.) In second step it estimates the domain-invariant relationship by predicting labels with the learned conditional distribution by sampling from the first step distribtion.<br>
+
+        ![Model](images/16.png)
+        </details>  
+
+   - [The Blessings of Unlabeled Background in Untrimmed Videos](https://arxiv.org/abs/2103.13183) [4]
+      - <details><summary>Maheep's Notes</summary>
+         The paper propose a Temporal Smoothing PCA-based (TS-PCA) deconfounder, which exploits the unlabelled background to model an observed substitute for the unobserved confounder, to remove the confounding effect in Weakly-supervised Temporal Action Localization(WTAL), which aims to detect the action segments with only video-level action labels in training. The author proposes to take all different input video and argues that if by extracting the distribution of the input video features the if we have an unobsereved confounder "z", then we can identify it by using the equation 
+         
+         `P(x_1, x_2,....., x_n | Z = z) = TT P(x_t | Z = z)`, i.e. the features will become independent if we are able to obeserve `Z` but if there exists an unobserved confounder c, which affects multiple input video features within x and segment-level labels A. Then, x would be dependent, even conditional on z, due to the impact of c, in this case with the blessings of weak ignorability we can replace the expectation over C with a single z in `E[E[A|X = x, C = c]] = A`
+        </details>  
+
+   - [Domain Generalization using Causal Matching](https://arxiv.org/abs/2006.07500) [5]
+      - <details><summary>Maheep's Notes</summary>
+        The paper proposes MatchDG is an iterative algorithm that starts with randomly matched inputs from the same class and builds a representation using contrastive learning such that inputs sharing the same causal features are closer to one another. It is a two-phase method that first learns a representation independent of the ERM loss, so that classification loss does not interfere with the learning of stable features. The author argues that the a common objective is to learn representations independent of the domain after conditioning on the class label. They show that this objective is not sufficient: there exist counter-examples where a model fails to generalize to unseen domains even after satisfying class-conditional domain invariance. If there are 3 data-points (x_d_i, y), (x_d'_j, y) and (x_d_k, y') then the distance in causal features between x_i and x_j is smaller than distance between x_i and x_k or x_j and x_k. Based on this they represent a contrastive loss which bring lables of same class closer and increases the distances b/w different class label.
+
+        ![Algorithm](images/19.png) 
+        </details> 
+
+   - [Counterfactual Debiasing Inference for Compositional Action Recognition](https://dl.acm.org/doi/abs/10.1145/3474085.3475472) [4]
+      - <details><summary>Maheep's Notes</summary>
+        The paper proposes Counterfactual Debiasing Network (CDN) Compositional action recognition by inhibiting the co-occurrence bias in the same action with distinct objects and also to deconfound the direct effect of appearance. The model consist of only 2 simple steps:<br>
+        1.) Building the model as usual by training it.<br>
+        2.) Taking the prediction from only visual appearance and subtracting it from the output of the model considering both brances.<br>
+        The only losses which gets constituted in the model are: Appearance loss, Structural Loss and fusion Loss by using the cross-entropy.
+
+        ![Model](images/17.png)
+        </details>  
+
+
+   - [Deconfounded Video Moment Retrieval with Causal Intervention](https://arxiv.org/abs/2106.01534) [2, 4]
+      - <details><summary>Maheep's Notes</summary>
+        The paper proposes Deconfounded Cross-modal Matching(DCM) method for a causality-inspired VMR framework that builds structural causal model to capture the true effect of query and video content on the prediction to remove the confounding effects of moment location. It first disentangles moment representation to infer the core feature of visual content, and then applies causal intervention on the disentangled multimodal input based on backdoor adjustment. The feature disentanglement is used to separate the location feature from the visual context feature which act a spurious feature in it and as it act as a spurious feature for the label by directly effecting it the use the second method to eridicate it.
+        This is implemented as:<br>
+        1.) The disentanglement is done by using the two fully connected layers. It is ensured by reconstruction loss that the `"l"` vector reconstructs the location and the loss `"L_inde"` so as to force the `l` to be independent of `c`.<br>
+        2.) As for the second point backdoor method is used to eradicate the spurious correlation.
+
+        ![Model](images/20.png)
+        </details>  
+
+
+   - [Intervention Video Relation Detection](https://dl.acm.org/doi/pdf/10.1145/3474085.3475540) [2, 4]
+      - <details><summary>Maheep's Notes</summary>
+        The paper proposes Interventional video Relation Detection(IVRD) approach that aims just not only to improve the accuracy but to improve the robustness of the model for Video Visual Relation Detection (VidVRD). It contains of 2 components:<br>
+        1.) They first learn the set of predicate prototype where each prototype describes a set of relation references with the same predicate.<br>
+        2.) They apply a causality-inspired intervention to model input <subject,object>, which forces the model to fairly incorporate each possible predicate prototype into consideration using the backdoor method.<br>
+        The model only consist of only 2 types of losses: <br>
+        
+        `L = L_obj + lambda*L_pred`, where `L_obj` is the cross entropy loss function to calculate the loss of classifying video object trajectories and `L_pred` is binary cross entropy loss used for predicate prediciton.
+
+        ![Model](images/21.png)
+        </details>  
+
+   - [Visual Commonsense R-CNN](https://arxiv.org/pdf/2002.12204.pdf) [2, 4]
+      - <details><summary>Maheep's Notes</summary>
+        The paper proposes VC R-CNN which uses causal intervention for the prediction of label "Y". The author implements it as:<br>
+        The possible confounders are put into a dictionary. From the image objects are detected by Faster R-CNN, where each RoI is then fed into two sibling branches: a Self Predictor to predict its own class, e.g., x_c , and a Context Predictor to predict its context labels, e.g., y_c, where it is used to caluculate the 
+
+        `E[g(z)]` to get the top confounders from the dictionary. Now there is a complexity arise where the confounder is the doctionary act as the colliders therefore they are eridacted through the use of Neural Causation coefficient(NCC).
+
+   
+        ![Model](images/22.png)
+        </details>  
+   
 
 
 
