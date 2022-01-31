@@ -1,5 +1,9 @@
 # Fields 
 
+The papers have been soreted according to the tools to that they belong, by stating them in the heading of the paper. For ex: `[1, 2, 3]`, which means the paper has 1, 2 and 3 tools ingrined in it. The picture below shows my understanding about the & tools of Causal Inference. 
+
+![7 tools of Causal Inference](7_tools.jpg)
+
 ## Counterfactual Sythesizing or Causal augmentation
 
   - [Counterfactual Samples Synthesizing and Training for Robust Visual Question Answering](https://arxiv.org/pdf/2003.06576.pdf) [1, 5, 6]
