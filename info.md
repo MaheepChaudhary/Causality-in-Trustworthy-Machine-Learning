@@ -1,6 +1,6 @@
 # Fields 
 
-The papers have been soreted according to the tools to that they belong, by stating them in the heading of the paper. For ex: `[1, 2, 3]`, which means the paper has 1, 2 and 3 tools ingrined in it. The picture below shows my understanding about the & tools of Causal Inference. 
+The papers have been soreted according to the tools to that they belong, by stating them in the heading of the paper. For ex: `[1, 2, 3]`, which means the paper has 1, 2 and 3 tools ingrined in it. The picture below shows my understanding about the & tools of Causal Inference. This is the link of the paper [Seven Tools of Causal Inference with Reflections on Machine Learning](https://ftp.cs.ucla.edu/pub/stat_ser/r481.pdf)
 
 ![7 tools of Causal Inference](7_tools.jpg)
 
