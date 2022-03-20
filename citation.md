@@ -328,7 +328,7 @@ numpages = {9}
       archivePrefix={arXiv},
       primaryClass={cs.CV}
 }
-
+t
 @misc{pan2019questionconditioned,
       title={Question-Conditioned Counterfactual Image Generation for VQA}, 
       author={Jingjing Pan and Yash Goyal and Stefan Lee},
@@ -911,3 +911,39 @@ numpages = {7}
       eprint={2110.12066},
       archivePrefix={arXiv},
       primaryClass={cs.LG}
+
+@article{goodfellow2014generative,
+  title={Generative adversarial nets},
+  author={Goodfellow, Ian and Pouget-Abadie, Jean and Mirza, Mehdi and Xu, Bing and Warde-Farley, David and Ozair, Sherjil and Courville, Aaron and Bengio, Yoshua},
+  journal={Advances in neural information processing systems},
+  volume={27},
+  year={2014}
+}
+
+@misc{45507,
+title	= {Inceptionism: Going Deeper into Neural Networks},
+author	= {Alexander Mordvintsev and Christopher Olah and Mike Tyka},
+year	= {2015},
+URL	= {https://research.googleblog.com/2015/06/inceptionism-going-deeper-into-neural.html}
+}
+
+@misc{yin2020dreaming,
+      title={Dreaming to Distill: Data-free Knowledge Transfer via DeepInversion}, 
+      author={Hongxu Yin and Pavlo Molchanov and Zhizhong Li and Jose M. Alvarez and Arun Mallya and Derek Hoiem and Niraj K. Jha and Jan Kautz},
+      year={2020},
+      eprint={1912.08795},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG}
+}
+
+@book{book,
+author = {Spirtes, Peter and Glymour, Clark and Scheines, Richard},
+year = {1993},
+month = {01},
+pages = {},
+title = {Causation, Prediction, and Search},
+volume = {81},
+isbn = {978-1-4612-7650-0},
+journal = {Causation, Prediction, and Search},
+doi = {10.1007/978-1-4612-2748-9}
+}

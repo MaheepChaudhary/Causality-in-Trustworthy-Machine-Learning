@@ -8,7 +8,7 @@ The papers have been soreted according to the tools to that they belong, by stat
 
   - [Counterfactual Samples Synthesizing and Training for Robust Visual Question Answering](https://arxiv.org/pdf/2003.06576.pdf) [1, 5, 6]
       - <details><summary>Maheep's notes </summary>
-         In this research paper the author focuses on 2 major questions, i.e. <br>
+         In this research paper the author focuses on 2 major approaches, i.e. <br>
          1) Visual-explainable: The model should rely on the right visual regions when making decisions.<br>
          2) Question-sensitive: The model should be sensitive to the linguistic variations in questions.<br>
          The author proposes a technique, i.e. CSST which consist  of CSS and CST which do counterfactual in VQA as the CSS generates the counterfactual samples by masking critical objects  in the images and words. The CST model tackles the second challenge of sensitivity is handled by  the CST which make the model learn to distinguish between the origianl samples and counterfactal ones. Addtionally it trains the model to learn both kind of samples, i.e. origianl and counterfactual ones, making  the model robust. 
@@ -176,7 +176,7 @@ The papers have been soreted according to the tools to that they belong, by stat
 
   - [What If We Could Not See? Counterfactual Analysis for Egocentric Action Anticipation](https://vipl.ict.ac.cn/homepage/jsq/publication/2021-Zhang-IJCAI.pdf) [2]
       - <details><summary>Maheep's notes </summary>
-         Egocentric action anticipation aims at predicting the near future based on past observation in first-person vision. In addition to visual features which capture spatial and temporal representations, semantic labels act as high-level abstraction about what has happened. Since egocentric action anticipation is a vision-based task, they consider that visual representation of past observation has a main causal effect on predicting the future action. In the second stage of CAEAA, we can imagine a counterfactual situation: “what action would be predicted if we had not observed any visual representation?" 
+         Egocentric action anticipation aims at predicting the near future based on past observation in first-person vision. In addition to visual features which capture spatial and temporal representations, semantic labels act as high-level abstraction about what has happened. Since egocentric action anticipat      ion is a vision-based task, they consider that visual representation of past observation has a main causal effect on predicting the future action. In the second stage of CAEAA, we can imagine a counterfactual situation: “what action would be predicted if we had not observed any visual representation?" 
 
          They ask this question so as to only get the effect of semantic label. As the visual feature is the main feature the semantic label can act as a confouder due to some situations occuring frequently. Therfore the author proposes to get the logits "A" from the pipeline without making any changes to the model and then also getting the logits "B" when they provide a random value to visual feature denoting the question of counterfactual, i.e. “what action would be predicted if we had not observed any visual representation?" getting the unbiased logit by: 
 
@@ -332,7 +332,7 @@ The papers have been soreted according to the tools to that they belong, by stat
         ![Model](images/15.png)
         </details>
 
-   - [Learning Domain Invariant Relationship with Instrumental Variable for Domain Generalization](https://arxiv.org/pdf/2110.01438.pdf) [4, 5]
+   - [Learning Domain Invariant Relationship with zal Variable for Domain Generalization](https://arxiv.org/pdf/2110.01438.pdf) [4, 5]
       - <details><summary>Maheep's Notes</summary>
         The paper proposes an instrumental variable-based approach to learn the domain-invariant relationship between input features and labels contained in the conditional distribution as the input features of one domain are valid instrumental variables for other domains. Therefore they propose a model Domain-invariant Relationship with Instrumental VariablE (DRIVE) via a two-stage IV method. <br>
         1.) It learns the conditional distribution of input features of one domain given input features of another domain with Maximum Mean Discrepancy(MMD) that minimizes the distance b/w the feature representation of two different domains.<br>

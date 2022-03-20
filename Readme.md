@@ -892,3 +892,93 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
         </details>  
 
 
+---
+
+   - [Causal Attention for Vision-Language Tasks](https://openaccess.thecvf.com/content/CVPR2021/papers/Yang_Causal_Attention_for_Vision-Language_Tasks_CVPR_2021_paper.pdf)
+      - <details><summary>Maheep's Notes</summary>
+        The paper proposes to eradicate unobserved confounder using the front-door adjustment. The author implements the same using the two methods, i.e. **In-Sample Attention** and **Cross-Sample Attention**. The causal effect from the input set X to the target Y through a mediator Z. The attention mechanism can be split into two parts: a selector which selects suitable knowledge Z  from X, i.e. 
+        
+        `P(Z = z|X)` known as **In-Sampling** and a predictor which exploits Z to predict Y. <br>
+        `P(Y|X) = sigma P(Z = z|X)P(Y|Z = z)`<br>
+        But the predictor may learn the spurious correlation brought by the backdoor path from X to Z, and thus the backdoor method is used to block the path from X to Z, making it: <br>
+        `P(Y|do(Z)) = sigma P(X = x)P(Y|X = x,Z)`<br>
+        where `P(X = x)` is known as **Cross-Sampling** and making the whole equation: <br>
+        `P(Y|do(X)) = sigma P(Z = z|X) sigma P(X = x)P(Y|Z = z, X = x)`
+
+   
+   
+        ![Model](images/23.png)
+        </details>  
+
+   - [Causal Attention for Unbiased Visual Recognition](https://openaccess.thecvf.com/content/ICCV2021/papers/Wang_Causal_Attention_for_Unbiased_Visual_Recognition_ICCV_2021_paper.pdf)
+  
+      - <details><summary>Maheep's Notes</summary>
+        Background plays a very common role as confounder and demands to train the model in way such as all the objectys come with various background so as to prevent bias in the model, e.g., a “dog” model is learned within “grass+dog” and “road+dog” respectively, so the “grass” and “road” contexts will no longer confound the “dog” recognition. But it faces with two types of problem: <br>
+        1.) Such annotation is not only prohibitively expensive, but also inherently problematic, as the confounders are elusive in nature.<br>
+        2.) Such coarser contexts will lead to the over-adjustment problem. The intervention not only removes the context, but also hurts beneficial causalities. <br>
+        Also splitting the context split, to merge the ground-truth contexts into bigger splits to include all classes also faces problem as this kind of intervention removes the non-causal features of different contexts. Therefore the author proposes a causal attention module(CaaM) that self-annotates the confounders in unsupervised fashion which the causal features 
+        
+        `M` are retained while the non-causal features `S` are eradicated as shown in the figure below. Therefore to disentangle the the `S` and `M`, the equation can be derived as:<br>
+        `P(Y|do(X)) = sigma_for_s sigma_for_m P(Y|X, s, m)P(m|X,s)P(s)`
+        
+        `P(Z = z|X)` known as **In-Sampling** and a predictor which exploits Z to predict Y. <br>
+        `P(Y|X) = sigma P(Z = z|X)P(Y|Z = z)`<br>
+        But the predictor may learn the spurious correlation brought by the backdoor path from X to Z, and thus the backdoor method is used to block the path from X to Z, making it: <br>
+        `P(Y|do(Z)) = sigma P(X = x)P(Y|X = x,Z)`<br>
+        where `P(X = x)` is known as **Cross-Sampling** and making the whole equation: <br>
+        `P(Y|do(X)) = sigma P(Z = z|X) sigma P(X = x)P(Y|Z = z, X = x)`
+
+   
+   
+        ![Model](images/24.png)
+        </details>  
+
+
+   - [Causal Intervention for Weakly-Supervised Semantic Segmentation](https://openaccess.thecvf.com/content/ICCV2021/papers/Wang_Causal_Attention_for_Unbiased_Visual_Recognition_ICCV_2021_paper.pdf)
+      - <details><summary>Maheep's Notes</summary>
+         In Weakly-Supervised Semantic Segmentation(WSSS) the confounder creates a major problem as the non-causal features gets associated with positively correlated pixels to labels, and also disassociates causal but negatively correlated ones. The author proposes to eradicate it using the backdoor adjustment. The Ground Truth(GT) is extracted using the CAM and therefore pseudo-labels with is used to train the model. The author proposes 4 main varibales for the SCM, i.e. Confounder "C", Mediator "M" which act as the image-specific representation, Input "X" and Output "Y", where the direct effect of "C" is cutoff from "X", by using class-specific average mask to approzimate the confounder 
+
+         `C = {c1, c2, c3,.....,cn}` where `n` is the class size to finally compute the equation. 
+        
+
+
+        ![Equation](images/26.png)
+        ![Model](images/25.png)
+        </details>  
+
+   - [Confounder Identification-free Causal Visual Feature Learning](https://arxiv.org/abs/2111.13420)
+      - <details><summary>Maheep's Notes</summary>
+         The paper aims to eradicate all the confounders that are present without observing them using the frontdoor adjustment criteria and also try to explain the success of MAML algorithm. The work deals with two major questions: <br>
+         1.) How to model the intervening effects from other samples on a given sample in the training process. <br>
+         2.) How to estimate the global-scope intervening effect across all samples in the training set to find a suitable optimization direction. <br>
+         and therefore proposes a gradient-based optimization strategy to mitigate the intervening effects using an efficient cluster then-sample algorithm to approximate the global-scope intervening effects for feasible optimization. The author implements it by explicitly modelling the intervening effects of another sample x̃ on Z = h(x) effecting Y by instantiating P (Y |Z = h(x), x̃) with the calculated gradients of the sample x̃ with respect to f<br>
+
+         `P(Y|Z = h(x), x̃) = f(Z = h(x))P(x̃)` <br>
+         after clustering-then-sampling using the k-mean.
+
+
+
+        ![Model](images/27.png)
+        </details>  
+
+   - [Comprehensive Knowledge Distillation with Causal Intervention](https://proceedings.neurips.cc/paper/2021/file/b9f35816f460ab999cbc168c4da26ff3-Paper.pdf)
+      - <details><summary>Maheep's Notes</summary>
+        The paper proposes CID for an efficient biased free knowledge distillation, which is able to transfer the class representations which are largely ignored by the existing literature and by using softened logits as sample context information removes biases with causal intervention. The author implements it as:<br>
+        1.) They distill the feature vector in the last layer.<br>
+        2.) They use MSE on noramlized vectors so as to get the MSE not to get biased towards the samples that have large-norm features.<br>
+        3.) They integrate the class representations using the class shapes to incorporate it into the student model as so not to only transfer the sample representation. 
+        4.) By using the backdoor adjustment the effect of the prior knowledge of the teacher model because of the object and background co-occurences by setting each item to the prior knowledge to a class.  
+
+        ![Model](images/28.png)
+        </details>  
+
+   - [Counterfactual Contrastive Learning for Weakly-Supervised Vision-Language Grounding](https://papers.nips.cc/paper/2020/file/d27b95cac4c27feb850aaa4070cc4675-Paper.pdf)
+      - <details><summary>Maheep's Notes</summary>
+        The paper proposes CID for an efficient biased free knowledge distillation, which is able to transfer the class representations which are largely ignored by the existing literature and by using softened logits as sample context information removes biases with causal intervention. The author implements it as:<br>
+        1.) They distill the feature vector in the last layer.<br>
+        2.) They use MSE on noramlized vectors so as to get the MSE not to get biased towards the samples that have large-norm features.<br>
+        3.) They integrate the class representations using the class shapes to incorporate it into the student model as so not to only transfer the sample representation. 
+        4.) By using the backdoor adjustment the effect of the prior knowledge of the teacher model because of the object and background co-occurences by setting each item to the prior knowledge to a class.  
+
+        ![Model](images/28.png)
+        </details>  
