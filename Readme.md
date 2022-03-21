@@ -974,11 +974,51 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
 
    - [Counterfactual Contrastive Learning for Weakly-Supervised Vision-Language Grounding](https://papers.nips.cc/paper/2020/file/d27b95cac4c27feb850aaa4070cc4675-Paper.pdf)
       - <details><summary>Maheep's Notes</summary>
-        The paper proposes CID for an efficient biased free knowledge distillation, which is able to transfer the class representations which are largely ignored by the existing literature and by using softened logits as sample context information removes biases with causal intervention. The author implements it as:<br>
-        1.) They distill the feature vector in the last layer.<br>
-        2.) They use MSE on noramlized vectors so as to get the MSE not to get biased towards the samples that have large-norm features.<br>
-        3.) They integrate the class representations using the class shapes to incorporate it into the student model as so not to only transfer the sample representation. 
-        4.) By using the backdoor adjustment the effect of the prior knowledge of the teacher model because of the object and background co-occurences by setting each item to the prior knowledge to a class.  
+        The paper aim to solve the problem of Weakly supervised Vision Language Grounding, i.e. to localize target moments in a video using a query. The author uses counterfactual scenario to make the process more robust, based on the feature-level, relation-level and interaction level. <br>
+        The two types of approaches are introduced so as to generate the counterfactual scenarios, namely **DCT** and **RCT**, where the **DCT** aims to generate negative counterfactual scenarios by damaging the essential part of the visual content and **RCT** aims to generate positive counterfactual scenarios by damaging inessential part of the visual content based on the above defined 3 approaches. <br>
+        A ranking loss is also developed so as to develop the difference between the positive and negative samples. <br>
+        The feature-level focuses on the critical region proposals, which are modified using the memory bank containing the proposal features from randomly selected different samples, whereas the interaction-level features also uses memory bank to modify the interaction-level features, i.e. the word level features that correspond to the proposal features. The memory-bank contains the language features from different samples. <br>
+        The relational-level approach focuses on the relation, i.e. the edges connecting the propsal "j" from proposal "i". The crucial edges are then destroyed by **DCT** whereas the inessential by **RCT**. 
 
-        ![Model](images/28.png)
+
+        ![Model](images/29.png)
         </details>  
+
+   - [C_3 : Compositional Counterfactual Constrastive Learning for Video-grounded Dialogues](https://arxiv.org/abs/2106.08914)
+      - <details><summary>Maheep's Notes</summary>
+        The paper focuses on the video-grounding using the diaglouges and inputs, where the author inlcudes the turn based events which let the model give high priority to some instances rather than uniformly giving to all. Also the author separates the dialogue context and video input into object and action, through which they are able to parse through if the query is about object or any action taken, as shown in the figure below.  
+        
+        ![Model](images/31.png)
+
+        Also they generate counterfactual scenarios by removing irrelavant objects or actions to create factual data and by removing relevant object or actions, they generate counterfactual data, finally making the equations as: 
+
+        `H_t^- = H_{t, obj}^- + H_{t, act}`<br>
+        `H_t^+ = H_{t, obj}^+ + H_{t, act}`<br>
+        `I^- = I_obj + I_act^-`<br>
+        `I^+ = I_obj + I_act^+`<br>
+
+        where `H_t^-` denotes counterfactual dialogue context in instance `t` and `I^-` represents the counterfactual image input.
+
+        ![Model](images/30.png)
+        </details>  
+
+
+   - [COIN: Counterfactual Image Generation for VQA Interpretation](https://arxiv.org/pdf/2201.03342.pdf)
+      - <details><summary>Maheep's Notes</summary>
+        The paper focuses on interpretability approach for VQA models by generating counterfactual images by minimal possible change, ensuring the image looks realistic. This paper introduces an attention mechanism that identifies question-critical objects in the image and guides the counterfactual generator to apply the changes on specific regions. Moreover, a weighted reconstruction loss is introduced in order to allow the counterfactual generator to make more significant changes to question-critical spatial regions than the rest of the image. <br>
+        This is implemented by instead of generating a counterfactual image 
+        
+        `I'` based on the original image , the latter is concatenated with the attention map `M`, such that the concatenation `[ I; M]` serves as an input to the generator `G`, where the answer is passed into the `G` so as to create `I'`, where the regions are identified using GRAD-CAM, where the discriminator `D` ensures that image looks realistic and reconstruction loss is used to do miimal changes. The whole process happens as shown in the figure.  
+
+        ![Model](images/32.png)
+        </details>  
+
+   - [COIN: Counterfactual Image Generation for VQA Interpretation](https://arxiv.org/pdf/2201.03342.pdf)
+      - <details><summary>Maheep's Notes</summary>
+        The paper focuses on interpretability approach for VQA models by generating counterfactual images by minimal possible change, ensuring the image looks realistic. This paper introduces an attention mechanism that identifies question-critical objects in the image and guides the counterfactual generator to apply the changes on specific regions. Moreover, a weighted reconstruction loss is introduced in order to allow the counterfactual generator to make more significant changes to question-critical spatial regions than the rest of the image. <br>
+        This is implemented by instead of generating a counterfactual image 
+        
+        `I'` based on the original image , the latter is concatenated with the attention map `M`, such that the concatenation `[ I; M]` serves as an input to the generator `G`, where the answer is passed into the `G` so as to create `I'`, where the regions are identified using GRAD-CAM, where the discriminator `D` ensures that image looks realistic and reconstruction loss is used to do miimal changes. The whole process happens as shown in the figure.  
+
+        ![Model](images/32.png)
+        </details> 
