@@ -1013,12 +1013,15 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
         ![Model](images/32.png)
         </details>  
 
-   - [COIN: Counterfactual Image Generation for VQA Interpretation](https://arxiv.org/pdf/2201.03342.pdf)
+   - [Causal Intervention for Object Detection](https://ieeexplore.ieee.org/document/9643182)
       - <details><summary>Maheep's Notes</summary>
-        The paper focuses on interpretability approach for VQA models by generating counterfactual images by minimal possible change, ensuring the image looks realistic. This paper introduces an attention mechanism that identifies question-critical objects in the image and guides the counterfactual generator to apply the changes on specific regions. Moreover, a weighted reconstruction loss is introduced in order to allow the counterfactual generator to make more significant changes to question-critical spatial regions than the rest of the image. <br>
-        This is implemented by instead of generating a counterfactual image 
-        
-        `I'` based on the original image , the latter is concatenated with the attention map `M`, such that the concatenation `[ I; M]` serves as an input to the generator `G`, where the answer is passed into the `G` so as to create `I'`, where the regions are identified using GRAD-CAM, where the discriminator `D` ensures that image looks realistic and reconstruction loss is used to do miimal changes. The whole process happens as shown in the figure.  
+        The paper proposes to remove bias from the object detection models using the intervention, where the author uses the idea of two-stage detectors and apply backdoor adjustment to virtually obtain 
 
-        ![Model](images/32.png)
+        `P(Y|do(X))` where the author proposes 4 variables namely input `X`, output `Y`, context confounder `C` and mediator `M` affected by both `X` and `C`, where the `C = {c1. c2, ..., cn}` belonging to different `n` categories in the dataset. The output `P(Y|do(X))` is represented as:<br>
+
+        `P(Y|do(X)) = sigma P(c)P(Y|X,M = f(X,c))` where `M` is represented as <br>
+        `M = sigma a_i*c_i*P(c_i)`<br>
+        where `a_i` is the attention for category specific entry `c_i`.  
+
+        ![Model](images/33.png)
         </details> 
