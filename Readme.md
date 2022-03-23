@@ -1052,13 +1052,45 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
 
    - [Distilling Causal Effect of Data in Class-Incremental Learning](https://arxiv.org/abs/2103.01737)
       - <details><summary>Maheep's Notes</summary>
-        The paper proposes solve the problem of Domain Generalization for image segementation m using the two modules:<br>
-        1.) **GIN**: It promotes to preserve the shape of information as it is one of the most improtant information that remains invariant while domain shift and also is intuitively causal to segmentation results. <br>
-        This is implemented by augmenting the image to have diverse appearances via randomly-weighted shallow convolutional networks, as shown in the diagram below.<br>
-        2.) **IPA**: It focuses on removing the confounding factors from the image like thebackground and also the acquisiton process, where different tissues are given different color. The author uses 
-        
-        `do(.)` to remove the confouning nature of on `A` on `S` by transforming the `A` using the `T_i(.)` photometric transformation. <br>
-        The psuedo-correlation is proposed so as to deconfound the Pixels that correspond to different values are given different values unsupervised fashion. The pseudo-correlation map is impelemnted by using the contnous random-valued control points with low spatial frequency, which are multiplied with the `GIN` augmented image.  
+        The paper proposes to immune the forgetfull nature of NN while shifting to new data from old data. The author discusses the three main methods which are used now to mitigate this problem.<br>
+        1.) **Data Replay**: This focus on to include a small percentage of old data in the new data.<br>
+        2.) **Feature Distillation** and **Logit Distillation**: This focuses on to the effect is the features/logits extracted from the new data by using the old network, which is imposed on the new training by using the distillation loss, regulating that the new network behavior should not deviate too much from the old one.<br>
 
-        ![Model](images/35.png)
+        The paper focuses on to explain the causal effect of these methods. The work proposes to calculate the effect of old data on the current predicition  
+        
+        `Y`, making the equation `Effect = P(Y|D = d) - P(Y|D = 0)`, which comes `0` when the old data has no influence on `Y`, while if we calculate the impact in replay or distillation, will not be `0`. The work proposes to further enhace the replay method by passing down the causal effect of the old data, rather than the data. Therefore making the whole process computationally inexpensive by conditioning on `Xo`, i.e. the old data representaiton and therefore making the equation:<br>
+        `Effect = P(Y|I, Xo)(P(I|Xo, D = d) - P(I|Xo, D = 0))` <br>
+        further defining it as: <br>
+        `Effect = P(Y|I, Xo)W(I = i, Xo, D)`<br>
+        The paper aims to increase the value of `W(.)` expression as it depends the close similarity between the representation of the similar image in old model and new model.
+        
+         
+        ![Model](images/36.png)
+
+
         </details> 
+
+
+   - [DeepVisualInsight: Time-Travelling Visualization for Spatio-Temporal Causality of Deep Classification Training](https://arxiv.org/abs/2201.01155)
+      - <details><summary>Maheep's Notes</summary>
+        The paper proposes to immune the forgetfull nature of NN while shifting to new data from old data. The author discusses the three main methods which are used now to mitigate this problem.<br>
+        1.) **Data Replay**: This focus on to include a small percentage of old data in the new data.<br>
+        2.) **Feature Distillation** and **Logit Distillation**: This focuses on to the effect is the features/logits extracted from the new data by using the old network, which is imposed on the new training by using the distillation loss, regulating that the new network behavior should not deviate too much from the old one.<br>
+
+        The paper focuses on to explain the causal effect of these methods. The work proposes to calculate the effect of old data on the current predicition  
+        
+        `Y`, making the equation `Effect = P(Y|D = d) - P(Y|D = 0)`, which comes `0` when the old data has no influence on `Y`, while if we calculate the impact in replay or distillation, will not be `0`. The work proposes to further enhace the replay method by passing down the causal effect of the old data, rather than the data. Therefore making the whole process computationally inexpensive by conditioning on `Xo`, i.e. the old data representaiton and therefore making the equation:<br>
+        `Effect = P(Y|I, Xo)(P(I|Xo, D = d) - P(I|Xo, D = 0))` <br>
+        further defining it as: <br>
+        `Effect = P(Y|I, Xo)W(I = i, Xo, D)`<br>
+        The paper aims to increase the value of `W(.)` expression as it depends the close similarity between the representation of the similar image in old model and new model.
+        
+         
+        ![Model](images/36.png)
+
+
+        </details> 
+
+                
+
+        **Let me know our slot and timings of the hackathon**
