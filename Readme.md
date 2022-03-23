@@ -1039,7 +1039,26 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
    
    - [Causality-inspired Single-source Domain Generalization for Medical Image Segmentation](https://arxiv.org/pdf/2111.12525.pdf)
       - <details><summary>Maheep's Notes</summary>
-        The paper proposes 
+        The paper proposes solve the problem of Domain Generalization for image segementation m using the two modules:<br>
+        1.) **GIN**: It promotes to preserve the shape of information as it is one of the most improtant information that remains invariant while domain shift and also is intuitively causal to segmentation results. <br>
+        This is implemented by augmenting the image to have diverse appearances via randomly-weighted shallow convolutional networks, as shown in the diagram below.<br>
+        2.) **IPA**: It focuses on removing the confounding factors from the image like thebackground and also the acquisiton process, where different tissues are given different color. The author uses 
+
+        `do(.)` to remove the confouning nature of on `A` on `S` by transforming the `A` using the `T_i(.)` photometric transformation. <br>
+        The psuedo-correlation is proposed so as to deconfound background that is correlted with the output by changing the pixels that correspond to different values are given different values unsupervised fashion. The pseudo-correlation map is impelemnted by using the continous random-valued control points with low spatial frequency, which are multiplied with the `GIN` augmented image.  
+
+        ![Model](images/35.png)
+        </details> 
+
+   - [Distilling Causal Effect of Data in Class-Incremental Learning](https://arxiv.org/abs/2103.01737)
+      - <details><summary>Maheep's Notes</summary>
+        The paper proposes solve the problem of Domain Generalization for image segementation m using the two modules:<br>
+        1.) **GIN**: It promotes to preserve the shape of information as it is one of the most improtant information that remains invariant while domain shift and also is intuitively causal to segmentation results. <br>
+        This is implemented by augmenting the image to have diverse appearances via randomly-weighted shallow convolutional networks, as shown in the diagram below.<br>
+        2.) **IPA**: It focuses on removing the confounding factors from the image like thebackground and also the acquisiton process, where different tissues are given different color. The author uses 
+        
+        `do(.)` to remove the confouning nature of on `A` on `S` by transforming the `A` using the `T_i(.)` photometric transformation. <br>
+        The psuedo-correlation is proposed so as to deconfound the Pixels that correspond to different values are given different values unsupervised fashion. The pseudo-correlation map is impelemnted by using the contnous random-valued control points with low spatial frequency, which are multiplied with the `GIN` augmented image.  
 
         ![Model](images/35.png)
         </details> 
