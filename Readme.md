@@ -1071,26 +1071,70 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
         </details> 
 
 
-   - [DeepVisualInsight: Time-Travelling Visualization for Spatio-Temporal Causality of Deep Classification Training](https://arxiv.org/abs/2201.01155)
+   - [Counterfactual Explanation of Brain Activity Classifiers using Image-to-Image Transfer by Generative Adversarial Network](https://arxiv.org/abs/2110.14927)
       - <details><summary>Maheep's Notes</summary>
-        The paper proposes to immune the forgetfull nature of NN while shifting to new data from old data. The author discusses the three main methods which are used now to mitigate this problem.<br>
-        1.) **Data Replay**: This focus on to include a small percentage of old data in the new data.<br>
-        2.) **Feature Distillation** and **Logit Distillation**: This focuses on to the effect is the features/logits extracted from the new data by using the old network, which is imposed on the new training by using the distillation loss, regulating that the new network behavior should not deviate too much from the old one.<br>
+        The paper proposes to generate counterfactual explanation for multi-class classification of fMRI data. The author proposes **CAG** which is build upon **StarGAN**. The explanation is based upon the **Correct Classification** and **Incorrect Classification**, where the CAG converts the input to the target class and subtracts it pixel-wise so as to extract the activated regions, giving red(blue) output activation as to answer why the classifier predicted(not predicted) the target class. Auxillary discriminator is introduced so as to have a single discriminator to control multiple classes and produce their probability distribution, based on source and target class. 
 
-        The paper focuses on to explain the causal effect of these methods. The work proposes to calculate the effect of old data on the current predicition  
-        
-        `Y`, making the equation `Effect = P(Y|D = d) - P(Y|D = 0)`, which comes `0` when the old data has no influence on `Y`, while if we calculate the impact in replay or distillation, will not be `0`. The work proposes to further enhace the replay method by passing down the causal effect of the old data, rather than the data. Therefore making the whole process computationally inexpensive by conditioning on `Xo`, i.e. the old data representaiton and therefore making the equation:<br>
-        `Effect = P(Y|I, Xo)(P(I|Xo, D = d) - P(I|Xo, D = 0))` <br>
-        further defining it as: <br>
-        `Effect = P(Y|I, Xo)W(I = i, Xo, D)`<br>
-        The paper aims to increase the value of `W(.)` expression as it depends the close similarity between the representation of the similar image in old model and new model.
-        
-         
-        ![Model](images/36.png)
 
+        ![Model](images/37.png)
 
         </details> 
 
-                
+   - [How Well do Feature Visualizations Support Causal Understanding of CNN Activations?](https://arxiv.org/abs/2106.12447)
+      - <details><summary>Maheep's Notes</summary>
+        The paper proposes to identify the benefits of providing users with visualization of unit's activation based on different features of the input, so as to provide humnas with precise information about the image features that casuse a unit to be activated. <br>
+        The author uses the counterfactually inspired task to evaluate how well do feature visualization support causal understanding of CNN activations. The author implements it by using 5 kiond of images, namely: <br>
 
-        **Let me know our slot and timings of the hackathon**
+        1.) **Synthetic Reference** : These are image that are generated from optimized result of feature visualization method.<br>
+        2.) **Natural Reference** : Most strong actiavted samples are taken from the dataset.<br>
+        3.) **Mixed Reference** : 4 synthetic and 5 Natural refernce are taken, to take the best of both worlds<br>
+        4.) **Blurred Reference** : Everything is blurred, except a patch.<br>
+        5.) **No Reference** : Only query image is given and no other image.<br>
+
+        The author concludes the research by concluding that the performance of humans with visualization and no visualization did not have very significant differences.
+
+        ![Model](images/38.png)
+        </details>                
+
+   - [CausalAF__Causal_Autoregressive_Flow_for_Goal_Directed_Safety_Critical](https://arxiv.org/abs/2110.13939)
+      - <details><summary>Maheep's Notes</summary>
+        The paper proposes to generate goal-direceted data satisfying a given goal for safety-critical situations. The author argues that the 
+        
+        **Behavioural Graph** unearths the causality from the **Causal Graph** so as to include in the generated samples. This is done using two methods namely:<br>
+        1.) **COM** : It maintians the **Q** , to ensure that the cause is generated in terms of nodes only after the effect. It is also noted that the node have many parents, therefore the node is considered valid only when all of it's parents have been generated.<br> 
+        2,) **CVM** : The correct order of causal order is not sufficient for causality therefore CVM is proposed so as to only consider the nodes when the information of it's parents are available and the information only flow to a node from it's parents. 
+
+        ![Model](images/39.png)
+
+        </details>                
+
+   - [Counterfactual Attention Learning for Fine-Grained Visual Categorization and Re-identification](https://arxiv.org/abs/2108.08728)
+      - <details><summary>Maheep's Notes</summary>
+        The paper proposes to improve attention using a counterfactual attention learning method based on causal inference. The author argues that the most existing methods learns the attention in a weakly-supervised way. The basic idea is to quantitate the quality of attentions by comparing the effects of facts (i.e., the learned attentions) and the counterfactuals (i.e., uncorrected attentions) on the final prediction (i.e., the classification score). Then, we propose to maximize the difference to encourage the network to learn more effective visual attentions and reduce the effects of biased training set. The author implements it by:<br>
+        1.) The attention maps are extracted from the image, 
+
+        `A = {A1, A2, A3,....., An}`, the attention maps are used to extract the respective feature from the image. `hi = gamma(X*Ai)`, where all the `hi` are normalized to get the `h = normalize(h, h2,...., hn)` which is used to predict. 
+        2.) The attention is intervened to get the effect on the output of the model, i.e. <br>
+        `Y_effect = E[Y(A = A, X = X) - Y(do(A = bar(A))), X = X]`<br>
+        It is expected to achieve two-conditions using this method:<br> 
+        a. ) The attention model should improve the prediction based on wrong attentions as much as possible, which encourages the attention to dis- cover the most discriminative regions and avoid sub-optimal results<br> b.) The prediction based on wrong attentions is penalized, which forces the classifier to make decision based more on the main clues instead of the biased clues and reduces the influence of biased training set.
+
+        ![Model](images/40.png)
+
+        </details>   
+
+
+   - [Improving Users’ Mental Model with Attention-directed Counterfactual Edits](https://arxiv.org/abs/2110.06863)
+      - <details><summary>Maheep's Notes</summary>
+        The paper proposes to improve attention using a counterfactual attention learning method based on causal inference. The author argues that the most existing methods learns the attention in a weakly-supervised way. The basic idea is to quantitate the quality of attentions by comparing the effects of facts (i.e., the learned attentions) and the counterfactuals (i.e., uncorrected attentions) on the final prediction (i.e., the classification score). Then, we propose to maximize the difference to encourage the network to learn more effective visual attentions and reduce the effects of biased training set. The author implements it by:<br>
+        1.) The attention maps are extracted from the image, 
+
+        `A = {A1, A2, A3,....., An}`, the attention maps are used to extract the respective feature from the image. `hi = gamma(X*Ai)`, where all the `hi` are normalized to the `h = normalize(h, h2,...., hn)` which is used to predict. 
+        2.) The attention is intervened to get the effect on the output of the model, i.e. <br>
+        `Y_effect = E[Y(A = A, X = X) - Y(do(A = bar(A))), X = X]`<br>
+        It is expected to achieve two-conditions using this method:<br> 
+        a. ) The attention model should improve the prediction based on wrong attentions as much as possible, which encourages the attention to dis- cover the most discriminative regions and avoid sub-optimal results<br> b.) The prediction based on wrong attentions is penalized, which forces the classifier to make decision based more on the main clues instead of the biased clues and reduces the influence of biased training set.
+
+        ![Model](images/41.png)
+
+        </details>           
