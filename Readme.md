@@ -1126,15 +1126,80 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
 
    - [Improving Users’ Mental Model with Attention-directed Counterfactual Edits](https://arxiv.org/abs/2110.06863)
       - <details><summary>Maheep's Notes</summary>
-        The paper proposes to improve attention using a counterfactual attention learning method based on causal inference. The author argues that the most existing methods learns the attention in a weakly-supervised way. The basic idea is to quantitate the quality of attentions by comparing the effects of facts (i.e., the learned attentions) and the counterfactuals (i.e., uncorrected attentions) on the final prediction (i.e., the classification score). Then, we propose to maximize the difference to encourage the network to learn more effective visual attentions and reduce the effects of biased training set. The author implements it by:<br>
-        1.) The attention maps are extracted from the image, 
-
-        `A = {A1, A2, A3,....., An}`, the attention maps are used to extract the respective feature from the image. `hi = gamma(X*Ai)`, where all the `hi` are normalized to the `h = normalize(h, h2,...., hn)` which is used to predict. 
-        2.) The attention is intervened to get the effect on the output of the model, i.e. <br>
-        `Y_effect = E[Y(A = A, X = X) - Y(do(A = bar(A))), X = X]`<br>
-        It is expected to achieve two-conditions using this method:<br> 
-        a. ) The attention model should improve the prediction based on wrong attentions as much as possible, which encourages the attention to dis- cover the most discriminative regions and avoid sub-optimal results<br> b.) The prediction based on wrong attentions is penalized, which forces the classifier to make decision based more on the main clues instead of the biased clues and reduces the influence of biased training set.
+        The paper show that showing controlled counterfactual image-question examples are more effective at improving the mental model of users as compared to simply showing random examples. The statement is evaluated by asking the users to predict the model’s performance on a test counterfactual image. It is noted that, overall an improvement in users’ accuracy to predict answer change when shown counterfactual explanations. The counterfactual image is generated either by retrieving an image where the answer is different or by removing the visually important patch from the image, which is identified using the attention maps, using a GAN network. The patch with high and low attention are removed to evaluate the decision of VQA. Based on it a user can hypothetically learn whether the VAQ model is behaving rationally or not. 
 
         ![Model](images/41.png)
 
+        </details>      
+
+
+   - [Free Lunch for Co-Saliency Detection: Context Adjustment](https://arxiv.org/abs/2108.02093)
+      - <details><summary>Maheep's Notes</summary>
+        The paper focus on collecting dataset for co-saliency detection system called Context Adjustment Training. The author introduces counterfactual training to mitigate the finite dataset to achieve the true data distribution. Based on it the author proposes to use context adjustment using the 
+        
+        **group-cut-paste** method to imporve the data distribution. GCP turns image `I` into a canvas to be completed and paint the remaining part through the following steps:<br> 
+        (1) classifying candidate images into a semantic group Z (e.g., banana) by reliable pretrained models<br>
+        (2) cutting out candidate objects (e.g., baseball, butterfly, etc.)<br> (3) pasting candidate objects into image samples as shown in the figure below.<br>
+        To make the process more robust the author proposes to have three metrics, namely:<br>
+        a.) **Abduction**: In the new generated data the co-saliency image should remina unchanged.<br>
+        b.) **Action**: The mask sould remain unchanged from the GT of the image and should be optimal for it's value.<br>
+        c.) **Prediction**: The probability distribution of the image should remian unchanged. 
+
+        ![Model](images/42.png)
+
         </details>           
+
+   - [Counterfactual Explanation Based on Gradual Construction for Deep Networks](https://arxiv.org/abs/2008.01897)
+      - <details><summary>Maheep's Notes</summary>
+         The work focuses on modifying the charecteristic of the image given the features of the Deep Neural Network classifier. The author takes in two measures, i.e. the image shold be easily explainable and should only be minimally modified. <br>
+         The author impelements it using the two steps, namely:<br>
+         
+         1.) **Masking Step**: It mask the appropriate region of the image, to which the model pays most attention, extracted using the gradients.<br>
+         2.) **Composition Steps**: It perturbs the regions minimally so as to change the logits to the target class.
+
+        ![Model](images/43.png)
+
+        </details>           
+
+   - [GANterfactual - Counterfactual Explanations for Medical Non-Experts using Generative Adversarial Learning](https://arxiv.org/abs/2012.11905)
+      - <details><summary>Maheep's Notes</summary>
+         The work proposes to create counterfactual explanation images for medical images by taking in two measures, i.e. there should be minimal change in the original image and the classifier predicts it in to the target class. The author accomplishes this goal using the image-to-image translation using StarGAN as shown in the picture below.  
+
+        ![Model](images/44.png)
+
+        </details>           
+
+       
+   - [Using Causal Analysis for Conceptual Deep Learning Explanation](https://arxiv.org/abs/2107.06098)
+      - <details><summary>Maheep's Notes</summary>
+         The work proposes to explain the model's decision using the hidden unit cells of the network in radiology. The author uses the associating the hidden units of the classifier to clinically relevant concepts using a linear sparse logistic regression. But to evaluate that the identified units truly influence the classifier’s outcome, they use mediation analysis through counterfactual interventions. A low-depth decision tree is constructed so as to translate all the discovered concepts into a straightforward decision rule, expressed to the radiologist. Technically the author implements it by using:<br>
+         1.) **Concept Associations**: The network is divided into 
+         
+         `phi1(.)` and `phi2(.)`, where the `phi1(.)` gives different concept in terms of features and `phi2(.)` do prediction. The output of `phi1(.)` gives a vector of `lbh` dimension with each unit having a binary prediction, i.e. if concept is present or absent.
+         <br>
+         2.) **Causal concept ranking**: A counterfactual `x'` for the input   `x` is generated for causal inference using a cGAN, where the concepts are denoted with `Vk(x)` and the left over hidden units are denoted by `bar(Vk(x))` and the effect is measured by: <br>
+         `A = phi2(phi1(do(Vk(x)), bar(Vk(x'))))`  
+         `B = phi2(phi1(Vk(x), bar(Vk(x))))`<br>
+         `Effect = E[A/B - 1]`<br>
+         3.) **Surrogate explanation function**: A function `g(·)` is introduced as a decision tree because many clinical decision-making procedures follow a rule-based pattern, based on the intial classifier `f(.)` based on the logits produced for different concepts.<br>
+
+        ![Model](images/45.png)
+
+        </details>    
+
+   - [Learn-Explain-Reinforce: Counterfactual Reasoning and Its Guidance to Reinforce an Alzheimer’s Disease Diagnosis Model](https://arxiv.org/abs/2108.09451)
+      - <details><summary>Maheep's Notes</summary>
+         The work proposes to explain the model's decision using the hidden unit cells of the network in radiology. The author uses the associating the hidden units of the classifier to clinically relevant concepts using a linear sparse logistic regression. But to evaluate that the identified units truly influence the classifier’s outcome, they use mediation analysis through counterfactual interventions. A low-depth decision tree is constructed so as to translate all the discovered concepts into a straightforward decision rule, expressed to the radiologist. Technically the author implements it by using:<br>
+         1.) **Concept Associations**: The network is divided into 
+         
+         `phi1(.)` and `phi2(.)`, where the `phi1(.)` gives different concept in terms of features and `phi2(.)` do prediction. The output of `phi1(.)` gives a vector of `lbh` dimension with each unit having a binary prediction, i.e. if concept is present or absent.
+         <br>
+         2.) **Causal concept ranking**: A counterfactual `x'` for the input   `x` is generated for causal inference using a cGAN, where the concepts are denoted with `Vk(x)` and the left over hidden units are denoted by `bar(Vk(x))` and the effect is measured by: <br>
+         `A = phi2(phi1(do(Vk(x)), bar(Vk(x'))))`  
+         `B = phi2(phi1(Vk(x), bar(Vk(x))))`<br>
+         `Effect = E[A/B - 1]`<br>
+         3.) **Surrogate explanation function**: A function `g(·)` is introduced as a decision tree because many clinical decision-making procedures follow a rule-based pattern, based on the intial classifier `f(.)` based on the logits produced for different concepts.<br>
+
+        ![Model](images/45.png)
+
+        </details>    
