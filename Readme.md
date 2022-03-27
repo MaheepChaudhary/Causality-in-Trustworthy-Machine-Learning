@@ -1187,19 +1187,40 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
 
         </details>    
 
-   - [Learn-Explain-Reinforce: Counterfactual Reasoning and Its Guidance to Reinforce an Alzheimer’s Disease Diagnosis Model](https://arxiv.org/abs/2108.09451)
+   - [Learn-Explain-Reinforce: Counterfactual Reasoning and Its Guidance to Reinforce an Alzheimer’s Disease Diagnosis Model](https://arxiv.org/abs/2108.09451) <!--- Not able to understand properly --> 
       - <details><summary>Maheep's Notes</summary>
-         The work proposes to explain the model's decision using the hidden unit cells of the network in radiology. The author uses the associating the hidden units of the classifier to clinically relevant concepts using a linear sparse logistic regression. But to evaluate that the identified units truly influence the classifier’s outcome, they use mediation analysis through counterfactual interventions. A low-depth decision tree is constructed so as to translate all the discovered concepts into a straightforward decision rule, expressed to the radiologist. Technically the author implements it by using:<br>
-         1.) **Concept Associations**: The network is divided into 
-         
-         `phi1(.)` and `phi2(.)`, where the `phi1(.)` gives different concept in terms of features and `phi2(.)` do prediction. The output of `phi1(.)` gives a vector of `lbh` dimension with each unit having a binary prediction, i.e. if concept is present or absent.
-         <br>
-         2.) **Causal concept ranking**: A counterfactual `x'` for the input   `x` is generated for causal inference using a cGAN, where the concepts are denoted with `Vk(x)` and the left over hidden units are denoted by `bar(Vk(x))` and the effect is measured by: <br>
-         `A = phi2(phi1(do(Vk(x)), bar(Vk(x'))))`  
-         `B = phi2(phi1(Vk(x), bar(Vk(x))))`<br>
-         `Effect = E[A/B - 1]`<br>
-         3.) **Surrogate explanation function**: A function `g(·)` is introduced as a decision tree because many clinical decision-making procedures follow a rule-based pattern, based on the intial classifier `f(.)` based on the logits produced for different concepts.<br>
+         The work proposes to unify diagnostic model learning, visual explanation generation using the counterfactual explanation using a target class, and trained diagnostic model reinforcement guided by the visual explanation on the discriminative features extracted by the counterfactual explanation on the mSRI data for the muti-class classification. The author implements the system by learning the counterfactual map for explanation which consist of three modules **Counterfactual Map Generator(CMG)**, **Reasoning Evaluator(RE)** and a **Discriminator(DC)**, where CMG generates the counterfactual image using the U-net technique giving a Mask and adding it to the input as given in the image below. RE directly evaluates the effect of the generated counterfactual map in producing the targeted label, and Discriminator makes it sure that the generated image look realistic. The **Reinforcement Representation Learning** tries to create a guide map using the above counterfactual map which highlight the extreme regions, i.e. the normal and the regions that have high probability that are abnormal.
 
-        ![Model](images/45.png)
+        ![Model](images/46.png)
 
         </details>    
+
+   - [Causal affect prediction model using a facial image sequence](https://arxiv.org/abs/2107.03886) 
+      - <details><summary>Maheep's Notes</summary>
+         The work proposes to learn the causal affect prediction network (CAPNet), which uses only past facial images to predict corresponding affective valence and arousal, after learning the causal inference between the past images facial-expressions and the current affective state. The author implements it as:<br>
+         The system mainly consist of 2 modules:<br>
+         1.) **Feature Extractor**: The module consist of REsNeXt and SENet to extract the features from the image using the FER model as it is and output the valence and arousal of the subject.<br>
+         2.) **Causality Extractor**: It consist of a LSTM layer and two FC layers. During the integration of sequential data into the single hidden state, the LSTM layer learn the causal inference between the past facial images and the affective state. The FC layers eventually convert the single hidden state to the predicted affective state.  
+
+        ![Model](images/47.png)
+
+        </details>  
+
+   - [iReason: Multimodal Commonsense Reasoning using Videos and Natural Language with Interpretability](https://arxiv.org/abs/2107.10300) 
+      - <details><summary>Maheep's Notes</summary>
+         The work proposes to extract the causal events using the videos and text. The author claimes that objects in the video and time-ordered nature of events promotes causality, therefore removing bias. The author implememnts by using the architecture given below.<br>
+
+        ![Model](images/48.png)
+
+        The CFDM module localize the said events in the video and outputs a pair of images, i.e. 
+        
+        `I1` and `I2` from the video. The aim is to infer causality from the event in `I1` into `I2`. The **Causality Rationalization Module** outputs a string explaining the commonsense reasoning using natural language for causal events `e1` from `I1` and `e2` from `I2`.
+
+        </details>  
+
+   - [CausalCity: Complex Simulations with Agency for Causal Discovery and Reasoning](https://arxiv.org/abs/2106.13364) 
+      - <details><summary>Maheep's Notes</summary>
+         The work proposes to 
+        ![Model](images/49.png)
+
+        </details>  
