@@ -1220,7 +1220,50 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
 
    - [CausalCity: Complex Simulations with Agency for Causal Discovery and Reasoning](https://arxiv.org/abs/2106.13364) 
       - <details><summary>Maheep's Notes</summary>
-         The work proposes to 
+         The work proposes to generate a data with rare events in substantial amount for safety-critical decisions of driving using a simulated environment having the ability to introduce confounders, observed and unobserved using the agency or high-level controls, that define the agents behaviour in an abstract format. The author implements it as:<br>
+
+         The author introduces two main things that totallly build up the whole simulated environment, i.e. 
+         
+         **JSON** file that contains the vehicles that should be present, their start location, and high-level features which are flexible and can be regulated using the **Python API**. To make the whole enviroment 6 types of varibales are introduced, namely: <br>
+         1.) **Environment Features**: It contains the information about the basic objects in the environment like trees, pole, etc. <br>
+         2.) **Vehicles**: It contains the vehicle positions, their velocities and information about the collision. <br>
+         3.) **Traffic Lights**: It contains the information where the traffic lights will be and how will they react at different time frame.<br>
+         4.) **Environment**: It contains the information about the weather, from which the confounders can be easily added. <br>
+         5.) **Views/Cameras**: It has the ability where to place the camera for recording, therefore providing the dataset with third person or bird eye view. <br>
+         6.) **Logging**: The log of different vehicles and state of traffic lights are recorded in it. Although other things can also be included.   <br>
+
+         Using the author prepares two types of dataset:<br>
+         a.) **Toy Dataset**: It contains no confounders, agency but only causal relationship.<br>
+         b.) **CausalityCity**: It contains confounders, agency and also causal relationship.
+
         ![Model](images/49.png)
 
         </details>  
+
+   - [Driver-centric Risk Object Identification](https://arxiv.org/abs/2106.13201) 
+      - <details><summary>Maheep's Notes</summary>
+         The work proposes to preapre the dataset for identifying risk objects using the Intention and Response of the driver, where a model is deployed to match the response prediction from the driver prediction. The author implements by having the modules of 
+
+         **Perception**, which represents different embeddings of the objects present, **Comprehension** which evaluates the interaction between the driver and thing or stuff using the Ego-Thing Graph and Ego-Stuff Graph, where Ego-Thing Graph have the embedding of how the driver react with the things such as the car, person, bicycle and the Ego-Stuff Graph have the embedding of how the driver reacts with the Stuff in the envionment such as roads, footpath, and Traffic Sign. The last module is of **Projection**  which is used to predict the future forecasts. <br>
+
+         The Causal reasoning module is added to the model so as to augment the data only in "GO" scenarion, i.e. no risk objects are present to remove the non-causal features by randomly selecting top k ransdom objects. It is also used in "STOP" scenarios, to identify the risk object identification by using the same intervention maethod of inpainting. The "GO" score is computed by removing the different object and the one object with removal that gives the highest "GO" score is identified as the risk object.  
+        </details>  
+
+   - [Dependent Multi-Task Learning with Causal Intervention for Image Captioning](https://arxiv.org/abs/2105.08573) 
+      - <details><summary>Maheep's Notes</summary>
+         The work proposes to enhance the capability of Image Captioning systems by creating the content consistency to have non-contradicting views and provide informative information. The author implements it by eradicating the counfounder, cutting the link between the visual features and possible confounders. This is done by introducing a mediator 
+
+         `m` and the proxy confounder `c` to eradicate the real confounder `z_c`. In these type of systems it is to be considered that the mediator is not affected by the counfounder after the intervention. 
+
+        ![Model](images/51.png)
+
+        </details>  
+
+
+   - [Structure by Architecture: Disentangled Representations without Regularization](https://arxiv.org/abs/2006.07796) 
+      - <details><summary>Maheep's Notes</summary>
+         The work proposes to 
+
+        ![Model](images/50.png)
+
+        </details>      
