@@ -1265,8 +1265,44 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
 
    - [Structure by Architecture: Disentangled Representations without Regularization](https://arxiv.org/abs/2006.07796) 
       - <details><summary>Maheep's Notes</summary>
-         The work proposes to 
+         The work focuses on the problem of self-supervised structured representation learning using autoencoders for generative modeling. The author proposes the structural autoencoder architecture inspired by structural causal models, which orders information in the latent space, while also, encourages independence. Notably, it does so without additional loss terms or regularization. The SAE architec- ture produces high quality reconstructions and generated samples, improving extrapolation, as well as achieving a significant degree of disentanglement across a variety of datasets.
+
+        </details>      
+
+   - [EXTRACTING CAUSAL VISUAL FEATURES FOR LIMITED LABEL CLASSIFICATION](https://arxiv.org/abs/2103.12322) 
+      - <details><summary>Maheep's Notes</summary>
+         The work focuses to extract causal features
+         
+         `C`, separating them from context features `B` while computed from Grad-CAM using the Huffman encoding which increases the performance by 3% in terms of accuracy and also retains 15% less size in bit size. <br>
+         The author implements it by arguing that given the just features `G = C U B` are given. By taking the analogy of the sets given below, the author extracts `B` as given in the following equations below:<br>
 
         ![Model](images/50.png)
 
-        </details>      
+         `C_p = G_p - B_p`,.....................(1) i.e. for prediciton `p`<br>
+         `B_p = C_(p,q) - C_(bar(p),bar(q)) - C_(bar(p),p)` ...................(2)<br>
+         which denotes the following things:<br>
+         `C_(p,q)`: "Why p or q?"<br>
+         `C_(bar(p),bar(q))`: "Why neither P nor Q"<br>
+         `C_(bar(p),p)`: "Why not P with 100% confidence?"<br>
+
+         Therefore (1) can be eaily be obtained after substituting the value of (2) in it. 
+        </details>  
+
+   - [ACRE: Abstract Causal REasoning Beyond Covariation](https://arxiv.org/abs/2103.14232) 
+      - <details><summary>Maheep's Notes</summary>
+         The work focuses to extract causal features
+         
+         `C`, separating them from context features `B` while computed from Grad-CAM using the Huffman encoding which increases the performance by 3% in terms of accuracy and also retains 15% less size in bit size. <br>
+         The author implements it by arguing that given the just features `G = C U B` are given. By taking the analogy of the sets given below, the author extracts `B` as given in the following equations below:<br>
+
+        ![Model](images/52.png)
+
+         `C_p = G_p - B_p`,.....................(1) i.e. for prediciton `p`<br>
+         `B_p = C_(p,q) - C_(bar(p),bar(q)) - C_(bar(p),p)` ...................(2)<br>
+         which denotes the following things:<br>
+         `C_(p,q)`: "Why p or q?"<br>
+         `C_(bar(p),bar(q))`: "Why neither P nor Q"<br>
+         `C_(bar(p),p)`: "Why not P with 100% confidence?"<br>
+
+         Therefore (1) can be eaily be obtained after substituting the value of (2) in it. 
+        </details>  
