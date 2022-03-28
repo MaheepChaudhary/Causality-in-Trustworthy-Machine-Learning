@@ -1206,6 +1206,9 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
 
         </details>  
 
+
+---
+
    - [iReason: Multimodal Commonsense Reasoning using Videos and Natural Language with Interpretability](https://arxiv.org/abs/2107.10300) 
       - <details><summary>Maheep's Notes</summary>
          The work proposes to extract the causal events using the videos and text. The author claimes that objects in the video and time-ordered nature of events promotes causality, therefore removing bias. The author implememnts by using the architecture given below.<br>
