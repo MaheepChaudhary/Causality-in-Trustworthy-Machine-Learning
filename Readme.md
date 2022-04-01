@@ -1313,17 +1313,12 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
          ![Model](images/53.png)
         </details>  
 
-   - [Translational Lung Imaging Analysis Through Disentangled Representations](https://arxiv.org/abs/2203.01668) 
+   - [CRAFT: A Benchmark for Causal Reasoning About Forces and inTeractions](https://arxiv.org/abs/2012.04293) 
       - <details><summary>Maheep's Notes</summary>
-         The work focuses on retrieving relevant information from the images of inter-species pathological processes by proposing the following features:<br>
-         1.) able to infer the animal model, position, damage present and generate a mask covering the whole lung. <br>
-         2.) Generate realistic lung images<br>
-         3.) Generate counterfactual images, i.e. healthy versions of damaged input slice. <br>
-
-         The author implements it by considering 3 factors for generating and masking the image, namely: animal model,
+         The work proposes a dataset named CRAFT visual question answering dataset that requires causal reasoning about physical forces and object interactions. It contains three question categories, namely:<br> 
          
-         `A`, the realtive position of axial slice, `S` and estimated lung damage, `Mtb`, via the hierarchy at different resolution scales `k`. By using the Noveau VAE to extract the latent space `z` variables to generate the mask `y` and image `x`.  
+         1.) **Descriptive Questions** : It requires extracting the attributes of objects, especially those involving counting, need temporal analysis as well<br>
+         2.) **Counterfactual Questions** : It requires understanding what would happen if one of the objects was removed from the scene. For ex: *“Will the small gray circle enter the basket if any of the other objects are removed?”*<br> 
+         3.) **Causal Questions** : It involves understanding the causal interactions between objects whether the object is causing, enabling, or preventing it. <br> 
 
-
-         ![Model](images/53.png)
         </details>  
