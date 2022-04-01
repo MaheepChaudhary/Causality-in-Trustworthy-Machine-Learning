@@ -1288,21 +1288,42 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
          Therefore (1) can be eaily be obtained after substituting the value of (2) in it. 
         </details>  
 
-   - [ACRE: Abstract Causal REasoning Beyond Covariation](https://arxiv.org/abs/2103.14232) 
+   - [ALIGN-DEFORM-SUBTRACT: AN INTERVENTIONAL FRAMEWORK FOR EXPLAINING OBJECT DIFFERENCES](https://arxiv.org/abs/2203.04694) 
       - <details><summary>Maheep's Notes</summary>
-         The work focuses to extract causal features
+         The work focuses to define the differences betwen the objects by intervening on the image of the source object 
+
+         `X_s` converting into the target object image `X_t`, by modifying it and quantifying the parameters via changing it's **affnity** by changing the scaling `s`, translation `∆t` and in-plane rotation `∆θ`. **Shape** acts as the second parameter by which the image is changed. The transformation takes place in the same order as if shape is changed before that it will also have the effect of changing the pose of the image. **Subtract** act as the third module to change the image via removing the background using a segmentaion model to see the apperance difference using MSE.  
+
+
+         ![Model](images/52.png)
+        </details>  
+
+   - [Translational Lung Imaging Analysis Through Disentangled Representations](https://arxiv.org/abs/2203.01668) 
+      - <details><summary>Maheep's Notes</summary>
+         The work focuses on retrieving relevant information from the images of inter-species pathological processes by proposing the following features:<br>
+         1.) able to infer the animal model, position, damage present and generate a mask covering the whole lung. <br>
+         2.) Generate realistic lung images<br>
+         3.) Generate counterfactual images, i.e. healthy versions of damaged input slice. <br>
+
+         The author implements it by considering 3 factors for generating and masking the image, namely: animal model,
          
-         `C`, separating them from context features `B` while computed from Grad-CAM using the Huffman encoding which increases the performance by 3% in terms of accuracy and also retains 15% less size in bit size. <br>
-         The author implements it by arguing that given the just features `G = C U B` are given. By taking the analogy of the sets given below, the author extracts `B` as given in the following equations below:<br>
+         `A`, the realtive position of axial slice, `S` and estimated lung damage, `Mtb`, via the hierarchy at different resolution scales `k`. By using the Noveau VAE to extract the latent space `z` variables to generate the mask `y` and image `x`.  
 
-        ![Model](images/52.png)
 
-         `C_p = G_p - B_p`,.....................(1) i.e. for prediciton `p`<br>
-         `B_p = C_(p,q) - C_(bar(p),bar(q)) - C_(bar(p),p)` ...................(2)<br>
-         which denotes the following things:<br>
-         `C_(p,q)`: "Why p or q?"<br>
-         `C_(bar(p),bar(q))`: "Why neither P nor Q"<br>
-         `C_(bar(p),p)`: "Why not P with 100% confidence?"<br>
+         ![Model](images/53.png)
+        </details>  
 
-         Therefore (1) can be eaily be obtained after substituting the value of (2) in it. 
+   - [Translational Lung Imaging Analysis Through Disentangled Representations](https://arxiv.org/abs/2203.01668) 
+      - <details><summary>Maheep's Notes</summary>
+         The work focuses on retrieving relevant information from the images of inter-species pathological processes by proposing the following features:<br>
+         1.) able to infer the animal model, position, damage present and generate a mask covering the whole lung. <br>
+         2.) Generate realistic lung images<br>
+         3.) Generate counterfactual images, i.e. healthy versions of damaged input slice. <br>
+
+         The author implements it by considering 3 factors for generating and masking the image, namely: animal model,
+         
+         `A`, the realtive position of axial slice, `S` and estimated lung damage, `Mtb`, via the hierarchy at different resolution scales `k`. By using the Noveau VAE to extract the latent space `z` variables to generate the mask `y` and image `x`.  
+
+
+         ![Model](images/53.png)
         </details>  
