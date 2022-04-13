@@ -1,3 +1,5 @@
+Backdoor
+---
    - [Causal Attention for Vision-Language Tasks](https://openaccess.thecvf.com/content/CVPR2021/papers/Yang_Causal_Attention_for_Vision-Language_Tasks_CVPR_2021_paper.pdf)
       - <details><summary>Maheep's Notes</summary>
         The paper proposes to eradicate unobserved confounder using the front-door adjustment. The author implements the same using the two methods, i.e. **In-Sample Attention** and **Cross-Sample Attention**. The causal effect from the input set X to the target Y through a mediator Z. The attention mechanism can be split into two parts: a selector which selects suitable knowledge Z  from X, i.e. 
@@ -50,6 +52,52 @@
         ![Model](images/25.png)
         </details>  
 
+
+   - [Comprehensive Knowledge Distillation with Causal Intervention](https://proceedings.neurips.cc/paper/2021/file/b9f35816f460ab999cbc168c4da26ff3-Paper.pdf)
+      - <details><summary>Maheep's Notes</summary>
+        The paper proposes CID for an efficient biased free knowledge distillation, which is able to transfer the class representations which are largely ignored by the existing literature and by using softened logits as sample context information removes biases with causal intervention. The author implements it as:<br>
+        1.) They distill the feature vector in the last layer.<br>
+        2.) They use MSE on noramlized vectors so as to get the MSE not to get biased towards the samples that have large-norm features.<br>
+        3.) They integrate the class representations using the class shapes to incorporate it into the student model as so not to only transfer the sample representation. 
+        4.) By using the backdoor adjustment the effect of the prior knowledge of the teacher model because of the object and background co-occurences by setting each item to the prior knowledge to a class.  
+
+        ![Model](images/28.png)
+        </details>  
+
+   - [Causal Intervention for Object Detection](https://ieeexplore.ieee.org/document/9643182)
+      - <details><summary>Maheep's Notes</summary>
+        The paper proposes to remove bias from the object detection models using the intervention, where the author uses the idea of two-stage detectors and apply backdoor adjustment to virtually obtain 
+
+        `P(Y|do(X))` where the author proposes 4 variables namely input `X`, output `Y`, context confounder `C` and mediator `M` affected by both `X` and `C`, where the `C = {c1. c2, ..., cn}` belonging to different `n` categories in the dataset. The output `P(Y|do(X))` is represented as:<br>
+
+        `P(Y|do(X)) = sigma P(c)P(Y|X,M = f(X,c))` where `M` is represented as <br>
+        `M = sigma a_i*c_i*P(c_i)`<br>
+        where `a_i` is the attention for category specific entry `c_i`.  
+
+        ![Model](images/33.png)
+        </details> 
+
+   - [A Closer Look at Debiased Temporal Sentence Grounding in Videos: Dataset, Metric, and Approach](https://arxiv.org/pdf/2203.05243.pdf) 
+      - <details><summary>Maheep's Notes</summary>
+          The work focuses on Temporal Sentence Grounding in Videos, where SOTA models are being proposed but harness correlated features to increase the accuracy as tested by the author by creating a new dataset via merging two datasets and making the test data out of OOD examples. The author also argues on the metrics used by the previous works to get to optimal performance as the traditional metrics often fails when dataset contains over-long ground-truth moments get hit especialy with the small IOU threshold. Therefore the author proposes a new metric, i.e. *dR@n, IOU@m* that takes temporal distances between the predicted moments and ground-truth. To de-confound the network they propose to cut the different confounders effects on the label using the backdoor method and also to get the good/robust feature on language they exploit a semantic role labeling toolkit to parse the sentence into a three-layer semantic role tree, and a more fine-grained sentence feature is obtained by adopting hierarchical attention mechanism on the tree. For visual information, in order to discriminate video moments and distinguish different temporal relationships, a reconstruction loss function is created to enhance the video moment features.  
+
+        </details>  
+
+   - [Causal Intervention for Subject-deconfounded Facial Action Unit Recognition](https://www.aaai.org/AAAI22Papers/AAAI-399.ChenY.pdf) 
+      - <details><summary>Maheep's Notes</summary>
+          The work focuses on Facial expressions and the confounging factors that come due to individual's subject particular a slight variant in style to express an expression. The author solves this problem with a very unique method by taking into account the **Action Unit**, i.e. different sub-parts or muscles in a face where an individual may have some other mucles also getting activated than the muscles that are universal for that expression. The author proposes a model-agnostic system that not only considers the low-level facial-appearance features but also high level semantics relations among Action Units as they depend upon each other. The author builds and SCM by proposing 4 varibales, i.e. Image 
+          
+          *X*, Subject(Confounder) *S*, Latent Representation *R* and output *Y*, where the author eradicates the effect of *S* on *X*. The author implements it by having three modules:<br>
+          1.) **Attention Module**: It takes the attention of the extracted feature and the different AU for each Subject which are computed by taking the average of all the samples of the Subject, denoted by `s_i`<br>
+          2.) **Memory Module**: It consist `s_i` as defined above<br>
+          3.) **Confounder Priors**:  It consist of the sample distribution of different `s_i` by taking the number of (samples in that subject)/(total samples) <br>
+
+         ![Model](images/55.png)
+        </details>  
+
+
+FrontDoor
+---
    - [Confounder Identification-free Causal Visual Feature Learning](https://arxiv.org/abs/2111.13420)
       - <details><summary>Maheep's Notes</summary>
          The paper aims to eradicate all the confounders that are present without observing them using the frontdoor adjustment criteria and also try to explain the success of MAML algorithm. The work deals with two major questions: <br>
@@ -65,16 +113,83 @@
         ![Model](images/27.png)
         </details>  
 
-   - [Comprehensive Knowledge Distillation with Causal Intervention](https://proceedings.neurips.cc/paper/2021/file/b9f35816f460ab999cbc168c4da26ff3-Paper.pdf)
-      - <details><summary>Maheep's Notes</summary>
-        The paper proposes CID for an efficient biased free knowledge distillation, which is able to transfer the class representations which are largely ignored by the existing literature and by using softened logits as sample context information removes biases with causal intervention. The author implements it as:<br>
-        1.) They distill the feature vector in the last layer.<br>
-        2.) They use MSE on noramlized vectors so as to get the MSE not to get biased towards the samples that have large-norm features.<br>
-        3.) They integrate the class representations using the class shapes to incorporate it into the student model as so not to only transfer the sample representation. 
-        4.) By using the backdoor adjustment the effect of the prior knowledge of the teacher model because of the object and background co-occurences by setting each item to the prior knowledge to a class.  
 
-        ![Model](images/28.png)
+Explanation
+---
+   - [Learn-Explain-Reinforce: Counterfactual Reasoning and Its Guidance to Reinforce an Alzheimer’s Disease Diagnosis Model](https://arxiv.org/abs/2108.09451) <!--- Not able to understand properly --> 
+      - <details><summary>Maheep's Notes</summary>
+         The work proposes to unify diagnostic model learning, visual explanation generation using the counterfactual explanation using a target class, and trained diagnostic model reinforcement guided by the visual explanation on the discriminative features extracted by the counterfactual explanation on the mSRI data for the muti-class classification. The author implements the system by learning the counterfactual map for explanation which consist of three modules 
+         
+         **Counterfactual Map Generator(CMG)**, **Reasoning Evaluator(RE)** and a **Discriminator(DC)**, where CMG generates the counterfactual image using the U-net technique giving a Mask and adding it to the input as given in the image below. RE directly evaluates the effect of the generated counterfactual map in producing the targeted label, and Discriminator makes it sure that the generated image look realistic. The **Reinforcement Representation Learning** tries to create a guide map using the above counterfactual map which highlight the extreme regions, i.e. the normal and the regions that have high probability that are abnormal.
+
+        ![Model](images/46.png)
+
         </details>  
+
+   - [Counterfactual Explanation of Brain Activity Classifiers using Image-to-Image Transfer by Generative Adversarial Network](https://arxiv.org/abs/2110.14927)
+      - <details><summary>Maheep's Notes</summary>
+        The paper proposes to generate counterfactual explanation for multi-class classification of fMRI data. The author proposes 
+        
+        **CAG** which is build upon **StarGAN**. The explanation is based upon the **Correct Classification** and **Incorrect Classification**, where the CAG converts the input to the target class and subtracts it pixel-wise so as to extract the activated regions, giving red(blue) output activation as to answer why the classifier predicted(not predicted) the target class. Auxillary discriminator is introduced so as to have a single discriminator to control multiple classes and produce their probability distribution, based on source and target class. 
+
+
+        ![Model](images/37.png)
+
+        </details> 
+
+   - [Counterfactual Explanation Based on Gradual Construction for Deep Networks](https://arxiv.org/abs/2008.01897)
+      - <details><summary>Maheep's Notes</summary>
+         The work focuses on modifying the charecteristic of the image given the features of the Deep Neural Network classifier. The author takes in two measures, i.e. the image shold be easily explainable and should only be minimally modified. <br>
+         The author impelements it using the two steps, namely:<br>
+         
+         1.) 
+         
+         **Masking Step**: It mask the appropriate region of the image, to which the model pays most attention, extracted using the gradients.<br>
+         2.) **Composition Steps**: It perturbs the regions minimally so as to change the logits to the target class.
+
+        ![Model](images/43.png)
+
+        </details> 
+
+   - [GANterfactual - Counterfactual Explanations for Medical Non-Experts using Generative Adversarial Learning](https://arxiv.org/abs/2012.11905)
+      - <details><summary>Maheep's Notes</summary>
+         The work proposes to create counterfactual explanation images for medical images by taking in two measures, i.e. there should be minimal change in the original image and the classifier predicts it in to the target class. The author accomplishes this goal using the image-to-image translation using StarGAN as shown in the picture below.  
+
+        ![Model](images/44.png)
+
+        </details>   
+
+   - [Using Causal Analysis for Conceptual Deep Learning Explanation](https://arxiv.org/abs/2107.06098)
+      - <details><summary>Maheep's Notes</summary>
+         The work proposes to explain the model's decision using the hidden unit cells of the network in radiology. The author uses the associating the hidden units of the classifier to clinically relevant concepts using a linear sparse logistic regression. But to evaluate that the identified units truly influence the classifier’s outcome, they use mediation analysis through counterfactual interventions. A low-depth decision tree is constructed so as to translate all the discovered concepts into a straightforward decision rule, expressed to the radiologist. Technically the author implements it by using:<br>
+         1.) 
+         
+         **Concept Associations**: The network is divided into 
+         
+         `phi1(.)` and `phi2(.)`, where the `phi1(.)` gives different concept in terms of features and `phi2(.)` do prediction. The output of `phi1(.)` gives a vector of `lbh` dimension with each unit having a binary prediction, i.e. if concept is present or absent.
+         <br>
+         2.) **Causal concept ranking**: A counterfactual `x'` for the input   `x` is generated for causal inference using a cGAN, where the concepts are denoted with `Vk(x)` and the left over hidden units are denoted by `bar(Vk(x))` and the effect is measured by: <br>
+         `A = phi2(phi1(do(Vk(x)), bar(Vk(x'))))`  
+         `B = phi2(phi1(Vk(x), bar(Vk(x))))`<br>
+         `Effect = E[A/B - 1]`<br>
+         3.) **Surrogate explanation function**: A function `g(·)` is introduced as a decision tree because many clinical decision-making procedures follow a rule-based pattern, based on the intial classifier `f(.)` based on the logits produced for different concepts.<br>
+
+        ![Model](images/45.png)
+
+        </details>  
+
+   - [COIN: Counterfactual Image Generation for VQA Interpretation](https://arxiv.org/pdf/2201.03342.pdf)
+      - <details><summary>Maheep's Notes</summary>
+        The paper focuses on interpretability approach for VQA models by generating counterfactual images by minimal possible change, ensuring the image looks realistic. This paper introduces an attention mechanism that identifies question-critical objects in the image and guides the counterfactual generator to apply the changes on specific regions. Moreover, a weighted reconstruction loss is introduced in order to allow the counterfactual generator to make more significant changes to question-critical spatial regions than the rest of the image. <br>
+        This is implemented by instead of generating a counterfactual image 
+        
+        `I'` based on the original image , the latter is concatenated with the attention map `M`, such that the concatenation `[ I; M]` serves as an input to the generator `G`, where the answer is passed into the `G` so as to create `I'`, where the regions are identified using GRAD-CAM, where the discriminator `D` ensures that image looks realistic and reconstruction loss is used to do miimal changes. The whole process happens as shown in the figure.  
+
+        ![Model](images/32.png)
+        </details>  
+
+Generating Data using GAN
+---
 
    - [Counterfactual Contrastive Learning for Weakly-Supervised Vision-Language Grounding](https://papers.nips.cc/paper/2020/file/d27b95cac4c27feb850aaa4070cc4675-Paper.pdf)
       - <details><summary>Maheep's Notes</summary>
@@ -90,6 +205,26 @@
         ![Model](images/29.png)
         </details>  
 
+
+   - [Translational Lung Imaging Analysis Through Disentangled Representations](https://arxiv.org/abs/2203.01668) 
+      - <details><summary>Maheep's Notes</summary>
+         The work focuses on retrieving relevant information from the images of inter-species pathological processes by proposing the following features:<br>
+         1.) able to infer the animal model, position, damage present and generate a mask covering the whole lung. <br>
+         2.) Generate realistic lung images<br>
+         3.) Generate counterfactual images, i.e. healthy versions of damaged input slice. <br>
+
+         The author implements it by considering 3 factors for generating and masking the image, namely: animal model,
+         
+         `A`, the realtive position of axial slice, `S` and estimated lung damage, `Mtb`, via the hierarchy at different resolution scales `k`. By using the Noveau VAE to extract the latent space `z` variables to generate the mask `y` and image `x`.  
+
+
+         ![Model](images/53.png)
+        </details>  
+
+
+
+Augmentation
+---
    - [C_3 : Compositional Counterfactual Constrastive Learning for Video-grounded Dialogues](https://arxiv.org/abs/2106.08914)
       - <details><summary>Maheep's Notes</summary>
         The paper focuses on the video-grounding using the diaglouges and inputs, where the author inlcudes the turn based events which let the model give high priority to some instances rather than uniformly giving to all. Also the author separates the dialogue context and video input into object and action, through which they are able to parse through if the query is about object or any action taken, as shown in the figure below.  
@@ -109,29 +244,6 @@
         </details>  
 
 
-   - [COIN: Counterfactual Image Generation for VQA Interpretation](https://arxiv.org/pdf/2201.03342.pdf)
-      - <details><summary>Maheep's Notes</summary>
-        The paper focuses on interpretability approach for VQA models by generating counterfactual images by minimal possible change, ensuring the image looks realistic. This paper introduces an attention mechanism that identifies question-critical objects in the image and guides the counterfactual generator to apply the changes on specific regions. Moreover, a weighted reconstruction loss is introduced in order to allow the counterfactual generator to make more significant changes to question-critical spatial regions than the rest of the image. <br>
-        This is implemented by instead of generating a counterfactual image 
-        
-        `I'` based on the original image , the latter is concatenated with the attention map `M`, such that the concatenation `[ I; M]` serves as an input to the generator `G`, where the answer is passed into the `G` so as to create `I'`, where the regions are identified using GRAD-CAM, where the discriminator `D` ensures that image looks realistic and reconstruction loss is used to do miimal changes. The whole process happens as shown in the figure.  
-
-        ![Model](images/32.png)
-        </details>  
-
-   - [Causal Intervention for Object Detection](https://ieeexplore.ieee.org/document/9643182)
-      - <details><summary>Maheep's Notes</summary>
-        The paper proposes to remove bias from the object detection models using the intervention, where the author uses the idea of two-stage detectors and apply backdoor adjustment to virtually obtain 
-
-        `P(Y|do(X))` where the author proposes 4 variables namely input `X`, output `Y`, context confounder `C` and mediator `M` affected by both `X` and `C`, where the `C = {c1. c2, ..., cn}` belonging to different `n` categories in the dataset. The output `P(Y|do(X))` is represented as:<br>
-
-        `P(Y|do(X)) = sigma P(c)P(Y|X,M = f(X,c))` where `M` is represented as <br>
-        `M = sigma a_i*c_i*P(c_i)`<br>
-        where `a_i` is the attention for category specific entry `c_i`.  
-
-        ![Model](images/33.png)
-        </details> 
-
    - [Efficient Counterfactual Debiasing for Visual Question Answering](https://openaccess.thecvf.com/content/WACV2022/papers/Kolling_Efficient_Counterfactual_Debiasing_for_Visual_Question_Answering_WACV_2022_paper.pdf)
       - <details><summary>Maheep's Notes</summary>
         The paper proposes a novel model-agnostic counterfactual training procedure, namely Efficient Counterfactual Debiasing (ECD). The author implements the technique by defining the three modules in this work:<br>
@@ -144,7 +256,43 @@
         ![Model](images/34.png)
         </details> 
 
-   
+   - [Free Lunch for Co-Saliency Detection: Context Adjustment](https://arxiv.org/abs/2108.02093)
+      - <details><summary>Maheep's Notes</summary>
+        The paper focus on collecting dataset for co-saliency detection system called Context Adjustment Training. The author introduces counterfactual training to mitigate the finite dataset to achieve the true data distribution. Based on it the author proposes to use context adjustment using the 
+        
+        **group-cut-paste** method to imporve the data distribution. GCP turns image `I` into a canvas to be completed and paint the remaining part through the following steps:<br> 
+        (1) classifying candidate images into a semantic group Z (e.g., banana) by reliable pretrained models<br>
+        (2) cutting out candidate objects (e.g., baseball, butterfly, etc.)<br> (3) pasting candidate objects into image samples as shown in the figure below.<br>
+        To make the process more robust the author proposes to have three metrics, namely:<br>
+        a.) **Abduction**: In the new generated data the co-saliency image should remina unchanged.<br>
+        b.) **Action**: The mask sould remain unchanged from the GT of the image and should be optimal for it's value.<br>
+        c.) **Prediction**: The probability distribution of the image should remian unchanged. 
+
+        ![Model](images/42.png)
+
+        </details> 
+
+   - [Driver-centric Risk Object Identification](https://arxiv.org/abs/2106.13201) 
+      - <details><summary>Maheep's Notes</summary>
+         The work proposes to preapre the dataset for identifying risk objects using the Intention and Response of the driver, where a model is deployed to match the response prediction from the driver prediction. The author implements by having the modules of 
+
+         **Perception**, which represents different embeddings of the objects present, **Comprehension** which evaluates the interaction between the driver and thing or stuff using the Ego-Thing Graph and Ego-Stuff Graph, where Ego-Thing Graph have the embedding of how the driver react with the things such as the car, person, bicycle and the Ego-Stuff Graph have the embedding of how the driver reacts with the Stuff in the envionment such as roads, footpath, and Traffic Sign. The last module is of **Projection**  which is used to predict the future forecasts. <br>
+
+         The Causal reasoning module is added to the model so as to augment the data only in "GO" scenarion, i.e. no risk objects are present to remove the non-causal features by randomly selecting top k ransdom objects. It is also used in "STOP" scenarios, to identify the risk object identification by using the same intervention maethod of inpainting. The "GO" score is computed by removing the different object and the one object with removal that gives the highest "GO" score is identified as the risk object.  
+        </details> 
+
+   - [ALIGN-DEFORM-SUBTRACT: AN INTERVENTIONAL FRAMEWORK FOR EXPLAINING OBJECT DIFFERENCES](https://arxiv.org/abs/2203.04694) 
+      - <details><summary>Maheep's Notes</summary>
+         The work focuses to define the differences betwen the objects by intervening on the image of the source object 
+
+         `X_s` converting into the target object image `X_t`, by modifying it and quantifying the parameters via changing it's **affnity** by changing the scaling `s`, translation `∆t` and in-plane rotation `∆θ`. **Shape** acts as the second parameter by which the image is changed. The transformation takes place in the same order as if shape is changed before that it will also have the effect of changing the pose of the image. **Subtract** act as the third module to change the image via removing the background using a segmentaion model to see the apperance difference using MSE.  
+
+
+         ![Model](images/52.png)
+        </details> 
+
+Augmentation_Others
+---   
    - [Causality-inspired Single-source Domain Generalization for Medical Image Segmentation](https://arxiv.org/pdf/2111.12525.pdf)
       - <details><summary>Maheep's Notes</summary>
         The paper proposes solve the problem of Domain Generalization for image segementation m using the two modules:<br>
@@ -160,6 +308,9 @@
         ![Model](images/35.png)
         </details> 
 
+
+Subtraction
+---
    - [Distilling Causal Effect of Data in Class-Incremental Learning](https://arxiv.org/abs/2103.01737)
       - <details><summary>Maheep's Notes</summary>
         The paper proposes to immune the forgetfull nature of NN while shifting to new data from old data. The author discusses the three main methods which are used now to mitigate this problem.<br>
@@ -182,18 +333,34 @@
 
         </details> 
 
-
-   - [Counterfactual Explanation of Brain Activity Classifiers using Image-to-Image Transfer by Generative Adversarial Network](https://arxiv.org/abs/2110.14927)
+   - [Counterfactual Attention Learning for Fine-Grained Visual Categorization and Re-identification](https://arxiv.org/abs/2108.08728)
       - <details><summary>Maheep's Notes</summary>
-        The paper proposes to generate counterfactual explanation for multi-class classification of fMRI data. The author proposes 
-        
-        **CAG** which is build upon **StarGAN**. The explanation is based upon the **Correct Classification** and **Incorrect Classification**, where the CAG converts the input to the target class and subtracts it pixel-wise so as to extract the activated regions, giving red(blue) output activation as to answer why the classifier predicted(not predicted) the target class. Auxillary discriminator is introduced so as to have a single discriminator to control multiple classes and produce their probability distribution, based on source and target class. 
+        The paper proposes to improve attention using a counterfactual attention learning method based on causal inference. The author argues that the most existing methods learns the attention in a weakly-supervised way. The basic idea is to quantitate the quality of attentions by comparing the effects of facts (i.e., the learned attentions) and the counterfactuals (i.e., uncorrected attentions) on the final prediction (i.e., the classification score). Then, we propose to maximize the difference to encourage the network to learn more effective visual attentions and reduce the effects of biased training set. The author implements it by:<br>
+        1.) The attention maps are extracted from the image, 
 
+        `A = {A1, A2, A3,....., An}`, the attention maps are used to extract the respective feature from the image. `hi = gamma(X*Ai)`, where all the `hi` are normalized to get the `h = normalize(h, h2,...., hn)` which is used to predict. 
+        2.) The attention is intervened to get the effect on the output of the model, i.e. <br>
+        `Y_effect = E[Y(A = A, X = X) - Y(do(A = bar(A))), X = X]`<br>
+        It is expected to achieve two-conditions using this method:<br> 
+        a. ) The attention model should improve the prediction based on wrong attentions as much as possible, which encourages the attention to dis- cover the most discriminative regions and avoid sub-optimal results<br> b.) The prediction based on wrong attentions is penalized, which forces the classifier to make decision based more on the main clues instead of the biased clues and reduces the influence of biased training set.
 
-        ![Model](images/37.png)
+        ![Model](images/40.png)
 
         </details> 
 
+   - [Causal Scene BERT: Improving object detection by searching for challenging groups of data](https://arxiv.org/pdf/2202.03651) 
+      - <details><summary>Maheep's Notes</summary>
+          The work is based on the rare scenarios that occur in the self-driving where the model is built and then when it fails for a group, the dataset is collected, annotated and the model is trained on that, which is a very time-consuming and risky process. The author proposes to identify these groups during the training of the model such as specific 
+
+          *weather patterns*, *Vehicle types* and *Vehicle positioning*. The author harnesses the Simulation and **MLM**(Masked Language Model) to apply causal intervention so as to generate counterfactual scenarios while **MLM**, acts as a Denoising Autoencoder to generate data near true distribution. The different tokens represent different groups such as *weather*, *agent asset*, *rotations*, etc. and are masked to generate counterfactual image. The author uses the score function `f(phi, I, L)` where `phi` is the model, `I` is the image and `L` is the label. The score function is used to identify the vulnerable groups using the `rho` function: <br>
+          `rho` =  `f(phi, I', L')` - `f(phi, I, L)`<br>
+          if `|rho| >= t`, where `t` is the threshold, which defines if the `rho` is very negative or positive then the modified group is vulnerable.
+
+
+        </details>  
+
+Others
+---
    - [How Well do Feature Visualizations Support Causal Understanding of CNN Activations?](https://arxiv.org/abs/2106.12447)
       - <details><summary>Maheep's Notes</summary>
         The paper proposes to identify the benefits of providing users with visualization of unit's activation based on different features of the input, so as to provide humnas with precise information about the image features that casuse a unit to be activated. <br>
@@ -224,21 +391,6 @@
 
         </details>                
 
-   - [Counterfactual Attention Learning for Fine-Grained Visual Categorization and Re-identification](https://arxiv.org/abs/2108.08728)
-      - <details><summary>Maheep's Notes</summary>
-        The paper proposes to improve attention using a counterfactual attention learning method based on causal inference. The author argues that the most existing methods learns the attention in a weakly-supervised way. The basic idea is to quantitate the quality of attentions by comparing the effects of facts (i.e., the learned attentions) and the counterfactuals (i.e., uncorrected attentions) on the final prediction (i.e., the classification score). Then, we propose to maximize the difference to encourage the network to learn more effective visual attentions and reduce the effects of biased training set. The author implements it by:<br>
-        1.) The attention maps are extracted from the image, 
-
-        `A = {A1, A2, A3,....., An}`, the attention maps are used to extract the respective feature from the image. `hi = gamma(X*Ai)`, where all the `hi` are normalized to get the `h = normalize(h, h2,...., hn)` which is used to predict. 
-        2.) The attention is intervened to get the effect on the output of the model, i.e. <br>
-        `Y_effect = E[Y(A = A, X = X) - Y(do(A = bar(A))), X = X]`<br>
-        It is expected to achieve two-conditions using this method:<br> 
-        a. ) The attention model should improve the prediction based on wrong attentions as much as possible, which encourages the attention to dis- cover the most discriminative regions and avoid sub-optimal results<br> b.) The prediction based on wrong attentions is penalized, which forces the classifier to make decision based more on the main clues instead of the biased clues and reduces the influence of biased training set.
-
-        ![Model](images/40.png)
-
-        </details>   
-
 
    - [Improving Users’ Mental Model with Attention-directed Counterfactual Edits](https://arxiv.org/abs/2110.06863)
       - <details><summary>Maheep's Notes</summary>
@@ -248,74 +400,6 @@
 
         </details>      
 
-
-   - [Free Lunch for Co-Saliency Detection: Context Adjustment](https://arxiv.org/abs/2108.02093)
-      - <details><summary>Maheep's Notes</summary>
-        The paper focus on collecting dataset for co-saliency detection system called Context Adjustment Training. The author introduces counterfactual training to mitigate the finite dataset to achieve the true data distribution. Based on it the author proposes to use context adjustment using the 
-        
-        **group-cut-paste** method to imporve the data distribution. GCP turns image `I` into a canvas to be completed and paint the remaining part through the following steps:<br> 
-        (1) classifying candidate images into a semantic group Z (e.g., banana) by reliable pretrained models<br>
-        (2) cutting out candidate objects (e.g., baseball, butterfly, etc.)<br> (3) pasting candidate objects into image samples as shown in the figure below.<br>
-        To make the process more robust the author proposes to have three metrics, namely:<br>
-        a.) **Abduction**: In the new generated data the co-saliency image should remina unchanged.<br>
-        b.) **Action**: The mask sould remain unchanged from the GT of the image and should be optimal for it's value.<br>
-        c.) **Prediction**: The probability distribution of the image should remian unchanged. 
-
-        ![Model](images/42.png)
-
-        </details>           
-
-   - [Counterfactual Explanation Based on Gradual Construction for Deep Networks](https://arxiv.org/abs/2008.01897)
-      - <details><summary>Maheep's Notes</summary>
-         The work focuses on modifying the charecteristic of the image given the features of the Deep Neural Network classifier. The author takes in two measures, i.e. the image shold be easily explainable and should only be minimally modified. <br>
-         The author impelements it using the two steps, namely:<br>
-         
-         1.) 
-         
-         **Masking Step**: It mask the appropriate region of the image, to which the model pays most attention, extracted using the gradients.<br>
-         2.) **Composition Steps**: It perturbs the regions minimally so as to change the logits to the target class.
-
-        ![Model](images/43.png)
-
-        </details>           
-
-   - [GANterfactual - Counterfactual Explanations for Medical Non-Experts using Generative Adversarial Learning](https://arxiv.org/abs/2012.11905)
-      - <details><summary>Maheep's Notes</summary>
-         The work proposes to create counterfactual explanation images for medical images by taking in two measures, i.e. there should be minimal change in the original image and the classifier predicts it in to the target class. The author accomplishes this goal using the image-to-image translation using StarGAN as shown in the picture below.  
-
-        ![Model](images/44.png)
-
-        </details>           
-
-       
-   - [Using Causal Analysis for Conceptual Deep Learning Explanation](https://arxiv.org/abs/2107.06098)
-      - <details><summary>Maheep's Notes</summary>
-         The work proposes to explain the model's decision using the hidden unit cells of the network in radiology. The author uses the associating the hidden units of the classifier to clinically relevant concepts using a linear sparse logistic regression. But to evaluate that the identified units truly influence the classifier’s outcome, they use mediation analysis through counterfactual interventions. A low-depth decision tree is constructed so as to translate all the discovered concepts into a straightforward decision rule, expressed to the radiologist. Technically the author implements it by using:<br>
-         1.) 
-         
-         **Concept Associations**: The network is divided into 
-         
-         `phi1(.)` and `phi2(.)`, where the `phi1(.)` gives different concept in terms of features and `phi2(.)` do prediction. The output of `phi1(.)` gives a vector of `lbh` dimension with each unit having a binary prediction, i.e. if concept is present or absent.
-         <br>
-         2.) **Causal concept ranking**: A counterfactual `x'` for the input   `x` is generated for causal inference using a cGAN, where the concepts are denoted with `Vk(x)` and the left over hidden units are denoted by `bar(Vk(x))` and the effect is measured by: <br>
-         `A = phi2(phi1(do(Vk(x)), bar(Vk(x'))))`  
-         `B = phi2(phi1(Vk(x), bar(Vk(x))))`<br>
-         `Effect = E[A/B - 1]`<br>
-         3.) **Surrogate explanation function**: A function `g(·)` is introduced as a decision tree because many clinical decision-making procedures follow a rule-based pattern, based on the intial classifier `f(.)` based on the logits produced for different concepts.<br>
-
-        ![Model](images/45.png)
-
-        </details>    
-
-   - [Learn-Explain-Reinforce: Counterfactual Reasoning and Its Guidance to Reinforce an Alzheimer’s Disease Diagnosis Model](https://arxiv.org/abs/2108.09451) <!--- Not able to understand properly --> 
-      - <details><summary>Maheep's Notes</summary>
-         The work proposes to unify diagnostic model learning, visual explanation generation using the counterfactual explanation using a target class, and trained diagnostic model reinforcement guided by the visual explanation on the discriminative features extracted by the counterfactual explanation on the mSRI data for the muti-class classification. The author implements the system by learning the counterfactual map for explanation which consist of three modules 
-         
-         **Counterfactual Map Generator(CMG)**, **Reasoning Evaluator(RE)** and a **Discriminator(DC)**, where CMG generates the counterfactual image using the U-net technique giving a Mask and adding it to the input as given in the image below. RE directly evaluates the effect of the generated counterfactual map in producing the targeted label, and Discriminator makes it sure that the generated image look realistic. The **Reinforcement Representation Learning** tries to create a guide map using the above counterfactual map which highlight the extreme regions, i.e. the normal and the regions that have high probability that are abnormal.
-
-        ![Model](images/46.png)
-
-        </details>    
 
    - [Causal affect prediction model using a facial image sequence](https://arxiv.org/abs/2107.03886) 
       - <details><summary>Maheep's Notes</summary>
@@ -330,8 +414,6 @@
 
         </details>  
 
-
----
 
    - [iReason: Multimodal Commonsense Reasoning using Videos and Natural Language with Interpretability](https://arxiv.org/abs/2107.10300) 
       - <details><summary>Maheep's Notes</summary>
@@ -367,14 +449,7 @@
 
         </details>  
 
-   - [Driver-centric Risk Object Identification](https://arxiv.org/abs/2106.13201) 
-      - <details><summary>Maheep's Notes</summary>
-         The work proposes to preapre the dataset for identifying risk objects using the Intention and Response of the driver, where a model is deployed to match the response prediction from the driver prediction. The author implements by having the modules of 
-
-         **Perception**, which represents different embeddings of the objects present, **Comprehension** which evaluates the interaction between the driver and thing or stuff using the Ego-Thing Graph and Ego-Stuff Graph, where Ego-Thing Graph have the embedding of how the driver react with the things such as the car, person, bicycle and the Ego-Stuff Graph have the embedding of how the driver reacts with the Stuff in the envionment such as roads, footpath, and Traffic Sign. The last module is of **Projection**  which is used to predict the future forecasts. <br>
-
-         The Causal reasoning module is added to the model so as to augment the data only in "GO" scenarion, i.e. no risk objects are present to remove the non-causal features by randomly selecting top k ransdom objects. It is also used in "STOP" scenarios, to identify the risk object identification by using the same intervention maethod of inpainting. The "GO" score is computed by removing the different object and the one object with removal that gives the highest "GO" score is identified as the risk object.  
-        </details>  
+ 
 
    - [Dependent Multi-Task Learning with Causal Intervention for Image Captioning](https://arxiv.org/abs/2105.08573) 
       - <details><summary>Maheep's Notes</summary>
@@ -412,30 +487,6 @@
          Therefore (1) can be eaily be obtained after substituting the value of (2) in it. 
         </details>  
 
-   - [ALIGN-DEFORM-SUBTRACT: AN INTERVENTIONAL FRAMEWORK FOR EXPLAINING OBJECT DIFFERENCES](https://arxiv.org/abs/2203.04694) 
-      - <details><summary>Maheep's Notes</summary>
-         The work focuses to define the differences betwen the objects by intervening on the image of the source object 
-
-         `X_s` converting into the target object image `X_t`, by modifying it and quantifying the parameters via changing it's **affnity** by changing the scaling `s`, translation `∆t` and in-plane rotation `∆θ`. **Shape** acts as the second parameter by which the image is changed. The transformation takes place in the same order as if shape is changed before that it will also have the effect of changing the pose of the image. **Subtract** act as the third module to change the image via removing the background using a segmentaion model to see the apperance difference using MSE.  
-
-
-         ![Model](images/52.png)
-        </details>  
-
-   - [Translational Lung Imaging Analysis Through Disentangled Representations](https://arxiv.org/abs/2203.01668) 
-      - <details><summary>Maheep's Notes</summary>
-         The work focuses on retrieving relevant information from the images of inter-species pathological processes by proposing the following features:<br>
-         1.) able to infer the animal model, position, damage present and generate a mask covering the whole lung. <br>
-         2.) Generate realistic lung images<br>
-         3.) Generate counterfactual images, i.e. healthy versions of damaged input slice. <br>
-
-         The author implements it by considering 3 factors for generating and masking the image, namely: animal model,
-         
-         `A`, the realtive position of axial slice, `S` and estimated lung damage, `Mtb`, via the hierarchy at different resolution scales `k`. By using the Noveau VAE to extract the latent space `z` variables to generate the mask `y` and image `x`.  
-
-
-         ![Model](images/53.png)
-        </details>  
 
    - [CRAFT: A Benchmark for Causal Reasoning About Forces and inTeractions](https://arxiv.org/abs/2012.04293) 
       - <details><summary>Maheep's Notes</summary>
@@ -463,31 +514,3 @@
          ![Model](images/54.png)
         </details>  
 
-   - [A Closer Look at Debiased Temporal Sentence Grounding in Videos: Dataset, Metric, and Approach](https://arxiv.org/pdf/2203.05243.pdf) 
-      - <details><summary>Maheep's Notes</summary>
-          The work focuses on Temporal Sentence Grounding in Videos, where SOTA models are being proposed but harness correlated features to increase the accuracy as tested by the author by creating a new dataset via merging two datasets and making the test data out of OOD examples. The author also argues on the metrics used by the previous works to get to optimal performance as the traditional metrics often fails when dataset contains over-long ground-truth moments get hit especialy with the small IOU threshold. Therefore the author proposes a new metric, i.e. *dR@n, IOU@m* that takes temporal distances between the predicted moments and ground-truth. To de-confound the network they propose to cut the different confounders effects on the label using the backdoor method and also to get the good/robust feature on language they exploit a semantic role labeling toolkit to parse the sentence into a three-layer semantic role tree, and a more fine-grained sentence feature is obtained by adopting hierarchical attention mechanism on the tree. For visual information, in order to discriminate video moments and distinguish different temporal relationships, a reconstruction loss function is created to enhance the video moment features.  
-
-        </details>  
-
-   - [Causal Intervention for Subject-deconfounded Facial Action Unit Recognition](https://www.aaai.org/AAAI22Papers/AAAI-399.ChenY.pdf) 
-      - <details><summary>Maheep's Notes</summary>
-          The work focuses on Facial expressions and the confounging factors that come due to individual's subject particular a slight variant in style to express an expression. The author solves this problem with a very unique method by taking into account the **Action Unit**, i.e. different sub-parts or muscles in a face where an individual may have some other mucles also getting activated than the muscles that are universal for that expression. The author proposes a model-agnostic system that not only considers the low-level facial-appearance features but also high level semantics relations among Action Units as they depend upon each other. The author builds and SCM by proposing 4 varibales, i.e. Image 
-          
-          *X*, Subject(Confounder) *S*, Latent Representation *R* and output *Y*, where the author eradicates the effect of *S* on *X*. The author implements it by having three modules:<br>
-          1.) **Attention Module**: It takes the attention of the extracted feature and the different AU for each Subject which are computed by taking the average of all the samples of the Subject, denoted by `s_i`<br>
-          2.) **Memory Module**: It consist `s_i` as defined above<br>
-          3.) **Confounder Priors**:  It consist of the sample distribution of different `s_i` by taking the number of (samples in that subject)/(total samples) <br>
-
-         ![Model](images/55.png)
-        </details>  
-
-   - [Causal Scene BERT: Improving object detection by searching for challenging groups of data](https://arxiv.org/pdf/2202.03651) 
-      - <details><summary>Maheep's Notes</summary>
-          The work is based on the rare scenarios that occur in the self-driving where the model is built and then when it fails for a group, the dataset is collected, annotated and the model is trained on that, which is a very time-consuming and risky process. The author proposes to identify these groups during the training of the model such as specific 
-
-          *weather patterns*, *Vehicle types* and *Vehicle positioning*. The author harnesses the Simulation and **MLM**(Masked Language Model) to apply causal intervention so as to generate counterfactual scenarios while **MLM**, acts as a Denoising Autoencoder to generate data near true distribution. The different tokens represent different groups such as *weather*, *agent asset*, *rotations*, etc. and are masked to generate counterfactual image. The author uses the score function `f(phi, I, L)` where `phi` is the model, `I` is the image and `L` is the label. The score function is used to identify the vulnerable groups using the `rho` function: <br>
-          `rho` =  `f(phi, I', L')` - `f(phi, I, L)`<br>
-          if `|rho| >= t`, where `t` is the threshold, which defines if the `rho` is very negative or positive then the modified group is vulnerable.
-
-
-        </details>  
