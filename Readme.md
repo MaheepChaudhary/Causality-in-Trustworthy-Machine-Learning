@@ -145,6 +145,20 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
          The author argues that by obtaining the PDF may give very valuable information as compared to only estimating the Cumlative Distribution Function. 
         </details>
  
+  - [Causal Explanations and XAI](https://arxiv.org/abs/2201.13169) 
+      - <details><summary>Maheep's notes </summary>
+         The paper focuses on shedding the light upon action-guiding explanations or causal explanations by defining three types of explanations  i.e. 
+         
+         **Sufficient Explanations(SE)**, **Counterfactual Explanations(CE)** and **Actual Causations(AC)**. These all kinds of explanations are based on intervention on feature to generate explanation. The **AC** lies between the **SE** and **CE**, as it consist of the features when changed do not change the prediction but are sufficient for explanation. The author introduces the concept of *Independence*, which states that a causal model that agrees with a function that mimics it mapping the input to output by making sure that the *Endogenous Variables(V)*, *V = Input U {output}*, where every V have only *exogenous(U)* parents and not any endogenous. <br>
+         In addition to that the author argues for a very important point, i.e.<br> *successful explanation must show factors that may not be manipulated for the explanation to hold, which is distinct from stating which variables must be held fixed at their actual values.*<br>
+         To give a more detailed view of the terms defined above, the author defines them in a detailed way:<br>
+         1.) **Sufficient Explanations**: The author describes the phenomenon when it is explained that for 
+         
+         `X` having values as `x` fixed then the `Y` will take value `y` is known as *weak sufficiency*, but if only a subset of values in `X` are set fixed to `x`, ensure `Y = y` regardless of the values other leftover variables takes, is known as *Direct Sufficiency*. In addition to that variables `N`, that are not to be manipulated for the explanations or in other words safeguarded from intervention and `Y` takes the value `y`, the notion is called *Strong Sufficiency*. The varibales in `N` can be thought of as a network that transmits the Causal Inference on `Y`. The *actual sufficient explanation* can be thought as the pair of `(X = x, N)` where `X` is strongly sufficient for `Y = y`. The sufficient explanation may dominate other one if the variables in it explains the same and has a subset of the varibles in the other equation.<br>
+         2.) **Counterfactual Explanations**: It informs us the variables that needs to be changed from `X = x` to `X = x'` so as to change the output from `Y = y` to `Y = y'`, which is divided into two parts: *direct counterfactual dependence* which deals by the above fact but fixing all the other variables constant and *counterfactaul dependence* which also holds the above fact but does not intervene on any other variables. The author generalizes these two methods by introducing a new varibale `W` that contains the fixed variables. In the latter case `W` remians null but in former case it contains all the varibles excluding the ones intervened upon, where the dominance of one explanation over another takes place as in the **SE** <br>
+
+         The author concludes the paper by defining **Actual Causation** and concludes that sufficient explanations are of little value for action-guidance, compared to counterfactual aspect. Contrary to **CE** the **AC** guides towards actions that would not ensure the actual output under the same conditions as the actual action. The author actual causation naturally accommodates this replacement as well,define fairness by for actual causation occurs along a network `N` demanding that protected variables do not cause the outcome along an unfair network, i.e., a network that consists entirely of unfair paths.
+        </details>
 
 ## Causality & Computer Vision
 
