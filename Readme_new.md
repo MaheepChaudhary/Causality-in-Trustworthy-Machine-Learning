@@ -211,10 +211,10 @@ Generating Data using GAN
         The paper aim to solve the problem of Weakly supervised Vision Language Grounding, i.e. to localize target moments in a video using a query. The author uses counterfactual scenario to make the process more robust, based on the feature-level, relation-level and interaction level. <br>
         The two types of approaches are introduced so as to generate the counterfactual scenarios, namely 
         
-        **DCT** and **RCT**, where the **DCT** aims to generate negative counterfactual scenarios by damaging the essential part of the visual content and **RCT** aims to generate positive counterfactual scenarios by damaging inessential part of the visual content based on the above defined 3 approaches. <br>
+        **DCT** and **RCT**, where the **DCT** aims to generate negative counterfactual scenarios by damaging the essential part of the visual content and **RCT** aims to generate three types of counterfactual scenarios, namely: **feature-level**, **interaction-level** and **relation-level** generate positive counterfactual scenarios by damaging inessential part of the visual content based on the above defined 3 approaches. <br>
         A ranking loss is also developed so as to develop the difference between the positive and negative samples. <br>
-        The feature-level focuses on the critical region proposals, which are modified using the memory bank containing the proposal features from randomly selected different samples, whereas the interaction-level features also uses memory bank to modify the interaction-level features, i.e. the word level features that correspond to the proposal features. The memory-bank contains the language features from different samples. <br>
-        The relational-level approach focuses on the relation, i.e. the edges connecting the propsal "j" from proposal "i". The crucial edges are then destroyed by **DCT** whereas the inessential by **RCT**. 
+        The **feature-level** focuses on the critical region proposals, which are modified using the memory bank containing the proposal features from randomly selected different samples, whereas the **interaction-level** features also uses memory bank to modify the interaction-level features, i.e. the word level features that correspond to the proposal features. The memory-bank contains the language features from different samples. <br>
+        The **relational-level** approach focuses on the relation, i.e. the edges connecting the propsal "j" from proposal "i". The crucial edges are then destroyed by **DCT** whereas the inessential by **RCT**. 
 
 
         ![Model](images/29.png)
