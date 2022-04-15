@@ -188,6 +188,21 @@ Explanation
         ![Model](images/32.png)
         </details>  
 
+   - [Translational Lung Imaging Analysis Through Disentangled Representations](https://arxiv.org/abs/2203.01668) 
+      - <details><summary>Maheep's Notes</summary>
+         The work focuses on retrieving relevant information from the images of inter-species pathological processes by proposing the following features:<br>
+         1.) able to infer the animal model, position, damage present and generate a mask covering the whole lung. <br>
+         2.) Generate realistic lung images<br>
+         3.) Generate counterfactual images, i.e. healthy versions of damaged input slice. <br>
+
+         The author implements it by considering 3 factors for generating and masking the image, namely: animal model,
+         
+         `A`, the realtive position of axial slice, `S` and estimated lung damage, `Mtb`, via the hierarchy at different resolution scales `k`. By using the Noveau VAE to extract the latent space `z` variables to generate the mask `y` and image `x`.  
+
+
+         ![Model](images/53.png)
+        </details>  
+
 Generating Data using GAN
 ---
 
@@ -204,23 +219,6 @@ Generating Data using GAN
 
         ![Model](images/29.png)
         </details>  
-
-
-   - [Translational Lung Imaging Analysis Through Disentangled Representations](https://arxiv.org/abs/2203.01668) 
-      - <details><summary>Maheep's Notes</summary>
-         The work focuses on retrieving relevant information from the images of inter-species pathological processes by proposing the following features:<br>
-         1.) able to infer the animal model, position, damage present and generate a mask covering the whole lung. <br>
-         2.) Generate realistic lung images<br>
-         3.) Generate counterfactual images, i.e. healthy versions of damaged input slice. <br>
-
-         The author implements it by considering 3 factors for generating and masking the image, namely: animal model,
-         
-         `A`, the realtive position of axial slice, `S` and estimated lung damage, `Mtb`, via the hierarchy at different resolution scales `k`. By using the Noveau VAE to extract the latent space `z` variables to generate the mask `y` and image `x`.  
-
-
-         ![Model](images/53.png)
-        </details>  
-
 
 
 Augmentation
