@@ -1,21 +1,23 @@
 Backdoor
----
+--- 
+<!-- Simple islolation -->
    - [Causal Attention for Vision-Language Tasks](https://openaccess.thecvf.com/content/CVPR2021/papers/Yang_Causal_Attention_for_Vision-Language_Tasks_CVPR_2021_paper.pdf)
       - <details><summary>Maheep's Notes</summary>
-        The paper proposes to eradicate unobserved confounder using the front-door adjustment. The author implements the same using the two methods, i.e. **In-Sample Attention** and **Cross-Sample Attention**. The causal effect from the input set X to the target Y through a mediator Z. The attention mechanism can be split into two parts: a selector which selects suitable knowledge Z  from X, i.e. 
+        The paper proposes to eradicate unobserved confounder using the front-door adjustment in Visual Image Captioning. The author implements the same using the two methods, i.e. 
         
-        `P(Z = z|X)` known as **In-Sampling** and a predictor which exploits Z to predict Y. <br>
+        **In-Sample Attention** and **Cross-Sample Attention**. The selector separates the `Z`(suitable knowledge, known as **IS-Sampling**) from `X`(Input) and predictor predicts the `Y` from `Z`. The suitable knowledge `P(Z = z|X)` is also known as **In-Sampling** and a predictor which exploits Z to predict Y. <br>
         `P(Y|X) = sigma P(Z = z|X)P(Y|Z = z)`<br>
-        But the predictor may learn the spurious correlation brought by the backdoor path from X to Z, and thus the backdoor method is used to block the path from X to Z, making it: <br>
+        But the predictor may learn the spurious correlation brought by the backdoor path from X to Z, and thus the backdoor method is used to block the path from X to Z by stratifying `X` into different cases `{x}`, making it: <br>
         `P(Y|do(Z)) = sigma P(X = x)P(Y|X = x,Z)`<br>
-        where `P(X = x)` is known as **Cross-Sampling** and making the whole equation: <br>
+        where `P(X = x)` is known as **Cross-Sampling** sice it comes with other samples, making the whole equation: <br>
         `P(Y|do(X)) = sigma P(Z = z|X) sigma P(X = x)P(Y|Z = z, X = x)`
-
+         This is also called front-door adjustment. 
    
    
         ![Model](images/23.png)
         </details>  
 
+<!-- Simple eradication -->
    - [Causal Attention for Unbiased Visual Recognition](https://openaccess.thecvf.com/content/ICCV2021/papers/Wang_Causal_Attention_for_Unbiased_Visual_Recognition_ICCV_2021_paper.pdf)
   
       - <details><summary>Maheep's Notes</summary>
@@ -27,7 +29,9 @@ Backdoor
         `M` are retained while the non-causal features `S` are eradicated as shown in the figure below. Therefore to disentangle the the `S` and `M`, the equation can be derived as:<br>
         `P(Y|do(X)) = sigma_for_s sigma_for_m P(Y|X, s, m)P(m|X,s)P(s)`
         
-        `P(Z = z|X)` known as **In-Sampling** and a predictor which exploits Z to predict Y. <br>
+        `P(Z = z|X)` known as 
+        
+        **In-Sampling** and a predictor which exploits Z to predict Y. <br>
         `P(Y|X) = sigma P(Z = z|X)P(Y|Z = z)`<br>
         But the predictor may learn the spurious correlation brought by the backdoor path from X to Z, and thus the backdoor method is used to block the path from X to Z, making it: <br>
         `P(Y|do(Z)) = sigma P(X = x)P(Y|X = x,Z)`<br>
@@ -39,7 +43,7 @@ Backdoor
         ![Model](images/24.png)
         </details>  
 
-
+<!-- Using dictionary(last category) -->
    - [Causal Intervention for Weakly-Supervised Semantic Segmentation](https://openaccess.thecvf.com/content/ICCV2021/papers/Wang_Causal_Attention_for_Unbiased_Visual_Recognition_ICCV_2021_paper.pdf)
       - <details><summary>Maheep's Notes</summary>
          In Weakly-Supervised Semantic Segmentation(WSSS) the confounder creates a major problem as the non-causal features gets associated with positively correlated pixels to labels, and also disassociates causal but negatively correlated ones. The author proposes to eradicate it using the backdoor adjustment. The Ground Truth(GT) is extracted using the CAM and therefore pseudo-labels with is used to train the model. The author proposes 4 main varibales for the SCM, i.e. Confounder "C", Mediator "M" which act as the image-specific representation, Input "X" and Output "Y", where the direct effect of "C" is cutoff from "X", by using class-specific average mask to approzimate the confounder 
@@ -53,17 +57,19 @@ Backdoor
         </details>  
 
 
+<!-- Simple deconfounding -->
    - [Comprehensive Knowledge Distillation with Causal Intervention](https://proceedings.neurips.cc/paper/2021/file/b9f35816f460ab999cbc168c4da26ff3-Paper.pdf)
       - <details><summary>Maheep's Notes</summary>
         The paper proposes CID for an efficient biased free knowledge distillation, which is able to transfer the class representations which are largely ignored by the existing literature and by using softened logits as sample context information removes biases with causal intervention. The author implements it as:<br>
         1.) They distill the feature vector in the last layer.<br>
-        2.) They use MSE on noramlized vectors so as to get the MSE not to get biased towards the samples that have large-norm features.<br>
+        2.) They use MSE on normalized vectors so as to get the MSE not to get biased towards the samples that have large-norm features.<br>
         3.) They integrate the class representations using the class shapes to incorporate it into the student model as so not to only transfer the sample representation. 
         4.) By using the backdoor adjustment the effect of the prior knowledge of the teacher model because of the object and background co-occurences by setting each item to the prior knowledge to a class.  
 
         ![Model](images/28.png)
         </details>  
 
+<!-- Dicitonary(last method) -->
    - [Causal Intervention for Object Detection](https://ieeexplore.ieee.org/document/9643182)
       - <details><summary>Maheep's Notes</summary>
         The paper proposes to remove bias from the object detection models using the intervention, where the author uses the idea of two-stage detectors and apply backdoor adjustment to virtually obtain 
@@ -77,12 +83,14 @@ Backdoor
         ![Model](images/33.png)
         </details> 
 
+<!-- Simple deconfounding -->
    - [A Closer Look at Debiased Temporal Sentence Grounding in Videos: Dataset, Metric, and Approach](https://arxiv.org/pdf/2203.05243.pdf) 
       - <details><summary>Maheep's Notes</summary>
           The work focuses on Temporal Sentence Grounding in Videos, where SOTA models are being proposed but harness correlated features to increase the accuracy as tested by the author by creating a new dataset via merging two datasets and making the test data out of OOD examples. The author also argues on the metrics used by the previous works to get to optimal performance as the traditional metrics often fails when dataset contains over-long ground-truth moments get hit especialy with the small IOU threshold. Therefore the author proposes a new metric, i.e. *dR@n, IOU@m* that takes temporal distances between the predicted moments and ground-truth. To de-confound the network they propose to cut the different confounders effects on the label using the backdoor method and also to get the good/robust feature on language they exploit a semantic role labeling toolkit to parse the sentence into a three-layer semantic role tree, and a more fine-grained sentence feature is obtained by adopting hierarchical attention mechanism on the tree. For visual information, in order to discriminate video moments and distinguish different temporal relationships, a reconstruction loss function is created to enhance the video moment features.  
 
         </details>  
 
+<!-- Memory bank(last method) -->
    - [Causal Intervention for Subject-deconfounded Facial Action Unit Recognition](https://www.aaai.org/AAAI22Papers/AAAI-399.ChenY.pdf) 
       - <details><summary>Maheep's Notes</summary>
           The work focuses on Facial expressions and the confounging factors that come due to individual's subject particular a slight variant in style to express an expression. The author solves this problem with a very unique method by taking into account the **Action Unit**, i.e. different sub-parts or muscles in a face where an individual may have some other mucles also getting activated than the muscles that are universal for that expression. The author proposes a model-agnostic system that not only considers the low-level facial-appearance features but also high level semantics relations among Action Units as they depend upon each other. The author builds and SCM by proposing 4 varibales, i.e. Image 
