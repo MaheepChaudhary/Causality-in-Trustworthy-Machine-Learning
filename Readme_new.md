@@ -24,20 +24,11 @@ Backdoor
         Background plays a very common role as confounder and demands to train the model in way such as all the objectys come with various background so as to prevent bias in the model, e.g., a “dog” model is learned within “grass+dog” and “road+dog” respectively, so the “grass” and “road” contexts will no longer confound the “dog” recognition. But it faces with two types of problem: <br>
         1.) Such annotation is not only prohibitively expensive, but also inherently problematic, as the confounders are elusive in nature.<br>
         2.) Such coarser contexts will lead to the over-adjustment problem. The intervention not only removes the context, but also hurts beneficial causalities. <br>
-        Also splitting the context split, to merge the ground-truth contexts into bigger splits to include all classes also faces problem as this kind of intervention removes the non-causal features of different contexts. Therefore the author proposes a causal attention module(CaaM) that self-annotates the confounders in unsupervised fashion which the causal features 
+        Also splitting the context split, to merge the ground-truth contexts into bigger splits to include all classes also faces problem as this kind of intervention removes the non-causal features of different contexts. Therefore the author proposes a causal attention module(CaaM) that self-annotates the confounders in unsupervised fashionto over-come the adjustment problem. This results in retaining of causal features
         
-        `M` are retained while the non-causal features `S` are eradicated as shown in the figure below. Therefore to disentangle the the `S` and `M`, the equation can be derived as:<br>
+        `M` while eradicating the non-causal features `S` as shown in the figure below. Therefore to disentangle the the `S` and `M`, the equation can be derived as:<br>
         `P(Y|do(X)) = sigma_for_s sigma_for_m P(Y|X, s, m)P(m|X,s)P(s)`
         
-        `P(Z = z|X)` known as 
-        
-        **In-Sampling** and a predictor which exploits Z to predict Y. <br>
-        `P(Y|X) = sigma P(Z = z|X)P(Y|Z = z)`<br>
-        But the predictor may learn the spurious correlation brought by the backdoor path from X to Z, and thus the backdoor method is used to block the path from X to Z, making it: <br>
-        `P(Y|do(Z)) = sigma P(X = x)P(Y|X = x,Z)`<br>
-        where `P(X = x)` is known as **Cross-Sampling** and making the whole equation: <br>
-        `P(Y|do(X)) = sigma P(Z = z|X) sigma P(X = x)P(Y|Z = z, X = x)`
-
    
    
         ![Model](images/24.png)
