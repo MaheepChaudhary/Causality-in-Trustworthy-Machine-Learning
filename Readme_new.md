@@ -54,8 +54,9 @@ Backdoor
         The paper proposes CID for an efficient biased free knowledge distillation, which is able to transfer the class representations which are largely ignored by the existing literature and by using softened logits as sample context information removes biases with causal intervention. The author implements it as:<br>
         1.) They distill the feature vector in the last layer.<br>
         2.) They use MSE on normalized vectors so as to get the MSE not to get biased towards the samples that have large-norm features.<br>
-        3.) They integrate the class representations using the class shapes to incorporate it into the student model as so not to only transfer the sample representation. 
-        4.) By using the backdoor adjustment the effect of the prior knowledge of the teacher model because of the object and background co-occurences by setting each item to the prior knowledge to a class.  
+        3.) They integrate the class representations using the class shapes to incorporate it into the student model as so not to only transfer the sample representation. <br>
+        4.) The "Context Knowledge" affects both the sample and latent representation. Therefore the "Context Knowledge" acting as confounder is stratified into pieces K = {k1, k2, ..., k|K|} the effect of which is cut off through backdoor adjustment. The author argues that the teacher model has context information in it's logits which is softened and based on it the "student model" is forced to learn the context information.  
+        the effect of the prior "knowledge" of the teacher model because of the object and background co-occurences by setting each item to the prior knowledge to a class.  
 
         ![Model](images/28.png)
         </details>  
