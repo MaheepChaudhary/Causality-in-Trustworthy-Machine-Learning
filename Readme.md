@@ -750,7 +750,7 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
         ![Contrastive Module](images/13.png)
 
         3) The output of two feature encoders are fed to a fusion module with a context-query attention mechanism to capture the cross-modal interactions between visual and textual features.<br> 
-        4) Next, to mitigate the spurious correlations between textual and visual features, they use causal interventions P (Y |do(X)) with event as surrogate confounders to learn representations.<br> 
+        4) As the confounder is unobserved, therefore to mitigate the spurious correlations between textual and visual features, the author develops a surrogate confounder. It includes the the vocabulary of roles, actions and objects extracted from captions. Based on these, it computes the prior probability of every phrase z in each set and incoporates every phrase uniformly using the Normalized Geometric Mean(NWGM).<br> 
         5) Finally, two losses L_s and L_e for the start and end boundaries are introduced.<br>
         
         ![Model](images/14.png)

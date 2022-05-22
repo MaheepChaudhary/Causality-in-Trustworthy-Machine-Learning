@@ -48,7 +48,7 @@ Backdoor
         </details>  
 
 
-<!-- Simple deconfounding -->
+<!-- Dictionary building -->
    - [Comprehensive Knowledge Distillation with Causal Intervention](https://proceedings.neurips.cc/paper/2021/file/b9f35816f460ab999cbc168c4da26ff3-Paper.pdf)
       - <details><summary>Maheep's Notes</summary>
         The paper proposes CID for an efficient biased free knowledge distillation, which is able to transfer the class representations which are largely ignored by the existing literature and by using softened logits as sample context information removes biases with causal intervention. The author implements it as:<br>
@@ -116,6 +116,7 @@ FrontDoor
 
 Explanation
 ---
+<!-- Not sure -->
    - [Learn-Explain-Reinforce: Counterfactual Reasoning and Its Guidance to Reinforce an Alzheimer’s Disease Diagnosis Model](https://arxiv.org/abs/2108.09451) <!--- Not able to understand properly --> 
       - <details><summary>Maheep's Notes</summary>
          The work proposes to unify diagnostic model learning, visual explanation generation using the counterfactual explanation using a target class, and trained diagnostic model reinforcement guided by the visual explanation on the discriminative features extracted by the counterfactual explanation on the mSRI data for the muti-class classification. The author implements the system by learning the counterfactual map for explanation which consist of three modules 
@@ -126,6 +127,7 @@ Explanation
 
         </details>  
 
+<!-- Simply Generating for Medical -->
    - [Counterfactual Explanation of Brain Activity Classifiers using Image-to-Image Transfer by Generative Adversarial Network](https://arxiv.org/abs/2110.14927)
       - <details><summary>Maheep's Notes</summary>
         The paper proposes to generate counterfactual explanation for multi-class classification of fMRI data. The author proposes 
@@ -137,6 +139,7 @@ Explanation
 
         </details> 
 
+<!-- Simply Generating -->
    - [Counterfactual Explanation Based on Gradual Construction for Deep Networks](https://arxiv.org/abs/2008.01897)
       - <details><summary>Maheep's Notes</summary>
          The work focuses on modifying the charecteristic of the image given the features of the Deep Neural Network classifier. The author takes in two measures, i.e. the image shold be easily explainable and should only be minimally modified. <br>
@@ -151,6 +154,7 @@ Explanation
 
         </details> 
 
+<!-- Simply Generating for Medical -->
    - [GANterfactual - Counterfactual Explanations for Medical Non-Experts using Generative Adversarial Learning](https://arxiv.org/abs/2012.11905)
       - <details><summary>Maheep's Notes</summary>
          The work proposes to create counterfactual explanation images for medical images by taking in two measures, i.e. there should be minimal change in the original image and the classifier predicts it in to the target class. The author accomplishes this goal using the image-to-image translation using StarGAN as shown in the picture below.  
@@ -159,6 +163,7 @@ Explanation
 
         </details>   
 
+<!-- This is one is not generating counterfactual image but is a good explainer, making the model more transparent  -->
    - [Using Causal Analysis for Conceptual Deep Learning Explanation](https://arxiv.org/abs/2107.06098)
       - <details><summary>Maheep's Notes</summary>
          The work proposes to explain the model's decision using the hidden unit cells of the network in radiology. The author uses the associating the hidden units of the classifier to clinically relevant concepts using a linear sparse logistic regression. But to evaluate that the identified units truly influence the classifier’s outcome, they use mediation analysis through counterfactual interventions. A low-depth decision tree is constructed so as to translate all the discovered concepts into a straightforward decision rule, expressed to the radiologist. Technically the author implements it by using:<br>
@@ -178,6 +183,7 @@ Explanation
 
         </details>  
 
+<!-- Challenge is to make process more transparent and less computationally expensive -->
    - [COIN: Counterfactual Image Generation for VQA Interpretation](https://arxiv.org/pdf/2201.03342.pdf)
       - <details><summary>Maheep's Notes</summary>
         The paper focuses on interpretability approach for VQA models by generating counterfactual images by minimal possible change, ensuring the image looks realistic. This paper introduces an attention mechanism that identifies question-critical objects in the image and guides the counterfactual generator to apply the changes on specific regions. Moreover, a weighted reconstruction loss is introduced in order to allow the counterfactual generator to make more significant changes to question-critical spatial regions than the rest of the image. <br>
@@ -188,6 +194,7 @@ Explanation
         ![Model](images/32.png)
         </details>  
 
+<!-- More transparent -->
    - [Translational Lung Imaging Analysis Through Disentangled Representations](https://arxiv.org/abs/2203.01668) 
       - <details><summary>Maheep's Notes</summary>
          The work focuses on retrieving relevant information from the images of inter-species pathological processes by proposing the following features:<br>
@@ -351,12 +358,13 @@ Subtraction
 
    - [Driver-centric Risk Object Identification](https://arxiv.org/abs/2106.13201) 
       - <details><summary>Maheep's Notes</summary>
-         The work proposes to preapre the dataset for identifying risk objects using the Intention and Response of the driver, where a model is deployed to match the response prediction from the driver prediction. The author implements by having the modules of 
+         The work proposes to prepare the dataset for identifying risk objects using the Intention and Response of the driver, where a model is deployed to match the response prediction from the driver prediction. The author implements by having the modules of 
 
          **Perception**, which represents different embeddings of the objects present, **Comprehension** which evaluates the interaction between the driver and thing or stuff using the Ego-Thing Graph and Ego-Stuff Graph, where Ego-Thing Graph have the embedding of how the driver react with the things such as the car, person, bicycle and the Ego-Stuff Graph have the embedding of how the driver reacts with the Stuff in the envionment such as roads, footpath, and Traffic Sign. The last module is of **Projection**  which is used to predict the future forecasts. <br>
 
-         The Causal reasoning module is added to the model so as to augment the data only in "GO" scenarion, i.e. no risk objects are present to remove the non-causal features by randomly selecting top k ransdom objects. It is also used in "STOP" scenarios, to identify the risk object identification by using the same intervention maethod of inpainting. The "GO" score is computed by removing the different object and the one object with removal that gives the highest "GO" score is identified as the risk object.  
+         The Causal reasoning module is added to the model so as to augment the data only in "GO" scenarion, i.e. no risk objects are present to remove the non-causal features by randomly selecting top k random objects. It is also used in "STOP" scenarios, to identify the risk object identification by using the same intervention maethod of inpainting. The "GO" score is computed by removing the different object and the one object with removal that gives the highest "GO" score is identified as the risk object.  
         </details> 
+
 
 Others
 ---
@@ -378,9 +386,9 @@ Others
         ![Model](images/38.png)
         </details>                
 
-   - [CausalAF__Causal_Autoregressive_Flow_for_Goal_Directed_Safety_Critical](https://arxiv.org/abs/2110.13939)
+   - [CausalAF Causal Autoregressive Flow for Goal Directed Safety Critical](https://arxiv.org/abs/2110.13939)
       - <details><summary>Maheep's Notes</summary>
-        The paper proposes to generate goal-direceted data satisfying a given goal for safety-critical situations. The author argues that the 
+        The paper proposes to generate goal-directed data satisfying a given goal for safety-critical situations. The author argues that the 
         
         **Behavioural Graph** unearths the causality from the **Causal Graph** so as to include in the generated samples. This is done using two methods namely:<br>
         1.) **COM** : It maintians the **Q** , to ensure that the cause is generated in terms of nodes only after the effect. It is also noted that the node have many parents, therefore the node is considered valid only when all of it's parents have been generated.<br> 
@@ -449,7 +457,7 @@ Others
         </details>  
 
  
-
+<!-- Other of Eliminating bias using causality -->
    - [Dependent Multi-Task Learning with Causal Intervention for Image Captioning](https://arxiv.org/abs/2105.08573) 
       - <details><summary>Maheep's Notes</summary>
          The work proposes to enhance the capability of Image Captioning systems by creating the content consistency to have non-contradicting views and provide informative information. The author implements it by eradicating the counfounder, cutting the link between the visual features and possible confounders. This is done by introducing a mediator 
@@ -463,7 +471,7 @@ Others
 
    - [Structure by Architecture: Disentangled Representations without Regularization](https://arxiv.org/abs/2006.07796) 
       - <details><summary>Maheep's Notes</summary>
-         The work focuses on the problem of self-supervised structured representation learning using autoencoders for generative modeling. The author proposes the structural autoencoder architecture inspired by structural causal models, which orders information in the latent space, while also, encourages independence. Notably, it does so without additional loss terms or regularization. The SAE architec- ture produces high quality reconstructions and generated samples, improving extrapolation, as well as achieving a significant degree of disentanglement across a variety of datasets.
+         The work focuses on the problem of self-supervised structured representation learning using autoencoders for generative modeling. The author proposes the structural autoencoder architecture inspired by structural causal models, which orders information in the latent space, while also, encourages independence. Notably, it does so without additional loss terms or regularization. The SAE architecture produces high quality reconstructions and generated samples, improving extrapolation, as well as achieving a significant degree of disentanglement across a variety of datasets.
 
         </details>      
 
