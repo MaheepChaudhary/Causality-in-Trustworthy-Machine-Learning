@@ -246,13 +246,9 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
             
             * ![Causal Graph](images/c_graph_chracteristic.png)
          * Therefore it defines the standard equation to solve the issue, i.e. 
-         $$
-         P(Y|do(X), Domain) = \sum_u P(Y|X,C = c)P(C|Domain)
-         $$
+         $P(Y|do(X), Domain) = \sum_u P(Y|X,C = c)P(C|Domain)$
          * to the equation 
-         $$
-         P(|X,Domain,Z) = \sum_{\hat{x}}h_y(X,\hat{x})P(\hat{X} = \hat{x}|Z,X,Domain)
-         $$
+         $P(|X,Domain,Z) = \sum_{\hat{x}}h_y(X,\hat{x})P(\hat{X} = \hat{x}|Z,X,Domain)$
       </details>
 
   - [WHEN CAUSAL INTERVENTION MEETS ADVERSARIAL EXAMPLES AND IMAGE MASKING FOR DEEP NEURAL NETWORKS](https://arxiv.org/pdf/1902.03380.pdf) 
