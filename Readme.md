@@ -232,9 +232,28 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
 
   - [Transporting Causal Mechanisms for Unsupervised Domain Adaptation](https://openaccess.thecvf.com/content/ICCV2021/papers/Yue_Transporting_Causal_Mechanisms_for_Unsupervised_Domain_Adaptation_ICCV_2021_paper.pdf) 
       - <details><summary>Maheep's notes </summary>
-         Existing Unsupervised Domain Adaptation (UDA) literature adopts the covariate shift and conditional shift assumptions, which essentially encourage models to learn common features across domains, i.e. in source domain and target domain but  as it is unsupervised, the feature will inevitably lose non-discriminative semantics in source domain, which is however discriminative in target domain. This is represented by Covariate Shift: P (X|S = s) != P (X|S = t), where X denotes the samples, e.g., real-world vs. clip-art images; and 2) Conditional Shift: P (Y |X, S = s) != P (Y |X, S = t). In other words covariate dhift defiens that the features or images of both the target and source domain will be different. The conditional shift represents the logit probability from same class images in source and target domain will vary. The author argues that the features discartrded but are important say "U" are confounder to image and features extracterd.
-         Therefore the author discovers k pairs of end-to-end functions {(M i , M i inverse )}^k in unsupervised fashion, where M(Xs) =  (Xt) and M i_inverse(Xt) = Xs , (M i , M i 1 ) corresponds to U i intervention. Specifically, training samples are fed into all (M i , M i 1 ) in parallel to compute L iCycleGAN for each pair. Only the winning pair with the smallest loss is updated. This is how they insert images with same content but by  adding U in both target and source domain using image generation. 
-        </details>
+         
+         Existing **Unsupervised Domain Adaptation(UDA)** literature focuses to tackle the challenges of *covariate shift*, i.e. $P(X|Domain = d) \neq P(X|Domain = d')$ and *conditional shift*, i.e. $P(Y|X, Domain = d) \neq P(Y|X, Domain = d')$ during the adjustment of model trained on dataset $\textbf{D}_1$ and inferenced on data $\textbf{D}_2$ which may belong to another domain. 
+
+         Consequently the work proposes to solve using it by:
+
+         * It proposes $k$ functions $\{f_i(\cdot)\}_{i = 1}^{k}$ that converts $f(X_d) = \overline{X}_{d'}$ and $f^{-1}(X_{d'}) = \overline{X}_{d}$, where $P(\overline{X}_d) \in P(\textbf{D}_1); P(\overline{X}_{d'}) \in P(\textbf{D}_2)$.
+            
+            * !['K-functions'](images/k_functions.png) 
+
+         * Although $\{f_i(\cdot)\}_{i = 1}^{k}$ represents different confounders $C$ that makes the features of $\textbf{D}_1$ and $\textbf{D}_2$ invariant/same. But are unable to get the vector representation, therefore its characteristics to delineate $C$.
+         * The chracteristic of $C$(denoted by $U$ in the image) can be observed by the $\overline{X}$ or $\hat{X}$ and the latent variable $Z$ of $X$, as shown in the image below, both containing the information encoded about $C$. 
+            
+            * ![Causal Graph](images/c_graph_chracteristic.png)
+         * Therefore it defines the standard equation to solve the issue, i.e. 
+         $$
+         P(Y|do(X), Domain) = \sum_u P(Y|X,C = c)P(C|Domain)
+         $$
+         * to the equation 
+         $$
+         P(|X,Domain,Z) = \sum_{\hat{x}}h_y(X,\hat{x})P(\hat{X} = \hat{x}|Z,X,Domain)
+         $$
+      </details>
 
   - [WHEN CAUSAL INTERVENTION MEETS ADVERSARIAL EXAMPLES AND IMAGE MASKING FOR DEEP NEURAL NETWORKS](https://arxiv.org/pdf/1902.03380.pdf) 
       - <details><summary>Maheep's notes </summary>
