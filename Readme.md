@@ -750,7 +750,7 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
         ![Contrastive Module](images/13.png)
 
         3) The output of two feature encoders are fed to a fusion module with a context-query attention mechanism to capture the cross-modal interactions between visual and textual features.<br> 
-        4) As the confounder is unobserved, therefore to mitigate the spurious correlations between textual and visual features, the author develops a surrogate confounder. It includes the the vocabulary of roles, actions and objects extracted from captions. Based on these, it computes the prior probability of every phrase z in each set and incoporates every phrase uniformly using the Normalized Geometric Mean(NWGM).<br> 
+        4) As the confounder is unobserved, therefore to mitigate the spurious correlations between textual and visual features, the author develops a surrogate confounder. It includes the vocabulary of roles, actions and objects extracted from captions. Based on these, it computes the prior probability of every phrase z in each set and incoporates every phrase uniformly using the Normalized Geometric Mean(NWGM).<br> 
         5) Finally, two losses L_s and L_e for the start and end boundaries are introduced.<br>
         
         ![Model](images/14.png)
@@ -962,17 +962,30 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
 
    - [Confounder Identification-free Causal Visual Feature Learning](https://arxiv.org/abs/2111.13420)
       - <details><summary>Maheep's Notes</summary>
-         The paper aims to eradicate all the confounders that are present without observing them using the frontdoor adjustment criteria and also try to explain the success of MAML algorithm. The work deals with two major questions: <br>
-         1.) How to model the intervening effects from other samples on a given sample in the training process. <br>
-         2.) How to estimate the global-scope intervening effect across all samples in the training set to find a suitable optimization direction. <br>
-         and therefore proposes a gradient-based optimization strategy to mitigate the intervening effects using an efficient cluster then-sample algorithm to approximate the global-scope intervening effects for feasible optimization. The author implements it by explicitly modelling the intervening effects of another sample x̃ on Z = h(x) effecting Y by instantiating P (Y |Z = h(x), x̃) with the calculated gradients of the sample x̃ with respect to f<br>
+         It obviates the confounders using Front-Door Criteria on individual samples and **approximates the global-scope intervening effect upon the instance level** intervention from the perspective of optimization. 
 
-         `P(Y|Z = h(x), x̃) = f(Z = h(x))P(x̃)` <br>
-         after clustering-then-sampling using the k-mean.
+         It results to find a reliable intervention direction to intervene on the effects of confounders. 
 
+         There are two challenges we will address for CICF
 
+         - How to model the intervening effects from other samples on a given sample in the training process?
+         - How to estimate the global-scope intervening effect across all samples in the training set to find a suitable optimization direction?
 
-        ![Model](images/27.png)
+         It focuses on the gradients as they are the ones, that really intervene upon different samples based on the previous sample that shifted the direction of gradient during training. 
+
+         But it is intractable to involve such modelled global-scope intervening effects, therefore they use an efficient cluster-then-sample approach to approximate the global-scope intervening effects on feasible optimization. 
+
+         The aim is to approximate the term, where the param of $\phi$ are fixed, therefore $z = h(x)$.
+
+         $$
+         P(Y|do(X = x)) = \underset{\tilde{x} \in X}{\sum}P(Y|Z = h(x))P(\tilde{x})
+         $$
+
+         They propose to explicitly model the intervening effects of another sample $\tilde{x}$ on  $Z = h(x) \rightarrow Y$ by instantiating $P(Y|Z = h(x), \tilde{x})$ with the calculated gradients of the sample $\tilde{x}$ with respect to $f$.
+
+         To make it computationally inexpensive they use the cluster-sample algorithm, that cluster statistically similar samples and computes gradient for each cluster using weighted average.
+
+         ![Clustering Algorithm](images/27.png)
         </details>  
 
    - [Comprehensive Knowledge Distillation with Causal Intervention](https://proceedings.neurips.cc/paper/2021/file/b9f35816f460ab999cbc168c4da26ff3-Paper.pdf)
@@ -1381,3 +1394,5 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
 
 
         </details>  
+
+
