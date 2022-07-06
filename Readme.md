@@ -874,12 +874,27 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
 
    - [Deconfounded Video Moment Retrieval with Causal Intervention](https://arxiv.org/abs/2106.01534)
       - <details><summary>Maheep's Notes</summary>
-        The paper proposes Deconfounded Cross-modal Matching(DCM) method for a causality-inspired VMR framework that builds structural causal model to capture the true effect of query and video content on the prediction to remove the confounding effects of moment location. It first disentangles moment representation to infer the core feature of visual content, and then applies causal intervention on the disentangled multimodal input based on backdoor adjustment. The feature disentanglement is used to separate the location feature from the visual context feature which act a spurious feature in it and as it act as a spurious feature for the label by directly effecting it the use the second method to eridicate it.
-        This is implemented as:<br>
-        1.) The disentanglement is done by using the two fully connected layers. It is ensured by reconstruction loss that the `"l"` vector reconstructs the location and the loss `"L_inde"` so as to force the `l` to be independent of `c`.<br>
-        2.) As for the second point backdoor method is used to eradicate the spurious correlation.
+         .
+         
+         The paper proposes to handle the location $L$ acting as the confounder in the Video-Moment Retrieval. 
+         It creates a spurious correaltion b.w. itself and the query $Q$, atimes completely ignoring the core visual cues $V$. 
 
-        ![Model](images/20.png)
+         The author eradicates the effect of $L \rightarrow Y$ using two steps: 
+            
+         * By disentangling it from $V$ using the functions for obtaining location $g_l(v)$ and content $g_c(v)$. 
+         Also to ensure the proper disentanglement, the reconstruction loss is used to construct original $v$ using the $g_l(v)$ and $g_v(v)$.
+
+         * To eliminate the discrimination b.w. locations, such as high-frequency and low-frequency are made to interact fairly with the query using the backdoor adjustment
+
+            $$
+            P(Y|do(Q,V)) = P(Y|Q,do(V)) = \underset{l \in L}{\sum} P(Y|Q,V,l)P(l)
+            $$ 
+
+            where $P(l) =  \frac{1}{N}$ and $N$ total number of proposed candidates. 
+            It is implemented using the Normalized Weighted Geometric Mean(NWGM).
+
+         ![Model](images/20.png)
+        
         </details>  
 
    - [Intervention Video Relation Detection](https://dl.acm.org/doi/pdf/10.1145/3474085.3475540)
@@ -985,6 +1000,10 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
 
          To make it computationally inexpensive they use the cluster-sample algorithm, that cluster statistically similar samples and computes gradient for each cluster using weighted average.
 
+         $$
+         g_+ = \frac{1}{M}\overset{K}{\underset{k = 1}{\sum}}\overset{N_k}{\underset{j = 1}{\sum}}g_{\tilde{x}_{j,k \in K}}
+         $$
+
          ![Clustering Algorithm](images/27.png)
         </details>  
 
@@ -1066,16 +1085,28 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
    
    - [Causality-inspired Single-source Domain Generalization for Medical Image Segmentation](https://arxiv.org/pdf/2111.12525.pdf)
       - <details><summary>Maheep's Notes</summary>
-        The paper proposes solve the problem of Domain Generalization for image segementation m using the two modules:<br>
-        1.) **GIN**: It promotes to preserve the shape of information as it is one of the most improtant information that remains invariant while domain shift and also is intuitively causal to segmentation results. <br>
-        This is implemented by augmenting the image to have diverse appearances via randomly-weighted shallow convolutional networks, as shown in the diagram below.<br>
-        2.) **IPA**: It focuses on removing the confounding factors from the image like thebackground and also the acquisiton process, where different tissues are given different color. The author uses 
+         The paper proposes solve the problem of Domain Generalization for image segementation using the two modules:
 
-        `do(.)` to remove the confouning nature of on `A` on `S` by transforming the `A` using the `T_i(.)` photometric transformation. <br>
-        The psuedo-correlation is proposed so as to deconfound background that is correlted with the output by changing the pixels that correspond to different values are given different values unsupervised fashion. The pseudo-correlation map is impelemnted by using the continous random-valued control points with low spatial frequency, which are multiplied with the `GIN` augmented image.  
+         * **GIN**: It promotes to preserve the shape of information as it is one of the most improtant information that remains invariant while domain shift and also is intuitively causal to segmentation results. This is implemented by augmenting the image to have diverse appearances via randomly-weighted shallow convolutional networks, as shown in the diagram below.
 
-        ![Model](images/35.png)
-        </details> 
+         * **IPA**: It focuses on removing the confounding factors from the image like the background and also the acquisiton process, where different tissues are given different color. The author uses $do(\cdot)$ to remove the confouning nature of acquisition process $A$ on domain-invariant representation $S$ by transforming the $A$ using the $T_i(\cdot)$ photometric transformation. 
+
+         The backdoor method cannot be used in this scenario as:
+            
+         * All the confounders are not oberved
+         * There can be more than 1 confounder $X_b$ and also their effect is entangled with the causal feature $X_f$.
+         * $do(X_f = x_f)$ make $x_f$ to naturally stand out, providing a shortcut to the network. 
+
+         Consequently, it does the $T_i(\cdot)$ using both the **GIN**, i.e. $g_{\theta}(\cdot)$ and **IPA** to obtain psuedo correlation maps $b$, which act as surrogate of label maps of $x_b$'s. But is applied on overall image including $x_f$ to avoid any shortcuts by fixing $x_f$. It is obtianed using the equaiton:
+
+         $$
+         T_1(x;\theta_1, \theta_2, b) = g_{\theta_1} \odot b +  g_{\theta_2} \odot (1 - b)
+         $$
+
+         This operation can also be interpreted as an extension to AugMix which is designed for image classification. Different from AugMix, **IPA** necessities strict spatial correspondence between pixels and labels to ensure accuracy of this pixel-wise prediction.
+
+         ![Model](images/35.png)
+      </details> 
 
    - [Distilling Causal Effect of Data in Class-Incremental Learning](https://arxiv.org/abs/2103.01737)
       - <details><summary>Maheep's Notes</summary>
