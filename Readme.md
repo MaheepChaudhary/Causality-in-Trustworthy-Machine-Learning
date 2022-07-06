@@ -237,7 +237,7 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
 
          Consequently the work proposes to solve using it by:
 
-         * It proposes $k$ functions $\{f_i(.)\}_{i = 1}^{k}$ that converts $f(X_d) = X_{d'}$ and $f^{-1}(X_{d'}) = X_{d}$, where $P(X_d) \in P(D_1); P(X_{d'}) \in P(D_2)$.
+         * It proposes k functions $\{f_i(.)\}_{i = 1}^{k}$ that converts $f(X_d) = X_{d'}$ and $f^{-1}(X_{d'}) = X_{d}$, where $P(X_d) \in P(D_1); P(X_{d'}) \in P(D_2)$.
             
             * !['K-functions'](images/k_functions.png) 
 
