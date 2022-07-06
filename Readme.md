@@ -233,16 +233,16 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
   - [Transporting Causal Mechanisms for Unsupervised Domain Adaptation](https://openaccess.thecvf.com/content/ICCV2021/papers/Yue_Transporting_Causal_Mechanisms_for_Unsupervised_Domain_Adaptation_ICCV_2021_paper.pdf) 
       - <details><summary>Maheep's notes </summary>
          
-         Existing **Unsupervised Domain Adaptation(UDA)** literature focuses to tackle the challenges of *covariate shift*, i.e. $P(X|Domain = d) \neq P(X|Domain = d')$ and *conditional shift*, i.e. $P(Y|X, Domain = d) \neq P(Y|X, Domain = d')$ during the adjustment of model trained on dataset $\textbf{D}_1$ and inferenced on data $\textbf{D}_2$ which may belong to another domain. 
+         Existing **Unsupervised Domain Adaptation(UDA)** literature focuses to tackle the challenges of *covariate shift*, i.e. $P(X|Domain = d) \neq P(X|Domain = d')$ and *conditional shift*, i.e. $P(Y|X, Domain = d) \neq P(Y|X, Domain = d')$ during the adjustment of model trained on dataset $D_1$ and inferenced on data $D_2$ which may belong to another domain. 
 
          Consequently the work proposes to solve using it by:
 
-         * It proposes $k$ functions $\{f_i(\cdot)\}_{i = 1}^{k}$ that converts $f(X_d) = \overline{X}_{d'}$ and $f^{-1}(X_{d'}) = \overline{X}_{d}$, where $P(\overline{X}_d) \in P(\textbf{D}_1); P(\overline{X}_{d'}) \in P(\textbf{D}_2)$.
+         * It proposes $k$ functions $\{f_i(.)\}_{i = 1}^{k}$ that converts $f(X_d) = X_{d'}$ and $f^{-1}(X_{d'}) = X_{d}$, where $P(X_d) \in P(D_1); P(X_{d'}) \in P(D_2)$.
             
             * !['K-functions'](images/k_functions.png) 
 
-         * Although $\{f_i(\cdot)\}_{i = 1}^{k}$ represents different confounders $C$ that makes the features of $\textbf{D}_1$ and $\textbf{D}_2$ invariant/same. But are unable to get the vector representation, therefore its characteristics to delineate $C$.
-         * The chracteristic of $C$(denoted by $U$ in the image) can be observed by the $\overline{X}$ or $\hat{X}$ and the latent variable $Z$ of $X$, as shown in the image below, both containing the information encoded about $C$. 
+         * Although $\{f_i(\cdot)\}_{i = 1}^{k}$ represents different confounders $C$ that makes the features of $D_1$ and $D_2$ invariant/same. But are unable to get the vector representation, therefore its characteristics to delineate $C$.
+         * The characteristic of $C$(denoted by $U$ in the image) can be observed by the $X$ and the latent variable $Z$ of $X$, as shown in the image below, both containing the information encoded about $C$. 
             
             * ![Causal Graph](images/c_graph_chracteristic.png)
          * Therefore it defines the standard equation to solve the issue, i.e. 
