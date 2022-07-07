@@ -353,30 +353,7 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
         `Diversity loss` : This loss prevents the multiple explanations of the model from being identical and reconstructs different images modifing the different spurious correlations and explaing through them.
         The model uses the beta-TCVAE to obtain a disentangled latent representation which leads to more proximal and sparse explanations and also Fisher information matrix of its latent space to focus its search on the less influential factors of variation of the ML model as it defines the scores of the influential latent factors of Z. This mechanism enables the discovery of spurious correlations learned by the ML model.
         </details>       
-         
-        
-        
-   - [SCOUT: Self-aware Discriminant Counterfactual Explanations](https://arxiv.org/pdf/2004.07769.pdf)
-      -<details><summary>Maheep's Notes</summary>
-
-      The paper focuses to tackle the challenges of interpretable ML, where it tries to answer the questions: 
-
-      > *Why the image of a class $Y^i$ does not belong to a counterfactual class $Y^j$?*
-
-      The author proposes connect attributive explanations, which are based on a single heat map, to counterfactual explanations, which seek to highlight the regions that are informative of the $Y^i$ class but uninformative of the counterfactual class $Y^j$. It proposes three functions that may solve the problem efficiently:
-
-      * $A = a(f(h_{y^i}(x)))$: It gives the heatmaps that are informative of the class $Y^i$.
-      * $B = a(f(h_{y^j}(x)))$: It gives the heatmaps that are informative of the counterfactual class $Y^j$.
-      * $C = a(s(x))$: It is a function that gives the score for a region, w.r.t to the confidence a model has about a region importance to predict the class.
-
-      The $a(s(x))$ is produced as the conventional methods used the methodology of $A(1 - B)$ to highlight the discriminant features of a class w.r.t. counterfactual class. Although, this is able to highlight the desired features but only when *The classes are non-trivially different*, but fails when *they are similar*.
-
-      Therefore, it harness the three functions $A, B$ and  $C$ to extract the discriminatory function using the equaiton: $d(h_{y^i}(x), h_{y^j}(x)) = a(f(h_{y^i}(x)))a'(f(h_{y^j}(x)))a(s(x))$, 
-
-      where $a'_{ij} = max_{ij}a_{ij} - a_{ij}$.
-
-   </details>         
-     
+              
      
                  
    - [Born Identity Network: Multi-way Counterfactual Map Generation to Explain a Classifier’s Decision](https://arxiv.org/pdf/2011.10381.pdf)
@@ -542,13 +519,6 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
         </details>         
         
 
-   - [GENERATIVE_COUNTERFACTUAL_INTROSPECTION_FOR_EXPLAINABLE_DEEP_LEARNING](https://arxiv.org/pdf/1907.03077.pdf)
-      - <details><summary>Maheep's Notes</summary>
-        The paper propose to generate counterfactual using the Generative Counterfactual Explanation not by replacing a patch of the original image with something but by generating a counterfactual image by replacing minimal attributes uinchanged, i.e. A = {a1, a2, a3, a4, a5....an}. It is implemented by: - <br>
-
-        `min(lambda*loss(I(A')) + ||I - I(A'))`, where loss is cross-entropy for predicting image I(A') to label c'.
-
-        </details>        
         
   - [Generative_Counterfactuals_for_Neural_Networks_via_Attribute_Informed_Perturbations](https://arxiv.org/pdf/2101.06930.pdf)
       - <details><summary>Maheep's Notes</summary>
@@ -1458,3 +1428,36 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
         </details>  
 
 
+   - [SCOUT: Self-aware Discriminant Counterfactual Explanations](https://arxiv.org/pdf/2004.07769.pdf)
+      - <details><summary>Maheep's Notes</summary>
+
+         The paper focuses to tackle the challenges of interpretable ML, where it tries to answer the questions: 
+
+         > *Why the image of a class $Y^i$ does not belong to a counterfactual class $Y^j$?*
+
+         The author proposes connect attributive explanations, which are based on a single heat map, to counterfactual explanations, which seek to highlight the regions that are informative of the $Y^i$ class but uninformative of the counterfactual class $Y^j$. It proposes three functions that may solve the problem efficiently:
+
+         * $A = a(f(h_{y^i}(x)))$: It gives the heatmaps that are informative of the class $Y^i$.
+         * $B = a(f(h_{y^j}(x)))$: It gives the heatmaps that are informative of the counterfactual class $Y^j$.
+         * $C = a(s(x))$: It is a function that gives the score for a region, w.r.t to the confidence a model has about a region importance to predict the class.
+
+         > !['Model Structure'](images/model_structure.png)
+         
+         The $a(s(x))$ is produced as the conventional methods used the methodology of $A(1 - B)$ to highlight the discriminant features of a class w.r.t. counterfactual class. Although, this is able to highlight the desired features but only when *The classes are non-trivially different*, but fails when *they are similar*.
+
+         Therefore, it harness the three functions $A, B$ and  $C$ to extract the discriminatory function using the equaiton: $d(h_{y^i}(x), h_{y^j}(x)) = a(f(h_{y^i}(x)))a'(f(h_{y^j}(x)))a(s(x))$, 
+
+         where $a_{ij}' = max_{ij}a_{ij} - a_{ij}$.
+
+         </details>         
+
+
+   - [GENERATIVE_COUNTERFACTUAL_INTROSPECTION_FOR_EXPLAINABLE_DEEP_LEARNING](https://arxiv.org/pdf/1907.03077.pdf)
+      - <details><summary>Maheep's Notes</summary>
+
+         The paper propose to discover key attributes that are used to associate a sample with a class. The author implements it by:
+
+         It intervenes $do(A = A')$ minimally $min ||I - I(A')||$ on the attribue $A = \{a_1, a_2, ...., a_n\}$ of original image to generate counterfactual image $I(A')$. Consequqently, unravelling the key attribute features. 
+
+         > !['The illustration of the generative counterfactual introspection concept'](images/generative_actionable_counterfactual_Explanation.png)
+         </details>        
