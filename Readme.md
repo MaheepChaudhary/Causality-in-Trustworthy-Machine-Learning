@@ -182,7 +182,7 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
         </details>
 
   - [Counterfactual Zero-Shot and Open-Set Visual Recognition](https://arxiv.org/pdf/2103.00887.pdf) 
-         - <details><summary>Maheep's notes </summary>
+      - <details><summary>Maheep's notes </summary>
          
          Generating novel samples within True Distribution has been the Holy Grail of Deep Learning. 
          It focuses on it to solve the challenge of *Zero Shot Learning*(ZSL) and *Open Set Recognition*(OSR) using *Counterfactual Faithfulness* which guarantee that counterfactual distribution is coherent with the ground-truth seen/unseen distribution. 
