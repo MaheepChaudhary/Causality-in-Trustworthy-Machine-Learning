@@ -610,14 +610,7 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
         4.) Adversarials must be necessarily misclassified while counterfactuals are agnostic in that respect <br> 
         5.) Closeness to the original input is usually a benefit for adversarials to make them less perceptible whereas counterfactuals focus on closeness to the original input as it plays a significant role for the causal interpretation
         </details>  
-
-   - [Discriminative Attribution from Counterfactuals](https://arxiv.org/pdf/2109.13412.pdf)
-      - <details><summary>Maheep's Notes</summary>
-        The paper proposes a novel technique to combine feature attribution with counterfactual explanations to generate attribution maps that highlight the most discriminative features between pairs of classes. This is implemented as:<br>
-        <br>They use a cycle-GAN to translate real images x of class i to counterfactual images x'. Then both the images are fed into the Discriminative Attribution model which finds out the most discriminative features separting the 2 image. The most important part is masked out. The part is extracted from the original image x and is combined with the counterfactual image by intiallly masking the region to get the original image. <br>
-      
-        !['Diagram'](images/6.png)  
-        </details>  
+ 
 
    - [Causal Interventional Training for Image Recognition](https://ieeexplore.ieee.org/document/9656623)
       - <details><summary>Maheep's Notes</summary>
@@ -1460,4 +1453,15 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
          It intervenes $do(A = A')$ minimally $min ||I - I(A')||$ on the attribue $A = \{a_1, a_2, ...., a_n\}$ of original image to generate counterfactual image $I(A')$. Consequqently, unravelling the key attribute features. 
 
          > !['The illustration of the generative counterfactual introspection concept'](images/generative_actionable_counterfactual_Explanation.png)
-         </details>        
+         </details>          
+   
+   
+   - [Discriminative Attribution from Counterfactuals](https://arxiv.org/pdf/2109.13412.pdf)
+      - <details><summary>Maheep's Notes</summary>
+        
+        The paper proposes a novel technique to combine feature attribution with counterfactual explanations to generate attribution maps that highlight the most discriminative features between pairs of classes. This is implemented as:
+
+        They use a *cycle-GAN* to translate real images $X$ of class $Y^i$ to counterfactual images $X'$. Then both the images are fed into the *Discriminative Attribution model* which finds out the most discriminative features separting the 2 image. The most important part is masked out. The part is extracted from the original image $X$ and is combined with the counterfactual image by intiallly masking the region to get the original image. <br>
+      
+        !['Diagram'](images/6.png)  
+        </details> 
