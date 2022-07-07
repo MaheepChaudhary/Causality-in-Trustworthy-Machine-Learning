@@ -439,11 +439,15 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
 
   - [CLEVRER: COLLISION EVENTS FOR VIDEO REPRESENTATION AND REASONING](https://arxiv.org/pdf/1910.01442.pdf) 
       - <details><summary>Maheep's notes </summary>
-         The authors propose CoLlision Events for Video REpresentation and Reasoning (CLEVRER) dataset, a diagnostic video dataset for systematic evaluation of computational models on a wide range of reasoning tasks. Motivated by the theory of human causal judgment, CLEVRER includes four types of question: descriptive (e.g., ‘what color’), explanatory (‘what’s responsible for’), predictive (‘what will happen next’), and counterfactual (‘what if’). 
+         It Generate video reasoning dataset using the concepts of causality by doing some simple perturbations, i.e. specifically by asking the 4 major questions, i.e. 
 
-          The dataset is build on CLEVR dataset and has predicitive both predictive and counterfactual questions, i.e. done by, Predictive questions test a model’s capability of predicting possible occurrences of future events after the video ends. Counterfactual questions query the outcome of the video under certain hypothetical conditions (e.g. removing one of the objects). Models need to select the events that would or would not happen under the designated condition. There are at most four options for each question. The numbers of correct and incorrect options are balanced. Both predictive and counterfactual questions require knowledge of object dynamics underlying the videos and the ability to imagine and reason about unobserved events.
+         * *Descriptive (e.g., ‘what color’)*
+         * *Explanatory (‘what’s responsible for’)*
+         * *Predictive (‘what will happen next?’)*
+         * *Counterfactual (‘what if’)*
 
-          The dataset is being prepared by using the pysics simulation engine.
+         and generating data from it. The data is created with the help of simulated motion traces and based on the counterfactual scenario where an object is replaced by another object to different size/shape/color to generate a counterfactual scenario.
+
         </details>
 
   - [Towards Robust Classification Model by Counterfactual and Invariant Data Generation](https://openaccess.thecvf.com/content/CVPR2021/papers/Chang_Towards_Robust_Classification_Model_by_Counterfactual_and_Invariant_Data_Generation_CVPR_2021_paper.pdf) 
