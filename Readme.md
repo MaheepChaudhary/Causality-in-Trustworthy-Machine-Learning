@@ -57,6 +57,73 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
           
         </details>
 
+  - [Counterfactual Explanation and XAI](https://arxiv.org/abs/2201.13169)
+      - <details><summary>Maheep's Notes </summary>
+
+         The author mainly discusses 3 main ideas: 
+
+         * **Sufficient Explanations(SE)**
+
+            > Conditions under which an action guarantees a particular output
+         
+         * **Counterfactual Explanations(CE)**
+            
+            > An action that changes an observed input to produce a change in an already observed output.
+         
+         * **Actual Causation(AC)**
+            
+            > They are very exciting as they consist b/w the Sufficient Explanations and Counterfactual Explanations. They consist of good SE conditions but the ones for which there exist a counterfactual value that would not have made the explanation better.
+
+         As for the example in a regression model can be that a variable $P_{ai}$ in the past that has resulted in the observational data $X$ playing an important role in predicting the output $Y$. Here $X$ have counterfactual importance and also a SE but $P_{ai}$ will only have sufficient condition as $X$ has occured and no longer depends on $P_{ai}$ and not any CE, giving rise to AC. 
+
+         If we think of an example in Computer Vision then what can be the AC?
+
+         We were talking about the intervention on the event $P_{ai} \rightarrow X \rightarrow Y$ to convert it to $P_{ai} \not \rightarrow do(X = x) \rightarrow Y$ or cut off relations with the parents $P_{ai}$ and then observing the output $Y$. Now what i think this paper argues is that when we are doing an intervention on $P_{ai} \rightarrow do(X = x) \rightarrow Y$ then assign a value to that variable but do not cut off the effects from $P_{ai}$. 
+
+         The author argues that under **Independence** a variety of causal notions becomes indistinguishable, also he claims that because of it 
+
+         > *Work on action-guiding explanations in XAI has failed to take up the most relevant lesson that the literature on causation has to offer.*
+         > 
+
+         Now what can be comprehended by this sentence?
+
+         > *Prediction in its most natural application is a forward-looking notion, meaning one predicts an event before it takes place. Explanation on the other hand is a backward-looking notion, meaning that one explains an event after it has happened. Yet as many papers on XAI clearly illustrate, explanations about past events are often required precisely to inform predictions about future events. Therefore a suitable notion of causal
+         explanation, and thus also of actual causation, needs to specify how it relates to predictions.*
+         > 
+
+         Although the work is done by  `Hitchcock (2017)` but I am not able to find it as i think it is paid $$. 
+
+         The author discusses about the counterfactual scenarios by focusing on the question, i.e. *What-if-things-had-been-different?* but focuses on those factors that *may not be manipulated* for the explanation to hold, i.e. they must state which variables are to be safeguarded from intervention **which clearly does not mean that they are held fixed**. 
+
+         One of the important thing author writes in the paper is: 
+
+         > *Contrary to counterfactual explanations, actual causes do not guide you towards actions that, under the same conditions, would ensure the output to be different. But they do guide you towards actions that would not ensure the actual output under the same conditions as the actual action.*
+         > 
+
+
+         A small example of AC by the author as *Salary*
+
+         $$
+         X_1(Salary) = 250,000 \\
+         X_3(Deposit\_Box) = 50,000 \\
+         X_2(Savings) = 125,000 \\
+
+         Y = (X_1 + 5 \cdot X_2 - 225,000) > 0
+         \\
+         Y = (250,000 + 625,000 - 225,000) = True
+         $$
+
+         Obviously the salary does not matter in the counterfactual scenario, as he will get the loan regardless of his salary but is a good sufficient explanation. 
+
+         The author discusses about the AC and Fairness, where he sets off from  forward-looking action-guiding explanations to explanations by backward-looking contexts. The backward-looking explanations do not mean that they are capable of inferring the future outputs as forward-looking explanations.
+
+         Also the author claims that actual causation should be used to quantify the actual fairness rather than the counterfactual explanation. 
+
+         > Interestingly though, there already is a growing consensus that counterfactual dependence is too strong a condition and should be replaced with counterfactual dependence along *unfair paths.*
+         >
+
+         </details>
+
   - [Unit selection based on counterfactual logic](https://escholarship.org/content/qt8pw00989/qt8pw00989.pdf) 
       - <details><summary>Maheep's notes </summary>
          The unit selection problem entails two sub-problems, evaluation and search. The evaluation problem is to find an objective function that, ensure a counterfactual behaviour when optimized over the set of observed characteristics C for the selected group. The search task is to devise a search algorithm to select individuals based both on their observed characteristics and the objective function devised above. 
@@ -143,21 +210,6 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
          Model-based approximators: It projects the density in the dfinite-dimenional density class basedon a distributional distance measure..........<br>
 
          The author argues that by obtaining the PDF may give very valuable information as compared to only estimating the Cumlative Distribution Function. 
-        </details>
- 
-  - [Causal Explanations and XAI](https://arxiv.org/abs/2201.13169) 
-      - <details><summary>Maheep's notes </summary>
-         The paper focuses on shedding the light upon action-guiding explanations or causal explanations by defining three types of explanations  i.e. 
-         
-         **Sufficient Explanations(SE)**, **Counterfactual Explanations(CE)** and **Actual Causations(AC)**. These all kinds of explanations are based on intervention on feature to generate explanation. The **AC** lies between the **SE** and **CE**, as it consist of the features when changed do not change the prediction but are sufficient for explanation. The author introduces the concept of *Independence*, which states that a causal model that agrees with a function that mimics it mapping the input to output by making sure that the *Endogenous Variables(V)*, *V = Input U {output}*, where every V have only *exogenous(U)* parents and not any endogenous. <br>
-         In addition to that the author argues for a very important point, i.e.<br> *successful explanation must show factors that may not be manipulated for the explanation to hold, which is distinct from stating which variables must be held fixed at their actual values.*<br>
-         To give a more detailed view of the terms defined above, the author defines them in a detailed way:<br>
-         1.) **Sufficient Explanations**: The author describes the phenomenon when it is explained that for 
-         
-         `X` having values as `x` fixed then the `Y` will take value `y` is known as *weak sufficiency*, but if only a subset of values in `X` are set fixed to `x`, ensure `Y = y` regardless of the values other leftover variables takes, is known as *Direct Sufficiency*. In addition to that variables `N`, that are not to be manipulated for the explanations or in other words safeguarded from intervention and `Y` takes the value `y`, the notion is called *Strong Sufficiency*. The varibales in `N` can be thought of as a network that transmits the Causal Inference on `Y`. The *actual sufficient explanation* can be thought as the pair of `(X = x, N)` where `X` is strongly sufficient for `Y = y`. The sufficient explanation may dominate other one if the variables in it explains the same and has a subset of the varibles in the other equation.<br>
-         2.) **Counterfactual Explanations**: It informs us the variables that needs to be changed from `X = x` to `X = x'` so as to change the output from `Y = y` to `Y = y'`, which is divided into two parts: *direct counterfactual dependence* which deals by the above fact but fixing all the other variables constant and *counterfactaul dependence* which also holds the above fact but does not intervene on any other variables. The author generalizes these two methods by introducing a new varibale `W` that contains the fixed variables. In the latter case `W` remians null but in former case it contains all the varibles excluding the ones intervened upon, where the dominance of one explanation over another takes place as in the **SE** <br>
-
-         The author concludes the paper by defining **Actual Causation** and concludes that sufficient explanations are of little value for action-guidance, compared to counterfactual aspect. Contrary to **CE** the **AC** guides towards actions that would not ensure the actual output under the same conditions as the actual action. The author actual causation naturally accommodates this replacement as well,define fairness by for actual causation occurs along a network `N` demanding that protected variables do not cause the outcome along an unfair network, i.e., a network that consists entirely of unfair paths.
         </details>
 
 ## Causality & Computer Vision
