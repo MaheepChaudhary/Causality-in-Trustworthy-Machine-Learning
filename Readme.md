@@ -357,11 +357,25 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
         
         
    - [SCOUT: Self-aware Discriminant Counterfactual Explanations](https://arxiv.org/pdf/2004.07769.pdf)
-      - <details><summary>Maheep's Notes</summary>
-        The paper proposes to connect attributive explanations, which are based on a single heat map, to counterfactual explanations, which seek to identify regions where it is easy to discriminate between prediction and counter class. They also segments the region which discriminates between the two classes of a class image. 
-        
-        The author implements using a network by giving a query image x of class y , a user-chosen counter class y' != y, a predictor h(x), and a confidence predictor s(x), x is then forwarded to get the F_h(x) and F_s(x). From F_h(x) we predict h_y(x) and h_y'(x) which are then combined with the original F_h(x) to produce the A(x, y) and A(x, y') to get the activation tensors and they are then combined with A(x, s(x)) to get the segmented region of the image which is discriminative of the counter class. 
-        </details>         
+      -<details><summary>Maheep's Notes</summary>
+
+      The paper focuses to tackle the challenges of interpretable ML, where it tries to answer the questions: 
+
+      > *Why the image of a class $Y^i$ does not belong to a counterfactual class $Y^j$?*
+
+      The author proposes connect attributive explanations, which are based on a single heat map, to counterfactual explanations, which seek to highlight the regions that are informative of the $Y^i$ class but uninformative of the counterfactual class $Y^j$. It proposes three functions that may solve the problem efficiently:
+
+      * $A = a(f(h_{y^i}(x)))$: It gives the heatmaps that are informative of the class $Y^i$.
+      * $B = a(f(h_{y^j}(x)))$: It gives the heatmaps that are informative of the counterfactual class $Y^j$.
+      * $C = a(s(x))$: It is a function that gives the score for a region, w.r.t to the confidence a model has about a region importance to predict the class.
+
+      The $a(s(x))$ is produced as the conventional methods used the methodology of $A(1 - B)$ to highlight the discriminant features of a class w.r.t. counterfactual class. Although, this is able to highlight the desired features but only when *The classes are non-trivially different*, but fails when *they are similar*.
+
+      Therefore, it harness the three functions $A, B$ and  $C$ to extract the discriminatory function using the equaiton: $d(h_{y^i}(x), h_{y^j}(x)) = a(f(h_{y^i}(x)))a'(f(h_{y^j}(x)))a(s(x))$, 
+
+      where $a'_{ij} = max_{ij}a_{ij} - a_{ij}$.
+
+   </details>         
      
      
                  
