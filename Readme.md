@@ -183,12 +183,44 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
 
   - [Counterfactual Zero-Shot and Open-Set Visual Recognition](https://arxiv.org/pdf/2103.00887.pdf) 
       - <details><summary>Maheep's notes </summary>
-         The author proposes a novel counterfactual framework for  both Zero-Shot Learning (ZSL) and Open-Set Recognition (OSR), whose common challenge is generalizing to the unseen-classes by only training on the seen-classes. all the unseen-class recognition methods stem from the same grand assumption: attributes (or features) learned from the training seen-classes are transferable to the testing unseen-classes. But this does not happen in practise. <br>
+         Zero-shot semantic segmentation methods is based on the generative model, where the word embedding and visual feature of the images are mapped together for seen classes. This mapping helps to generate fake features of the classes by their word using the generator. The generator learns from the real features by generating fake features for the samples that are present in the training set. As a result it becomes capable of generating close to real features, also for the samples that were not present in the training set. 
 
-         ZSL is usually provided with an auxiliary set of class attributes to describe each seen- and unseen-class whereas the OSR has open environment setting with no information on the unseen-classes [51, 52], and the goal is to build a classifier for seen-classes. Thae author describers previous works in which the generated samples from the class attribute of an unseen-class, do not lie in the sample domain between the ground truth seen and unseen, i.e., they resemble neither the seen nor the unseen. As a result, the seen/unseen boundary learned from the generated unseen and the true seen samples is imbalanced. <br>
+         The $C$ gets created as a result of influence of $\psi(I;\theta) \rightarrow G(W)$. Therefore, to de-bias the model they separate the $\psi(I;\theta) \rightarrow Y$ and $W \rightarrow G(W) \rightarrow Y$outputs and fuse them together in the last. It is done by intervention and quantifying different effects by intervening on the conditional probability 
 
-         The author proposes a technique using counterfactual, i.e. to generate samples using the class attributes, i.e. Y and sample attrubute Z by the counterfactual, i.e. 
-         X would be x̃, had Y been y, given the fact that Z = z(X = x) and the consistency rule defines that if the ground truth is Y then x_bar would be x. The proposed genrative causal model P(X|Z, Y ) generate exapmles for ZSL and OSR. 
+         $$
+         P\{Y = y|T = w, \psi(I;\theta) = r, F = G(W = w, \psi(I;\theta) = r)\}
+
+         \\
+         L_{w,r,f} = L(W = w, \psi(I;\theta) = r, F = G(W = w))
+
+         \\
+         TE = L_{w, r, f} - L_{w^*, r^*, F^*}
+
+         \\
+         NDE = L_{w^*, r, f^*} - L_{w^*, r^*, F^*} 
+
+         \\
+         NIE = L_{w^*, r^* f} - L_{w^*, r^*, F^*}
+         $$ 
+         Therefore the branch for the unbiased path $W \rightarrow G(W) \rightarrow L$ is denoted by $\mathcal{Out}_{FL}$, i.e. 
+
+         $$
+         \mathcal{Out}_{RL} = TE - NDE - NIE
+         $$
+
+         output the total loss as: 
+
+         $$
+         L_{pred} = L(\mathcal{Out}_{FL}) + L(\mathcal{Out}_{FL}) + L(h(\mathcal{Out}_{FL}, \mathcal{Out}_{FL}))
+         $$
+
+         where 
+
+         $$
+         h(\mathcal{Out}_{FL}, \mathcal{Out}_{FL}) = \frac{var(\psi(I;\theta))\cdot\mathcal{Out}_{FL} + var(G(W)\cdot\mathcal{Out}_{RL}}{var(\psi(I;\theta)) + var(G(W)}
+         $$
+
+         But the relationship between the text and image is based on statistical relationship rather than causal relationship.
         </details>
 
 
@@ -1461,7 +1493,7 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
         
         The paper proposes a novel technique to combine feature attribution with counterfactual explanations to generate attribution maps that highlight the most discriminative features between pairs of classes. This is implemented as:
 
-        They use a *cycle-GAN* to translate real images $X$ of class $Y^i$ to counterfactual images $X'$. Then both the images are fed into the *Discriminative Attribution model* which finds out the most discriminative features separting the 2 image. The most important part is masked out. The part is extracted from the original image $X$ and is combined with the counterfactual image by intiallly masking the region to get the original image. <br>
+        They use a *cycle-GAN* to translate real images $X$ of class $Y^i$ to counterfactual images $X'$. Then both the images are fed into the *Discriminative Attribution model* which finds out the most discriminative features separting the 2 image. The most important part is masked out. The part is extracted from the original image $X$ and is combined with the counterfactual image by intiallly masking the region to get the original image. 
       
         !['Diagram'](images/6.png)  
         </details> 
