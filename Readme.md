@@ -1181,12 +1181,80 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
 
    - [Counterfactual Contrastive Learning for Weakly-Supervised Vision-Language Grounding](https://papers.nips.cc/paper/2020/file/d27b95cac4c27feb850aaa4070cc4675-Paper.pdf)
       - <details><summary>Maheep's Notes</summary>
-        The paper aim to solve the problem of Weakly supervised Vision Language Grounding, i.e. to localize target moments in a video using a query. The author uses counterfactual scenario to make the process more robust, based on the feature-level, relation-level and interaction level. <br>
-        The two types of approaches are introduced so as to generate the counterfactual scenarios, namely **DCT** and **RCT**, where the **DCT** aims to generate negative counterfactual scenarios by damaging the essential part of the visual content and **RCT** aims to generate positive counterfactual scenarios by damaging inessential part of the visual content based on the above defined 3 approaches. <br>
-        A ranking loss is also developed so as to develop the difference between the positive and negative samples. <br>
-        The feature-level focuses on the critical region proposals, which are modified using the memory bank containing the proposal features from randomly selected different samples, whereas the interaction-level features also uses memory bank to modify the interaction-level features, i.e. the word level features that correspond to the proposal features. The memory-bank contains the language features from different samples. <br>
-        The relational-level approach focuses on the relation, i.e. the edges connecting the propsal "j" from proposal "i". The crucial edges are then destroyed by **DCT** whereas the inessential by **RCT**. 
+        
+        MIL-based or reconstruction-based paradigms are recently used for **WSVLG** but the former heavily depends on the quality of randomly-selected negative samples and the latter cannot directly optimize the visual-textual alignment score.
 
+        Therefore they use three type of counterfactual transformations using feature-level, interaction-level and relation-level to generate counterfactual examples to train it robustly. 
+
+         * Feature-level strategy damages the features (i.e. endogenous clues) of selected proposals
+         by the memory-based replacement
+         * Interaction-level strategy confuses the vision-language
+         interaction by destroying the multi-modal fusion
+         * Relation-level strategy perturbs the
+         context relations (i.e. exogenous clues) of chosen proposals by counterfactual relation construction
+
+         They firstly employ the MIL-based pre-training grounding network to estimate the given vision-language pairs to produce original results. By the gradient-based selection method, build a critical proposal set and an inessential proposal set.
+
+         Robust Counterfactual Transformations (RCT) is devised based on the inessential set and Destructive Counterfactual Transformations (DCT) according to the critical set.
+
+         Finally the ranking loss is used to focus on the score-based difference b.w. positive and negative results. 
+
+         !['Architecture'](images/architecture.png)
+
+         $\psi(I,Q;\theta)$ is trained to detect most relevant proposals $p$ with annotations. $\psi(I,Q;\theta)$ is composed into 3 modules: 
+
+         * **Encoder Module(EM):**  It learns the *sentence feature* $q$ and *word features* 
+         $S = \{s_n\}^N_{n = 1}$ from the query $Q$, where $N$ is the word number. It also extracts $T$ proposal features 
+         $H = \{h_t\}^T_{t = 1}$ from the instance $C$, i.e. moment or region features with their corresponding proposal scores 
+         $\textbf{K} = \{k_t\}_{t = 1}^T$ to obtain 
+         $Agg(\textbf{K})$.
+         Based on which thing it extracts the proposed features?
+         * **Interaction Module(IM):** vision-language interaction and outputs multi-modal output using attention aggregation. 
+         $Y_z = \{l_t\}_{t = 1}^T$
+         * **Relation Module(RM):** It ****outputs relation reasoning between proposals features, 
+         $P = \{p_t\}_{t = 1}^T$.
+         
+         It is trained using the conventional **MIL** based method using the triplet loss. 
+
+         The gradient-based method is used to select the critical and inessential proposals. 
+
+         Randomly samples were used to construct the negative and positive scenarios, i.e. 
+         $(\overline{C}, Q)$ and 
+         $(C, \overline{Q})$ to obtain the 
+         $Agg({\textbf{K}_{\overline{C}}})$ and 
+         $Agg({\textbf{K}_{\overline{Q}}})$ using MIL-based triplet loss.
+
+         Although, top 
+         $\textbf{P}$ can be identified using the MIL but they use Grad-CAM to do so. 
+
+         Doing this 
+         $\textbf{P}^+$ and 
+         $\textbf{P}^-$, i.e. important and unimportant features are identified.  Based on which **DCT** and **RCT**  work. 
+
+         **DCT** generates proposal scores for counterfactual negative results, i.e. 
+         $\textbf{K}^{dj} = \{k_t^{dj}\}_{t = 1}^T$ by  doing $J$ destructive transformations.
+
+         **RCT**  generates proposal scores for counterfactual positive results, i.e. 
+         $\textbf{K}^{rj} = \{k_t^{rj}\}_{t = 1}^T$by doing $J$  positive transformations.
+
+         The author develops margin-based ranking loss, such that  the positive results should have higher alignment score than negative results and consistency loss to maintain the consistency of the score distributions on the original and
+         positive results, and pull the distributions of original and negative results. 
+
+         $$
+         L_{rank} = max(0, \triangle_{rank} - \frac{1}{J}\overset{J}{\underset{j = 1}{\sum}}Agg(\textbf{K}^{rj})) + \frac{1}{J}\overset{J}{\underset{j = 1}{\sum}}Agg(\textbf{K}^{dj}))
+         $$
+
+         $$
+         L_{cons} = \frac{1}{J}\overset{J}{\underset{j = 1}{\sum}}(- \overset{T}{\underset{t = 1}{\sum}}\tilde{k_t}log(\tilde{k_t}^{rj}) + \overset{T}{\underset{t = 1}{\sum}}\tilde{k_t}log(\tilde{k_t}^{dj}))
+         $$
+
+         where $\tilde{k_t^{rj}}$ is the normalized result. 
+
+         $$
+         L_{ccl} = L_{rank} + \lambda L_{cons}
+         $$
+
+         ### Counterfactual Transformations:
 
         ![Model](images/29.png)
         </details>  
