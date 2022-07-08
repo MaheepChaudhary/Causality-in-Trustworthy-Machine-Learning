@@ -1221,13 +1221,18 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
          $\psi(I,Q;\theta)$ is composed into 3 modules: 
 
          * **Encoder Module(EM):**  It learns the *sentence feature* $q$ and *word features*,  
-         $S = \{s_n\}_{n = 1}^N$ from the query 
+         $S = \{s_n\}_{n = 1}^N$ 
+  
+         from the query 
          $Q$, where 
          $N$ is the word number. It also extracts 
          $T$ proposal features 
-         $H = \{h_t\}^T_{t = 1}$ from the instance 
-         $C$, i.e. moment or region features with their corresponding proposal scores 
-         $\textbf{K} = \{k_t\}_{t = 1}^T$ to obtain 
+         $H = \{h_t\}^T_{t = 1}$
+         from the instance 
+         $C$
+         , i.e. moment or region features with their corresponding proposal scores 
+         $\textbf{K} = \{k_t\}_{t = 1}^T$ 
+         to obtain 
          $Agg(\textbf{K})$.
          Based on which thing it extracts the proposed features?
          * **Interaction Module(IM):** vision-language interaction and outputs multi-modal output using attention aggregation. 
@@ -1240,16 +1245,23 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
          The gradient-based method is used to select the critical and inessential proposals. 
 
          Randomly samples were used to construct the negative and positive scenarios, i.e. 
-         $(\overline{C}, Q)$ and 
-         $(C, \overline{Q})$ to obtain the 
-         $Agg({\textbf{K}_{\overline{C}}})$ and 
-         $Agg({\textbf{K}_{\overline{Q}}})$ using MIL-based triplet loss.
+         $(\overline{C}, Q)$ 
+         and 
+         $(C, \overline{Q})$ 
+         to obtain the 
+         $Agg({\textbf{K}_{\overline{C}}})$ 
+         
+         and 
+         $Agg({\textbf{K}_{\overline{Q}}})$ 
+         using MIL-based triplet loss.
 
          Although, top 
          $\textbf{P}$ can be identified using the MIL but they use Grad-CAM to do so. 
 
          Doing this 
-         $\textbf{P}^+$ and 
+         $\textbf{P}^+$ 
+         
+         and 
          $\textbf{P}^-$, i.e. important and unimportant features are identified.  Based on which **DCT** and **RCT**  work. 
 
          **DCT** generates proposal scores for counterfactual negative results, i.e. 
