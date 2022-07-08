@@ -1261,8 +1261,6 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
          L_{ccl} = L_{rank} + \lambda L_{cons}
          $$
 
-         ### Counterfactual Transformations:
-
         ![Model](images/29.png)
         </details>  
 
