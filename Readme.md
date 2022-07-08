@@ -1201,11 +1201,18 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
 
          !['Architecture'](images/architecture.png)
 
-         $\psi(I,Q;\theta)$ is trained to detect most relevant proposals $p$ with annotations. $\psi(I,Q;\theta)$ is composed into 3 modules: 
+         $\psi(I,Q;\theta)$ is trained to detect most relevant proposals 
+         $p$ 
+         with annotations. 
+         $\psi(I,Q;\theta)$ is composed into 3 modules: 
 
-         * **Encoder Module(EM):**  It learns the *sentence feature* $q$ and *word features* 
-         $S = \{s_n\}^N_{n = 1}$ from the query $Q$, where $N$ is the word number. It also extracts $T$ proposal features 
-         $H = \{h_t\}^T_{t = 1}$ from the instance $C$, i.e. moment or region features with their corresponding proposal scores 
+         * **Encoder Module(EM):**  It learns the *sentence feature* $q$ and *word features*,  
+         $S = \{s_n\}_{n = 1}^N$ from the query 
+         $Q$, where 
+         $N$ is the word number. It also extracts 
+         $T$ proposal features 
+         $H = \{h_t\}^T_{t = 1}$ from the instance 
+         $C$, i.e. moment or region features with their corresponding proposal scores 
          $\textbf{K} = \{k_t\}_{t = 1}^T$ to obtain 
          $Agg(\textbf{K})$.
          Based on which thing it extracts the proposed features?
