@@ -1752,9 +1752,29 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
 
    - [Counterfactual Explanation Based on Gradual Construction for Deep Networks](https://arxiv.org/pdf/2008.01897.pdf)
       - <details><summary>Maheep's Notes</summary>
-        The paper focuses on gradually construct an explanation by iterating over masking and composition steps, where the masking step aims to select the important feature from the input data to be classified as target label. The compostition step aims to optimize the previously selected features by perturbating them so as to prodice the target class. <br><br>
+        
+        The paper focuses on tackling the challenge of network interpretability, concentrating on the issue of avoiding generation of samples within the dataset distribution for interpretability, rather than generating adversarial samples. 
+        
+        The work employs it in two steps:
+        * **Masking Step**: It extracts the sensitive features in the sample, which are to be modified to generate the counterfactual samples.
+        * **Composition Step**: It modifies the features extracted by the **Masking Step**, s.t. it does not lie out of the current dataset distribution, which is identified using the *logits* of sample of available dataset and the counterfactual dataset. 
+        The following diagram gives a more brief idea of the overall algorithm.
 
-        The proposed also focuses on 2 things, i.e. Explainability and Minimality. while implementing the techniue the authors observe the target class which were being generated were getting much perturbated so as to come under asverserial attack and therfore they propose the logit space of x' to belong to the space of training data as follows:   
-        `argmin(sigma(f_k'(x') - (1/N)*sigma(f_k'(X_i,c_t))) + lambda(X' - X))` <br>
-        where `f'` gives the logits for class k, `X_i,c_t` represents the i-th training data that is classified into c_k class and the N is the number of modifications. 
+        > !['Overview'](images/overview.png)
+
+        In terms of algorithm it can be seen as: 
+
+        > !['Algorithm'](images/algo.png)
+
+        In the algorithm, $K$ is the number of classes, 
+        $f_{k}'$ represents a logit score for a class $k$, 
+        $X_{i,ct}$ denotes $i^{th}$ training data that is classified into
+        a target class $c_t$. 
+        
+        The overall equation looks like: 
+        
+        $$
+        X' = (1 - M) \odot X + M \odot C
+        $$
+
         </details>
