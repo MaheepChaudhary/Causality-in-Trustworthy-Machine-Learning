@@ -1731,7 +1731,8 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
         The author proposes 
         $M_{x,y}$ 
         counterfactual map that transforms an input image 
-        $X$ to 
+        $X$ 
+        to 
         $\tilde{X} = X + M_{x,y}$
         
         where $y$ is the counterfactual class, i.e. 
