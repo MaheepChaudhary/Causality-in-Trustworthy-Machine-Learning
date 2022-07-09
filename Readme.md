@@ -471,22 +471,6 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
          The author proposes the TDE = y_e - y_e(x_bar,z_e), the first term denote the logits of the image when there is no intervention, the latter term signifies the logit when content(object pairs) are removed from the image, therfore giving the total effect of content and removing other effect of confounders.    
         </details>
         
-   - [Counterfactual Visual Explanations](https://arxiv.org/pdf/1904.07451.pdf)
-      - <details><summary>Maheep's Notes</summary>
-        The paper focuses on Counterfactual Visual Explanations. The author ask a very signifiant question while developing the technique proposed in the paper, i.e. how I could change such that the system would output a different specified class c'. To do this, the author proposes the defined technique: - 
-         
-         1) He selects ‘distractor’ image I' that the system predicts as class c' and identify spatial regions in I and I' such that replacing the identified region in I with the identified region in I' would push the system towards classifying I as c'. 
-        
-        The author proposes the implementation by the equation: <br>
-        `f(I*) = (1-a)*f(I) + a*P(f(I'))` <br> 
-        where <br> 
-        `I*` represents the image made using the `I` and `I'`
-        `*` represents the Hamdard product. <br>
-        `f(.)` represents the spatial feature extractor <br>
-        `P(f(.))` represents a permutation matrix that rearranges the spatial cells of `f(I')` to align with spatial cells of `f(I)`
-      
-        The author implements it using the two greedy sequential relaxations – first, an exhaustive search approach keeping a and P binary and second, a continuous relaxation of a and P that replaces search with an optimization. 
-        </details>
 
    - [Counterfactual Vision and Language Learning](https://openaccess.thecvf.com/content_CVPR_2020/papers/Abbasnejad_Counterfactual_Vision_and_Language_Learning_CVPR_2020_paper.pdf)
       - <details><summary>Maheep's Notes</summary>
@@ -1714,7 +1698,7 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
         It uses a U-net network consisting of Encoder $E$, Generator $G$ and Discriminator $D$. 
         The combination of $E$ and $G$ produces $M_{x}$ as shown in the figure below:
 
-        > !['Structure of Encoder and Decoder, where the encoding of target is transffered to the Generator to Generate Counterfactual Mask'](images/Enc_and_Dec.png)
+        > ![Encode Decoder image](images/Enc_and_Dec.png "Structure of Encoder and Decoder, where the encoding of target is transffered to the Generator to Generate Counterfactual Mask")
 
         The above process is guided by *Target Attribution Network*(TAN), which guides the generator to produce counterfactual maps that transform an input sample to be classified as a target class.
 
@@ -1763,8 +1747,8 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
    - [Counterfactual Explanation of Brain Activity Classifiers using Image-to-Image Transfer by Generative Adversarial Network](https://arxiv.org/abs/2110.14927)
       - <details><summary>Maheep's Notes</summary>
 
-        * It is also used for multi-way counterfactual class explanation.
-        * It provides the explanation for failed decision by dissecting:
+        <!-- Although the paper was not quite understood by me, can be modified in the end again. -->
+        The work mainly focuses for multi-way counterfactual class explanation. It provides the explanation for failed decision by dissecting:
             * The features $A$ harnessed for wrong classification.
             * The minimal features $B$ changed to generate the counterfactual image, so that model predicts as correct/true class.
             * Find the reason for failed decision by $B - A$, highlighting positive and negative contribution. 
@@ -1773,3 +1757,77 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
         ![Model](images/37.png)
 
         </details> 
+
+
+   - [Counterfactual Visual Explanations](https://arxiv.org/pdf/1904.07451.pdf)
+      - <details><summary>Maheep's Notes</summary>
+      
+        The paper focuses to increase the interpretability of the network by generating counterfactual sample from the input while ensuring minimal perturbation. 
+        
+        The author ask a very signifiant question while developing the technique proposed in the paper, i.e. '' *How could I minimally change the existing features of image* 
+        $I$ 
+        *of class* 
+        $C$ 
+        *using the features of image* 
+        $I$
+        *of distractor class*
+        $C'$ *to change the label of image* $I$ **as* $C'$
+        .'' The analogy can be more understood by dissecting the figure below:
+
+        > ![image](images/cut_paste.png)
+
+        The author implements it by: 
+        * The key discriminatory features are identified b.w. the 
+        $I$ 
+        and 
+        $I'$
+        using a CNN to get the feature space using 
+        $f(I)$
+        and 
+        $g(f(I))$
+        acting as the classification function.
+
+        >!['Dissecting the Functions'](images/feature_extraction.png)     
+
+        The author proposes two approaches to achieve the above scenario, keeping the equation below as base equation: 
+        
+        $$
+        f(I^{*}) = (1-a) \odot f(I) + a \odot P(f(I')) 
+        $$
+
+        $P(f(\odot))$ 
+        represents a permutation matrix that rearranges the spatial cells of 
+        $f(I')$ 
+        to align with spatial cells of 
+        $f(I)$.
+      
+        >![images](images/comb_perm.png)
+
+        The approaches that the paper takes are:
+        * *Greedy Sequential Exhaustive Search*: It is an exhaustive search approach keeping $a$ and $P$ binary resulting in the below equation.
+
+        $$
+         maximize_{P,a} \ \ g_{c'}((1-a) \odot f(I) + a \odot P(f(I'))) \\ \\
+
+         s.t. \ \ ||a||_{1} = 1, \ \ a_{i} \in \{0,1\} \forall i \\
+         
+          P \in \mathcal{P}
+        $$
+        
+        * *Continous Relaxation*: The restriction of 
+        $a$ 
+        and 
+        $P$ 
+        are relaxed from binary value to have point on the simplex, in case of 
+        $a$
+        and a stochastic matrix in-case of
+        
+        $$
+         maximize_{P,a} \ \ g_{c'}((1-a) \odot f(I) + a \odot P(f(I'))) \\ \\
+
+         s.t. \ \ ||a||_{1} = 1, \ \ a_{i} \geq \forall i \\
+         
+         ||p_i||_{1} = 1, \ \forall i \ P_{i,j} \geq 0 \ \forall i,j
+        
+        $$
+        </details>
