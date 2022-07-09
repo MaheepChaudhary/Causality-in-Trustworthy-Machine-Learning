@@ -1368,15 +1368,6 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
         </details> 
 
 
-   - [Counterfactual Explanation of Brain Activity Classifiers using Image-to-Image Transfer by Generative Adversarial Network](https://arxiv.org/abs/2110.14927)
-      - <details><summary>Maheep's Notes</summary>
-        The paper proposes to generate counterfactual explanation for multi-class classification of fMRI data. The author proposes **CAG** which is build upon **StarGAN**. The explanation is based upon the **Correct Classification** and **Incorrect Classification**, where the CAG converts the input to the target class and subtracts it pixel-wise so as to extract the activated regions, giving red(blue) output activation as to answer why the classifier predicted(not predicted) the target class. Auxillary discriminator is introduced so as to have a single discriminator to control multiple classes and produce their probability distribution, based on source and target class. 
-
-
-        ![Model](images/37.png)
-
-        </details> 
-
    - [How Well do Feature Visualizations Support Causal Understanding of CNN Activations?](https://arxiv.org/abs/2106.12447)
       - <details><summary>Maheep's Notes</summary>
         The paper proposes to identify the benefits of providing users with visualization of unit's activation based on different features of the input, so as to provide humnas with precise information about the image features that casuse a unit to be activated. <br>
@@ -1446,17 +1437,7 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
 
         </details>           
 
-   - [Counterfactual Explanation Based on Gradual Construction for Deep Networks](https://arxiv.org/abs/2008.01897)
-      - <details><summary>Maheep's Notes</summary>
-         The work focuses on modifying the charecteristic of the image given the features of the Deep Neural Network classifier. The author takes in two measures, i.e. the image shold be easily explainable and should only be minimally modified. <br>
-         The author impelements it using the two steps, namely:<br>
-         
-         1.) **Masking Step**: It mask the appropriate region of the image, to which the model pays most attention, extracted using the gradients.<br>
-         2.) **Composition Steps**: It perturbs the regions minimally so as to change the logits to the target class.
 
-        ![Model](images/43.png)
-
-        </details>           
 
    - [GANterfactual - Counterfactual Explanations for Medical Non-Experts using Generative Adversarial Learning](https://arxiv.org/abs/2012.11905)
       - <details><summary>Maheep's Notes</summary>
@@ -1778,3 +1759,17 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
         $$
 
         </details>
+
+   - [Counterfactual Explanation of Brain Activity Classifiers using Image-to-Image Transfer by Generative Adversarial Network](https://arxiv.org/abs/2110.14927)
+      - <details><summary>Maheep's Notes</summary>
+
+        * It is also used for multi-way counterfactual class explanation.
+        * It provides the explanation for failed decision by dissecting:
+            * The features $A$ harnessed for wrong classification.
+            * The minimal features $B$ changed to generate the counterfactual image, so that model predicts as correct/true class.
+            * Find the reason for failed decision by $B - A$, highlighting positive and negative contribution. 
+        * It aims to have very less difference b.w. the generated counterfactual image and input image.
+
+        ![Model](images/37.png)
+
+        </details> 
