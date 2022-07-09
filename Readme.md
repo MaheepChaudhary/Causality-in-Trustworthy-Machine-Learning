@@ -1812,8 +1812,10 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
 
         $$
          s.t. \ \ ||a||_{1} = 1, \ \ a_{i} \in \{0,1\} \forall i \\
-         
-          P \in \mathcal{P}
+        $$
+      
+        $$
+         P \in \mathcal{P}
         $$
         
         * *Continous Relaxation*: The restriction of 
