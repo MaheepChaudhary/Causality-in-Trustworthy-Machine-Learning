@@ -1807,8 +1807,10 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
         * *Greedy Sequential Exhaustive Search*: It is an exhaustive search approach keeping $a$ and $P$ binary resulting in the below equation.
 
         $$
-         maximize_{P,a} \ \ g_{c'}((1-a) \odot f(I) + a \odot P(f(I'))) \\ \\
+         maximize_{P,a} \ \ g_{c'}((1-a) \odot f(I) + a \odot P(f(I'))) 
+        $$
 
+        $$
          s.t. \ \ ||a||_{1} = 1, \ \ a_{i} \in \{0,1\} \forall i \\
          
           P \in \mathcal{P}
