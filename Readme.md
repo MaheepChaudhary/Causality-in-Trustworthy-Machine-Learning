@@ -1841,7 +1841,7 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
          * **Adverserial loss**: It measures whether the generated image is indistinguishable from the real world images.
 
          $$
-         L_{adv} = \mathbb{E}_x[logD(x)] + \mathbb{E}_{x,y^c}[log(1 - D(x + G(x,y^c)))] 
+         L_{adv} = \mathbb{E}_x [logD(x)] + \mathbb{E}_{x,y^c}[log(1 - D(x + G(x,y^c)))] 
          $$
 
          * **Domain classification loss**: It is used to render the generate image 
