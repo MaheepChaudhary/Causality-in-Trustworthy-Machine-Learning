@@ -1835,6 +1835,9 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
         $$
 
         $$
-         ||p_i||_1 = 1,  \forall i   P_{i,j} \geq 0   \forall i,j
+         ||p_i||_1 = 1,  \forall i \ \  
+         P_{i,j} 
+         
+         \geq 0 \ \ \forall i,j
         $$
         </details>
