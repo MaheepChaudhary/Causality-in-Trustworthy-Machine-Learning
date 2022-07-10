@@ -648,22 +648,8 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
 
         `Effect = E(F(I)|do(C = 1)) - E(F(I)|do(C = 0))` where F gives output on image I and C is the concept. This can be done at scale by intervening for a lot of values in a concept and find the spurious corrlation. But due to the insufficient knowlegde of the Causal Graph teh author porposes a VAE which can calculate the precise CaCE by by generating counterfactual image by just changing a concept and hence computing the difference between the prediction score.  
         </details>         
-                
-   - [Fast Real-time Counterfactual Explanations](https://arxiv.org/pdf/2007.05684.pdf)
-      - <details><summary>Maheep's Notes</summary>
-        The paper proposes a transformer is trained as a residual generator conditional on a classifier constrained under a proposal perturbation loss which maintains the content information of the query image, but just the class-specific semantic information is changed. The technique is implemented as : <br>
 
-        1.) **Adverserial loss**: It measures whether the generated image is indistinguishable from the real world images <br>
-        2.) **Domain classification loss**: It is used to render the generate image x + G(x,y') conditional on y'. `L = E[-log(D(y'|x + G(x,y')))]` where G(x, y') is the perterbuation introduced by generator to convert image from x to x' <br>
-        3.) **Reconstruction loss**: The Loss focuses to have generator work propoerly so as to produce the image need to be produced as defined by the loss. `L = E[x - (x + G(x,y') + G(x + G(x,y'), y))]`
-        4.) **Explanation loss**: This is to gurantee that the generated fake image produced belongs to the distribution of H. `L = E[-logH(y'|x + G(x,y'))]`        
-        5.) **Perturbation loss**: To have the perturbation as small as possible it is introduced. `L = E[G(x,y') + G(x + G(x,y'),y)]`
-        <br>
-        All these 5 losses are added to make the final loss with different weights.
-        </details>         
-        
 
-        
   - [Generative_Counterfactuals_for_Neural_Networks_via_Attribute_Informed_Perturbations](https://arxiv.org/pdf/2101.06930.pdf)
       - <details><summary>Maheep's Notes</summary>
         The paper focues on generating counterfactuals for raw data instances (i.e., text and image) is still in the early stage due to its challenges on high data dimensionality, unsemantic raw features and also in scenario when the effictive counterfactual for certain label are not guranteed, therfore the author proposes Attribute-Informed-Perturbation(AIP) which convert raw features are embedded as low-dimension and data attributes are modeled as joint latent features. To make this process optimized it has two losses: Reconstruction_loss(used to guarantee the quality of the raw feature) + Discrimination loss,(ensure the correct the attribute embedding) i.e.  
@@ -1632,6 +1618,8 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
 
 ---
 
+<!-- I am not able to grasp the methodology of what is multiway counterfactual mechanism -->
+
    - [SCOUT: Self-aware Discriminant Counterfactual Explanations](https://arxiv.org/pdf/2004.07769.pdf)
       - <details><summary>Maheep's Notes</summary>
 
@@ -1835,9 +1823,55 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
         $$
 
         $$
-         ||p_i||_1 = 1,  \forall i \ \  
-         P_{i,j} 
-         
-         \geq 0 \ \ \forall i,j
+         ||p_i||_1 = 1,  \forall i \ \  P_{i,j} \geq 0 \ \ \forall i,j
         $$
         </details>
+
+                
+   - [Fast Real-time Counterfactual Explanations](https://arxiv.org/pdf/2007.05684.pdf)
+      - <details><summary>Maheep's Notes</summary>
+
+         The paper focuses to build a transformer, i.e. trained as a residual generator conditional on a classifier constrained under a proposal perturbation loss which maintains the content information of the query image, but just the class-specific semantic information is changed as shown in the figure below:
+
+         >![image](images/archi.png)
+
+
+         The technique is implemented using several losses: 
+
+         * **Adverserial loss**: It measures whether the generated image is indistinguishable from the real world images.
+
+         $$
+         L_{adv} = \mathbb{E}_x[logD(x)] + \mathbb{E}_{x,y^c}[log(1 - D(x + G(x,y^c)))] 
+         $$
+
+         * **Domain classification loss**: It is used to render the generate image 
+         $x + G(x,y^c)$ 
+         conditional on 
+         $y^c$. 
+
+         $$
+         L = \mathbb{E}[-log(D(y^c|x + G(x,y^c)))]
+         $$ 
+
+         where $G(x, y^c)$ is the perterbuation introduced by generator to convert image from $x$ to $x^c$.
+
+         * **Reconstruction loss**: The loss focuses to have generator work propoerly so as to produce the image need to be produced as defined by the loss. 
+
+         $$
+         L = \mathbb{E}[x - (x + G(x,y^c) + G(x + G(x,y^c), y))]
+         $$
+
+         * **Explanation loss**: This is to gurantee that the generated fake image produced belongs to the distribution of $H$ 
+
+         $$
+         L = \mathbb{E}[-logH(y^c|x + G(x,y^c))]        
+         $$
+
+         * **Perturbation loss**: To have the perturbation as small as possible it is introduced. 
+
+         $$
+         L = \mathbb{E}[G(x,y^c) + G(x + G(x,y^c),y)]
+         $$
+
+         All these 5 losses are added to make the final loss with different weights.
+        </details>         
