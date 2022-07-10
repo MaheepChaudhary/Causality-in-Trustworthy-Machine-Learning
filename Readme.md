@@ -1231,16 +1231,6 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
         </details>  
 
 
-   - [COIN: Counterfactual Image Generation for VQA Interpretation](https://arxiv.org/pdf/2201.03342.pdf)
-      - <details><summary>Maheep's Notes</summary>
-        The paper focuses on interpretability approach for VQA models by generating counterfactual images by minimal possible change, ensuring the image looks realistic. This paper introduces an attention mechanism that identifies question-critical objects in the image and guides the counterfactual generator to apply the changes on specific regions. Moreover, a weighted reconstruction loss is introduced in order to allow the counterfactual generator to make more significant changes to question-critical spatial regions than the rest of the image. <br>
-        This is implemented by instead of generating a counterfactual image 
-        
-        `I'` based on the original image , the latter is concatenated with the attention map `M`, such that the concatenation `[ I; M]` serves as an input to the generator `G`, where the answer is passed into the `G` so as to create `I'`, where the regions are identified using GRAD-CAM, where the discriminator `D` ensures that image looks realistic and reconstruction loss is used to do miimal changes. The whole process happens as shown in the figure.  
-
-        ![Model](images/32.png)
-        </details>  
-
    - [Causal Intervention for Object Detection](https://ieeexplore.ieee.org/document/9643182)
       - <details><summary>Maheep's Notes</summary>
         The paper proposes to remove bias from the object detection models using the intervention, where the author uses the idea of two-stage detectors and apply backdoor adjustment to virtually obtain 
@@ -1979,10 +1969,34 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
          The second term forces the model to identify a 
          sparse perturbation to the latent space so as to produce sparse explanations. 
          * *Diversity loss* : This loss prevents the multiple explanations of the model from being identical and reconstructs different images modifing the different spurious correlations and explaing through them.
-         
+
          $$
          L_{div}(\{e_i\}_{i = 1}^N) = \sqrt{\sum_{i \neq j}(\frac{e_i^T}{||e_i||_2} \cdot \frac{e_j}{||e_j||_2})^2}
          $$
 
          The model harnesses the Fisher information to identify the importance score of different latent factors with the basic assumption that the less important features are highly eigible to produce non-trivial features to get surprising explanations, as highly influential features are likely to be related to the main attribute used by the classifier. 
         </details>       
+
+
+   - [COIN: Counterfactual Image Generation for VQA Interpretation](https://arxiv.org/pdf/2201.03342.pdf)
+      - <details><summary>Maheep's Notes</summary>
+
+        The paper focuses on interpretability approach for VQA models. 
+        The author tries to tackle 3 major questions during the process of counterfactual image generation. 
+        
+        * How to change the answer of a VQA model with the minimum possible edit on the input image?
+        * How to alter exclusively the region in the image on which the VQA model focuses to derive an answer to a certain question?
+        * How to generate realistic counterfactual images?
+
+        This question-critical region is identified using the Grad-CAM, acting as an attention map. It guides the counterfactual generator to apply the changes on specific regions. 
+        
+        Moreover, a weighted reconstruction loss is introduced in order to allow the counterfactual generator to make more significant changes to question-critical spatial regions than the rest of the image. 
+
+        This is implemented by instead of generating a counterfactual image         
+        $I' = G(I \odot M, A)$
+        based on the original image $I$, 
+        attention map $M$ and generator $G$.
+        The discriminator $D$ ensures that image looks realistic and reconstruction loss is used to do minimal changes. The whole process happens as shown in the figure.  
+
+        ![Model](images/32.png)
+        </details>  
