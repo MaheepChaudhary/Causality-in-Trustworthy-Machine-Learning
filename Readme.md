@@ -1396,16 +1396,6 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
 
         </details>           
 
-
-
-   - [GANterfactual - Counterfactual Explanations for Medical Non-Experts using Generative Adversarial Learning](https://arxiv.org/abs/2012.11905)
-      - <details><summary>Maheep's Notes</summary>
-         The work proposes to create counterfactual explanation images for medical images by taking in two measures, i.e. there should be minimal change in the original image and the classifier predicts it in to the target class. The author accomplishes this goal using the image-to-image translation using StarGAN as shown in the picture below.  
-
-        ![Model](images/44.png)
-
-        </details>           
-
        
    - [Using Causal Analysis for Conceptual Deep Learning Explanation](https://arxiv.org/abs/2107.06098)
       - <details><summary>Maheep's Notes</summary>
@@ -1907,7 +1897,7 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
          with a linear classifier $Y = W^Tz + b$
          . They generate a counterfatual by altering a feature representation of $X$ along the direction of weight vector, 
          $z' = z + \alpha*w$ 
-         
+
          where 
          $\tilde{x} = \psi^{-1}(z + \alpha*W)$ 
          
@@ -1935,3 +1925,39 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
          This hyperplane can also be used to create hyperplanes using
          $\psi^{-1}(e_i + \alpha w)$.
         </details>  
+
+
+   - [GANterfactual - Counterfactual Explanations for Medical Non-Experts using Generative Adversarial Learning](https://arxiv.org/abs/2012.11905)
+      - <details><summary>Maheep's Notes</summary>
+
+         The work proposes to create counterfactual explanation images for medical images by taking in two measures: 
+         * There should be minimal change in the original image 
+         * The classifier predicts it in to the target class. 
+         
+         The author accomplishes this goal using the image-to-image translation using StarGAN as shown in the picture below, using 2 functions, i.e. 
+         $F(\cdot)$ to convert image of domain/class $Y$ to $X$ 
+         and
+         $G(\cdot)$ to convert image of domain/class $X$ to $Y$.
+
+
+         > ![Model](images/44.png)
+
+         It accomplishes it using the $GAN$ loss for functions $F$ and $G$ with other losses defined below:
+         * *Cycle-Consistency Loss*: It monitors the convertability quality of both the functions using the equation:
+
+         $$
+            L_{cycle}(G,F) = \mathbb{E}[||F(G(X)) - X||_{1}] + \mathbb{E}[||G(F(Y)) - Y||_{1}]
+         $$
+
+         * *Counter Loss*: It monitors the confidence prediciton of generated counterfactual image w.r.t. to the target class.
+
+         $$
+            L_{counter}(G,F,C) = \mathbb{E}[||Classification(G(X)) - Logits(Y)||] + \mathbb{E}[||Classification(F(Y)) - Logits(X)||]
+         $$
+
+         * *Identity Loss*: It forces the input images to remain same after transformation, using th equation:
+
+         $$
+            L_{identity}(G,F) = \mathbb{E}[||G(Y) - Y||_1] + \mathbb{||F(X) - X||_1}
+         $$
+        </details>           
