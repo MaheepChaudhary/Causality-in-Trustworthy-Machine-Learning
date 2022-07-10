@@ -1811,7 +1811,7 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
         $$
 
         $$
-         s.t. \ \ ||a||_{1} = 1, \ \ a_{i} \in \{0,1\} \forall i \\
+         s.t. \ \ ||a||_1 = 1, \ \ a_i \in \{0,1\} \ \forall i \\
         $$
       
         $$
