@@ -1907,6 +1907,7 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
          with a linear classifier $Y = W^Tz + b$
          . They generate a counterfatual by altering a feature representation of $X$ along the direction of weight vector, 
          $z' = z + \alpha*w$ 
+         
          where 
          $\tilde{x} = \psi^{-1}(z + \alpha*W)$ 
          
