@@ -703,11 +703,6 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
 
         </details>  
 
-   - [Generating Natural Counterfactual Visual Explanations](https://www.ijcai.org/proceedings/2020/0742.pdf)
-      - <details><summary>Maheep's Notes</summary>
-        The paper proposes a counterfactual visual explainer that look for counterfactual features belonging to class B that do not exist in class A. They use each counterfactual feature to replace the corresponding class A feature and output a counterfactual text. The counterfactual text contains the B-type features of one part and the A-type features of the remaining parts. Then they use a text-to-image GAN model and the counterfactual text to generate a counterfactual image. They generate the images using the AttGAN and StackGAN and they take the image using the function. <br>
-        `log(P(B)/P(A))` where P(.) is the classifier probability of a class for obtaining the highest-scoring counterfactual image. 
-        </details> 
 
    - [On Causally Disentangled Representations](https://arxiv.org/pdf/2112.05746.pdf)
       - <details><summary>Maheep's Notes</summary>
@@ -1875,3 +1870,29 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
 
          All these 5 losses are added to make the final loss with different weights.
         </details>         
+
+
+   - [Generating Natural Counterfactual Visual Explanations](https://www.ijcai.org/proceedings/2020/0742.pdf)
+      - <details><summary>Maheep's Notes</summary>
+
+        The paper proposes to generate counterfactual image explanation.
+
+        The author creates a dataset with the class 
+        $I_A$ 
+        image with corresponding text 
+        $T_A$
+        . The images are compared using their corresponding text, i.e.
+        $D = Compared(T_A, T_B)$
+        and therefore producing the disciminatory features 
+        $D$. 
+        The $D$ is used by a text-to-image GAN model  $G$
+        generate a counterfactual image. 
+        
+        $$
+         I' = G(T_A, D)
+        $$
+        
+        They use AttGAN and StackGAN and they take the image using the function. 
+
+        >![image](images/text_to_image.png) 
+        </details> 
