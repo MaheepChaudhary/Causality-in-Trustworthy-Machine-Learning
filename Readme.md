@@ -1828,10 +1828,13 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
         
         $$
          maximize_{P,a} \ \ g_{c'}((1-a) \odot f(I) + a \odot P(f(I'))) \\ \\
+        $$
 
-         s.t. \ \ ||a||_{1} = 1, \ \ a_{i} \geq \forall i \\
-         
-         ||p_i||_{1} = 1, \ \forall i \ P_{i,j} \geq 0 \ \forall i,j
-        
+        $$
+         s.t. \ \ ||a||_1 = 1, \ \ a_i \geq \forall i \\
+        $$
+
+        $$
+         ||p_i||_1 = 1, \ \forall i \ P_{i,j} \geq 0 \ \forall i,j
         $$
         </details>
