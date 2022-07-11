@@ -851,12 +851,6 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
         ![Model](images/16.png)
         </details>  
 
-   - [Latent Space Explanation by Intervention](https://arxiv.org/abs/2112.04895)
-      - <details><summary>Maheep's Notes</summary>
-        The study in this R.P. aims to reveal hidden concepts by employing an intervention mechanism that shifts the predicted class based on discrete variational autoencoders based on the high concepts(human interpretale and not low level features like pixels). We could easily intervene on the latent space of the high concepts to find out the most discriminative concepts but they are not human interpretable therefore they use visualization to make it human interpretable. To accomplish the first step they use discrete variational autoencoder(DVAE). The boolean latent space cosnist of 
-        
-        `Z = {z1, z2,....., zn}` which is intervened to flip the output of the model and are finally vsualized from the hidden representation using the loss `L = l(g(phi'(x), x))`, where `phi'(x)` is the counterfactual model. The next goal is to ensure that the generated concepts follow the same concepts the discriminator employ. They achieve this by maximizing the amount of information that the explanatory learner (i.e., g) extracted from the latent representation with respect to the discriminative learner’s (i.e., f_K) information.  
-        </details>  
 
    - [The Blessings of Unlabeled Background in Untrimmed Videos](https://arxiv.org/abs/2103.13183)
       - <details><summary>Maheep's Notes</summary>
@@ -2078,4 +2072,42 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
         </details>
 
 
- 
+- [Latent Space Explanation by Intervention](https://arxiv.org/abs/2112.04895)
+   - <details><summary>Maheep's Notes</summary>
+
+      The paper focuses to shift the prediction of the sample using the *Discrete Variational Autoencoder*(DVAE). 
+      
+      It proposes the following items as its prime contribution:
+      * Identifies discrete global concepts in a trained layer and intervene upon them.
+      * Novel Explanatory approach for explaining a given layer in human interpretable form.
+      * It proposes a regularization term that encourage high shared information b.w. discriminative and explanatory features. 
+
+      >![image](images/lsei.png)
+
+      The author implements it mainly using 2 major modules:
+      * Concepts are detected using a clustering upon the neural network 
+      $\phi(x)$
+      * Visual explanation are given by intervening upon the 
+      $Z = \{Z_1,.....,Z_n\}$
+      to get
+      $Z = \{\tilde{Z}_1,....., \tilde{Z}_n\}$
+      where different $Z_i$ represents a human interpretable concept. 
+      The DVAE learns these discrete concepts is ensured using the equation below:
+
+      $$
+         - log \ p(\phi(x)) \leq \mathbb{E}[(log \ p(\phi(x))|z)] - KL(q(z|\phi(x))||p(z))
+      $$ 
+
+      where $q(\cdot)$ is the probability distribution of $n$ dimensional boolean variable. 
+
+      The minimal reconstruction loss is ensured using:
+
+      $$
+         min \ l(g(\phi'(x)), x)
+      $$
+
+      where $g(\psi(x))$ makes it human interpretable.
+
+      The information b.w. the classifier $f(\cdot)$ and generator $g(\cdot)$ is maximized using the *Fisher Information*.
+
+      </details>  
