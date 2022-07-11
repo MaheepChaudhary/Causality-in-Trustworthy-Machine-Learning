@@ -566,19 +566,6 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
         </details>
         
         
-   - [ECINN: Efficient Counterfactuals from Invertible Neural Networks](https://arxiv.org/pdf/2103.13701.pdf)
-      - <details><summary>Maheep's Notes</summary>
-        The paper utilizes the generative capacities of invertible neural networks for image classification to generate counterfactual examples efficiently. The main advantage of this network is that it is fast and invertible, i.e. it has full information preservation between input and output layers, where the other networks are surjective in nature, therfore also making the evaluation easy. The network claims to change only class-dependent features while ignoring the class-independence features succesfully. This happens as the INNs have the property that thier latent spaces are semantically organized. When many latent representations of samples from the same class are averaged, then class-independent information like background and object orientation will cancel out and leaves just class-dependent information<br>
-
-        `x' = f_inv(f(x) + alpha*delta_x)` 
-        <br>
-        where, <br>
-        `x'` :Counterfactual image. <br>
-        `f`: INN and therfore `f_inv` is the inverse of `f`.<br>
-        `delta_x`: the infoprmation to be added to convert the latent space of image to that of counterfactual image.<br>
-        `||z + alpha_0*delta_x- µ_p || = ||z + alpha_0*delta_x - µ_q ||` where the z + alpha_0*delta_x is the line separating the two classes and µ_q and µ_q are the mean distance from line. Therefore <br>
-        `alpha = alpha_0 + 4/5*(1-alpha_0)`  
-        </details>
         
    - [EXPLAINABLE IMAGE CLASSIFICATION WITH EVIDENCE COUNTERFACTUAL](https://arxiv.org/pdf/2004.07511.pdf)
       - <details><summary>Maheep's Notes</summary>
@@ -2006,7 +1993,7 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
       TraCE works on the following metrics to evaluate the counterfactual images, i.e. 
 
       * **Validity**: ratio of the counterfactuals that actually have the desired target attribute to the total number of counterfactuals  
-      * The confidence of the **image** and **sparsity**, i.e. ratio of number of pixels altered to total no of pixels. Th eother 2 metrcs are **proximity**, i.e. average l2 distance of each counterfactual to the K-nearest training samples in the latent space and **Realism score** so as to have the generated image is close to the true data manifold.
+      * The confidence of the **image** and **sparsity**, i.e. ratio of number of pixels altered to total no of pixels. The other 2 metrcs are **proximity**, i.e. average $l_2$ distance of each counterfactual to the K-nearest training samples in the latent space and **Realism score** so as to have the generated image is close to the true data manifold.
       * TraCE reveals attribute relationships by generating counterfactual image using the different attribute like age $A$ and diagnosis predictor $D$. 
 
       $$
@@ -2032,3 +2019,63 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
       , i.e. $F_d$ is the classifier of diagnosis. 
 
       </details>  
+
+
+
+- [ECINN: Efficient Counterfactuals from Invertible Neural Networks](https://arxiv.org/pdf/2103.13701.pdf)
+   - <details><summary>Maheep's Notes</summary>
+
+        The paper utilizes the generative capacities of invertible neural networks for image classification to generate counterfactual examples efficiently. 
+        
+        The authors proposes 3 major points as a contribution to this paper:
+        * The methodology is fast and invertible, i.e. it has full information preservation between input and output layers, where the other networks are surjective in nature, therfore also making the evaluation easy. 
+        * It only class-dependent features while ignoring the class-independence features succesfully. Therfore creates two types of counterfactuals: -
+            * *Tipping-point counterfactuals*: The counterfactuals that are on the border of the two classes, they give surpirising explanation and increases the interpretability property immensely.
+            * *Convincing counterfactuals*: The counterfactuals that have high confidence when classified for the counterfactual class.
+        * It generate heatmaps to define the features responsible for the altered prediction. 
+
+        >![image](images/ecinn.png)
+
+        The author implements it by: 
+        * Generating the clusters on the basis of the classes and clusters, extracted using INN 
+        $f(X)$ 
+        using the equations given below:
+
+        $$
+         C(x) = arg max_y P_x(y|x)
+        $$
+
+        $$
+         G_j = \{x|C(x)\}
+        $$
+
+        $$
+         \overline{\mu}_j = \frac{1}{|G_j|} \sum z_j
+        $$
+
+        $$
+         \Delta_{p,q} = \overline{\mu}_q - \overline{\mu}_p
+        $$
+
+        $$
+         \hat{x} = f^{-1}(f(x) + \alpha \Delta_{p,q})
+        $$
+
+        As for *tipping-pint counterfactuals* we use $\alpha_o$ and for *convincing counterfactuals* we use $\alpha_1$, where, it is interpolated by heuristic that 
+        $\alpha_1 = \frac{4}{5} + \frac{\alpha_o}{2}$
+
+        The $\alpha_o$ can be find out by conditioning on the equation below:
+
+        $$
+         ||z + \alpha_o \Delta_{p,q} - \mu_p|| = ||z + \alpha_o \Delta_{p,q} - \mu_q||
+        $$
+
+        As for the heatmap the difference b.w. the pixels of counterfactual and original input might do the trick:
+
+        $$
+         H(x,q) = \hat{x}^q - x
+        $$
+        </details>
+
+
+ 
