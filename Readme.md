@@ -527,16 +527,7 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
 
         </details>
 
-        
-   - [CoCoX: Generating Conceptual and Counterfactual Explanations via Fault-Lines](https://ojs.aaai.org/index.php/AAAI/article/view/5643/5499)
-      - <details><summary>Maheep's Notes</summary>
-        The paper focuses a model for explaining decisions made by a deep convolutional neural network (CNN) fault-lines that defines the main features from which the humans deifferentiate the two similar classes. The author introduces 2 concepts: PFT and NFT, PFT are those xoncepts to be added to input image to change model prediction and for NFT it subtracts, whereas the xconcepts are those semantic features that are main features extracted by CNN and from which fault-lines are made by selecting from them.<br><br>
-
-        The proposed model is implemented by taking the CNN captured richer semantic aspect and construct xconcepts by making use of feature maps from the last convolution layer. Every feature map is treated as an instance of an xconcept and obtain its localization map using the Grad-CAM and are spatially pooled to get important weights, based on that top p pixels are selected and are clustered using K-means. The selection is done using the TCAV tecnique. 
-
-        !['Algorithm'](images/1.png)
-        </details>
-        
+                
    - [CX-ToM: Counterfactual Explanations with Theory-of-Mind for Enhancing Human Trust in Image Recognition Models](https://arxiv.org/pdf/2109.01401.pdf)
       - <details><summary>Maheep's Notes</summary>
         The paper is kind of an extension of the above paper(CoCoX), i.e. it also uses fault-lines for explainability but states a dialogue between a user and the machine. The model is made by using the fault-lines and the Theory of Mind(ToM). <br><br>
@@ -2132,3 +2123,72 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
       $$
       
       </details>  
+
+- [CoCoX: Generating Conceptual and Counterfactual Explanations via Fault-Lines](https://ojs.aaai.org/index.php/AAAI/article/view/5643/5499)
+   - <details><summary>Maheep's Notes</summary>
+
+   The paper focuses to increase the interpretability of the network by generating counterfactual images 
+   $I'$ 
+   by minimally perturbing the changes in the original image
+   $I$
+
+   The author accounts for its contribution as:
+   * Generates fault-line explanation, which are a set of xconcepts that are used to alter the prediction of the image using a CNN 
+   $M$
+   . The xconcepts can be classified into two types:
+      * *Positive Fault-lines* : These are xconcepts that are added to the input image 
+      
+      $$
+      I' = I + \psi^+_{I,c_{alt},c_{pred}}
+      $$
+
+      * *Negative Fault-lines* : These are xconcepts that are subtracted from the input image to generate the counterfactual image.
+
+      $$
+      I' = I - \psi^-_{I,c_{alt},c_{pred}}
+      $$
+
+   
+   * It mines the fault-lines using the CNN of different 
+   $C$
+   classes in the dataset
+   $\mathcal{X}$ 
+   
+   >![image](images/cocox.png)
+
+   When a query $Q = <I,c_{pred}, c_{alt}>$ is passed to the image the model optimizes using the equation below:
+
+   $$
+      arg \ \underset{\psi}{max} P(\psi, \epsilon_{pred}, \epsilon_{alt}, \epsilon| Q) 
+   $$
+
+   where $\epsilon$ represents the all xconcepts, which is retrieved using the posterier 
+   $P(\epsilon|\mathcal{X}, M)$
+   Similarly 
+   $\epsilon_{pred}$
+   and 
+   $\epsilon_{alt}$ 
+   are obtained by:
+
+   $$
+      P(\epsilon_{pred}|\epsilon, X, I, c_{pred}, M)
+   $$
+
+   $$
+      P(\epsilon_{alt}|\epsilon, X, I, c_{alt}, M)
+   $$
+
+   >![image](images/cocox1.png
+   )
+
+   As for the mining of the xconcepts. The feature extractor 
+   $f(\cdot)$ 
+   and
+   classifier 
+   $g(\cdot)$
+   are used to build the xconcepts.
+   Different super-pixels are extracted from 
+   $f(I)$
+   
+   !['Algorithm'](images/1.png)
+      </details>
