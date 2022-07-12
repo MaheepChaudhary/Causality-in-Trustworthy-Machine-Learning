@@ -1464,20 +1464,6 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
          ![Model](images/52.png)
         </details>  
 
-   - [Translational Lung Imaging Analysis Through Disentangled Representations](https://arxiv.org/abs/2203.01668) 
-      - <details><summary>Maheep's Notes</summary>
-         The work focuses on retrieving relevant information from the images of inter-species pathological processes by proposing the following features:<br>
-         1.) able to infer the animal model, position, damage present and generate a mask covering the whole lung. <br>
-         2.) Generate realistic lung images<br>
-         3.) Generate counterfactual images, i.e. healthy versions of damaged input slice. <br>
-
-         The author implements it by considering 3 factors for generating and masking the image, namely: animal model,
-         
-         `A`, the realtive position of axial slice, `S` and estimated lung damage, `Mtb`, via the hierarchy at different resolution scales `k`. By using the Noveau VAE to extract the latent space `z` variables to generate the mask `y` and image `x`.  
-
-
-         ![Model](images/53.png)
-        </details>  
 
    - [CRAFT: A Benchmark for Causal Reasoning About Forces and inTeractions](https://arxiv.org/abs/2012.04293) 
       - <details><summary>Maheep's Notes</summary>
@@ -2110,4 +2096,39 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
 
       The information b.w. the classifier $f(\cdot)$ and generator $g(\cdot)$ is maximized using the *Fisher Information*.
 
+      </details>  
+
+- [Translational Lung Imaging Analysis Through Disentangled Representations](https://arxiv.org/abs/2203.01668) 
+   - <details><summary>Maheep's Notes</summary>
+
+      The work focuses on causal representation learning and interpretability focused on logical lung infected by Tuberculosis for animals. 
+
+      The works orders its contribution by:
+      * Generate suitable mask and produce very accurate prediciton of the image.
+      * Generate counterfactul image of healthy version w.r.t to a damaged lung image. 
+      * Generate realistic images, controlling lung damage on each. 
+
+      > ![image](images/53.png)
+
+      The author implements the same using the DAG, which harness 3 differnet kind of animal models, namely: 
+      animal model, 
+      $A$
+      , the realtive position of axial slice, 
+      $S$ and estimated lung damage, $D$, via the hierarchy at different resolution scales $k$, where *shape* and *texture* act as the low level features. 
+      It ensures the disentangled feature representation using the *Independent Causal Mechanism*(ICM).
+      By using the Noveau VAE to extract the latent space $z$ variables to generate the mask $y$ and image $x$. 
+      The mask $y$ is generated using the shape features while the CT image $x$ is generated using botht the *shape* and *texture* features. 
+      
+      It optimizes the construction using the following equation: 
+
+      $$
+         L(x,y) = \mathbb{E}[log \ p(x|z_1)] - KL(q(z_o|x)||p(z_o)) + \mathbb{E}[log \ p(y|z_2)] - \mathbb{E}_{z_1}(KL_{z_1}) - \mathbb{E}_{z_2}(KL_{z_2}) 
+      $$
+
+      where 
+
+      $$
+         \mathbb{E}_z[KL_z] = \sum_m^M \mathbb{E}[KL(q(z_m|z_{m-1},x)||q(z_m|z_{m-1}))] 
+      $$
+      
       </details>  
