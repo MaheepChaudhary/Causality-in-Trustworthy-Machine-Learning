@@ -104,12 +104,22 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
          A small example of AC by the author as *Salary*
 
          $$
-         X_1(Salary) = 250,000 \\
-         X_3(Deposit\_Box) = 50,000 \\
-         X_2(Savings) = 125,000 \\
+         X_1(Salary) = 250,000 
+         $$
 
+         $$
+         X_3(Deposit\_Box) = 50,000 
+         $$
+
+         $$
+         X_2(Savings) = 125,000 
+         $$
+
+         $$
          Y = (X_1 + 5 \cdot X_2 - 225,000) > 0
-         \\
+         $$
+
+         $$
          Y = (250,000 + 625,000 - 225,000) = True
          $$
 
@@ -517,16 +527,6 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
          3) The model is then distilled using the knowledge distillation manner, i.e. `L = KL(P_T, P_S)`, where `P_T` is the prediction of the teacher model and the `P_S` is the prediction of the student model. 
         </details>
         
-   - [Counterfactual Explanation and Causal Inference In Service of Robustness in Robot Control](https://arxiv.org/pdf/2009.08856.pdf)
-      - <details><summary>Maheep's Notes</summary>
-        The paper focuses on the generating the features using counterfactual mechanism so as to make the model robust. The author proposes to generate the features which are minimal and realistic in an image so as to make it as close as the training image to make the model work correctly making the model robust to adverserial attacks, therfore robust. The generator has two main components, a discriminator which forces the generator to generate the features that are similar to the output class and the modification has to be as small as possible.   <br><br>
-
-        The additonal component in the model is the predictor takes the modified image and produces real-world output. The implementation of it in mathematics looks like: <br>
-        `min d_g(x, x') + d_c(C(x'), t_c)`, where d_g is the distance b/w the modified and original image, d_c is the distance b/w the class space and C is the predictor that x' belongs to t_c class. <br>
-        The loss defines as: `total_loss = (1-alpha)*L_g(x, x') + (alpha)*L_c(x, t_c)`, where L_c is the loss `x` belongs to `t_c` class   
-
-        </details>
-
                 
    - [CX-ToM: Counterfactual Explanations with Theory-of-Mind for Enhancing Human Trust in Image Recognition Models](https://arxiv.org/pdf/2109.01401.pdf)
       - <details><summary>Maheep's Notes</summary>
@@ -2299,4 +2299,15 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
       >!['Algorithm'](images/3.png)
       </details>     
 
-      
+- [Counterfactual Explanation and Causal Inference In Service of Robustness in Robot Control](https://arxiv.org/pdf/2009.08856.pdf)
+   - <details><summary>Maheep's Notes</summary>
+   
+      The paper focuses on the generating the features using counterfactual mechanism so as to make the model robust. The author proposes to generate the features which are minimal and realistic in an image so as to make it as close as the training image to make the model work correctly making the model robust to adverserial attacks, therfore robust. The generator has two main components, a discriminator which forces the generator to generate the features that are similar to the output class and the modification has to be as small as possible.   <br><br>
+
+      The additonal component in the model is the predictor takes the modified image and produces real-world output. The implementation of it in mathematics looks like: 
+
+      `min d_g(x, x') + d_c(C(x'), t_c)`, where d_g is the distance b/w the modified and original image, d_c is the distance b/w the class space and C is the predictor that x' belongs to t_c class. 
+
+      The loss defines as: `total_loss = (1-alpha)*L_g(x, x') + (alpha)*L_c(x, t_c)`, where L_c is the loss `x` belongs to `t_c` class   
+
+        </details>
