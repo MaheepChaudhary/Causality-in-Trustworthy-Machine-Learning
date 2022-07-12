@@ -2139,13 +2139,13 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
       * *Positive Fault-lines* : These are xconcepts that are added to the input image 
       
       $$
-      I' = I + \psi^+_{I,c_{alt},c_{pred}}
+      I' = I + \psi_{I,c_{alt},c_{pred}}^+
       $$
 
       * *Negative Fault-lines* : These are xconcepts that are subtracted from the input image to generate the counterfactual image.
 
       $$
-      I' = I - \psi^-_{I,c_{alt},c_{pred}}
+      I' = I - \psi_{I,c_{alt},c_{pred}}^-
       $$
 
    
