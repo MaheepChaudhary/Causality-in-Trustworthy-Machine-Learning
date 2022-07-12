@@ -2127,68 +2127,86 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
 - [CoCoX: Generating Conceptual and Counterfactual Explanations via Fault-Lines](https://ojs.aaai.org/index.php/AAAI/article/view/5643/5499)
    - <details><summary>Maheep's Notes</summary>
 
-   The paper focuses to increase the interpretability of the network by generating counterfactual images 
-   $I'$ 
-   by minimally perturbing the changes in the original image
-   $I$
+      The paper focuses to increase the interpretability of the network by generating counterfactual images 
+      $I'$ 
+      by minimally perturbing the changes in the original image
+      $I$
 
-   The author accounts for its contribution as:
-   * Generates fault-line explanation, which are a set of xconcepts that are used to alter the prediction of the image using a CNN 
-   $M$
-   . The xconcepts can be classified into two types:
-      * *Positive Fault-lines* : These are xconcepts that are added to the input image 
+      The author accounts for its contribution as:
+      * Generates fault-line explanation, which are a set of xconcepts that are used to alter the prediction of the image using a CNN 
+      $M$
+      . The xconcepts can be classified into two types:
+         * *Positive Fault-lines* : These are xconcepts that are added to the input image 
+         
+         $$
+         I' = I + \psi_{I,c_{alt},c_{pred}}^+
+         $$
+
+         * *Negative Fault-lines* : These are xconcepts that are subtracted from the input image to generate the counterfactual image.
+
+         $$
+         I' = I - \psi_{I,c_{alt},c_{pred}}^-
+         $$
+
       
+      * It mines the fault-lines using the CNN of different 
+      $C$
+      classes in the dataset
+      $\mathcal{X}$ 
+      
+      >![image](images/cocox.png)
+
+      When a query $Q = <I,c_{pred}, c_{alt}>$ is passed to the image the model optimizes using the equation below:
+
       $$
-      I' = I + \psi_{I,c_{alt},c_{pred}}^+
+         arg \ \underset{\psi}{max} P(\psi, \epsilon_{pred}, \epsilon_{alt}, \epsilon| Q) 
       $$
 
-      * *Negative Fault-lines* : These are xconcepts that are subtracted from the input image to generate the counterfactual image.
+      where $\epsilon$ represents the all xconcepts, which is retrieved using the posterier 
+      $P(\epsilon|\mathcal{X}, M)$
+      Similarly 
+      $\epsilon_{pred}$
+      and 
+      $\epsilon_{alt}$ 
+      are obtained by:
 
       $$
-      I' = I - \psi_{I,c_{alt},c_{pred}}^-
+         P(\epsilon_{pred}|\epsilon, X, I, c_{pred}, M)
       $$
 
-   
-   * It mines the fault-lines using the CNN of different 
-   $C$
-   classes in the dataset
-   $\mathcal{X}$ 
-   
-   >![image](images/cocox.png)
+      $$
+         P(\epsilon_{alt}|\epsilon, X, I, c_{alt}, M)
+      $$
 
-   When a query $Q = <I,c_{pred}, c_{alt}>$ is passed to the image the model optimizes using the equation below:
+      >![image](images/cocox1.png
+      )
 
-   $$
-      arg \ \underset{\psi}{max} P(\psi, \epsilon_{pred}, \epsilon_{alt}, \epsilon| Q) 
-   $$
+      The process of mining of the xconcepts include: 
+      * The feature extractor 
+      $f(\cdot)$ 
+      and
+      classifier 
+      $g(\cdot)$
+      are used to build the xconcepts.
+      * Different feature maps are extracted using 
+      $f(I)$
+      which are seen as an instance of xconcept.
+      * The feature maps are then used to obtain localized maps, which are super-pixel of feature maps and are obtained using Grad-CAM, suing equation 1 in the figure below.
+      * Top-$p$ pixels are selected for each class, making a total of $p*C$ super-pixels.
+      * These are clustered using K-mean into different xconcepts into 
+      $G$ 
+      groups.
 
-   where $\epsilon$ represents the all xconcepts, which is retrieved using the posterier 
-   $P(\epsilon|\mathcal{X}, M)$
-   Similarly 
-   $\epsilon_{pred}$
-   and 
-   $\epsilon_{alt}$ 
-   are obtained by:
+      >!['Algorithm'](images/1.png)
 
-   $$
-      P(\epsilon_{pred}|\epsilon, X, I, c_{pred}, M)
-   $$
+      To get the importance of the concepts for a target class $C$
+      . They compute directional derivatives 
+      $S_{c,X}$ 
+      to produce estimates of how important the concept X was for a CNN’s prediction of a target class $C$, as defined in the $III^{rd}$ step.
 
-   $$
-      P(\epsilon_{alt}|\epsilon, X, I, c_{alt}, M)
-   $$
+      The fault lines are detected using the $4^{th}$ step, where 
+      >![image](images/cocox2.png)
 
-   >![image](images/cocox1.png
-   )
-
-   As for the mining of the xconcepts. The feature extractor 
-   $f(\cdot)$ 
-   and
-   classifier 
-   $g(\cdot)$
-   are used to build the xconcepts.
-   Different super-pixels are extracted from 
-   $f(I)$
-   
-   !['Algorithm'](images/1.png)
       </details>
+
+
