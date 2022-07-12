@@ -536,13 +536,6 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
         !['Algorithm'](images/2.png)
         </details>
         
-   - [DeDUCE: Generating Counterfactual Explanations At Scale](https://arxiv.org/pdf/2111.15639.pdf)
-      - <details><summary>Maheep's Notes</summary>
-        The paper focues to detect the erroneous behaviour of the models using counterfatctual as when an image classifier outputs a wrong class label, it can be helpful to see what changes in the image would lead to a correct classification. In these cases the counterfactual acrs as the closest alternative that changes the prediction and we also learn about the decision boundary.<br><br>
-        The proposed model is implemented by identifying the Epistemic uncertainity, i.e. the useful features using the Gaussian Mixture Model and therfore only the target class density is increased. The next step would be to change the prediction using a subtle change therefore the most slaient pixel, identified usign the gradient are changed.  
-
-        !['Algorithm'](images/3.png)
-        </details>     
         
    - [Designing Counterfactual Generators using Deep Model Inversion](https://arxiv.org/pdf/2109.14274.pdf)
       - <details><summary>Maheep Notes</summary>
@@ -2272,3 +2265,38 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
 
    </details>      
 
+- [DeDUCE: Generating Counterfactual Explanations At Scale](https://arxiv.org/pdf/2111.15639.pdf)
+   - <details><summary>Maheep's Notes</summary>
+   
+      The paper focues to generate counterfactuals to discover and modify the features that corrects the erroneous prediction by the model and output the correct label. 
+      The author accomplishes it w/o using any Generative model as used by many previous works.
+
+      >![image](images/deduce.png) 
+
+      The author accomlishes it by using the ''*[Epistemic Uncertianity](https://link.springer.com/article/10.1007/s10994-021-05946-3)*'' to generate samples similar to training data and maximizing the target class-density to minimize it.
+
+      The authors accomplishes the aim to generate counterfactual by modifying the pixels that are salient for the gradient of the loss and are changed using the equation:
+
+      $$
+         g_k = \frac{\nabla_{x_k}l_c(f(x_k), t)}{l_c(f(x_k),t)} - \frac{\nabla_{x_k}log \ p_t(f_Z(x_k))}{|log \ p_t(f_Z(x_k))|} + m \cdot g_{k-1}
+      $$    
+
+      where 
+      $l_c(f(x_k),t)$ 
+      and
+      $|log \ p_t(f_Z(x_k))|$
+      are used to normalize the both terms as they may have non-trivial difference in their magnitude, annhiliating the effect of one term.
+      The last term signifies the momentum and 
+      $l_c$ 
+      is the cross-entropy loss.
+
+      The author iteratively perturbs the input in small steps in a way that makes it more and more similar to the target class until it crosses the decision boundary. 
+      The algorithm stops when the softmax output for the target class is above 
+      $50%$ 
+      as this corresponds to the model choosing 
+      ‘*in target class*’ over ‘*not in target class*’.  
+
+      >!['Algorithm'](images/3.png)
+      </details>     
+
+      
