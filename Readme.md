@@ -2301,13 +2301,21 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
 
 - [Counterfactual Explanation and Causal Inference In Service of Robustness in Robot Control](https://arxiv.org/pdf/2009.08856.pdf)
    - <details><summary>Maheep's Notes</summary>
-   
-      The paper focuses on the generating the features using counterfactual mechanism so as to make the model robust. The author proposes to generate the features which are minimal and realistic in an image so as to make it as close as the training image to make the model work correctly making the model robust to adverserial attacks, therfore robust. The generator has two main components, a discriminator which forces the generator to generate the features that are similar to the output class and the modification has to be as small as possible.   <br><br>
 
-      The additonal component in the model is the predictor takes the modified image and produces real-world output. The implementation of it in mathematics looks like: 
+      The paper focuses on the building a robust robot control system by generating a counterfactual image w/ minimal modification that allows a robot to solve a control task.
 
-      `min d_g(x, x') + d_c(C(x'), t_c)`, where d_g is the distance b/w the modified and original image, d_c is the distance b/w the class space and C is the predictor that x' belongs to t_c class. 
+      The author solves it by quantifying the robustness of a robot by its distance b.w. the original and counterfactual image used to solve a task.
+      $d(x,x')$.
+      They use the architecture with a generator and a classifier as shown in the figure below:
 
-      The loss defines as: `total_loss = (1-alpha)*L_g(x, x') + (alpha)*L_c(x, t_c)`, where L_c is the loss `x` belongs to `t_c` class   
+      >![image](images/struc_robot.png)
 
-        </details>
+      They build the loss as having minimum intervention, therefore the distance to generate a counterfactual image and the counterfactual image has the highest probability to belong to the target class 
+      $t_c$
+      . Therfore computing the overall loss as:
+
+      $$
+         L = d_g(x,x') + d_c(C(x'),t_c)
+      $$
+
+      </details>
