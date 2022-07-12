@@ -573,24 +573,6 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
         The paper is implemented using the Distribution Causal Graph(DCG) where the causal graph is made but the nodes is represented the MLP, i.e. 
         `logP(X = (x1,x2,x3...xn)) = sigma(log(P(X = xi|theta_i)))` and the Counterfactual Image Generator which translate the latent factor into the image using the original image as anchor while genrating it which is done using Fader Networks which adds a critic in the latent space and AttGAN adds the critic in the actual output. 
         </details>      
-
-   - [Explaining the Black-box Smoothly-A Counterfactual Approach](https://arxiv.org/pdf/2101.04230.pdf)
-      - <details><summary>Maheep's Notes</summary>
-        The paper focuses on explaining the outcome of medical imaging by gradually exaggerating the semantic effect of the given outcome label and also show a counterfactual image by introducing the perturbations to the query image that gradually changes the posterior probability from its original class to its negation. The explanation therfore consist of 3 properties:<br>
-        1.) **Data Consistency**: The resembalance of the generated and orignal data should be same. Therefore cGAN id introduced with a loss as
-        
-        `L_cgan = log(P_data(x)/q(x)) + log(P_data(c|x)/q(c|x))` 
-        
-        where P_data(x) is the data distribtion and learned distribution q(x), whreas P_data(c|x)/q(c|x) = r(c|x) is the ratio of the generated image and the condition.  <br>
-        2.) **Classification model consistency**: The generated image should give desired output. Therefore the condition-aware loss is introduced, i.e. 
-        `L := r(c|x) + D_KL (f(x')||f (x) + delta),`, where f(x') is the output of classifier of the counterfactual image is varied only by delta amount when added to original image logit. They take delta as a knob to regularize the genration of counterfactual image. <br>
-        3.) **Context-aware self-consistency**: To be self-consistent, the explanation function should satisfy three criteria <br>
-        > (a) Reconstructing the input image by setting = 0 should return the input image, i.e., G(x, 0) = x. <br> 
-        > (b) Applying a reverse perturbation on the explanation image x should recover x. <br> 
-
-        To mitigate this conditions the author propose an identity loss. The author argues that there is a chance that the GAN may ignore small or uncommon details therfore the images are compared using semantic segemntation with object detection combined in identity loss. The identity loss is :
-        L_identity = L_rec(x, G(x, 0))+ L_rec(x, G(G(x,delta), -delta))
-        </details>      
                 
         
    - [Explaining the Behavior of Black-Box Prediction Algorithms with Causal  Learning](https://arxiv.org/pdf/2006.02482.pdf)
@@ -2197,7 +2179,7 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
       $G$ 
       groups.
 
-      >!['Algorithm'](images/1.png)
+      >!['Algorithm'](images/cocox3.png)
 
       To get the importance of the concepts for a target class $C$
       . They compute directional derivatives 
@@ -2209,4 +2191,84 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
 
       </details>
 
+
+- [Explaining the Black-box Smoothly-A Counterfactual Approach](https://arxiv.org/pdf/2101.04230.pdf)
+   - <details><summary>Maheep's Notes</summary>
+
+      The paper focuses on increasing the interpretability of medical imaging classification by generating counterfactual image by perturbing the original image. 
+      
+      >![image](images/bbs1.png)
+
+      It modifies the image using pre-trained function 
+      $f(\cdot) \in [0,1]$
+      The work aims to learn the *explanatory function* 
+      $I_f(\cdot)$ 
+      using the equation:
+
+      $$
+      x_{\delta} \approx I_f(x,\delta)
+      $$
+
+      where 
+
+      $$
+      f(x_{\delta}) - f(x) = \delta
+      $$
+
+      It optimizes the overall process using 3 loss functions with 
+      $\phi(\cdot)$
+      defining a feature extractor,
+      $\psi$ 
+      computes a scalar loss value,
+      $\textbf{c}$ 
+      defining the one-hot vector of condition, which is 
+      $\textbf{c} = c_f(x, \delta)$
+      and
+      $V$ 
+      is the embedding metrics modulated on 
+      $\textbf{c}$ 
+      as :
+
+      * *Data Consistency*: It evaluates the correspondence between the generated image and the conditioner,defining the loss as:
+      
+      $$
+      L_{cGAN} =  \psi(\phi(G(z);\theta_{\phi});\theta_{\psi}) + c^T V \phi(x;\theta_{\phi})
+      $$
+
+      >![image](images/bbs2.png)
+
+      * **Classification model consistency**: To ensure that the generated image should give desired output, the loss is introduced as:
+
+      $$
+         L := c^T V \phi(x;\theta_{\phi}) + D_{KL}(f(x')||f (x) + \delta)
+      $$
+
+      >![image](images/bbs3.png)
+
+      * **Context-aware self-consistency**: The loss is defined so as to preserve the features using the reconstruction loss:
+
+      $$
+         L = L_{rec}(x,\mathcal{I}_f(x,0)) + L_{rec}(x,\mathcal{I}_f({I}_f(x,\delta),-\delta))
+      $$
+
+      where 
+
+      $$
+         L_{rec}(x,x') = \sum_j \frac{S_j(x)\odot||x-x'||_1}{\sum S_j(x)} + D_{KL}(O(x)||O(x'))
+      $$
+
+      where 
+      $S(\cdot)$ is a pretrained semantic segmentation network that produces a label map for different regions in the input domain. 
+      $O(x)$ is a pre-trained object detector that, given an input image 
+      $x$
+      , output a binary mask 
+      $O(x)$
+         
+      The author argues that there is a chance that the GAN may ignore small or uncommon details therfore the images are compared using semantic segmentation 
+      $S(\cdot)$ 
+      with object detection combined in identity loss.   
+      
+      >![image](images/bbs4.png)
+
+   </details>      
 
