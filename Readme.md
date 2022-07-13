@@ -549,17 +549,7 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
         `L_fc`: It ensures that the prediction for the counterfactual matches the desired target
         </details>
         
-        
-        
-   - [EXPLAINABLE IMAGE CLASSIFICATION WITH EVIDENCE COUNTERFACTUAL](https://arxiv.org/pdf/2004.07511.pdf)
-      - <details><summary>Maheep's Notes</summary>
-        The author proposes a SDEC model that searches a small set of segments that, in case of removal, alters the classification<br>
-        The image is segemented with l segments and then the technique is implemented by using the best-first search avoid a complete search through all possible segment combinations. The best-first is each time selected based on the highest reduction in predicted class score. It continues until one or more same-sized explanations are found after an expansion loop. An additional local search can be performed by considering all possible subsets of the obtained explanation. If a subset leads to a class change after removal, the smallest set is taken as final explanation. When different subsets of equal size lead to a class change, the one with the highest reduction in predicted class score can be selected.
-
-        !['Algorithm'](images/4.png)
-        </details>      
-        
-        
+                
    - [Explaining Visual Models by Causal Attribution](https://arxiv.org/pdf/1909.08891.pdf)
       - <details><summary>Maheep Notes</summary>
         The paper focuses on the facts that there are limitations of current Conditional Image Generators for Counterfactual Generation and also proposes a new explanation technique for visual models based on latent factors. <br>
@@ -2365,6 +2355,7 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
       </details>        
 
 
+
 - [Contrastive_Counterfactual_Visual_Explanations_With_Overdetermination](https://arxiv.org/pdf/2106.14556.pdf)
    - <details><summary>Maheep's Notes</summary>
 
@@ -2418,3 +2409,38 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
       > ![image](images/overdetermination4.png)
 
       </details> 
+
+
+
+- [EXPLAINABLE IMAGE CLASSIFICATION WITH EVIDENCE COUNTERFACTUAL](https://arxiv.org/pdf/2004.07511.pdf)
+   - <details><summary>Maheep's Notes</summary>
+
+      The author proposes to generate the counterfactual image by perturbing the original image by identifying the set of features to be replaced.
+
+      The author proposes to integrate the following properties in the proposed model-agnostic model:
+
+      * Unravels the pattern that is used for classification, if true then also provides some meaningful representation of the model.
+      * If error to classify the image then unravels the reason for that.
+      * At last, delineate if the correct classification is classified for wrong feature harnessing by the model.
+
+      The author implements it by:
+
+      * An algorithm is proposed that identifies the EdC features, that if removed can alter the prediction of the model.  
+
+      > ![image](images/evidence_counterfactual.png)
+      
+      * To unravel the EdC features the author proposes SEDC algorithm, the algorithm defined below can be used
+
+      !['Algorithm'](images/4.png)
+
+      * But to generate the counterfactual class, the author proposes a tweaked version of the above algorithm as SEDC-T. In this secario a target class has to be specified and segments are selected based on the largest difference between the target class score and the predicted class score. In case more than one EdC is found, the EdC leading to the highest increase in target class score can be selected.
+      * SEDC-T allows for the generation of more nuanced explanations, since one can find out why the model predicts a class over another class of interest. This can certainly be useful for explaining misclassifications.
+      * As for segmenting and segment repacement as shown in the figure below, the author suggests:
+         * For segmentation the author uses segmentation algorithm that uses the numerical color values to obtain a meaningful grouping in segments.
+         * Alternatively, the segment replacement can be based on calculated pixel values. For example, the author suggests to use mean/mode pixel values of the image as a whole, the segment itself or the neighboring segments. Also, more advanced imputation methods for images are possible (e.g., image inpainting or blurring).
+
+      > ![image](images/evidence_counterfactual_2.png)
+
+      > ![image](images/evidence_counterfactual1.png)
+            
+      </details>      
