@@ -2423,6 +2423,7 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
       * If error to classify the image then unravels the reason for that.
       * At last, delineate if the correct classification is classified for wrong feature harnessing by the model.
 
+      <br>
       The author implements it by:
 
       * An algorithm is proposed that identifies the EdC features, that if removed can alter the prediction of the model.  
@@ -2444,3 +2445,4 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
       > ![image](images/evidence_counterfactual1.png)
             
       </details>      
+
