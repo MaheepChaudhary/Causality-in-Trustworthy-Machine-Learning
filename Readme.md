@@ -2442,54 +2442,54 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
 - [CX-ToM: Counterfactual Explanations with Theory-of-Mind for Enhancing Human Trust in Image Recognition Models](https://arxiv.org/pdf/2109.01401.pdf)
    - <details><summary>Maheep's Notes</summary>
 
-   The paper proposes to enhance the explainability of the model using the fault-lines(as defined above work). The author aurgues that *understandability* and *Predictability* act as the basic pillars of explainability of a system. Therefore establishes a dialogue between a user and the machine taking Theory of Mind(ToM) as the basis of it. 
+      The paper proposes to enhance the explainability of the model using the fault-lines(as defined above work). The author aurgues that *understandability* and *Predictability* act as the basic pillars of explainability of a system. Therefore establishes a dialogue between a user and the machine taking Theory of Mind(ToM) as the basis of it. 
 
-   > ![images](images/tom)  
+      > ![images](images/tom)  
 
-   >![images](images/tom1.png)
+      >![images](images/tom1.png)
 
-   The author implements it by:
-   * The dialogue aims to let the machine know about the user's intention of understanding and human to know about the machine's understanding of the system.
-   * The author setup an experiment in which a blurred image is provided to the user while the original image is provided to the machine. 
-   * The dialogue from the user are transffered in form of two type of questions *W-QA* and *E-QA* to understand from the machine as to what is on the place of the blurred image.
-      * *W-QA* include question of type *what*, *why*, *where*.
-      * *E-QA* include the questions which are seeking for explanation.
-   
-   > ![image](images/tom3.png)
+      The author implements it by:
+      * The dialogue aims to let the machine know about the user's intention of understanding and human to know about the machine's understanding of the system.
+      * The author setup an experiment in which a blurred image is provided to the user while the original image is provided to the machine. 
+      * The dialogue from the user are transffered in form of two type of questions *W-QA* and *E-QA* to understand from the machine as to what is on the place of the blurred image.
+         * *W-QA* include question of type *what*, *why*, *where*.
+         * *E-QA* include the questions which are seeking for explanation.
+      
+      > ![image](images/tom3.png)
 
-   * The machine predicts about the user's mind by building the graph
-   $Pg^{UinM}$
-   to give the only answer that might enhance the understandind of user to develop the understanding of user, while 
-   $pg^M$ 
-   is the graph of the image that machine has build for itself. The machine develop the understanding by giving bubbles to the blurred picture to develop understanding of user w/ minimum information. The 
-   $Pg^{MinU}$
-   is at the end compared w/ 
-   $Pg^{UinM}$
-   to evaluate how much has the user understood and how much machine has comprehended the user has understood.
+      * The machine predicts about the user's mind by building the graph
+      $Pg^{UinM}$
+      to give the only answer that might enhance the understandind of user to develop the understanding of user, while 
+      $pg^M$ 
+      is the graph of the image that machine has build for itself. The machine develop the understanding by giving bubbles to the blurred picture to develop understanding of user w/ minimum information. The 
+      $Pg^{MinU}$
+      is at the end compared w/ 
+      $Pg^{UinM}$
+      to evaluate how much has the user understood and how much machine has comprehended the user has understood.
 
-   > ![image](images/tom4.png)
+      > ![image](images/tom4.png)
 
-   * The author uses the fault-lines to develop the understanding of the user in these places of graph to develop understanding of user. It focuses to give the fault-lines on the basis:
-      * If the model thinks the user has low confidence of the model capability of classification b.w. *Person* and the *Deer* then it will highlight the fault-lines that shows the difference b.w. them but if the user have low-confidene on model capability of classification b.w. *Man* and the *Woman*, then it will show the corresponding fault-lines. 
+      * The author uses the fault-lines to develop the understanding of the user in these places of graph to develop understanding of user. It focuses to give the fault-lines on the basis:
+         * If the model thinks the user has low confidence of the model capability of classification b.w. *Person* and the *Deer* then it will highlight the fault-lines that shows the difference b.w. them but if the user have low-confidene on model capability of classification b.w. *Man* and the *Woman*, then it will show the corresponding fault-lines. 
 
-   > ![image](images/tom2)
+      > ![image](images/tom2)
 
-  * The author takes into account set 
-  $C$
-  contaning the images that 
-  $M$ 
-  predicts correctly and incorrectly in 
-  $W$
-  . The author uses two metrics to quatify human trust on system using:
-      * *JPT* : It is the $\%$ of images in 
-      $C$
-      that human feel the model 
-      $M$ would predict correctly.
-      * *JNT* : It is the $%$ of images in 
-      $W$ 
-      that human feel the model 
-      $M$ would predict incorrectly.
-      * *Reliance*:  It is the measure upto whihc hummman can accuractly predict the performers' inference results w/o under or over-estimation. It is the sum of both *JNT* and *JPT*.
+   * The author takes into account set 
+   $C$
+   contaning the images that 
+   $M$ 
+   predicts correctly and incorrectly in 
+   $W$
+   . The author uses two metrics to quatify human trust on system using:
+         * *JPT* : It is the $\%$ of images in 
+         $C$
+         that human feel the model 
+         $M$ would predict correctly.
+         * *JNT* : It is the $%$ of images in 
+         $W$ 
+         that human feel the model 
+         $M$ would predict incorrectly.
+         * *Reliance*:  It is the measure upto whihc hummman can accuractly predict the performers' inference results w/o under or over-estimation. It is the sum of both *JNT* and *JPT*.
 
 
       </details>
