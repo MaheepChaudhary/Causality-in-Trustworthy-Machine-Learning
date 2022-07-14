@@ -8,52 +8,103 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
 
   - [The Seven Tools of Causal Inference with Reflections on Machine Learning](https://ftp.cs.ucla.edu/pub/stat_ser/r481.pdf) 
       - <details><summary>Maheep's notes </summary>
-         The author proposes the 7 tools based on the 3 ladder of causation, i.e. Associaion, Intervention and Counterfactual. the paper proposes a diagram which describes that we have some assumptions from which we answer our query and from our data we validate our assumptions, i.e. "Fit Indices".The author proposes the 7 tools as :- 
-         <br>
-         1. Transparency and Testability : Transparency indicates that the encoded form is easily usable and compact. The testability validates that the assumption encoded are compatible with the available data
-         <br>
-         2. Do-Calculas and the control of Confounding : It is used for intervention, mainly used when we are trying to shift from 1st layer to 2nd. 
-         <br>
-         3. The Algorithmization of Counterfactuals : When we can analyse the counterfactual reasoning using the experimental or observational studies. 
-         <br>
-         4.  Mediation Analysis and the Assessment of Direct and  Indirect Effects : We find out the direct and indirect effects, such as what fraction of effect does X on Y mediated by variable Z.
-         <br>
-         5.  Adaptability, External Validity and Sample Selection Bias : Basically it deals with the robustness of the model and offers do-calculas for overcoming the bias due to environmental changes.
-         <br>
-         6. Recovering from Missing Data : The casual inference is made to find out the data-generating principles through probablisitic relationship and therefore promises to fill the missing data. 
-         <br>
-         7. Causal Discovery : The d-separation can ebable us to detect the testable implications of the casual model therefore can prune the set of compatible models
+         
+         The author proposes the 7 tools based on the 3 ladder of causation, i.e. *Associaion, Intervention and Counterfactual*. the paper proposes a diagram which describes that we have some assumptions from which we answer our query and from our data we validate our assumptions, i.e. "Fit Indices".The author proposes the 7 tools as :- 
+         
+         * **Transparency and Testability** : Transparency indicates that the encoded form is easily usable and compact. The testability validates that the assumption encoded are compatible with the available data
+         
+         * **Do-Calculas and the control of Confounding** : It is used for intervention, mainly used when we are trying to shift from 1st layer to 2nd. 
+         
+         * **The Algorithmization of Counterfactuals** : When we can analyse the counterfactual reasoning using the experimental or observational studies. 
+         
+         *  **Mediation Analysis and the Assessment of Direct and  Indirect Effects** : We find out the direct and indirect effects, such as what fraction of effect does X on Y mediated by variable Z.
+         
+         * **Adaptability, External Validity and Sample Selection Bias** : Basically it deals with the robustness of the model and offers do-calculas for overcoming the bias due to environmental changes.
+         
+         * **Recovering from Missing Data** : The casual inference is made to find out the data-generating principles through probablisitic relationship and therefore promises to fill the missing data. 
+         
+         * **Causal Discovery** : The d-separation can ebable us to detect the testable implications of the casual model therefore can prune the set of compatible models
          significantly to the point where causal queries can be estimated directly from that set.
+        
         </details>
 
   - [On Pearl’s Hierarchy and the Foundations of Causal Inference](https://causalai.net/r60.pdf) 
       - <details><summary>Maheep's notes </summary>
-        The pearl causal hierarchy encodes different concepts like : association. intervention and counterfactual.
+
+        The pearl causal hierarchy encodes different concepts like : *association. intervention and counterfactual*.
+        
+        * *Corollary1* : It is genrally impossible to draw higher-layer  inferences using only lower-layer informatio but the authors claim that they have atleast developed a framework to move from *layer 1* to *layer 2* just from the *layer 1* data using Causal Bayesian Network that uses *do-calculas*, i.e. intervention to get insight of *layer 2* using the *layer 1* data. 
+
         <br>
-        Corollary1 : It is genrally impossible to draw higher-layer  inferences using only lower-layer informatio but the authors claim that they have atleast developed a framework to move from layer 1 to layer 2 just from the layer 1 data using Causal Bayesian Network that uses do-calculas, i.e. intervention to get insight of layer 2 using the layer 1 data. 
-        <br>
-        A SCM includes 4 variables, i.e. exongenous "U", endogneous "V", set of functions and P(U).
+        A SCM includes 4 variables: *Exongenous* 
+        $U$
+        , *Endogneous* 
+        $V$
+        , *set of functions*
+        $f$ 
+        and 
+        $P(U)$.
+
         <br>
         A structural model is said to be markovian if the variable in the exogenous part are independent. 
-        <br>
-        Observing : Joint porobability distribution for the Y(u) = y<br>
-        Interventional SCM : SCM computed by fixing some varibales X = x. where X is in V.<br>
-        Potential Response : It is the solution of Y caluclated thorugh the set of eqautions of SCM when we intervene on it.   
-        Intervening : observing just when we do(X  = x)
-        Effectiveness : P(v|do(x)) is effectiveness when for every v, P(v|do(x)) = 1<br>
-        Collapse : The layers collapse when we can compute the results of the upper layer using the lower layer. For ex:- if Layer 2 collapses to layer 1, then it implies that we can draw all possible causal conculsion with mere correlation. 
-        <br>
-        Theorem 1: PCH never collapses. 
-        <br>
+        
+        * *Observing* : Joint porobability distribution for the 
+        $Y(u) = y$
+
+        * *Interventional SCM* : SCM computed by fixing some varibales 
+        $X = x$ 
+        where 
+        $X$ is in 
+        $V$.
+
+        * *Potential Response* : It is the solution of 
+        $Y$ 
+        caluclated thorugh the set of eqautions of *SCM* when we intervene on it.   
+        
+        * *Intervening* : observing just when we 
+        $do(X  = x)$
+
+        * *Effectiveness* : 
+        $P(v|do(x))$ 
+        is effectiveness when for every 
+        $v$ 
+        and 
+        $P(v|do(x)) = 1$
+
+        * *Collapse* : The layers collapse when we can compute the results of the upper layer using the lower layer. For ex:- if Layer 2 collapses to layer 1, then it implies that we can draw all possible causal conculsion with mere correlation. 
+        
+        **Theorem 1** : *PCH never collapses.* 
         It could be  easily observed/seen that SCM agrees on all lower layers but disagrees on all higher layers.  A typical rdata-generating SCM encodes rich information at all threee layers but even very small changes might have substantial effect, which is generally seen in the higher layers.  
-        <br>
-        Truncated Factorization Product is the equation stating P(v|do(x)) = pi P(v|pai)
-        <br>
-        When two variables are correlated it does not mean that one is causing the other, i.e. P(y|do(x)) = P(y) and P(x|do(y)) =P(x), in this case what happens is there is another unobserved variable that is influencing both x and y variable which is often indicated by the bi-directed line in the graph.
-        <br>
+        
+        Truncated Factorization Product is the equation stating 
+        $P(v|do(x)) = pi P(v|p_{ai})$
+        
+        When two variables are correlated it does not mean that one is causing the other, i.e. 
+        $P(y|do(x)) = P(y)$ 
+        and 
+        $P(x|do(y)) =P(x)$
+        , in this case what happens is there is another unobserved variable that is influencing both 
+        $x$ 
+        and 
+        $y$ 
+        variable which is often indicated by the bi-directed line in the graph.
+        
         Factorization implied by the semi-markovian model does not act like chain rule, i.e. 
+
+        $$
         P(e|a,b,c,d) = P(a)P(b|a)P(c|b,a)P(d|c,b,a)
-        but the factorization looks something like: P(e|d,c,b,a) = P(a)P(b|a)P(c|a)P(e|b.c) which implies that b and c are only affected by a also seen by a direct edge in SCM. 
+        $$
+
+        but the factorization looks something like:
+
+        $$ 
+        P(e|d,c,b,a) = P(a)P(b|a)P(c|a)P(e|b,c)
+        $$
+         
+        which implies that 
+        $b$ 
+        and 
+        $c$ are only affected by a also seen by a direct edge in *SCM*. 
           
         </details>
 
