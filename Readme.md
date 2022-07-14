@@ -36,6 +36,7 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
         * *Corollary1* : It is genrally impossible to draw higher-layer  inferences using only lower-layer informatio but the authors claim that they have atleast developed a framework to move from *layer 1* to *layer 2* just from the *layer 1* data using Causal Bayesian Network that uses *do-calculas*, i.e. intervention to get insight of *layer 2* using the *layer 1* data. 
 
         <br>
+        
         A SCM includes 4 variables: 
         *Exongenous* 
         $U$
