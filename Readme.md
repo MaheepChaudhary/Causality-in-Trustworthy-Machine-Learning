@@ -2474,13 +2474,13 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
 
       > ![image](images/tom2)
 
-   * The author takes into account set 
-   $C$
-   contaning the images that 
-   $M$ 
-   predicts correctly and incorrectly in 
-   $W$
-   . The author uses two metrics to quatify human trust on system using:
+      * The author takes into account set 
+      $C$
+      contaning the images that 
+      $M$ 
+      predicts correctly and incorrectly in 
+      $W$
+      . The author uses two metrics to quatify human trust on system using:
          * *JPT* : It is the $\%$ of images in 
          $C$
          that human feel the model 
