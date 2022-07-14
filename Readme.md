@@ -49,7 +49,7 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
         and 
         $P(U)$.
 
-        <br>
+   
         A structural model is said to be markovian if the variable in the exogenous part are independent. 
         
         * *Observing* : Joint porobability distribution for the 
