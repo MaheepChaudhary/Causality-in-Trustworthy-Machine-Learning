@@ -36,11 +36,14 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
         * *Corollary1* : It is genrally impossible to draw higher-layer  inferences using only lower-layer informatio but the authors claim that they have atleast developed a framework to move from *layer 1* to *layer 2* just from the *layer 1* data using Causal Bayesian Network that uses *do-calculas*, i.e. intervention to get insight of *layer 2* using the *layer 1* data. 
 
         <br>
-        A SCM includes 4 variables: *Exongenous* 
+        A SCM includes 4 variables: 
+        *Exongenous* 
         $U$
-        , *Endogneous* 
+        , 
+        *Endogneous* 
         $V$
-        , *set of functions*
+        , 
+        *set of functions*
         $f$ 
         and 
         $P(U)$.
@@ -77,7 +80,7 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
         It could be  easily observed/seen that SCM agrees on all lower layers but disagrees on all higher layers.  A typical rdata-generating SCM encodes rich information at all threee layers but even very small changes might have substantial effect, which is generally seen in the higher layers.  
         
         Truncated Factorization Product is the equation stating 
-        $P(v|do(x)) = pi P(v|p_{ai})$
+        $P(v|do(x)) = \pi P(v|p_{ai})$
         
         When two variables are correlated it does not mean that one is causing the other, i.e. 
         $P(y|do(x)) = P(y)$ 
@@ -100,7 +103,7 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
         $$ 
         P(e|d,c,b,a) = P(a)P(b|a)P(c|a)P(e|b,c)
         $$
-         
+
         which implies that 
         $b$ 
         and 
