@@ -527,16 +527,7 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
          3) The model is then distilled using the knowledge distillation manner, i.e. `L = KL(P_T, P_S)`, where `P_T` is the prediction of the teacher model and the `P_S` is the prediction of the student model. 
         </details>
         
-                
-   - [CX-ToM: Counterfactual Explanations with Theory-of-Mind for Enhancing Human Trust in Image Recognition Models](https://arxiv.org/pdf/2109.01401.pdf)
-      - <details><summary>Maheep's Notes</summary>
-        The paper is kind of an extension of the above paper(CoCoX), i.e. it also uses fault-lines for explainability but states a dialogue between a user and the machine. The model is made by using the fault-lines and the Theory of Mind(ToM). <br><br>
-        The proposed is implemented by taking an image and the same image is blurred and given to a person, then the machine take out the crucial features by thinking what the person may have understood and what is the information it should provide. The person is given more images and then the missing parts are told to be predicted after the dialogue, if the person is able to predict the parts that it was missing before then the machine gets a positive reward and functions in a RL training technique way.  
-
-        !['Algorithm'](images/2.png)
-        </details>
-        
-        
+                        
    - [Designing Counterfactual Generators using Deep Model Inversion](https://arxiv.org/pdf/2109.14274.pdf)
       - <details><summary>Maheep Notes</summary>
         The paper focues on the scenario when the we have access only to the trained deep classifier and not the actual training data. The paper proposes a goal to develop a deep inversion approach to generate counterfactual explanations. The paper propses methods to preserve metrics for semantic preservation using the different methods such as ISO and LSO. The author also focuses on manifold consistency for the counterfactual image using the Deep Image Prior model. -
@@ -2074,91 +2065,6 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
       
       </details>  
 
-- [CoCoX: Generating Conceptual and Counterfactual Explanations via Fault-Lines](https://ojs.aaai.org/index.php/AAAI/article/view/5643/5499)
-   - <details><summary>Maheep's Notes</summary>
-
-      The paper focuses to increase the interpretability of the network by generating counterfactual images 
-      $I'$ 
-      by minimally perturbing the changes in the original image
-      $I$
-
-      The author accounts for its contribution as:
-      * Generates fault-line explanation, which are a set of xconcepts that are used to alter the prediction of the image using a CNN 
-      $M$
-      . The xconcepts can be classified into two types:
-         * *Positive Fault-lines* : These are xconcepts that are added to the input image 
-         
-         $$
-         I' = I + \psi_{I,c_{alt},c_{pred}}^+
-         $$
-
-         * *Negative Fault-lines* : These are xconcepts that are subtracted from the input image to generate the counterfactual image.
-
-         $$
-         I' = I - \psi_{I,c_{alt},c_{pred}}^-
-         $$
-
-      
-      * It mines the fault-lines using the CNN of different 
-      $C$
-      classes in the dataset
-      $\mathcal{X}$ 
-      
-      >![image](images/cocox.png)
-
-      When a query $Q = <I,c_{pred}, c_{alt}>$ is passed to the image the model optimizes using the equation below:
-
-      $$
-         arg \ \underset{\psi}{max} P(\psi, \epsilon_{pred}, \epsilon_{alt}, \epsilon| Q) 
-      $$
-
-      where $\epsilon$ represents the all xconcepts, which is retrieved using the posterier 
-      $P(\epsilon|\mathcal{X}, M)$
-      Similarly 
-      $\epsilon_{pred}$
-      and 
-      $\epsilon_{alt}$ 
-      are obtained by:
-
-      $$
-         P(\epsilon_{pred}|\epsilon, X, I, c_{pred}, M)
-      $$
-
-      $$
-         P(\epsilon_{alt}|\epsilon, X, I, c_{alt}, M)
-      $$
-
-      >![image](images/cocox1.png
-      )
-
-      The process of mining of the xconcepts include: 
-      * The feature extractor 
-      $f(\cdot)$ 
-      and
-      classifier 
-      $g(\cdot)$
-      are used to build the xconcepts.
-      * Different feature maps are extracted using 
-      $f(I)$
-      which are seen as an instance of xconcept.
-      * The feature maps are then used to obtain localized maps, which are super-pixel of feature maps and are obtained using Grad-CAM, suing equation 1 in the figure below.
-      * Top-$p$ pixels are selected for each class, making a total of $p*C$ super-pixels.
-      * These are clustered using K-mean into different xconcepts into 
-      $G$ 
-      groups.
-
-      >!['Algorithm'](images/cocox3.png)
-
-      To get the importance of the concepts for a target class $C$
-      . They compute directional derivatives 
-      $S_{c,X}$ 
-      to produce estimates of how important the concept X was for a CNN’s prediction of a target class $C$, as defined in the $III^{rd}$ step.
-
-      The fault lines are detected using the $4^{th}$ step, where 
-      >![image](images/cocox2.png)
-
-      </details>
-
 
 - [Explaining the Black-box Smoothly-A Counterfactual Approach](https://arxiv.org/pdf/2101.04230.pdf)
    - <details><summary>Maheep's Notes</summary>
@@ -2446,3 +2352,144 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
             
       </details>      
 
+
+- [CoCoX: Generating Conceptual and Counterfactual Explanations via Fault-Lines](https://ojs.aaai.org/index.php/AAAI/article/view/5643/5499)
+   - <details><summary>Maheep's Notes</summary>
+
+      The paper focuses to increase the interpretability of the network by generating counterfactual images 
+      $I'$ 
+      by minimally perturbing the changes in the original image
+      $I$
+
+      The author accounts for its contribution as:
+      * Generates fault-line explanation, which are a set of xconcepts that are used to alter the prediction of the image using a CNN 
+      $M$
+      . The xconcepts can be classified into two types:
+         * *Positive Fault-lines* : These are xconcepts that are added to the input image 
+         
+         $$
+         I' = I + \psi_{I,c_{alt},c_{pred}}^+
+         $$
+
+         * *Negative Fault-lines* : These are xconcepts that are subtracted from the input image to generate the counterfactual image.
+
+         $$
+         I' = I - \psi_{I,c_{alt},c_{pred}}^-
+         $$
+
+      
+      * It mines the fault-lines using the CNN of different 
+      $C$
+      classes in the dataset
+      $\mathcal{X}$ 
+      
+      >![image](images/cocox.png)
+
+      When a query $Q = <I,c_{pred}, c_{alt}>$ is passed to the image the model optimizes using the equation below:
+
+      $$
+         arg \ \underset{\psi}{max} P(\psi, \epsilon_{pred}, \epsilon_{alt}, \epsilon| Q) 
+      $$
+
+      where $\epsilon$ represents the all xconcepts, which is retrieved using the posterier 
+      $P(\epsilon|\mathcal{X}, M)$
+      Similarly 
+      $\epsilon_{pred}$
+      and 
+      $\epsilon_{alt}$ 
+      are obtained by:
+
+      $$
+         P(\epsilon_{pred}|\epsilon, X, I, c_{pred}, M)
+      $$
+
+      $$
+         P(\epsilon_{alt}|\epsilon, X, I, c_{alt}, M)
+      $$
+
+      >![image](images/cocox1.png
+      )
+
+      The process of mining of the xconcepts include: 
+      * The feature extractor 
+      $f(\cdot)$ 
+      and
+      classifier 
+      $g(\cdot)$
+      are used to build the xconcepts.
+      * Different feature maps are extracted using 
+      $f(I)$
+      which are seen as an instance of xconcept.
+      * The feature maps are then used to obtain localized maps, which are super-pixel of feature maps and are obtained using Grad-CAM, suing equation 1 in the figure below.
+      * Top-$p$ pixels are selected for each class, making a total of $p*C$ super-pixels.
+      * These are clustered using K-mean into different xconcepts into 
+      $G$ 
+      groups.
+
+      >!['Algorithm'](images/cocox3.png)
+
+      To get the importance of the concepts for a target class $C$
+      . They compute directional derivatives 
+      $S_{c,X}$ 
+      to produce estimates of how important the concept X was for a CNN’s prediction of a target class $C$, as defined in the $III^{rd}$ step.
+
+      The fault lines are detected using the $4^{th}$ step, where 
+      >![image](images/cocox2.png)
+
+      </details>
+
+
+- [CX-ToM: Counterfactual Explanations with Theory-of-Mind for Enhancing Human Trust in Image Recognition Models](https://arxiv.org/pdf/2109.01401.pdf)
+   - <details><summary>Maheep's Notes</summary>
+
+   The paper proposes to enhance the explainability of the model using the fault-lines(as defined above work). The author aurgues that *understandability* and *Predictability* act as the basic pillars of explainability of a system. Therefore establishes a dialogue between a user and the machine taking Theory of Mind(ToM) as the basis of it. 
+
+   > ![images](images/tom)  
+
+   >![images](images/tom1.png)
+
+   The author implements it by:
+   * The dialogue aims to let the machine know about the user's intention of understanding and human to know about the machine's understanding of the system.
+   * The author setup an experiment in which a blurred image is provided to the user while the original image is provided to the machine. 
+   * The dialogue from the user are transffered in form of two type of questions *W-QA* and *E-QA* to understand from the machine as to what is on the place of the blurred image.
+      * *W-QA* include question of type *what*, *why*, *where*.
+      * *E-QA* include the questions which are seeking for explanation.
+   
+   > ![image](images/tom3.png)
+
+   * The machine predicts about the user's mind by building the graph
+   $Pg^{UinM}$
+   to give the only answer that might enhance the understandind of user to develop the understanding of user, while 
+   $pg^M$ 
+   is the graph of the image that machine has build for itself. The machine develop the understanding by giving bubbles to the blurred picture to develop understanding of user w/ minimum information. The 
+   $Pg^{MinU}$
+   is at the end compared w/ 
+   $Pg^{UinM}$
+   to evaluate how much has the user understood and how much machine has comprehended the user has understood.
+
+   > ![image](images/tom4.png)
+
+   * The author uses the fault-lines to develop the understanding of the user in these places of graph to develop understanding of user. It focuses to give the fault-lines on the basis:
+      * If the model thinks the user has low confidence of the model capability of classification b.w. *Person* and the *Deer* then it will highlight the fault-lines that shows the difference b.w. them but if the user have low-confidene on model capability of classification b.w. *Man* and the *Woman*, then it will show the corresponding fault-lines. 
+
+   > ![image](images/tom2)
+
+  * The author takes into account set 
+  $C$
+  contaning the images that 
+  $M$ 
+  predicts correctly and incorrectly in 
+  $W$
+  . The author uses two metrics to quatify human trust on system using:
+      * *JPT* : It is the $\%$ of images in 
+      $C$
+      that human feel the model 
+      $M$ would predict correctly.
+      * *JNT* : It is the $%$ of images in 
+      $W$ 
+      that human feel the model 
+      $M$ would predict incorrectly.
+      * *Reliance*:  It is the measure upto whihc hummman can accuractly predict the performers' inference results w/o under or over-estimation. It is the sum of both *JNT* and *JPT*.
+
+
+      </details>
