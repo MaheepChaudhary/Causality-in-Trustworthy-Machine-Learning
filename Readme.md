@@ -1508,7 +1508,6 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
         </details>  
 
 
----
 
 ## Explainability:
 The papers in this section focuses to use the concepts of Causality to increase the interpretability of the Neural Network.
