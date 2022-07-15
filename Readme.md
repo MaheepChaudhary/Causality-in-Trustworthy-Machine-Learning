@@ -1554,7 +1554,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
         
         The paper proposes a novel technique to combine feature attribution with counterfactual explanations to generate attribution maps that highlight the most discriminative features between pairs of classes. This is implemented as:
 
-        They use a *cycle-GAN* to translate real images $X$ of class $Y^i$ to counterfactual images $X'$. Then both the images are fed into the *Discriminative Attribution model* which finds out the most discriminative features separting the 2 images. The most important part $m$ of class $Y^i$ is masked out.
+        They use a *cycle-GAN* to translate real images $X$ of class $Y^i$ to counterfactual images $X'$. Then both the images are fed into the *Discriminative Attribution model* which finds out the most discriminative features separting the $2$ images. The most important part $m$ of class $Y^i$ is masked out.
         The part is extracted from the original image $X$ and is combined with the $1-m$ region of counterfactual image to generate $x_H$ of class $Y^i$. 
       
         !['Diagram'](images/6.png)  
@@ -1632,9 +1632,9 @@ The papers in this section focuses to use the concepts of Causality to increase 
 
         <!-- Although the paper was not quite understood by me, can be modified in the end again. -->
         The work mainly focuses for multi-way counterfactual class explanation. It provides the explanation for failed decision by dissecting:
-            * The features $A$ harnessed for wrong classification.
-            * The minimal features $B$ changed to generate the counterfactual image, so that model predicts as correct/true class.
-            * Find the reason for failed decision by $B - A$, highlighting positive and negative contribution. 
+        * The features $A$ harnessed for wrong classification.
+        * The minimal features $B$ changed to generate the counterfactual image, so that model predicts as correct/true class.
+        * Find the reason for failed decision by $B - A$, highlighting positive and negative contribution. 
         * It aims to have very less difference b.w. the generated counterfactual image and input image.
 
         ![Model](images/37.png)
