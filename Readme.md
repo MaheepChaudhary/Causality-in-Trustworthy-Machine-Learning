@@ -1652,9 +1652,9 @@ The papers in this section focuses to use the concepts of Causality to increase 
         *of class* 
         $C$ 
         *using the features of image* 
-        $I$
+        $I'$
         *of distractor class*
-        $C'$ *to change the label of image* $I$ **as* $C'$
+        $C'$ *to change the label of image* $I*$ *as* $C'$
         .'' The analogy can be more understood by dissecting the figure below:
 
         > ![image](images/cut_paste.png)
@@ -1812,7 +1812,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
 
          with a linear classifier $Y = W^Tz + b$
          . They generate a counterfatual by altering a feature representation of $X$ along the direction of weight vector, 
-         $z' = z + \alpha*w$ 
+         $z' = z + \alpha*W$ 
 
          where 
          $\tilde{x} = \psi^{-1}(z + \alpha*W)$ 
@@ -1821,10 +1821,10 @@ The papers in this section focuses to use the concepts of Causality to increase 
          In this work the author ensures it by developing a function that extracts unrelated properties.
          $\mathcal{E}(x) = v^{T}z$
 
-         where $v$ is orthogonal to $w$ and ensuring using the equation below:
+         where $v$ is orthogonal to $W$ and ensuring using the equation below:
          
          $$
-            \mathcal{E}(\tilde{x}) = v^T(z + \alpha w) = v^Tz = \mathcal{E}(x)
+            \mathcal{E}(\tilde{x}) = v^T(z + \alpha W) = v^Tz = \mathcal{E}(x)
          $$
 
          Also, to increase the transparency of the model it creates isofactual surfaces which provides variation in the feature distribution of samples of same label. 
@@ -1839,7 +1839,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
          $$
 
          This hyperplane can also be used to create hyperplanes using
-         $\psi^{-1}(e_i + \alpha w)$.
+         $\psi^{-1}(e_i + \alpha W)$.
         </details>  
 
 
