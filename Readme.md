@@ -1889,7 +1889,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
          * Uncover multiple distinct valuable explanation about the model
                
          <br>
-         
+
          The author proposes: 
          * DiVE uses an encoder, a decoder, and a fixed-weight ML model.
          * Encoder and Decoder are trained in an unsupervised manner to approximate the data distribution on which the ML model was trained. 
@@ -2316,7 +2316,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
       * The discriminator loss can be defined as:
 
       $$
-      L = \sum_{i}^T \ -a_i \ log(D^i(\overline{x})) - (1 - a_i)\ log(1 - D^i(a_i)) + \mathbb{E} \ ||x - \overline{x}||_2
+      L = \sum_{i}^T \ -a_i \ log(D^i(\overline{x})) - (1 - a_i)\ log(1 - D^i(\overline{x})) + \mathbb{E} \ ||x - \overline{x}||_2
       $$
 
       The overall solution can be summed up using the equation below:
