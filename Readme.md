@@ -1554,7 +1554,8 @@ The papers in this section focuses to use the concepts of Causality to increase 
         
         The paper proposes a novel technique to combine feature attribution with counterfactual explanations to generate attribution maps that highlight the most discriminative features between pairs of classes. This is implemented as:
 
-        They use a *cycle-GAN* to translate real images $X$ of class $Y^i$ to counterfactual images $X'$. Then both the images are fed into the *Discriminative Attribution model* which finds out the most discriminative features separting the 2 image. The most important part is masked out. The part is extracted from the original image $X$ and is combined with the counterfactual image by intiallly masking the region to get the original image. 
+        They use a *cycle-GAN* to translate real images $X$ of class $Y^i$ to counterfactual images $X'$. Then both the images are fed into the *Discriminative Attribution model* which finds out the most discriminative features separting the 2 images. The most important part $m$ of class $Y^i$ is masked out.
+        The part is extracted from the original image $X$ and is combined with the $1-m$ region of counterfactual image to generate $x_H$ of class $Y^i$. 
       
         !['Diagram'](images/6.png)  
         </details> 
