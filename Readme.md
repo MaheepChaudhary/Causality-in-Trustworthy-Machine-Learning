@@ -1889,6 +1889,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
          * Uncover multiple distinct valuable explanation about the model
                
          <br>
+         
          The author proposes: 
          * DiVE uses an encoder, a decoder, and a fixed-weight ML model.
          * Encoder and Decoder are trained in an unsupervised manner to approximate the data distribution on which the ML model was trained. 
@@ -2276,7 +2277,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
       * Counterfactual for certian class might not exist in the data, which might create problems as the selected prototypes and criticism are not sufficient for the counterfactual analysis. 
       
       <br>
-      
+
       The author implements it by:
 
       * An encoder 
