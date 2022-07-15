@@ -1862,7 +1862,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
          * *Cycle-Consistency Loss*: It monitors the convertability quality of both the functions using the equation:
 
          $$
-            L_{cycle}(G,F) = \mathbb{E}[||F(G(X)) - X||_{1}] + \mathbb{E}[||G(F(Y)) - Y||_{1}]
+            L_{cycle}(G,F) = \mathbb{E}[||F(G(X)) - X||_1] + \mathbb{E}[||G(F(Y)) - Y||_1]
          $$
 
          * *Counter Loss*: It monitors the confidence prediciton of generated counterfactual image w.r.t. to the target class.
@@ -1888,7 +1888,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
          non-trivial explanations.  
          * Uncover multiple distinct valuable explanation about the model
                
-         
+         <br>
          The author proposes: 
          * DiVE uses an encoder, a decoder, and a fixed-weight ML model.
          * Encoder and Decoder are trained in an unsupervised manner to approximate the data distribution on which the ML model was trained. 
@@ -1898,8 +1898,8 @@ The papers in this section focuses to use the concepts of Causality to increase 
          >![image](images/dive.png)
             
          The author proposes 3 main losses to achieve the aforementioned objectives: 
-         * *Counterfatual loss* : It identifies a change of latent attributes that will cause the ML model f to change it’s prediction.
-         * *Proximity loss* : The goal of this loss function is to have minimum dis-similarity b.w.the reconstructed sample by the decoder
+         * *Counterfatual loss* : It identifies a change of latent attributes that will cause the ML model to change it’s prediction.
+         * *Proximity loss* : The goal of this loss function is to have minimum dis-similarity b.w. the reconstructed sample by the decoder
          $\tilde{x}$ 
          and the input $x$ in terms of appearance and attributes. It achieves this using the equation:
 
@@ -1907,7 +1907,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
             L_{prox}(x,e) = ||x - \tilde{x}||_1 + \gamma \cdot ||e||_1
          $$
          
-         &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+         &nbsp; &nbsp;
          The second term forces the model to identify a 
          sparse perturbation to the latent space so as to produce sparse explanations. 
          * *Diversity loss* : This loss prevents the multiple explanations of the model from being identical and reconstructs different images modifing the different spurious correlations and explaing through them.
@@ -1955,16 +1955,19 @@ The papers in this section focuses to use the concepts of Causality to increase 
       * Takes uncertainity into account while generating counterfactual explanation. 
 
       The author implements it using 3 modules:
-      * *Autoencoder*: It encodes the 
-      * A predictive model that takes as input the latent representations and outputs the desired target attribute (e.g., diagnosis state, age etc.) along with its prediction uncertainty 
-      * A counterfactual optimization strategy that uses an uncertainty-based calibration objective to reliably elucidate the intricate relationships between image signatures and the target attribute
+      * *Autoencoder*: It encodes the followings: 
+         * A predictive model that takes as input the latent representations and outputs the desired target attribute (e.g., diagnosis state, age etc.) along with its prediction uncertainty 
+         * A counterfactual optimization strategy that uses an uncertainty-based calibration objective to reliably elucidate the intricate relationships between image signatures and the target attribute
 
       >![image](images/struc.png)
       
       TraCE works on the following metrics to evaluate the counterfactual images, i.e. 
 
       * **Validity**: ratio of the counterfactuals that actually have the desired target attribute to the total number of counterfactuals  
-      * The confidence of the **image** and **sparsity**, i.e. ratio of number of pixels altered to total no of pixels. The other 2 metrcs are **proximity**, i.e. average $l_2$ distance of each counterfactual to the K-nearest training samples in the latent space and **Realism score** so as to have the generated image is close to the true data manifold.
+      * The confidence of the **image** and **sparsity**, i.e. ratio of number of pixels altered to total no of pixels. 
+      * The other 2 metrcs are 
+         * **proximity** :  Average out the $l_2$ distance of each counterfactual to the K-nearest training samples in the latent space.
+         * **Realism score** : To have the generated image is close to the true data manifold.
       * TraCE reveals attribute relationships by generating counterfactual image using the different attribute like age $A$ and diagnosis predictor $D$. 
 
       $$
@@ -2271,6 +2274,8 @@ The papers in this section focuses to use the concepts of Causality to increase 
       
       *  Counterfactuals generation for certain class might not be feasible as it is not possible to perturb the raw data due to various issue of piracy and the hassle to identify the perturbation.
       * Counterfactual for certian class might not exist in the data, which might create problems as the selected prototypes and criticism are not sufficient for the counterfactual analysis. 
+      
+      <br>
       
       The author implements it by:
 
