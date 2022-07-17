@@ -1515,58 +1515,58 @@ The papers in this section focuses to use the concepts of Causality to increase 
 <!-- I am not able to grasp the methodology of what is multiway counterfactual mechanism -->
 
    - [Contrastive_Counterfactual_Visual_Explanations_With_Overdetermination](https://arxiv.org/pdf/2106.14556.pdf)
-   - <details><summary>Maheep's Notes</summary>
+      - <details><summary>Maheep's Notes</summary>
 
-      The author slams the above works and contends that *Counterfactual Explanation* should be contrastive, counterfactual and measurable. It focuses to generate counterfactual explanation for medical image classification.
+         The author slams the above works and contends that *Counterfactual Explanation* should be contrastive, counterfactual and measurable. It focuses to generate counterfactual explanation for medical image classification.
 
-      >![image](images/overdetermination.png)
-      
-      The author proposes the following things in the paper:
+         >![image](images/overdetermination.png)
+         
+         The author proposes the following things in the paper:
 
-      * It not only highlights the difference b.w. the counterfactual and factual images as aforementioned works but also signifies each segment importance in image prediction after segmenting it out using ''*Clear Image*''.
-      * It aims to unravel the causal structure of the system, arguing that "*AI provide information about the factors on which the model depends but also how it depends*". 
-      * It also proposes the concept of *causal overdetermination*, which corresponds to the scenario when there are 2 or more than that causes present for an event.
+         * It not only highlights the difference b.w. the counterfactual and factual images as aforementioned works but also signifies each segment importance in image prediction after segmenting it out using ''*Clear Image*''.
+         * It aims to unravel the causal structure of the system, arguing that "*AI provide information about the factors on which the model depends but also how it depends*". 
+         * It also proposes the concept of *causal overdetermination*, which corresponds to the scenario when there are 2 or more than that causes present for an event.
 
-      The author contends that the mask resulted from the subtraction of factual and counterfactual is not a good measure of explainability as it can vary significantly and also other critical segments shoud be absent.
-      Therefore it takes *mask*, *image* and *classification behaviour*  to generate counterfactual image. 
+         The author contends that the mask resulted from the subtraction of factual and counterfactual is not a good measure of explainability as it can vary significantly and also other critical segments shoud be absent.
+         Therefore it takes *mask*, *image* and *classification behaviour*  to generate counterfactual image. 
 
-      The author implements it by 
-      
-      * Dividing the image into segments using the *Clear Image* module which by iteratively increasing the size of segments until an individual comes out to be counterfactual in the set.
-      * The two types of segments are created, as shown in image (a) and (b): 
-         * (a) The ones that differentiates the counterfactual and factual image w/ high intensity 
-         $S_h$
-         * (b) The ones that are not highly differentiable but carries a good weight in the classification of the image
-         $S_l$.
+         The author implements it by 
+         
+         * Dividing the image into segments using the *Clear Image* module which by iteratively increasing the size of segments until an individual comes out to be counterfactual in the set.
+         * The two types of segments are created, as shown in image (a) and (b): 
+            * (a) The ones that differentiates the counterfactual and factual image w/ high intensity 
+            $S_h$
+            * (b) The ones that are not highly differentiable but carries a good weight in the classification of the image
+            $S_l$.
 
-      > ![image](images/overdetermination1)
+         > ![image](images/overdetermination1)
 
-      > ![image](images/overdetermination3.png)
+         > ![image](images/overdetermination3.png)
 
-      * The importance of a segment is quantified by replacing segment of image
-      $x$
-      , i.e. 
-      $s = \{s_1, s_2, ...., s_n\}$
-      with the segements of the contrast image 
-      $x'$
-      , i.e. 
-      $s' = \{s_1', s_2', ...., s_n'\}$
-      to quantify the effect of each segment on classification. 
-      To limit the overdetermination, the work only replaces at-max 4 segments at a time to create a counterfacutal image.
+         * The importance of a segment is quantified by replacing segment of image
+         $x$
+         , i.e. 
+         $s = \{s_1, s_2, ...., s_n\}$
+         with the segements of the contrast image 
+         $x'$
+         , i.e. 
+         $s' = \{s_1', s_2', ...., s_n'\}$
+         to quantify the effect of each segment on classification. 
+         To limit the overdetermination, the work only replaces at-max 4 segments at a time to create a counterfacutal image.
 
-      > ![image](images/overdetermination2.png) 
+         > ![image](images/overdetermination2.png) 
 
-      * It uses regression equation
-      $w^TX$
-      to quantify the contribution that individual segement make to 
-      $y$
-      . With regression the classification probability is also considered and the subtraction of both results in *pleural effusion*.
-      It can be more elaborated using the image below where
-      The report identifies that substituting both segments 4 and 11 with the corresponding segments from its contrast image flips the classification probability to ’healthy’ According to the logistic regression equation these substitutions would change the probability of the X-ray being classified as ’pleural effusion’ to 0.44. However, when these segments are actually substituted and passed through the classifier, the probability changed to 0.43, hence the fidelity error is 0.01. CLEAR Image also identifies that substituting segments 3 and 11 also creates an image-counterfactual. The coefficient value becomes 0 if the segment belongs to the counterfactual image and becomes 1 if belongs to the original image. 
+         * It uses regression equation
+         $w^TX$
+         to quantify the contribution that individual segement make to 
+         $y$
+         . With regression the classification probability is also considered and the subtraction of both results in *pleural effusion*.
+         It can be more elaborated using the image below where
+         The report identifies that substituting both segments 4 and 11 with the corresponding segments from its contrast image flips the classification probability to ’healthy’ According to the logistic regression equation these substitutions would change the probability of the X-ray being classified as ’pleural effusion’ to 0.44. However, when these segments are actually substituted and passed through the classifier, the probability changed to 0.43, hence the fidelity error is 0.01. CLEAR Image also identifies that substituting segments 3 and 11 also creates an image-counterfactual. The coefficient value becomes 0 if the segment belongs to the counterfactual image and becomes 1 if belongs to the original image. 
 
-      > ![image](images/overdetermination4.png)
+         > ![image](images/overdetermination4.png)
 
-      </details> 
+         </details> 
 
 
    - [SCOUT: Self-aware Discriminant Counterfactual Explanations](https://arxiv.org/pdf/2004.07769.pdf)
