@@ -1604,6 +1604,248 @@ The papers in this section focuses to use the concepts of Causality to increase 
 
         </details>
 
+
+   - [Generative_Counterfactuals_for_Neural_Networks_via_Attribute_Informed_Perturbations](https://arxiv.org/pdf/2101.06930.pdf)
+      - <details><summary>Maheep's Notes</summary>
+            
+         The paper tries to generate counterfactual images using a low-dimensional latent space containing the *raw features* and *attribute informed latent space*, which are continously re-iterated for modification to generate a counterfactual image.
+
+         > ![image](images/aip.png)
+
+         The author highlight some of the challenges in the existing works, generating counterfactual image to increase interpretability:
+         
+         *  Counterfactuals generation for certain class might not be feasible as it is not possible to perturb the raw data due to various issue of piracy and the hassle to identify the perturbation.
+         * Counterfactual for certian class might not exist in the data, which might create problems as the selected prototypes and criticism are not sufficient for the counterfactual analysis. 
+         
+         <br>
+
+         The author implements it by:
+
+         * An encoder 
+         $E$ 
+         and decoder 
+         $D$ 
+         structure is proposed which encodes the *raw features* and *attribute related data* where the *raw features* includes the robust features of an object, where the *attribute related data* contains extra encoded information for humans such as "*bounding box*" and other information. 
+         *Attribute related-data* directly influences the quality of generated counterfactual. 
+      
+         $$
+            E(x) = z_o + a_o
+         $$
+
+         * The $z_o$ and $a_o$ are modified iteratively using the gradient-based optimization, specifically by the equaiton:
+
+         $$
+            z^{(n+1)} = z^n - \mu^n \nabla_z L_d(z^n, a^n, z_o, a_o, \overline{y})
+         $$
+
+         $$
+            a^{(n+1)} = a^n - \gamma^n \nabla_a L_d(z^n, a^n, z_o, a_o, \overline{y})
+         $$ 
+
+         where $L_d(\cdot)$ is the cross-entropy loss.
+
+         > ![image](images/aip1.png)
+
+         * The overall counterfactual loss can be categorized into prediction loss using cross-entropy 
+         $l_d(\cdot)$ 
+         and perturbation loss
+
+         $$
+            l_c = l_d(F(G^{dec}(z,a)),\overline{y}) + ||z - z_o||_2 + ||a - a_o||_2
+         $$
+
+         * The discriminator loss can be defined as:
+
+         $$
+         L = \sum_{i}^T \ -a_i \ log(D^i(\overline{x})) - (1 - a_i)\ log(1 - D^i(\overline{x})) + \mathbb{E} \ ||x - \overline{x}||_2
+         $$
+
+         The overall solution can be summed up using the equation below:
+            
+         > ![image](images/aip2.png)
+
+         </details>        
+
+
+
+
+   - [EXPLAINABLE IMAGE CLASSIFICATION WITH EVIDENCE COUNTERFACTUAL](https://arxiv.org/pdf/2004.07511.pdf)
+      - <details><summary>Maheep's Notes</summary>
+
+         The author proposes to generate the counterfactual image by perturbing the original image by identifying the set of features to be replaced.
+
+         The author proposes to integrate the following properties in the proposed model-agnostic model:
+
+         * Unravels the pattern that is used for classification, if true then also provides some meaningful representation of the model.
+         * If error to classify the image then unravels the reason for that.
+         * At last, delineate if the correct classification is classified for wrong feature harnessing by the model.
+
+         <br>
+         The author implements it by:
+
+         * An algorithm is proposed that identifies the EdC features, that if removed can alter the prediction of the model.  
+
+         > ![image](images/evidence_counterfactual.png)
+         
+         * To unravel the EdC features the author proposes SEDC algorithm, the algorithm defined below can be used
+
+         !['Algorithm'](images/4.png)
+
+         * But to generate the counterfactual class, the author proposes a tweaked version of the above algorithm as SEDC-T. In this secario a target class has to be specified and segments are selected based on the largest difference between the target class score and the predicted class score. In case more than one EdC is found, the EdC leading to the highest increase in target class score can be selected.
+         * SEDC-T allows for the generation of more nuanced explanations, since one can find out why the model predicts a class over another class of interest. This can certainly be useful for explaining misclassifications.
+         * As for segmenting and segment repacement as shown in the figure below, the author suggests:
+            * For segmentation the author uses segmentation algorithm that uses the numerical color values to obtain a meaningful grouping in segments.
+            * Alternatively, the segment replacement can be based on calculated pixel values. For example, the author suggests to use mean/mode pixel values of the image as a whole, the segment itself or the neighboring segments. Also, more advanced imputation methods for images are possible (e.g., image inpainting or blurring).
+
+         > ![image](images/evidence_counterfactual_2.png)
+
+         > ![image](images/evidence_counterfactual1.png)
+               
+         </details>      
+
+
+   - [CoCoX: Generating Conceptual and Counterfactual Explanations via Fault-Lines](https://ojs.aaai.org/index.php/AAAI/article/view/5643/5499)
+      - <details><summary>Maheep's Notes</summary>
+
+         The paper focuses to increase the interpretability of the network by generating counterfactual images 
+         $I'$ 
+         by minimally perturbing the changes in the original image
+         $I$
+
+         The author accounts for its contribution as:
+         * Generates fault-line explanation, which are a set of xconcepts that are used to alter the prediction of the image using a CNN 
+         $M$
+         . The xconcepts can be classified into two types:
+            * *Positive Fault-lines* : These are xconcepts that are added to the input image 
+            
+            $$
+            I' = I + \psi_{I,c_{alt},c_{pred}}^+
+            $$
+
+            * *Negative Fault-lines* : These are xconcepts that are subtracted from the input image to generate the counterfactual image.
+
+            $$
+            I' = I - \psi_{I,c_{alt},c_{pred}}^-
+            $$
+
+         
+         * It mines the fault-lines using the CNN of different 
+         $C$
+         classes in the dataset
+         $\mathcal{X}$ 
+         
+         >![image](images/cocox.png)
+
+         When a query $Q = <I,c_{pred}, c_{alt}>$ is passed to the image the model optimizes using the equation below:
+
+         $$
+            arg \ \underset{\psi}{max} P(\psi, \epsilon_{pred}, \epsilon_{alt}, \epsilon| Q) 
+         $$
+
+         where $\epsilon$ represents the all xconcepts, which is retrieved using the posterier 
+         $P(\epsilon|\mathcal{X}, M)$
+         Similarly 
+         $\epsilon_{pred}$
+         and 
+         $\epsilon_{alt}$ 
+         are obtained by:
+
+         $$
+            P(\epsilon_{pred}|\epsilon, X, I, c_{pred}, M)
+         $$
+
+         $$
+            P(\epsilon_{alt}|\epsilon, X, I, c_{alt}, M)
+         $$
+
+         >![image](images/cocox1.png
+         )
+
+         The process of mining of the xconcepts include: 
+         * The feature extractor 
+         $f(\cdot)$ 
+         and
+         classifier 
+         $g(\cdot)$
+         are used to build the xconcepts.
+         * Different feature maps are extracted using 
+         $f(I)$
+         which are seen as an instance of xconcept.
+         * The feature maps are then used to obtain localized maps, which are super-pixel of feature maps and are obtained using Grad-CAM, suing equation 1 in the figure below.
+         * Top-$p$ pixels are selected for each class, making a total of $p*C$ super-pixels.
+         * These are clustered using K-mean into different xconcepts into 
+         $G$ 
+         groups.
+
+         >!['Algorithm'](images/cocox3.png)
+
+         To get the importance of the concepts for a target class $C$
+         . They compute directional derivatives 
+         $S_{c,X}$ 
+         to produce estimates of how important the concept X was for a CNN’s prediction of a target class $C$, as defined in the $III^{rd}$ step.
+
+         The fault lines are detected using the $4^{th}$ step, where 
+         >![image](images/cocox2.png)
+
+         </details>
+
+
+   - [CX-ToM: Counterfactual Explanations with Theory-of-Mind for Enhancing Human Trust in Image Recognition Models](https://arxiv.org/pdf/2109.01401.pdf)
+      - <details><summary>Maheep's Notes</summary>
+
+         The paper proposes to enhance the explainability of the model using the fault-lines(as defined above work). The author aurgues that *understandability* and *Predictability* act as the basic pillars of explainability of a system. Therefore establishes a dialogue between a user and the machine taking Theory of Mind(ToM) as the basis of it. 
+
+         > ![images](images/tom)  
+
+         >![images](images/tom1.png)
+
+         The author implements it by:
+         * The dialogue aims to let the machine know about the user's intention of understanding and human to know about the machine's understanding of the system.
+         * The author setup an experiment in which a blurred image is provided to the user while the original image is provided to the machine. 
+         * The dialogue from the user are transffered in form of two type of questions *W-QA* and *E-QA* to understand from the machine as to what is on the place of the blurred image.
+            * *W-QA* include question of type *what*, *why*, *where*.
+            * *E-QA* include the questions which are seeking for explanation.
+         
+         > ![image](images/tom3.png)
+
+         * The machine predicts about the user's mind by building the graph
+         $Pg^{UinM}$
+         to give the only answer that might enhance the understandind of user to develop the understanding of user, while 
+         $pg^M$ 
+         is the graph of the image that machine has build for itself. The machine develop the understanding by giving bubbles to the blurred picture to develop understanding of user w/ minimum information. The 
+         $Pg^{MinU}$
+         is at the end compared w/ 
+         $Pg^{UinM}$
+         to evaluate how much has the user understood and how much machine has comprehended the user has understood.
+
+         > ![image](images/tom4.png)
+
+         * The author uses the fault-lines to develop the understanding of the user in these places of graph to develop understanding of user. It focuses to give the fault-lines on the basis:
+            * If the model thinks the user has low confidence of the model capability of classification b.w. *Person* and the *Deer* then it will highlight the fault-lines that shows the difference b.w. them but if the user have low-confidene on model capability of classification b.w. *Man* and the *Woman*, then it will show the corresponding fault-lines. 
+
+         > ![image](images/tom2)
+
+         * The author takes into account set 
+         $C$
+         contaning the images that 
+         $M$ 
+         predicts correctly and incorrectly in 
+         $W$
+         . The author uses two metrics to quatify human trust on system using:
+            * *JPT* : It is the $\%$ of images in 
+            $C$
+            that human feel the model 
+            $M$ would predict correctly.
+            * *JNT* : It is the $%$ of images in 
+            $W$ 
+            that human feel the model 
+            $M$ would predict incorrectly.
+            * *Reliance*:  It is the measure upto whihc hummman can accuractly predict the performers' inference results w/o under or over-estimation. It is the sum of both *JNT* and *JPT*.
+
+
+         </details>
+
+
    - [SCOUT: Self-aware Discriminant Counterfactual Explanations](https://arxiv.org/pdf/2004.07769.pdf)
       - <details><summary>Maheep's Notes</summary>
 
@@ -2314,245 +2556,5 @@ The papers in this section focuses to use the concepts of Causality to increase 
       $$
          L = d_g(x,x') + d_c(C(x'),t_c)
       $$
-
-      </details>
-
-- [Generative_Counterfactuals_for_Neural_Networks_via_Attribute_Informed_Perturbations](https://arxiv.org/pdf/2101.06930.pdf)
-   - <details><summary>Maheep's Notes</summary>
-         
-      The paper tries to generate counterfactual images using a low-dimensional latent space containing the *raw features* and *attribute informed latent space*, which are continously re-iterated for modification to generate a counterfactual image.
-
-      > ![image](images/aip.png)
-
-      The author highlight some of the challenges in the existing works, generating counterfactual image to increase interpretability:
-      
-      *  Counterfactuals generation for certain class might not be feasible as it is not possible to perturb the raw data due to various issue of piracy and the hassle to identify the perturbation.
-      * Counterfactual for certian class might not exist in the data, which might create problems as the selected prototypes and criticism are not sufficient for the counterfactual analysis. 
-      
-      <br>
-
-      The author implements it by:
-
-      * An encoder 
-      $E$ 
-      and decoder 
-      $D$ 
-      structure is proposed which encodes the *raw features* and *attribute related data* where the *raw features* includes the robust features of an object, where the *attribute related data* contains extra encoded information for humans such as "*bounding box*" and other information. 
-      *Attribute related-data* directly influences the quality of generated counterfactual. 
-   
-      $$
-         E(x) = z_o + a_o
-      $$
-
-      * The $z_o$ and $a_o$ are modified iteratively using the gradient-based optimization, specifically by the equaiton:
-
-      $$
-         z^{(n+1)} = z^n - \mu^n \nabla_z L_d(z^n, a^n, z_o, a_o, \overline{y})
-      $$
-
-      $$
-         a^{(n+1)} = a^n - \gamma^n \nabla_a L_d(z^n, a^n, z_o, a_o, \overline{y})
-      $$ 
-
-      where $L_d(\cdot)$ is the cross-entropy loss.
-
-      > ![image](images/aip1.png)
-
-      * The overall counterfactual loss can be categorized into prediction loss using cross-entropy 
-      $l_d(\cdot)$ 
-      and perturbation loss
-
-      $$
-         l_c = l_d(F(G^{dec}(z,a)),\overline{y}) + ||z - z_o||_2 + ||a - a_o||_2
-      $$
-
-      * The discriminator loss can be defined as:
-
-      $$
-      L = \sum_{i}^T \ -a_i \ log(D^i(\overline{x})) - (1 - a_i)\ log(1 - D^i(\overline{x})) + \mathbb{E} \ ||x - \overline{x}||_2
-      $$
-
-      The overall solution can be summed up using the equation below:
-         
-      > ![image](images/aip2.png)
-
-      </details>        
-
-
-
-
-- [EXPLAINABLE IMAGE CLASSIFICATION WITH EVIDENCE COUNTERFACTUAL](https://arxiv.org/pdf/2004.07511.pdf)
-   - <details><summary>Maheep's Notes</summary>
-
-      The author proposes to generate the counterfactual image by perturbing the original image by identifying the set of features to be replaced.
-
-      The author proposes to integrate the following properties in the proposed model-agnostic model:
-
-      * Unravels the pattern that is used for classification, if true then also provides some meaningful representation of the model.
-      * If error to classify the image then unravels the reason for that.
-      * At last, delineate if the correct classification is classified for wrong feature harnessing by the model.
-
-      <br>
-      The author implements it by:
-
-      * An algorithm is proposed that identifies the EdC features, that if removed can alter the prediction of the model.  
-
-      > ![image](images/evidence_counterfactual.png)
-      
-      * To unravel the EdC features the author proposes SEDC algorithm, the algorithm defined below can be used
-
-      !['Algorithm'](images/4.png)
-
-      * But to generate the counterfactual class, the author proposes a tweaked version of the above algorithm as SEDC-T. In this secario a target class has to be specified and segments are selected based on the largest difference between the target class score and the predicted class score. In case more than one EdC is found, the EdC leading to the highest increase in target class score can be selected.
-      * SEDC-T allows for the generation of more nuanced explanations, since one can find out why the model predicts a class over another class of interest. This can certainly be useful for explaining misclassifications.
-      * As for segmenting and segment repacement as shown in the figure below, the author suggests:
-         * For segmentation the author uses segmentation algorithm that uses the numerical color values to obtain a meaningful grouping in segments.
-         * Alternatively, the segment replacement can be based on calculated pixel values. For example, the author suggests to use mean/mode pixel values of the image as a whole, the segment itself or the neighboring segments. Also, more advanced imputation methods for images are possible (e.g., image inpainting or blurring).
-
-      > ![image](images/evidence_counterfactual_2.png)
-
-      > ![image](images/evidence_counterfactual1.png)
-            
-      </details>      
-
-
-- [CoCoX: Generating Conceptual and Counterfactual Explanations via Fault-Lines](https://ojs.aaai.org/index.php/AAAI/article/view/5643/5499)
-   - <details><summary>Maheep's Notes</summary>
-
-      The paper focuses to increase the interpretability of the network by generating counterfactual images 
-      $I'$ 
-      by minimally perturbing the changes in the original image
-      $I$
-
-      The author accounts for its contribution as:
-      * Generates fault-line explanation, which are a set of xconcepts that are used to alter the prediction of the image using a CNN 
-      $M$
-      . The xconcepts can be classified into two types:
-         * *Positive Fault-lines* : These are xconcepts that are added to the input image 
-         
-         $$
-         I' = I + \psi_{I,c_{alt},c_{pred}}^+
-         $$
-
-         * *Negative Fault-lines* : These are xconcepts that are subtracted from the input image to generate the counterfactual image.
-
-         $$
-         I' = I - \psi_{I,c_{alt},c_{pred}}^-
-         $$
-
-      
-      * It mines the fault-lines using the CNN of different 
-      $C$
-      classes in the dataset
-      $\mathcal{X}$ 
-      
-      >![image](images/cocox.png)
-
-      When a query $Q = <I,c_{pred}, c_{alt}>$ is passed to the image the model optimizes using the equation below:
-
-      $$
-         arg \ \underset{\psi}{max} P(\psi, \epsilon_{pred}, \epsilon_{alt}, \epsilon| Q) 
-      $$
-
-      where $\epsilon$ represents the all xconcepts, which is retrieved using the posterier 
-      $P(\epsilon|\mathcal{X}, M)$
-      Similarly 
-      $\epsilon_{pred}$
-      and 
-      $\epsilon_{alt}$ 
-      are obtained by:
-
-      $$
-         P(\epsilon_{pred}|\epsilon, X, I, c_{pred}, M)
-      $$
-
-      $$
-         P(\epsilon_{alt}|\epsilon, X, I, c_{alt}, M)
-      $$
-
-      >![image](images/cocox1.png
-      )
-
-      The process of mining of the xconcepts include: 
-      * The feature extractor 
-      $f(\cdot)$ 
-      and
-      classifier 
-      $g(\cdot)$
-      are used to build the xconcepts.
-      * Different feature maps are extracted using 
-      $f(I)$
-      which are seen as an instance of xconcept.
-      * The feature maps are then used to obtain localized maps, which are super-pixel of feature maps and are obtained using Grad-CAM, suing equation 1 in the figure below.
-      * Top-$p$ pixels are selected for each class, making a total of $p*C$ super-pixels.
-      * These are clustered using K-mean into different xconcepts into 
-      $G$ 
-      groups.
-
-      >!['Algorithm'](images/cocox3.png)
-
-      To get the importance of the concepts for a target class $C$
-      . They compute directional derivatives 
-      $S_{c,X}$ 
-      to produce estimates of how important the concept X was for a CNN’s prediction of a target class $C$, as defined in the $III^{rd}$ step.
-
-      The fault lines are detected using the $4^{th}$ step, where 
-      >![image](images/cocox2.png)
-
-      </details>
-
-
-- [CX-ToM: Counterfactual Explanations with Theory-of-Mind for Enhancing Human Trust in Image Recognition Models](https://arxiv.org/pdf/2109.01401.pdf)
-   - <details><summary>Maheep's Notes</summary>
-
-      The paper proposes to enhance the explainability of the model using the fault-lines(as defined above work). The author aurgues that *understandability* and *Predictability* act as the basic pillars of explainability of a system. Therefore establishes a dialogue between a user and the machine taking Theory of Mind(ToM) as the basis of it. 
-
-      > ![images](images/tom)  
-
-      >![images](images/tom1.png)
-
-      The author implements it by:
-      * The dialogue aims to let the machine know about the user's intention of understanding and human to know about the machine's understanding of the system.
-      * The author setup an experiment in which a blurred image is provided to the user while the original image is provided to the machine. 
-      * The dialogue from the user are transffered in form of two type of questions *W-QA* and *E-QA* to understand from the machine as to what is on the place of the blurred image.
-         * *W-QA* include question of type *what*, *why*, *where*.
-         * *E-QA* include the questions which are seeking for explanation.
-      
-      > ![image](images/tom3.png)
-
-      * The machine predicts about the user's mind by building the graph
-      $Pg^{UinM}$
-      to give the only answer that might enhance the understandind of user to develop the understanding of user, while 
-      $pg^M$ 
-      is the graph of the image that machine has build for itself. The machine develop the understanding by giving bubbles to the blurred picture to develop understanding of user w/ minimum information. The 
-      $Pg^{MinU}$
-      is at the end compared w/ 
-      $Pg^{UinM}$
-      to evaluate how much has the user understood and how much machine has comprehended the user has understood.
-
-      > ![image](images/tom4.png)
-
-      * The author uses the fault-lines to develop the understanding of the user in these places of graph to develop understanding of user. It focuses to give the fault-lines on the basis:
-         * If the model thinks the user has low confidence of the model capability of classification b.w. *Person* and the *Deer* then it will highlight the fault-lines that shows the difference b.w. them but if the user have low-confidene on model capability of classification b.w. *Man* and the *Woman*, then it will show the corresponding fault-lines. 
-
-      > ![image](images/tom2)
-
-      * The author takes into account set 
-      $C$
-      contaning the images that 
-      $M$ 
-      predicts correctly and incorrectly in 
-      $W$
-      . The author uses two metrics to quatify human trust on system using:
-         * *JPT* : It is the $\%$ of images in 
-         $C$
-         that human feel the model 
-         $M$ would predict correctly.
-         * *JNT* : It is the $%$ of images in 
-         $W$ 
-         that human feel the model 
-         $M$ would predict incorrectly.
-         * *Reliance*:  It is the measure upto whihc hummman can accuractly predict the performers' inference results w/o under or over-estimation. It is the sum of both *JNT* and *JPT*.
-
 
       </details>
