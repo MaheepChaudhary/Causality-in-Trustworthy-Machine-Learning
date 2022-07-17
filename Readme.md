@@ -1514,7 +1514,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
 
 <!-- I am not able to grasp the methodology of what is multiway counterfactual mechanism -->
 
-- [Contrastive_Counterfactual_Visual_Explanations_With_Overdetermination](https://arxiv.org/pdf/2106.14556.pdf)
+   - [Contrastive_Counterfactual_Visual_Explanations_With_Overdetermination](https://arxiv.org/pdf/2106.14556.pdf)
    - <details><summary>Maheep's Notes</summary>
 
       The author slams the above works and contends that *Counterfactual Explanation* should be contrastive, counterfactual and measurable. It focuses to generate counterfactual explanation for medical image classification.
