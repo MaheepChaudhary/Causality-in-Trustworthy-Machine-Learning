@@ -1568,6 +1568,41 @@ The papers in this section focuses to use the concepts of Causality to increase 
 
          </details> 
 
+   - [Born Identity Network: Multi-way Counterfactual Map Generation to Explain a Classifier’s Decision](https://arxiv.org/pdf/2011.10381.pdf)
+      - <details><summary>Maheep's Notes</summary>
+
+        The paper focuses on interpretability of medical image classification and mainly focuses on 2 main problems, i.e.
+        * Focuses to eradicate the negative correlation b.w. the performance and interpretability of the network. 
+        * Generates multi-way counterfactuals reasoning, where the aforementioned works only generates counterfactual map w.r.t. to only 1 class.
+
+        The author proposes 
+        $M_{x,y}$ 
+        counterfactual map that transforms an input image 
+        $X$ 
+        to 
+        $\tilde{X} = X + M_{x,y}$
+        
+        where $y$ is the counterfactual class, i.e. 
+        $F(\tilde{X}) = y$
+        
+        It uses a U-net network consisting of Encoder $E$, Generator $G$ and Discriminator $D$. 
+        The combination of $E$ and $G$ produces $M_{x}$ as shown in the figure below:
+
+        > ![Encode Decoder image](images/Enc_and_Dec.png "Structure of Encoder and Decoder, where the encoding of target is transffered to the Generator to Generate Counterfactual Mask")
+
+        The above process is guided by *Target Attribution Network*(TAN), which guides the generator to produce counterfactual maps that transform an input sample to be classified as a target class.
+
+        $M$ generates the image counterfactual image which is compared from the dataset distribution $P_{X}$, aiming to generate image of the same distribution, for which it uses Adversarial loss. 
+
+        > !['Full Structure'](images/full_structure.png)
+
+        The *Cycle Consistency loss*(CCL) is used to regulate the "multi-way" counterfactual maps.
+
+        $$
+            L_{cyc} = E_{X \sim P_X, Y \sim P_Y}[||(\tilde{X} + M_{\tilde{x},y'}) - X||_1]
+        $$
+
+        </details>
 
    - [SCOUT: Self-aware Discriminant Counterfactual Explanations](https://arxiv.org/pdf/2004.07769.pdf)
       - <details><summary>Maheep's Notes</summary>
@@ -1614,43 +1649,6 @@ The papers in this section focuses to use the concepts of Causality to increase 
       
         !['Diagram'](images/6.png)  
         </details> 
-
-
-   - [Born Identity Network: Multi-way Counterfactual Map Generation to Explain a Classifier’s Decision](https://arxiv.org/pdf/2011.10381.pdf)
-      - <details><summary>Maheep's Notes</summary>
-
-        The paper focuses on interpretability of medical image classification and mainly focuses on 2 main problems, i.e.
-        * Focuses to eradicate the negative correlation b.w. the performance and interpretability of the network. 
-        * Generates multi-way counterfactuals reasoning, where the aforementioned works only generates counterfactual map w.r.t. to only 1 class.
-
-        The author proposes 
-        $M_{x,y}$ 
-        counterfactual map that transforms an input image 
-        $X$ 
-        to 
-        $\tilde{X} = X + M_{x,y}$
-        
-        where $y$ is the counterfactual class, i.e. 
-        $F(\tilde{X}) = y$
-        
-        It uses a U-net network consisting of Encoder $E$, Generator $G$ and Discriminator $D$. 
-        The combination of $E$ and $G$ produces $M_{x}$ as shown in the figure below:
-
-        > ![Encode Decoder image](images/Enc_and_Dec.png "Structure of Encoder and Decoder, where the encoding of target is transffered to the Generator to Generate Counterfactual Mask")
-
-        The above process is guided by *Target Attribution Network*(TAN), which guides the generator to produce counterfactual maps that transform an input sample to be classified as a target class.
-
-        $M$ generates the image counterfactual image which is compared from the dataset distribution $P_{X}$, aiming to generate image of the same distribution, for which it uses Adversarial loss. 
-
-        > !['Full Structure'](images/full_structure.png)
-
-        The *Cycle Consistency loss*(CCL) is used to regulate the "multi-way" counterfactual maps.
-
-        $$
-            L_{cyc} = E_{X \sim P_X, Y \sim P_Y}[||(\tilde{X} + M_{\tilde{x},y'}) - X||_1]
-        $$
-
-        </details>
 
 
    - [Counterfactual Explanation Based on Gradual Construction for Deep Networks](https://arxiv.org/pdf/2008.01897.pdf)
