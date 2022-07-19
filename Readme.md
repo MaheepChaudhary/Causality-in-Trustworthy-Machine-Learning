@@ -2404,13 +2404,13 @@ The papers in this section focuses to use the concepts of Causality to increase 
          and the effect is measured by: 
 
          $$
-         \phi_1(x) = [V_k(x),  ̄\overline{V}_k(x)]  
+         \phi_1(x) = [V_k(x), \overline{V}_k(x)]
          $$
 
          $$
-         f(x) = \phi_2(\phi_1(x)) = \phi_2([V_k(x),  ̄\ovelrine{V}_k(x)])
+         f(x) = \phi_2(\phi_1(x)) = \phi_2([V_k(x), \overline{V}_k(x)])
          $$
-         
+
          $$
          Effect = \mathbb{E}[\frac{
          \phi_2([do(V_k(x)), \overline{V}_k(x')])}{\phi_2([V_k(x), \overline{V}_k(x)])} - 1]
