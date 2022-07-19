@@ -2413,8 +2413,13 @@ The papers in this section focuses to use the concepts of Causality to increase 
 
          $$
          Effect = E[\frac{
-         f(x) = \phi_2(\phi_1(x)) = \phi_2([do(V_k(x)),  ̄\ovelrine{V}_k(x')])}{
+         \phi_2([do(V_k(x)),  ̄\ovelrine{V}_k(x')])}{
          f(x) = \phi_2(\phi_1(x)) = \phi_2([V_k(x),  ̄\ovelrine{V}_k(x)])} - 1]
+         $$
+
+         $$
+         Effect = \mathbb{E}[\frac{
+         \phi_2([do(V_k(x)), \overline{V}_k(x')])}{\phi_2([V_k(x), \overline{V}_k(x)])([V_k(x)} - 1]
          $$
 
          * **Surrogate explanation function**: A function 
