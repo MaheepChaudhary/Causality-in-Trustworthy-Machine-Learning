@@ -1333,6 +1333,63 @@ The papers in this section focuses to use the concepts of Causality to increase 
 
 
 
+
+   - [Using Causal Analysis for Conceptual Deep Learning Explanation](https://arxiv.org/abs/2107.06098)
+      - <details><summary>Maheep's Notes</summary>
+
+         The work proposes to explain the model's decision using the hidden unit cells of the network in radiology. The author uses the associating the hidden units of the classifier to clinically relevant concepts using a linear sparse logistic regression. But to evaluate that the identified units truly influence the classifier’s outcome, they use mediation analysis through counterfactual interventions. A low-depth decision tree is constructed so as to translate all the discovered concepts into a straightforward decision rule, expressed to the radiologist. Technically the author implements it by using:
+
+         * **Concept Associations**: The network is divided into          
+         $\phi_1(\cdot)$ 
+         and 
+         $\phi_2(\cdot)$ 
+         where the 
+         $\phi_1(\cdot)$ 
+         gives different concept in terms of features and $\phi_2(\cdot)$ 
+         do prediction. The output of 
+         $\phi_1(\cdot)$ gives a vector of 
+         $lbh$ dimension with each unit having a binary prediction, i.e. if concept is present or absent.
+         
+         * **Causal concept ranking**: A counterfactual 
+         $x'$ 
+         for the input   
+         $x$ 
+         is generated for causal inference using a cGAN, where the concepts are denoted with 
+         $V_k(x)$ 
+         and the left over hidden units are denoted by 
+         $\overline{V}_k(x)$ 
+         and the effect is measured by: 
+
+         $$
+         \phi_1(x) = [V_k(x), \overline{V}_k(x)]
+         $$
+
+         $$
+         f(x) = \phi_2(\phi_1(x)) = \phi_2([V_k(x), \overline{V}_k(x)])
+         $$
+
+         $$
+         Effect = \mathbb{E}[\frac{
+         \phi_2([do(V_k(x)), \overline{V}_k(x')])}{\phi_2([V_k(x), \overline{V}_k(x)])} - 1]
+         $$
+
+         * **Surrogate explanation function**: A function 
+         $g(\cdot)$ 
+         is introduced as a decision tree because many clinical decision-making procedures follow a rule-based pattern, based on the intial classifier 
+         $f(\cdot)$ 
+         based on the logits produced for different concepts.
+
+         The decision tree tries to mimic the outcome of the function 
+         $f(\cdot)$
+
+         $$
+         g^* = arg \ \underset{g}{\min} \sum_n \mathcal{L}(g(w_n), f(x_n))
+         $$
+
+        ![Model](images/45.png)
+
+        </details>    
+
 ## Causality & Computer Vision
 
 
@@ -1351,6 +1408,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
          `I(S; Y, T ) = I(S; Y ) + I(S; T|Y ),`
          <br>The author proposes by this equation that the two models overlap, i.e. the objective model and the pretrained model. S represents the features extracted the model by the objective model and T is the features extracted by the pretrained model.
         </details>
+
 
   - [Counterfactual Zero-Shot and Open-Set Visual Recognition](https://arxiv.org/pdf/2103.00887.pdf) 
       - <details><summary>Maheep's notes </summary>
@@ -2376,62 +2434,6 @@ The papers in this section focuses to use the concepts of Causality to increase 
 
         </details>           
 
-       
-   - [Using Causal Analysis for Conceptual Deep Learning Explanation](https://arxiv.org/abs/2107.06098)
-      - <details><summary>Maheep's Notes</summary>
-
-         The work proposes to explain the model's decision using the hidden unit cells of the network in radiology. The author uses the associating the hidden units of the classifier to clinically relevant concepts using a linear sparse logistic regression. But to evaluate that the identified units truly influence the classifier’s outcome, they use mediation analysis through counterfactual interventions. A low-depth decision tree is constructed so as to translate all the discovered concepts into a straightforward decision rule, expressed to the radiologist. Technically the author implements it by using:
-
-         * **Concept Associations**: The network is divided into          
-         $\phi_1(\cdot)$ 
-         and 
-         $\phi_2(\cdot)$ 
-         where the 
-         $\phi_1(\cdot)$ 
-         gives different concept in terms of features and $\phi_2(\cdot)$ 
-         do prediction. The output of 
-         $\phi_1(\cdot)$ gives a vector of 
-         $lbh$ dimension with each unit having a binary prediction, i.e. if concept is present or absent.
-         
-         * **Causal concept ranking**: A counterfactual 
-         $x'$ 
-         for the input   
-         $x$ 
-         is generated for causal inference using a cGAN, where the concepts are denoted with 
-         $V_k(x)$ 
-         and the left over hidden units are denoted by 
-         $\overline{V}_k(x)$ 
-         and the effect is measured by: 
-
-         $$
-         \phi_1(x) = [V_k(x), \overline{V}_k(x)]
-         $$
-
-         $$
-         f(x) = \phi_2(\phi_1(x)) = \phi_2([V_k(x), \overline{V}_k(x)])
-         $$
-
-         $$
-         Effect = \mathbb{E}[\frac{
-         \phi_2([do(V_k(x)), \overline{V}_k(x')])}{\phi_2([V_k(x), \overline{V}_k(x)])} - 1]
-         $$
-
-         * **Surrogate explanation function**: A function 
-         $g(\cdot)$ 
-         is introduced as a decision tree because many clinical decision-making procedures follow a rule-based pattern, based on the intial classifier 
-         $f(\cdot)$ 
-         based on the logits produced for different concepts.
-
-         The decision tree tries to mimic the outcome of the function 
-         $f(\cdot)$
-
-         $$
-         g^* = arg \ \underset{g}{\min} \sum_n \mathcal{L}(g(w_n), f(x_n))
-         $$
-
-        ![Model](images/45.png)
-
-        </details>    
 
    - [Learn-Explain-Reinforce: Counterfactual Reasoning and Its Guidance to Reinforce an Alzheimer’s Disease Diagnosis Model](https://arxiv.org/abs/2108.09451) <!--- Not able to understand properly --> 
       - <details><summary>Maheep's Notes</summary>
