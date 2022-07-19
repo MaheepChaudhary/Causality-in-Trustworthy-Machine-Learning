@@ -2422,6 +2422,13 @@ The papers in this section focuses to use the concepts of Causality to increase 
          $f(\cdot)$ 
          based on the logits produced for different concepts.
 
+         The decision tree tries to mimic the outcome of the function 
+         $f(\cdot)$
+
+         $$
+         g^* = arg \ \underset{g}{\min} \sum_n \mathcal{L}(g(w_n), f(x_n))
+         $$
+
         ![Model](images/45.png)
 
         </details>    
