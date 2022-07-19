@@ -277,9 +277,1063 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
          The author argues that by obtaining the PDF may give very valuable information as compared to only estimating the Cumlative Distribution Function. 
         </details>
 
-## Causality & Computer Vision
 
 <!--- Week 1 --> 
+
+## Explainability Of ML Models using Causality:
+The papers in this section focuses to use the concepts of Causality to increase the interpretability of the Neural Network.
+
+<!-- I am not able to grasp the methodology of what is multiway counterfactual mechanism -->
+
+   - [Contrastive_Counterfactual_Visual_Explanations_With_Overdetermination](https://arxiv.org/pdf/2106.14556.pdf)
+      - <details><summary>Maheep's Notes</summary>
+
+         The author slams the above works and contends that *Counterfactual Explanation* should be contrastive, counterfactual and measurable. It focuses to generate counterfactual explanation for medical image classification.
+
+         >![image](images/overdetermination.png)
+         
+         The author proposes the following things in the paper:
+
+         * It not only highlights the difference b.w. the counterfactual and factual images as aforementioned works but also signifies each segment importance in image prediction after segmenting it out using ''*Clear Image*''.
+         * It aims to unravel the causal structure of the system, arguing that "*AI provide information about the factors on which the model depends but also how it depends*". 
+         * It also proposes the concept of *causal overdetermination*, which corresponds to the scenario when there are 2 or more than that causes present for an event.
+
+         The author contends that the mask resulted from the subtraction of factual and counterfactual is not a good measure of explainability as it can vary significantly and also other critical segments shoud be absent.
+         Therefore it takes *mask*, *image* and *classification behaviour*  to generate counterfactual image. 
+
+         The author implements it by 
+         
+         * Dividing the image into segments using the *Clear Image* module which by iteratively increasing the size of segments until an individual comes out to be counterfactual in the set.
+         * The two types of segments are created, as shown in image (a) and (b): 
+            * (a) The ones that differentiates the counterfactual and factual image w/ high intensity 
+            $S_h$
+            * (b) The ones that are not highly differentiable but carries a good weight in the classification of the image
+            $S_l$.
+
+         > ![image](images/overdetermination1)
+
+         > ![image](images/overdetermination3.png)
+
+         * The importance of a segment is quantified by replacing segment of image
+         $x$
+         , i.e. 
+         $s = \{s_1, s_2, ...., s_n\}$
+         with the segements of the contrast image 
+         $x'$
+         , i.e. 
+         $s' = \{s_1', s_2', ...., s_n'\}$
+         to quantify the effect of each segment on classification. 
+         To limit the overdetermination, the work only replaces at-max 4 segments at a time to create a counterfacutal image.
+
+         > ![image](images/overdetermination2.png) 
+
+         * It uses regression equation
+         $w^TX$
+         to quantify the contribution that individual segement make to 
+         $y$
+         . With regression the classification probability is also considered and the subtraction of both results in *pleural effusion*.
+         It can be more elaborated using the image below where
+         The report identifies that substituting both segments 4 and 11 with the corresponding segments from its contrast image flips the classification probability to ’healthy’ According to the logistic regression equation these substitutions would change the probability of the X-ray being classified as ’pleural effusion’ to 0.44. However, when these segments are actually substituted and passed through the classifier, the probability changed to 0.43, hence the fidelity error is 0.01. CLEAR Image also identifies that substituting segments 3 and 11 also creates an image-counterfactual. The coefficient value becomes 0 if the segment belongs to the counterfactual image and becomes 1 if belongs to the original image. 
+
+         > ![image](images/overdetermination4.png)
+
+         </details> 
+
+   - [Born Identity Network: Multi-way Counterfactual Map Generation to Explain a Classifier’s Decision](https://arxiv.org/pdf/2011.10381.pdf)
+      - <details><summary>Maheep's Notes</summary>
+
+        The paper focuses on interpretability of medical image classification and mainly focuses on 2 main problems, i.e.
+        * Focuses to eradicate the negative correlation b.w. the performance and interpretability of the network. 
+        * Generates multi-way counterfactuals reasoning, where the aforementioned works only generates counterfactual map w.r.t. to only 1 class.
+
+        The author proposes 
+        $M_{x,y}$ 
+        counterfactual map that transforms an input image 
+        $X$ 
+        to 
+        $\tilde{X} = X + M_{x,y}$
+        
+        where $y$ is the counterfactual class, i.e. 
+        $F(\tilde{X}) = y$
+        
+        It uses a U-net network consisting of Encoder $E$, Generator $G$ and Discriminator $D$. 
+        The combination of $E$ and $G$ produces $M_{x}$ as shown in the figure below:
+
+        > ![Encode Decoder image](images/Enc_and_Dec.png "Structure of Encoder and Decoder, where the encoding of target is transffered to the Generator to Generate Counterfactual Mask")
+
+        The above process is guided by *Target Attribution Network*(TAN), which guides the generator to produce counterfactual maps that transform an input sample to be classified as a target class.
+
+        $M$ generates the image counterfactual image which is compared from the dataset distribution $P_{X}$, aiming to generate image of the same distribution, for which it uses Adversarial loss. 
+
+        > !['Full Structure'](images/full_structure.png)
+
+        The *Cycle Consistency loss*(CCL) is used to regulate the "multi-way" counterfactual maps.
+
+        $$
+            L_{cyc} = E_{X \sim P_X, Y \sim P_Y}[||(\tilde{X} + M_{\tilde{x},y'}) - X||_1]
+        $$
+
+        </details>
+
+
+
+   - [Explaining the Black-box Smoothly-A Counterfactual Approach](https://arxiv.org/pdf/2101.04230.pdf)
+      - <details><summary>Maheep's Notes</summary>
+
+         The paper focuses on increasing the interpretability of medical imaging classification by generating counterfactual image by perturbing the original image. 
+         
+         >![image](images/bbs1.png)
+
+         It modifies the image using pre-trained function 
+         $f(\cdot) \in [0,1]$
+         The work aims to learn the *explanatory function* 
+         $I_f(\cdot)$ 
+         using the equation:
+
+         $$
+         x_{\delta} \approx I_f(x,\delta)
+         $$
+
+         where 
+
+         $$
+         f(x_{\delta}) - f(x) = \delta
+         $$
+
+         It optimizes the overall process using 3 loss functions with 
+         $\phi(\cdot)$
+         defining a feature extractor,
+         $\psi$ 
+         computes a scalar loss value,
+         $\textbf{c}$ 
+         defining the one-hot vector of condition, which is 
+         $\textbf{c} = c_f(x, \delta)$
+         and
+         $V$ 
+         is the embedding metrics modulated on 
+         $\textbf{c}$ 
+         as :
+
+         * *Data Consistency*: It evaluates the correspondence between the generated image and the conditioner,defining the loss as:
+         
+         $$
+         L_{cGAN} =  \psi(\phi(G(z);\theta_{\phi});\theta_{\psi}) + c^T V \phi(x;\theta_{\phi})
+         $$
+
+         >![image](images/bbs2.png)
+
+         * **Classification model consistency**: To ensure that the generated image should give desired output, the loss is introduced as:
+
+         $$
+            L := c^T V \phi(x;\theta_{\phi}) + D_{KL}(f(x')||f (x) + \delta)
+         $$
+
+         >![image](images/bbs3.png)
+
+         * **Context-aware self-consistency**: The loss is defined so as to preserve the features using the reconstruction loss:
+
+         $$
+            L = L_{rec}(x,\mathcal{I}_f(x,0)) + L_{rec}(x,\mathcal{I}_f({I}_f(x,\delta),-\delta))
+         $$
+
+         where 
+
+         $$
+            L_{rec}(x,x') = \sum_j \frac{S_j(x)\odot||x-x'||_1}{\sum S_j(x)} + D_{KL}(O(x)||O(x'))
+         $$
+
+         where 
+         $S(\cdot)$ is a pretrained semantic segmentation network that produces a label map for different regions in the input domain. 
+         $O(x)$ is a pre-trained object detector that, given an input image 
+         $x$
+         , output a binary mask 
+         $O(x)$
+            
+         The author argues that there is a chance that the GAN may ignore small or uncommon details therfore the images are compared using semantic segmentation 
+         $S(\cdot)$ 
+         with object detection combined in identity loss.   
+         
+         >![image](images/bbs4.png)
+
+      </details>      
+      
+   - [Generative_Counterfactuals_for_Neural_Networks_via_Attribute_Informed_Perturbations](https://arxiv.org/pdf/2101.06930.pdf)
+      - <details><summary>Maheep's Notes</summary>
+            
+         The paper tries to generate counterfactual images using a low-dimensional latent space containing the *raw features* and *attribute informed latent space*, which are continously re-iterated for modification to generate a counterfactual image.
+
+         > ![image](images/aip.png)
+
+         The author highlight some of the challenges in the existing works, generating counterfactual image to increase interpretability:
+         
+         *  Counterfactuals generation for certain class might not be feasible as it is not possible to perturb the raw data due to various issue of piracy and the hassle to identify the perturbation.
+         * Counterfactual for certian class might not exist in the data, which might create problems as the selected prototypes and criticism are not sufficient for the counterfactual analysis. 
+         
+         <br>
+
+         The author implements it by:
+
+         * An encoder 
+         $E$ 
+         and decoder 
+         $D$ 
+         structure is proposed which encodes the *raw features* and *attribute related data* where the *raw features* includes the robust features of an object, where the *attribute related data* contains extra encoded information for humans such as "*bounding box*" and other information. 
+         *Attribute related-data* directly influences the quality of generated counterfactual. 
+      
+         $$
+            E(x) = z_o + a_o
+         $$
+
+         * The $z_o$ and $a_o$ are modified iteratively using the gradient-based optimization, specifically by the equaiton:
+
+         $$
+            z^{(n+1)} = z^n - \mu^n \nabla_z L_d(z^n, a^n, z_o, a_o, \overline{y})
+         $$
+
+         $$
+            a^{(n+1)} = a^n - \gamma^n \nabla_a L_d(z^n, a^n, z_o, a_o, \overline{y})
+         $$ 
+
+         where $L_d(\cdot)$ is the cross-entropy loss.
+
+         > ![image](images/aip1.png)
+
+         * The overall counterfactual loss can be categorized into prediction loss using cross-entropy 
+         $l_d(\cdot)$ 
+         and perturbation loss
+
+         $$
+            l_c = l_d(F(G^{dec}(z,a)),\overline{y}) + ||z - z_o||_2 + ||a - a_o||_2
+         $$
+
+         * The discriminator loss can be defined as:
+
+         $$
+         L = \sum_{i}^T \ -a_i \ log(D^i(\overline{x})) - (1 - a_i)\ log(1 - D^i(\overline{x})) + \mathbb{E} \ ||x - \overline{x}||_2
+         $$
+
+         The overall solution can be summed up using the equation below:
+            
+         > ![image](images/aip2.png)
+
+         </details>        
+
+
+
+
+   - [EXPLAINABLE IMAGE CLASSIFICATION WITH EVIDENCE COUNTERFACTUAL](https://arxiv.org/pdf/2004.07511.pdf)
+      - <details><summary>Maheep's Notes</summary>
+
+         The author proposes to generate the counterfactual image by perturbing the original image by identifying the set of features to be replaced.
+
+         The author proposes to integrate the following properties in the proposed model-agnostic model:
+
+         * Unravels the pattern that is used for classification, if true then also provides some meaningful representation of the model.
+         * If error to classify the image then unravels the reason for that.
+         * At last, delineate if the correct classification is classified for wrong feature harnessing by the model.
+
+         <br>
+         The author implements it by:
+
+         * An algorithm is proposed that identifies the EdC features, that if removed can alter the prediction of the model.  
+
+         > ![image](images/evidence_counterfactual.png)
+         
+         * To unravel the EdC features the author proposes SEDC algorithm, the algorithm defined below can be used
+
+         !['Algorithm'](images/4.png)
+
+         * But to generate the counterfactual class, the author proposes a tweaked version of the above algorithm as SEDC-T. In this secario a target class has to be specified and segments are selected based on the largest difference between the target class score and the predicted class score. In case more than one EdC is found, the EdC leading to the highest increase in target class score can be selected.
+         * SEDC-T allows for the generation of more nuanced explanations, since one can find out why the model predicts a class over another class of interest. This can certainly be useful for explaining misclassifications.
+         * As for segmenting and segment repacement as shown in the figure below, the author suggests:
+            * For segmentation the author uses segmentation algorithm that uses the numerical color values to obtain a meaningful grouping in segments.
+            * Alternatively, the segment replacement can be based on calculated pixel values. For example, the author suggests to use mean/mode pixel values of the image as a whole, the segment itself or the neighboring segments. Also, more advanced imputation methods for images are possible (e.g., image inpainting or blurring).
+
+         > ![image](images/evidence_counterfactual_2.png)
+
+         > ![image](images/evidence_counterfactual1.png)
+               
+         </details>      
+
+
+   - [CoCoX: Generating Conceptual and Counterfactual Explanations via Fault-Lines](https://ojs.aaai.org/index.php/AAAI/article/view/5643/5499)
+      - <details><summary>Maheep's Notes</summary>
+
+         The paper focuses to increase the interpretability of the network by generating counterfactual images 
+         $I'$ 
+         by minimally perturbing the changes in the original image
+         $I$
+
+         The author accounts for its contribution as:
+         * Generates fault-line explanation, which are a set of xconcepts that are used to alter the prediction of the image using a CNN 
+         $M$
+         . The xconcepts can be classified into two types:
+            * *Positive Fault-lines* : These are xconcepts that are added to the input image 
+            
+            $$
+            I' = I + \psi_{I,c_{alt},c_{pred}}^+
+            $$
+
+            * *Negative Fault-lines* : These are xconcepts that are subtracted from the input image to generate the counterfactual image.
+
+            $$
+            I' = I - \psi_{I,c_{alt},c_{pred}}^-
+            $$
+
+         
+         * It mines the fault-lines using the CNN of different 
+         $C$
+         classes in the dataset
+         $\mathcal{X}$ 
+         
+         >![image](images/cocox.png)
+
+         When a query $Q = <I,c_{pred}, c_{alt}>$ is passed to the image the model optimizes using the equation below:
+
+         $$
+            arg \ \underset{\psi}{max} P(\psi, \epsilon_{pred}, \epsilon_{alt}, \epsilon| Q) 
+         $$
+
+         where $\epsilon$ represents the all xconcepts, which is retrieved using the posterier 
+         $P(\epsilon|\mathcal{X}, M)$
+         Similarly 
+         $\epsilon_{pred}$
+         and 
+         $\epsilon_{alt}$ 
+         are obtained by:
+
+         $$
+            P(\epsilon_{pred}|\epsilon, X, I, c_{pred}, M)
+         $$
+
+         $$
+            P(\epsilon_{alt}|\epsilon, X, I, c_{alt}, M)
+         $$
+
+         >![image](images/cocox1.png
+         )
+
+         The process of mining of the xconcepts include: 
+         * The feature extractor 
+         $f(\cdot)$ 
+         and
+         classifier 
+         $g(\cdot)$
+         are used to build the xconcepts.
+         * Different feature maps are extracted using 
+         $f(I)$
+         which are seen as an instance of xconcept.
+         * The feature maps are then used to obtain localized maps, which are super-pixel of feature maps and are obtained using Grad-CAM, suing equation 1 in the figure below.
+         * Top-$p$ pixels are selected for each class, making a total of $p*C$ super-pixels.
+         * These are clustered using K-mean into different xconcepts into 
+         $G$ 
+         groups.
+
+         >!['Algorithm'](images/cocox3.png)
+
+         To get the importance of the concepts for a target class $C$
+         . They compute directional derivatives 
+         $S_{c,X}$ 
+         to produce estimates of how important the concept X was for a CNN’s prediction of a target class $C$, as defined in the $III^{rd}$ step.
+
+         The fault lines are detected using the $4^{th}$ step, where 
+         >![image](images/cocox2.png)
+
+         </details>
+
+
+   - [CX-ToM: Counterfactual Explanations with Theory-of-Mind for Enhancing Human Trust in Image Recognition Models](https://arxiv.org/pdf/2109.01401.pdf)
+      - <details><summary>Maheep's Notes</summary>
+
+         The paper proposes to enhance the explainability of the model using the fault-lines(as defined above work). The author aurgues that *understandability* and *Predictability* act as the basic pillars of explainability of a system. Therefore establishes a dialogue between a user and the machine taking Theory of Mind(ToM) as the basis of it. 
+
+         > ![images](images/tom)  
+
+         >![images](images/tom1.png)
+
+         The author implements it by:
+         * The dialogue aims to let the machine know about the user's intention of understanding and human to know about the machine's understanding of the system.
+         * The author setup an experiment in which a blurred image is provided to the user while the original image is provided to the machine. 
+         * The dialogue from the user are transffered in form of two type of questions *W-QA* and *E-QA* to understand from the machine as to what is on the place of the blurred image.
+            * *W-QA* include question of type *what*, *why*, *where*.
+            * *E-QA* include the questions which are seeking for explanation.
+         
+         > ![image](images/tom3.png)
+
+         * The machine predicts about the user's mind by building the graph
+         $Pg^{UinM}$
+         to give the only answer that might enhance the understandind of user to develop the understanding of user, while 
+         $pg^M$ 
+         is the graph of the image that machine has build for itself. The machine develop the understanding by giving bubbles to the blurred picture to develop understanding of user w/ minimum information. The 
+         $Pg^{MinU}$
+         is at the end compared w/ 
+         $Pg^{UinM}$
+         to evaluate how much has the user understood and how much machine has comprehended the user has understood.
+
+         > ![image](images/tom4.png)
+
+         * The author uses the fault-lines to develop the understanding of the user in these places of graph to develop understanding of user. It focuses to give the fault-lines on the basis:
+            * If the model thinks the user has low confidence of the model capability of classification b.w. *Person* and the *Deer* then it will highlight the fault-lines that shows the difference b.w. them but if the user have low-confidene on model capability of classification b.w. *Man* and the *Woman*, then it will show the corresponding fault-lines. 
+
+         > ![image](images/tom2)
+
+         * The author takes into account set 
+         $C$
+         contaning the images that 
+         $M$ 
+         predicts correctly and incorrectly in 
+         $W$
+         . The author uses two metrics to quatify human trust on system using:
+            * *JPT* : It is the $\%$ of images in 
+            $C$
+            that human feel the model 
+            $M$ would predict correctly.
+            * *JNT* : It is the $%$ of images in 
+            $W$ 
+            that human feel the model 
+            $M$ would predict incorrectly.
+            * *Reliance*:  It is the measure upto whihc hummman can accuractly predict the performers' inference results w/o under or over-estimation. It is the sum of both *JNT* and *JPT*.
+
+
+         </details>
+
+
+   - [SCOUT: Self-aware Discriminant Counterfactual Explanations](https://arxiv.org/pdf/2004.07769.pdf)
+      - <details><summary>Maheep's Notes</summary>
+
+         The paper focuses to tackle the challenges of interpretable ML, where it tries to answer the questions: 
+
+         > *Why the image of a class $Y^i$ does not belong to a counterfactual class $Y^j$?*
+
+         The author proposes connect attributive explanations, which are based on a single heat map, to counterfactual explanations, which seek to highlight the regions that are informative of the $Y^i$ class but uninformative of the counterfactual class $Y^j$. It proposes three functions that may solve the problem efficiently:
+
+         * $A = a(f(h_{y^i}(x)))$: It gives the heatmaps that are informative of the class $Y^i$.
+         * $B = a(f(h_{y^j}(x)))$: It gives the heatmaps that are informative of the counterfactual class $Y^j$.
+         * $C = a(s(x))$: It is a function that gives the score for a region, w.r.t to the confidence a model has about a region importance to predict the class.
+
+         > !['Model Structure'](images/model_structure.png)
+         
+         The $a(s(x))$ is produced as the conventional methods used the methodology of $A(1 - B)$ to highlight the discriminant features of a class w.r.t. counterfactual class. Although, this is able to highlight the desired features but only when *The classes are non-trivially different*, but fails when *they are similar*.
+
+         Therefore, it harness the three functions $A, B$ and  $C$ to extract the discriminatory function using the equaiton: $d(h_{y^i}(x), h_{y^j}(x)) = a(f(h_{y^i}(x)))a'(f(h_{y^j}(x)))a(s(x))$, 
+
+         where $a_{ij}' = max_{ij}a_{ij} - a_{ij}$.
+
+         </details>         
+
+
+   - [GENERATIVE_COUNTERFACTUAL_INTROSPECTION_FOR_EXPLAINABLE_DEEP_LEARNING](https://arxiv.org/pdf/1907.03077.pdf)
+      - <details><summary>Maheep's Notes</summary>
+
+         The paper propose to discover key attributes that are used to associate a sample with a class. The author implements it by:
+
+         It intervenes $do(A = A')$ minimally $min ||I - I(A')||$ on the attribue $A = \{a_1, a_2, ...., a_n\}$ of original image to generate counterfactual image $I(A')$. Consequqently, unravelling the key attribute features. 
+
+         > !['The illustration of the generative counterfactual introspection concept'](images/generative_actionable_counterfactual_Explanation.png)
+         </details>          
+   
+   
+   - [Discriminative Attribution from Counterfactuals](https://arxiv.org/pdf/2109.13412.pdf)
+      - <details><summary>Maheep's Notes</summary>
+        
+        The paper proposes a novel technique to combine feature attribution with counterfactual explanations to generate attribution maps that highlight the most discriminative features between pairs of classes. This is implemented as:
+
+        They use a *cycle-GAN* to translate real images $X$ of class $Y^i$ to counterfactual images $X'$. Then both the images are fed into the *Discriminative Attribution model* which finds out the most discriminative features separting the $2$ images. The most important part $m$ of class $Y^i$ is masked out.
+        The part is extracted from the original image $X$ and is combined with the $1-m$ region of counterfactual image to generate $x_H$ of class $Y^i$. 
+      
+        !['Diagram'](images/6.png)  
+        </details> 
+
+
+   - [Counterfactual Explanation Based on Gradual Construction for Deep Networks](https://arxiv.org/pdf/2008.01897.pdf)
+      - <details><summary>Maheep's Notes</summary>
+        
+        The paper focuses on tackling the challenge of network interpretability, concentrating on the issue of avoiding generation of samples within the dataset distribution for interpretability, rather than generating adversarial samples. 
+        
+        The work employs it in two steps:
+        * **Masking Step**: It extracts the sensitive features in the sample, which are to be modified to generate the counterfactual samples.
+        * **Composition Step**: It modifies the features extracted by the **Masking Step**, s.t. it does not lie out of the current dataset distribution, which is identified using the *logits* of sample of available dataset and the counterfactual dataset. 
+        The following diagram gives a more brief idea of the overall algorithm.
+
+        > !['Overview'](images/overview.png)
+
+        In terms of algorithm it can be seen as: 
+
+        > !['Algorithm'](images/algo.png)
+
+        In the algorithm, $K$ is the number of classes, 
+        $f_{k}'$ represents a logit score for a class $k$, 
+        $X_{i,ct}$ denotes $i^{th}$ training data that is classified into
+        a target class $c_t$. 
+        
+        The overall equation looks like: 
+        
+        $$
+        X' = (1 - M) \odot X + M \odot C
+        $$
+
+        </details>
+
+   - [Counterfactual Explanation of Brain Activity Classifiers using Image-to-Image Transfer by Generative Adversarial Network](https://arxiv.org/abs/2110.14927)
+      - <details><summary>Maheep's Notes</summary>
+
+        <!-- Although the paper was not quite understood by me, can be modified in the end again. -->
+        The work mainly focuses for multi-way counterfactual class explanation. It provides the explanation for failed decision by dissecting:
+        * The features $A$ harnessed for wrong classification.
+        * The minimal features $B$ changed to generate the counterfactual image, so that model predicts as correct/true class.
+        * Find the reason for failed decision by $B - A$, highlighting positive and negative contribution. 
+        * It aims to have very less difference b.w. the generated counterfactual image and input image.
+
+        ![Model](images/37.png)
+
+        </details> 
+
+
+   - [Counterfactual Visual Explanations](https://arxiv.org/pdf/1904.07451.pdf)
+      - <details><summary>Maheep's Notes</summary>
+      
+        The paper focuses to increase the interpretability of the network by generating counterfactual sample from the input while ensuring minimal perturbation. 
+        
+        The author ask a very signifiant question while developing the technique proposed in the paper, i.e. '' *How could I minimally change the existing features of image* 
+        $I$ 
+        *of class* 
+        $C$ 
+        *using the features of image* 
+        $I'$
+        *of distractor class*
+        $C'$ *to change the label of image* $I*$ *as* $C'$
+        .'' The analogy can be more understood by dissecting the figure below:
+
+        > ![image](images/cut_paste.png)
+
+        The author implements it by: 
+        * The key discriminatory features are identified b.w. the 
+        $I$ 
+        and 
+        $I'$
+        using a CNN to get the feature space using 
+        $f(I)$
+        and 
+        $g(f(I))$
+        acting as the classification function.
+
+        >!['Dissecting the Functions'](images/feature_extraction.png)     
+
+        The author proposes two approaches to achieve the above scenario, keeping the equation below as base equation: 
+        
+        $$
+        f(I^{*}) = (1-a) \odot f(I) + a \odot P(f(I')) 
+        $$
+
+        $P(f(\odot))$ 
+        represents a permutation matrix that rearranges the spatial cells of 
+        $f(I')$ 
+        to align with spatial cells of 
+        $f(I)$.
+      
+        >![images](images/comb_perm.png)
+
+        The approaches that the paper takes are:
+        * *Greedy Sequential Exhaustive Search*: It is an exhaustive search approach keeping $a$ and $P$ binary resulting in the below equation.
+
+        $$
+         maximize_{P,a} \ \ g_{c'}((1-a) \odot f(I) + a \odot P(f(I'))) 
+        $$
+
+        $$
+         s.t. \ \ ||a||_1 = 1, \ \ a_i \in \{0,1\} \ \forall i \\
+        $$
+      
+        $$
+         P \in \mathcal{P}
+        $$
+        
+        * *Continous Relaxation*: The restriction of 
+        $a$ 
+        and 
+        $P$ 
+        are relaxed from binary value to have point on the simplex, in case of 
+        $a$
+        and a stochastic matrix in-case of
+        
+        $$
+         maximize_{P,a} \ \ g_{c'}((1-a) \odot f(I) + a \odot P(f(I'))) \\ \\
+        $$
+
+        $$
+         s.t. \ \ ||a||_1 = 1, \ \ a_i \geq \forall i \\
+        $$
+
+        $$
+         ||p_i||_1 = 1,  \forall i \ \  P_{i,j} \geq 0 \ \ \forall i,j
+        $$
+        </details>
+
+                
+   - [Fast Real-time Counterfactual Explanations](https://arxiv.org/pdf/2007.05684.pdf)
+      - <details><summary>Maheep's Notes</summary>
+
+         The paper focuses to build a transformer, i.e. trained as a residual generator conditional on a classifier constrained under a proposal perturbation loss which maintains the content information of the query image, but just the class-specific semantic information is changed as shown in the figure below:
+
+         >![image](images/archi.png)
+
+
+         The technique is implemented using several losses: 
+
+         * **Adverserial loss**: It measures whether the generated image is indistinguishable from the real world images.
+
+         $$
+         L_{adv} = \mathbb{E}_x [logD(x)] + \mathbb{E}_{x,y^c}[log(1 - D(x + G(x,y^c)))] 
+         $$
+
+         * **Domain classification loss**: It is used to render the generate image 
+         $x + G(x,y^c)$ 
+         conditional on 
+         $y^c$. 
+
+         $$
+         L = \mathbb{E}[-log(D(y^c|x + G(x,y^c)))]
+         $$ 
+
+         where $G(x, y^c)$ is the perterbuation introduced by generator to convert image from $x$ to $x^c$.
+
+         * **Reconstruction loss**: The loss focuses to have generator work propoerly so as to produce the image need to be produced as defined by the loss. 
+
+         $$
+         L = \mathbb{E}[x - (x + G(x,y^c) + G(x + G(x,y^c), y))]
+         $$
+
+         * **Explanation loss**: This is to gurantee that the generated fake image produced belongs to the distribution of $H$ 
+
+         $$
+         L = \mathbb{E}[-logH(y^c|x + G(x,y^c))]        
+         $$
+
+         * **Perturbation loss**: To have the perturbation as small as possible it is introduced. 
+
+         $$
+         L = \mathbb{E}[G(x,y^c) + G(x + G(x,y^c),y)]
+         $$
+
+         All these 5 losses are added to make the final loss with different weights.
+        </details>         
+
+
+   - [Generating Natural Counterfactual Visual Explanations](https://www.ijcai.org/proceedings/2020/0742.pdf)
+      - <details><summary>Maheep's Notes</summary>
+
+        The paper proposes to generate counterfactual image explanation.
+
+        The author creates a dataset with the class 
+        $I_A$ 
+        image with corresponding text 
+        $T_A$
+        . The images are compared using their corresponding text, i.e.
+        $D = Compared(T_A, T_B)$
+        and therefore producing the disciminatory features 
+        $D$. 
+        The $D$ is used by a text-to-image GAN model  $G$
+        generate a counterfactual image. 
+        
+        $$
+         I' = G(T_A, D)
+        $$
+        
+        They use AttGAN and StackGAN and they take the image using the function. 
+
+        >![image](images/text_to_image.png) 
+        </details> 
+
+
+   - [Interpretability through invertibility: A deep convolutional network with ideal counterfactuals and isosurfaces](https://openreview.net/pdf?id=8YFhXYe1Ps)
+      - <details><summary>Maheep's Notes</summary>
+         
+         The paper proposes a model that generates meaningful, faithful, and ideal counterfactuals. It also focuses to create “*isofactuals*”, i.e. image interpolations with the same outcome but visually meaningful different features. 
+         The author argues that a system should provide power to the users to discover hypotheses in the input space themselves with faithful counterfactuals that are ideal. 
+         
+         They author implements it using an invertible deep neural network 
+         $z = \psi(x)$ 
+         
+         and 
+         $x = \psi^{-1}(x)$
+
+         with a linear classifier $Y = W^Tz + b$
+         . They generate a counterfatual by altering a feature representation of $X$ along the direction of weight vector, 
+         $z' = z + \alpha*W$ 
+
+         where 
+         $\tilde{x} = \psi^{-1}(z + \alpha*W)$ 
+         
+         To obtain *ideal counterfactuals*, the condition of no-change to unrealted properties w.r.t. to output should be ensured. 
+         In this work the author ensures it by developing a function that extracts unrelated properties.
+         $\mathcal{E}(x) = v^{T}z$
+
+         where $v$ is orthogonal to $W$ and ensuring using the equation below:
+         
+         $$
+            \mathcal{E}(\tilde{x}) = v^T(z + \alpha W) = v^Tz = \mathcal{E}(x)
+         $$
+
+         Also, to increase the transparency of the model it creates isofactual surfaces which provides variation in the feature distribution of samples of same label. 
+         The author discovers it by removing variation from $W$
+         , using applying PCA on the simple projection
+         $Z_{p} = Z - (W^TZ/W^TW)W$
+
+         to get various principal components $e_i$ which are used to create a hyperplane 
+         
+         $$
+         \alpha W + \sum_{i}^{m-1}\beta_i e_i
+         $$
+
+         This hyperplane can also be used to create hyperplanes using
+         $\psi^{-1}(e_i + \alpha W)$.
+        </details>  
+
+
+   - [GANterfactual - Counterfactual Explanations for Medical Non-Experts using Generative Adversarial Learning](https://arxiv.org/abs/2012.11905)
+      - <details><summary>Maheep's Notes</summary>
+
+         The work proposes to create counterfactual explanation images for medical images by taking in two measures: 
+         * There should be minimal change in the original image 
+         * The classifier predicts it in to the target class. 
+         
+         The author accomplishes this goal using the image-to-image translation using StarGAN as shown in the picture below, using 2 functions, i.e. 
+         $F(\cdot)$ to convert image of domain/class $Y$ to $X$ 
+         and
+         $G(\cdot)$ to convert image of domain/class $X$ to $Y$.
+
+
+         > ![Model](images/44.png)
+
+         It accomplishes it using the $GAN$ loss for functions $F$ and $G$ with other losses defined below:
+         * *Cycle-Consistency Loss*: It monitors the convertability quality of both the functions using the equation:
+
+         $$
+            L_{cycle}(G,F) = \mathbb{E}[||F(G(X)) - X||_1] + \mathbb{E}[||G(F(Y)) - Y||_1]
+         $$
+
+         * *Counter Loss*: It monitors the confidence prediciton of generated counterfactual image w.r.t. to the target class.
+
+         $$
+            L_{counter}(G,F,C) = \mathbb{E}[||Classification(G(X)) - Logits(Y)||] + \mathbb{E}[||Classification(F(Y)) - Logits(X)||]
+         $$
+
+         * *Identity Loss*: It forces the input images to remain same after transformation, using th equation:
+
+         $$
+            L_{identity}(G,F) = \mathbb{E}[||G(Y) - Y||_1] + \mathbb{||F(X) - X||_1}
+         $$
+        </details>           
+
+
+   - [Beyond Trivial Counterfactual Explanations with Diverse Valuable Explanations](https://arxiv.org/pdf/2103.10226.pdf)
+      - <details><summary>Maheep's Notes</summary>
+
+         The paper proposes to learn explainability method that has the following capabilities:
+         * It can interpret an ML model by identifying the attributes that have the most effect on its output.
+         * Find spurious features that produce
+         non-trivial explanations.  
+         * Uncover multiple distinct valuable explanation about the model
+               
+         <br>
+
+         The author proposes: 
+         * DiVE uses an encoder, a decoder, and a fixed-weight ML model.
+         * Encoder and Decoder are trained in an unsupervised manner to approximate the data distribution on which the ML model was trained. 
+         * They optimize a set of vectors 
+         $E_i$ to perturb the latent representation z generated by the trained encoder.
+
+         >![image](images/dive.png)
+            
+         The author proposes 3 main losses to achieve the aforementioned objectives: 
+         * *Counterfatual loss* : It identifies a change of latent attributes that will cause the ML model to change it’s prediction.
+         * *Proximity loss* : The goal of this loss function is to have minimum dis-similarity b.w. the reconstructed sample by the decoder
+         $\tilde{x}$ 
+         and the input $x$ in terms of appearance and attributes. It achieves this using the equation:
+
+         $$
+            L_{prox}(x,e) = ||x - \tilde{x}||_1 + \gamma \cdot ||e||_1
+         $$
+         
+         &nbsp; &nbsp;
+         The second term forces the model to identify a 
+         sparse perturbation to the latent space so as to produce sparse explanations. 
+         * *Diversity loss* : This loss prevents the multiple explanations of the model from being identical and reconstructs different images modifing the different spurious correlations and explaing through them.
+
+         $$
+         L_{div}(\{e_i\}_{i = 1}^N) = \sqrt{\sum_{i \neq j}(\frac{e_i^T}{||e_i||_2} \cdot \frac{e_j}{||e_j||_2})^2}
+         $$
+
+         The model harnesses the Fisher information to identify the importance score of different latent factors with the basic assumption that the less important features are highly eigible to produce non-trivial features to get surprising explanations, as highly influential features are likely to be related to the main attribute used by the classifier. 
+        </details>       
+
+
+   - [COIN: Counterfactual Image Generation for VQA Interpretation](https://arxiv.org/pdf/2201.03342.pdf)
+      - <details><summary>Maheep's Notes</summary>
+
+        The paper focuses on interpretability approach for VQA models. 
+        The author tries to tackle 3 major questions during the process of counterfactual image generation. 
+        
+        * How to change the answer of a VQA model with the minimum possible edit on the input image?
+        * How to alter exclusively the region in the image on which the VQA model focuses to derive an answer to a certain question?
+        * How to generate realistic counterfactual images?
+
+        This question-critical region is identified using the Grad-CAM, acting as an attention map. It guides the counterfactual generator to apply the changes on specific regions. 
+        
+        Moreover, a weighted reconstruction loss is introduced in order to allow the counterfactual generator to make more significant changes to question-critical spatial regions than the rest of the image. 
+
+        This is implemented by instead of generating a counterfactual image         
+        $I' = G(I \odot M, A)$
+        based on the original image $I$, 
+        attention map $M$ and generator $G$.
+        The discriminator $D$ ensures that image looks realistic and reconstruction loss is used to do minimal changes. The whole process happens as shown in the figure.  
+
+        ![Model](images/32.png)
+        </details>  
+
+   - [Training_calibration‐based_counterfactual_explainers_for_deep_learning](https://www.nature.com/articles/s41598-021-04529-5)
+      - <details><summary>Maheep's Notes</summary>
+
+         The paper proposes TraCE which mainly tackles the challenge of irrelevant feature manipulation for counterfactual generation in case of models' prediction are uncertain.
+         
+         The author focuses to some of the conditions to generate counterfactual:
+         * It should have the minimal features modification to generate counterfactual image 
+         $d(x, \hat{x})$.
+         * It should lie close to the original data manifold $M(x)$.
+         * Takes uncertainity into account while generating counterfactual explanation. 
+
+         The author implements it using 3 modules:
+         * *Autoencoder*: It encodes the followings: 
+            * A predictive model that takes as input the latent representations and outputs the desired target attribute (e.g., diagnosis state, age etc.) along with its prediction uncertainty 
+            * A counterfactual optimization strategy that uses an uncertainty-based calibration objective to reliably elucidate the intricate relationships between image signatures and the target attribute
+
+         >![image](images/struc.png)
+         
+         TraCE works on the following metrics to evaluate the counterfactual images, i.e. 
+
+         * **Validity**: ratio of the counterfactuals that actually have the desired target attribute to the total number of counterfactuals  
+         * The confidence of the **image** and **sparsity**, i.e. ratio of number of pixels altered to total no of pixels. 
+         * The other 2 metrcs are 
+            * **proximity** :  Average out the $l_2$ distance of each counterfactual to the K-nearest training samples in the latent space.
+            * **Realism score** : To have the generated image is close to the true data manifold.
+         * TraCE reveals attribute relationships by generating counterfactual image using the different attribute like age $A$ and diagnosis predictor $D$. 
+
+         $$
+            \delta_{A_x} = x - x_a 
+         $$
+
+         $$
+            \delta_{D_x} = x - x_d
+         $$
+
+         The $x_a$ is the counterfactual image on the basis for age and same for $x_d$. 
+
+         $$
+            x' = x + \delta_{A_x} + \delta_{D_x}
+         $$ 
+         
+         and hence atlast we evaluate the sensitivity of a feature by 
+         
+         $$
+         F_d(x') - F_d(x_d')
+         $$
+
+         , i.e. $F_d$ is the classifier of diagnosis. 
+
+         </details>  
+
+
+
+   - [ECINN: Efficient Counterfactuals from Invertible Neural Networks](https://arxiv.org/pdf/2103.13701.pdf)
+      - <details><summary>Maheep's Notes</summary>
+
+         The paper utilizes the generative capacities of invertible neural networks for image classification to generate counterfactual examples efficiently. 
+         
+         The authors proposes 3 major points as a contribution to this paper:
+         * The methodology is fast and invertible, i.e. it has full information preservation between input and output layers, where the other networks are surjective in nature, therfore also making the evaluation easy. 
+         * It only class-dependent features while ignoring the class-independence features succesfully. Therfore creates two types of counterfactuals: -
+               * *Tipping-point counterfactuals*: The counterfactuals that are on the border of the two classes, they give surpirising explanation and increases the interpretability property immensely.
+               * *Convincing counterfactuals*: The counterfactuals that have high confidence when classified for the counterfactual class.
+         * It generate heatmaps to define the features responsible for the altered prediction. 
+
+         >![image](images/ecinn.png)
+
+         The author implements it by: 
+         * Generating the clusters on the basis of the classes and clusters, extracted using INN 
+         $f(X)$ 
+         using the equations given below:
+
+         $$
+            C(x) = arg max_y P_x(y|x)
+         $$
+
+         $$
+            G_j = \{x|C(x)\}
+         $$
+
+         $$
+            \overline{\mu}_j = \frac{1}{|G_j|} \sum z_j
+         $$
+
+         $$
+            \Delta_{p,q} = \overline{\mu}_q - \overline{\mu}_p
+         $$
+
+         $$
+            \hat{x} = f^{-1}(f(x) + \alpha \Delta_{p,q})
+         $$
+
+         As for *tipping-pint counterfactuals* we use $\alpha_o$ and for *convincing counterfactuals* we use $\alpha_1$, where, it is interpolated by heuristic that 
+         $\alpha_1 = \frac{4}{5} + \frac{\alpha_o}{2}$
+
+         The $\alpha_o$ can be find out by conditioning on the equation below:
+
+         $$
+            ||z + \alpha_o \Delta_{p,q} - \mu_p|| = ||z + \alpha_o \Delta_{p,q} - \mu_q||
+         $$
+
+         As for the heatmap the difference b.w. the pixels of counterfactual and original input might do the trick:
+
+         $$
+            H(x,q) = \hat{x}^q - x
+         $$
+         </details>
+
+
+   - [Latent Space Explanation by Intervention](https://arxiv.org/abs/2112.04895)
+      - <details><summary>Maheep's Notes</summary>
+
+         The paper focuses to shift the prediction of the sample using the *Discrete Variational Autoencoder*(DVAE). 
+         
+         It proposes the following items as its prime contribution:
+         * Identifies discrete global concepts in a trained layer and intervene upon them.
+         * Novel Explanatory approach for explaining a given layer in human interpretable form.
+         * It proposes a regularization term that encourage high shared information b.w. discriminative and explanatory features. 
+
+         >![image](images/lsei.png)
+
+         The author implements it mainly using 2 major modules:
+         * Concepts are detected using a clustering upon the neural network 
+         $\phi(x)$
+         * Visual explanation are given by intervening upon the 
+         $Z = \{Z_1,.....,Z_n\}$
+         to get
+         $Z = \{\tilde{Z}_1,....., \tilde{Z}_n\}$
+         where different $Z_i$ represents a human interpretable concept. 
+         The DVAE learns these discrete concepts is ensured using the equation below:
+
+         $$
+            - log \ p(\phi(x)) \leq \mathbb{E}[(log \ p(\phi(x))|z)] - KL(q(z|\phi(x))||p(z))
+         $$ 
+
+         where $q(\cdot)$ is the probability distribution of $n$ dimensional boolean variable. 
+
+         The minimal reconstruction loss is ensured using:
+
+         $$
+            min \ l(g(\phi'(x)), x)
+         $$
+
+         where $g(\psi(x))$ makes it human interpretable.
+
+         The information b.w. the classifier $f(\cdot)$ and generator $g(\cdot)$ is maximized using the *Fisher Information*.
+
+         </details>  
+
+   - [Translational Lung Imaging Analysis Through Disentangled Representations](https://arxiv.org/abs/2203.01668) 
+      - <details><summary>Maheep's Notes</summary>
+
+         The work focuses on causal representation learning and interpretability focused on logical lung infected by Tuberculosis for animals. 
+
+         The works orders its contribution by:
+         * Generate suitable mask and produce very accurate prediciton of the image.
+         * Generate counterfactul image of healthy version w.r.t to a damaged lung image. 
+         * Generate realistic images, controlling lung damage on each. 
+
+         > ![image](images/53.png)
+
+         The author implements the same using the DAG, which harness 3 differnet kind of animal models, namely: 
+         animal model, 
+         $A$
+         , the realtive position of axial slice, 
+         $S$ and estimated lung damage, $D$, via the hierarchy at different resolution scales $k$, where *shape* and *texture* act as the low level features. 
+         It ensures the disentangled feature representation using the *Independent Causal Mechanism*(ICM).
+         By using the Noveau VAE to extract the latent space $z$ variables to generate the mask $y$ and image $x$. 
+         The mask $y$ is generated using the shape features while the CT image $x$ is generated using botht the *shape* and *texture* features. 
+         
+         It optimizes the construction using the following equation: 
+
+         $$
+            L(x,y) = \mathbb{E}[log \ p(x|z_1)] - KL(q(z_o|x)||p(z_o)) + \mathbb{E}[log \ p(y|z_2)] - \mathbb{E}_{z_1}(KL_{z_1}) - \mathbb{E}_{z_2}(KL_{z_2}) 
+         $$
+
+         where 
+
+         $$
+            \mathbb{E}_z[KL_z] = \sum_m^M \mathbb{E}[KL(q(z_m|z_{m-1},x)||q(z_m|z_{m-1}))] 
+         $$
+         
+         </details>  
+
+   - [DeDUCE: Generating Counterfactual Explanations At Scale](https://arxiv.org/pdf/2111.15639.pdf)
+      - <details><summary>Maheep's Notes</summary>
+      
+         The paper focues to generate counterfactuals to discover and modify the features that corrects the erroneous prediction by the model and output the correct label. 
+         The author accomplishes it w/o using any Generative model as used by many previous works.
+
+         >![image](images/deduce.png) 
+
+         The author accomlishes it by using the ''*[Epistemic Uncertianity](https://link.springer.com/article/10.1007/s10994-021-05946-3)*'' to generate samples similar to training data and maximizing the target class-density to minimize it.
+
+         The authors accomplishes the aim to generate counterfactual by modifying the pixels that are salient for the gradient of the loss and are changed using the equation:
+
+         $$
+            g_k = \frac{\nabla_{x_k}l_c(f(x_k), t)}{l_c(f(x_k),t)} - \frac{\nabla_{x_k}log \ p_t(f_Z(x_k))}{|log \ p_t(f_Z(x_k))|} + m \cdot g_{k-1}
+         $$    
+
+         where 
+         $l_c(f(x_k),t)$ 
+         and
+         $|log \ p_t(f_Z(x_k))|$
+         are used to normalize the both terms as they may have non-trivial difference in their magnitude, annhiliating the effect of one term.
+         The last term signifies the momentum and 
+         $l_c$ 
+         is the cross-entropy loss.
+
+         The author iteratively perturbs the input in small steps in a way that makes it more and more similar to the target class until it crosses the decision boundary. 
+         The algorithm stops when the softmax output for the target class is above 
+         $50%$ 
+         as this corresponds to the model choosing 
+         ‘*in target class*’ over ‘*not in target class*’.  
+
+         >!['Algorithm'](images/3.png)
+         </details>     
+
+   - [Counterfactual Explanation and Causal Inference In Service of Robustness in Robot Control](https://arxiv.org/pdf/2009.08856.pdf)
+      - <details><summary>Maheep's Notes</summary>
+
+         The paper focuses on the building a robust robot control system by generating a counterfactual image w/ minimal modification that allows a robot to solve a control task.
+
+         The author solves it by quantifying the robustness of a robot by its distance b.w. the original and counterfactual image used to solve a task.
+         $d(x,x')$.
+         They use the architecture with a generator and a classifier as shown in the figure below:
+
+         >![image](images/struc_robot.png)
+
+         They build the loss as having minimum intervention, therefore the distance to generate a counterfactual image and the counterfactual image has the highest probability to belong to the target class 
+         $t_c$
+         . Therfore computing the overall loss as:
+
+         $$
+            L = d_g(x,x') + d_c(C(x'),t_c)
+         $$
+
+         </details>
+
+
+---
+
+## Causality & Computer Vision
 
 
   - [Counterfactual Samples Synthesizing and Training for Robust Visual Question Answering](https://arxiv.org/pdf/2003.06576.pdf) 
@@ -1509,1052 +2563,3 @@ The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github
 
 
 
-## Explainability:
-The papers in this section focuses to use the concepts of Causality to increase the interpretability of the Neural Network.
-
-<!-- I am not able to grasp the methodology of what is multiway counterfactual mechanism -->
-
-   - [Contrastive_Counterfactual_Visual_Explanations_With_Overdetermination](https://arxiv.org/pdf/2106.14556.pdf)
-      - <details><summary>Maheep's Notes</summary>
-
-         The author slams the above works and contends that *Counterfactual Explanation* should be contrastive, counterfactual and measurable. It focuses to generate counterfactual explanation for medical image classification.
-
-         >![image](images/overdetermination.png)
-         
-         The author proposes the following things in the paper:
-
-         * It not only highlights the difference b.w. the counterfactual and factual images as aforementioned works but also signifies each segment importance in image prediction after segmenting it out using ''*Clear Image*''.
-         * It aims to unravel the causal structure of the system, arguing that "*AI provide information about the factors on which the model depends but also how it depends*". 
-         * It also proposes the concept of *causal overdetermination*, which corresponds to the scenario when there are 2 or more than that causes present for an event.
-
-         The author contends that the mask resulted from the subtraction of factual and counterfactual is not a good measure of explainability as it can vary significantly and also other critical segments shoud be absent.
-         Therefore it takes *mask*, *image* and *classification behaviour*  to generate counterfactual image. 
-
-         The author implements it by 
-         
-         * Dividing the image into segments using the *Clear Image* module which by iteratively increasing the size of segments until an individual comes out to be counterfactual in the set.
-         * The two types of segments are created, as shown in image (a) and (b): 
-            * (a) The ones that differentiates the counterfactual and factual image w/ high intensity 
-            $S_h$
-            * (b) The ones that are not highly differentiable but carries a good weight in the classification of the image
-            $S_l$.
-
-         > ![image](images/overdetermination1)
-
-         > ![image](images/overdetermination3.png)
-
-         * The importance of a segment is quantified by replacing segment of image
-         $x$
-         , i.e. 
-         $s = \{s_1, s_2, ...., s_n\}$
-         with the segements of the contrast image 
-         $x'$
-         , i.e. 
-         $s' = \{s_1', s_2', ...., s_n'\}$
-         to quantify the effect of each segment on classification. 
-         To limit the overdetermination, the work only replaces at-max 4 segments at a time to create a counterfacutal image.
-
-         > ![image](images/overdetermination2.png) 
-
-         * It uses regression equation
-         $w^TX$
-         to quantify the contribution that individual segement make to 
-         $y$
-         . With regression the classification probability is also considered and the subtraction of both results in *pleural effusion*.
-         It can be more elaborated using the image below where
-         The report identifies that substituting both segments 4 and 11 with the corresponding segments from its contrast image flips the classification probability to ’healthy’ According to the logistic regression equation these substitutions would change the probability of the X-ray being classified as ’pleural effusion’ to 0.44. However, when these segments are actually substituted and passed through the classifier, the probability changed to 0.43, hence the fidelity error is 0.01. CLEAR Image also identifies that substituting segments 3 and 11 also creates an image-counterfactual. The coefficient value becomes 0 if the segment belongs to the counterfactual image and becomes 1 if belongs to the original image. 
-
-         > ![image](images/overdetermination4.png)
-
-         </details> 
-
-   - [Born Identity Network: Multi-way Counterfactual Map Generation to Explain a Classifier’s Decision](https://arxiv.org/pdf/2011.10381.pdf)
-      - <details><summary>Maheep's Notes</summary>
-
-        The paper focuses on interpretability of medical image classification and mainly focuses on 2 main problems, i.e.
-        * Focuses to eradicate the negative correlation b.w. the performance and interpretability of the network. 
-        * Generates multi-way counterfactuals reasoning, where the aforementioned works only generates counterfactual map w.r.t. to only 1 class.
-
-        The author proposes 
-        $M_{x,y}$ 
-        counterfactual map that transforms an input image 
-        $X$ 
-        to 
-        $\tilde{X} = X + M_{x,y}$
-        
-        where $y$ is the counterfactual class, i.e. 
-        $F(\tilde{X}) = y$
-        
-        It uses a U-net network consisting of Encoder $E$, Generator $G$ and Discriminator $D$. 
-        The combination of $E$ and $G$ produces $M_{x}$ as shown in the figure below:
-
-        > ![Encode Decoder image](images/Enc_and_Dec.png "Structure of Encoder and Decoder, where the encoding of target is transffered to the Generator to Generate Counterfactual Mask")
-
-        The above process is guided by *Target Attribution Network*(TAN), which guides the generator to produce counterfactual maps that transform an input sample to be classified as a target class.
-
-        $M$ generates the image counterfactual image which is compared from the dataset distribution $P_{X}$, aiming to generate image of the same distribution, for which it uses Adversarial loss. 
-
-        > !['Full Structure'](images/full_structure.png)
-
-        The *Cycle Consistency loss*(CCL) is used to regulate the "multi-way" counterfactual maps.
-
-        $$
-            L_{cyc} = E_{X \sim P_X, Y \sim P_Y}[||(\tilde{X} + M_{\tilde{x},y'}) - X||_1]
-        $$
-
-        </details>
-
-
-
-   - [Explaining the Black-box Smoothly-A Counterfactual Approach](https://arxiv.org/pdf/2101.04230.pdf)
-      - <details><summary>Maheep's Notes</summary>
-
-         The paper focuses on increasing the interpretability of medical imaging classification by generating counterfactual image by perturbing the original image. 
-         
-         >![image](images/bbs1.png)
-
-         It modifies the image using pre-trained function 
-         $f(\cdot) \in [0,1]$
-         The work aims to learn the *explanatory function* 
-         $I_f(\cdot)$ 
-         using the equation:
-
-         $$
-         x_{\delta} \approx I_f(x,\delta)
-         $$
-
-         where 
-
-         $$
-         f(x_{\delta}) - f(x) = \delta
-         $$
-
-         It optimizes the overall process using 3 loss functions with 
-         $\phi(\cdot)$
-         defining a feature extractor,
-         $\psi$ 
-         computes a scalar loss value,
-         $\textbf{c}$ 
-         defining the one-hot vector of condition, which is 
-         $\textbf{c} = c_f(x, \delta)$
-         and
-         $V$ 
-         is the embedding metrics modulated on 
-         $\textbf{c}$ 
-         as :
-
-         * *Data Consistency*: It evaluates the correspondence between the generated image and the conditioner,defining the loss as:
-         
-         $$
-         L_{cGAN} =  \psi(\phi(G(z);\theta_{\phi});\theta_{\psi}) + c^T V \phi(x;\theta_{\phi})
-         $$
-
-         >![image](images/bbs2.png)
-
-         * **Classification model consistency**: To ensure that the generated image should give desired output, the loss is introduced as:
-
-         $$
-            L := c^T V \phi(x;\theta_{\phi}) + D_{KL}(f(x')||f (x) + \delta)
-         $$
-
-         >![image](images/bbs3.png)
-
-         * **Context-aware self-consistency**: The loss is defined so as to preserve the features using the reconstruction loss:
-
-         $$
-            L = L_{rec}(x,\mathcal{I}_f(x,0)) + L_{rec}(x,\mathcal{I}_f({I}_f(x,\delta),-\delta))
-         $$
-
-         where 
-
-         $$
-            L_{rec}(x,x') = \sum_j \frac{S_j(x)\odot||x-x'||_1}{\sum S_j(x)} + D_{KL}(O(x)||O(x'))
-         $$
-
-         where 
-         $S(\cdot)$ is a pretrained semantic segmentation network that produces a label map for different regions in the input domain. 
-         $O(x)$ is a pre-trained object detector that, given an input image 
-         $x$
-         , output a binary mask 
-         $O(x)$
-            
-         The author argues that there is a chance that the GAN may ignore small or uncommon details therfore the images are compared using semantic segmentation 
-         $S(\cdot)$ 
-         with object detection combined in identity loss.   
-         
-         >![image](images/bbs4.png)
-
-      </details>      
-      
-   - [Generative_Counterfactuals_for_Neural_Networks_via_Attribute_Informed_Perturbations](https://arxiv.org/pdf/2101.06930.pdf)
-      - <details><summary>Maheep's Notes</summary>
-            
-         The paper tries to generate counterfactual images using a low-dimensional latent space containing the *raw features* and *attribute informed latent space*, which are continously re-iterated for modification to generate a counterfactual image.
-
-         > ![image](images/aip.png)
-
-         The author highlight some of the challenges in the existing works, generating counterfactual image to increase interpretability:
-         
-         *  Counterfactuals generation for certain class might not be feasible as it is not possible to perturb the raw data due to various issue of piracy and the hassle to identify the perturbation.
-         * Counterfactual for certian class might not exist in the data, which might create problems as the selected prototypes and criticism are not sufficient for the counterfactual analysis. 
-         
-         <br>
-
-         The author implements it by:
-
-         * An encoder 
-         $E$ 
-         and decoder 
-         $D$ 
-         structure is proposed which encodes the *raw features* and *attribute related data* where the *raw features* includes the robust features of an object, where the *attribute related data* contains extra encoded information for humans such as "*bounding box*" and other information. 
-         *Attribute related-data* directly influences the quality of generated counterfactual. 
-      
-         $$
-            E(x) = z_o + a_o
-         $$
-
-         * The $z_o$ and $a_o$ are modified iteratively using the gradient-based optimization, specifically by the equaiton:
-
-         $$
-            z^{(n+1)} = z^n - \mu^n \nabla_z L_d(z^n, a^n, z_o, a_o, \overline{y})
-         $$
-
-         $$
-            a^{(n+1)} = a^n - \gamma^n \nabla_a L_d(z^n, a^n, z_o, a_o, \overline{y})
-         $$ 
-
-         where $L_d(\cdot)$ is the cross-entropy loss.
-
-         > ![image](images/aip1.png)
-
-         * The overall counterfactual loss can be categorized into prediction loss using cross-entropy 
-         $l_d(\cdot)$ 
-         and perturbation loss
-
-         $$
-            l_c = l_d(F(G^{dec}(z,a)),\overline{y}) + ||z - z_o||_2 + ||a - a_o||_2
-         $$
-
-         * The discriminator loss can be defined as:
-
-         $$
-         L = \sum_{i}^T \ -a_i \ log(D^i(\overline{x})) - (1 - a_i)\ log(1 - D^i(\overline{x})) + \mathbb{E} \ ||x - \overline{x}||_2
-         $$
-
-         The overall solution can be summed up using the equation below:
-            
-         > ![image](images/aip2.png)
-
-         </details>        
-
-
-
-
-   - [EXPLAINABLE IMAGE CLASSIFICATION WITH EVIDENCE COUNTERFACTUAL](https://arxiv.org/pdf/2004.07511.pdf)
-      - <details><summary>Maheep's Notes</summary>
-
-         The author proposes to generate the counterfactual image by perturbing the original image by identifying the set of features to be replaced.
-
-         The author proposes to integrate the following properties in the proposed model-agnostic model:
-
-         * Unravels the pattern that is used for classification, if true then also provides some meaningful representation of the model.
-         * If error to classify the image then unravels the reason for that.
-         * At last, delineate if the correct classification is classified for wrong feature harnessing by the model.
-
-         <br>
-         The author implements it by:
-
-         * An algorithm is proposed that identifies the EdC features, that if removed can alter the prediction of the model.  
-
-         > ![image](images/evidence_counterfactual.png)
-         
-         * To unravel the EdC features the author proposes SEDC algorithm, the algorithm defined below can be used
-
-         !['Algorithm'](images/4.png)
-
-         * But to generate the counterfactual class, the author proposes a tweaked version of the above algorithm as SEDC-T. In this secario a target class has to be specified and segments are selected based on the largest difference between the target class score and the predicted class score. In case more than one EdC is found, the EdC leading to the highest increase in target class score can be selected.
-         * SEDC-T allows for the generation of more nuanced explanations, since one can find out why the model predicts a class over another class of interest. This can certainly be useful for explaining misclassifications.
-         * As for segmenting and segment repacement as shown in the figure below, the author suggests:
-            * For segmentation the author uses segmentation algorithm that uses the numerical color values to obtain a meaningful grouping in segments.
-            * Alternatively, the segment replacement can be based on calculated pixel values. For example, the author suggests to use mean/mode pixel values of the image as a whole, the segment itself or the neighboring segments. Also, more advanced imputation methods for images are possible (e.g., image inpainting or blurring).
-
-         > ![image](images/evidence_counterfactual_2.png)
-
-         > ![image](images/evidence_counterfactual1.png)
-               
-         </details>      
-
-
-   - [CoCoX: Generating Conceptual and Counterfactual Explanations via Fault-Lines](https://ojs.aaai.org/index.php/AAAI/article/view/5643/5499)
-      - <details><summary>Maheep's Notes</summary>
-
-         The paper focuses to increase the interpretability of the network by generating counterfactual images 
-         $I'$ 
-         by minimally perturbing the changes in the original image
-         $I$
-
-         The author accounts for its contribution as:
-         * Generates fault-line explanation, which are a set of xconcepts that are used to alter the prediction of the image using a CNN 
-         $M$
-         . The xconcepts can be classified into two types:
-            * *Positive Fault-lines* : These are xconcepts that are added to the input image 
-            
-            $$
-            I' = I + \psi_{I,c_{alt},c_{pred}}^+
-            $$
-
-            * *Negative Fault-lines* : These are xconcepts that are subtracted from the input image to generate the counterfactual image.
-
-            $$
-            I' = I - \psi_{I,c_{alt},c_{pred}}^-
-            $$
-
-         
-         * It mines the fault-lines using the CNN of different 
-         $C$
-         classes in the dataset
-         $\mathcal{X}$ 
-         
-         >![image](images/cocox.png)
-
-         When a query $Q = <I,c_{pred}, c_{alt}>$ is passed to the image the model optimizes using the equation below:
-
-         $$
-            arg \ \underset{\psi}{max} P(\psi, \epsilon_{pred}, \epsilon_{alt}, \epsilon| Q) 
-         $$
-
-         where $\epsilon$ represents the all xconcepts, which is retrieved using the posterier 
-         $P(\epsilon|\mathcal{X}, M)$
-         Similarly 
-         $\epsilon_{pred}$
-         and 
-         $\epsilon_{alt}$ 
-         are obtained by:
-
-         $$
-            P(\epsilon_{pred}|\epsilon, X, I, c_{pred}, M)
-         $$
-
-         $$
-            P(\epsilon_{alt}|\epsilon, X, I, c_{alt}, M)
-         $$
-
-         >![image](images/cocox1.png
-         )
-
-         The process of mining of the xconcepts include: 
-         * The feature extractor 
-         $f(\cdot)$ 
-         and
-         classifier 
-         $g(\cdot)$
-         are used to build the xconcepts.
-         * Different feature maps are extracted using 
-         $f(I)$
-         which are seen as an instance of xconcept.
-         * The feature maps are then used to obtain localized maps, which are super-pixel of feature maps and are obtained using Grad-CAM, suing equation 1 in the figure below.
-         * Top-$p$ pixels are selected for each class, making a total of $p*C$ super-pixels.
-         * These are clustered using K-mean into different xconcepts into 
-         $G$ 
-         groups.
-
-         >!['Algorithm'](images/cocox3.png)
-
-         To get the importance of the concepts for a target class $C$
-         . They compute directional derivatives 
-         $S_{c,X}$ 
-         to produce estimates of how important the concept X was for a CNN’s prediction of a target class $C$, as defined in the $III^{rd}$ step.
-
-         The fault lines are detected using the $4^{th}$ step, where 
-         >![image](images/cocox2.png)
-
-         </details>
-
-
-   - [CX-ToM: Counterfactual Explanations with Theory-of-Mind for Enhancing Human Trust in Image Recognition Models](https://arxiv.org/pdf/2109.01401.pdf)
-      - <details><summary>Maheep's Notes</summary>
-
-         The paper proposes to enhance the explainability of the model using the fault-lines(as defined above work). The author aurgues that *understandability* and *Predictability* act as the basic pillars of explainability of a system. Therefore establishes a dialogue between a user and the machine taking Theory of Mind(ToM) as the basis of it. 
-
-         > ![images](images/tom)  
-
-         >![images](images/tom1.png)
-
-         The author implements it by:
-         * The dialogue aims to let the machine know about the user's intention of understanding and human to know about the machine's understanding of the system.
-         * The author setup an experiment in which a blurred image is provided to the user while the original image is provided to the machine. 
-         * The dialogue from the user are transffered in form of two type of questions *W-QA* and *E-QA* to understand from the machine as to what is on the place of the blurred image.
-            * *W-QA* include question of type *what*, *why*, *where*.
-            * *E-QA* include the questions which are seeking for explanation.
-         
-         > ![image](images/tom3.png)
-
-         * The machine predicts about the user's mind by building the graph
-         $Pg^{UinM}$
-         to give the only answer that might enhance the understandind of user to develop the understanding of user, while 
-         $pg^M$ 
-         is the graph of the image that machine has build for itself. The machine develop the understanding by giving bubbles to the blurred picture to develop understanding of user w/ minimum information. The 
-         $Pg^{MinU}$
-         is at the end compared w/ 
-         $Pg^{UinM}$
-         to evaluate how much has the user understood and how much machine has comprehended the user has understood.
-
-         > ![image](images/tom4.png)
-
-         * The author uses the fault-lines to develop the understanding of the user in these places of graph to develop understanding of user. It focuses to give the fault-lines on the basis:
-            * If the model thinks the user has low confidence of the model capability of classification b.w. *Person* and the *Deer* then it will highlight the fault-lines that shows the difference b.w. them but if the user have low-confidene on model capability of classification b.w. *Man* and the *Woman*, then it will show the corresponding fault-lines. 
-
-         > ![image](images/tom2)
-
-         * The author takes into account set 
-         $C$
-         contaning the images that 
-         $M$ 
-         predicts correctly and incorrectly in 
-         $W$
-         . The author uses two metrics to quatify human trust on system using:
-            * *JPT* : It is the $\%$ of images in 
-            $C$
-            that human feel the model 
-            $M$ would predict correctly.
-            * *JNT* : It is the $%$ of images in 
-            $W$ 
-            that human feel the model 
-            $M$ would predict incorrectly.
-            * *Reliance*:  It is the measure upto whihc hummman can accuractly predict the performers' inference results w/o under or over-estimation. It is the sum of both *JNT* and *JPT*.
-
-
-         </details>
-
-
-   - [SCOUT: Self-aware Discriminant Counterfactual Explanations](https://arxiv.org/pdf/2004.07769.pdf)
-      - <details><summary>Maheep's Notes</summary>
-
-         The paper focuses to tackle the challenges of interpretable ML, where it tries to answer the questions: 
-
-         > *Why the image of a class $Y^i$ does not belong to a counterfactual class $Y^j$?*
-
-         The author proposes connect attributive explanations, which are based on a single heat map, to counterfactual explanations, which seek to highlight the regions that are informative of the $Y^i$ class but uninformative of the counterfactual class $Y^j$. It proposes three functions that may solve the problem efficiently:
-
-         * $A = a(f(h_{y^i}(x)))$: It gives the heatmaps that are informative of the class $Y^i$.
-         * $B = a(f(h_{y^j}(x)))$: It gives the heatmaps that are informative of the counterfactual class $Y^j$.
-         * $C = a(s(x))$: It is a function that gives the score for a region, w.r.t to the confidence a model has about a region importance to predict the class.
-
-         > !['Model Structure'](images/model_structure.png)
-         
-         The $a(s(x))$ is produced as the conventional methods used the methodology of $A(1 - B)$ to highlight the discriminant features of a class w.r.t. counterfactual class. Although, this is able to highlight the desired features but only when *The classes are non-trivially different*, but fails when *they are similar*.
-
-         Therefore, it harness the three functions $A, B$ and  $C$ to extract the discriminatory function using the equaiton: $d(h_{y^i}(x), h_{y^j}(x)) = a(f(h_{y^i}(x)))a'(f(h_{y^j}(x)))a(s(x))$, 
-
-         where $a_{ij}' = max_{ij}a_{ij} - a_{ij}$.
-
-         </details>         
-
-
-   - [GENERATIVE_COUNTERFACTUAL_INTROSPECTION_FOR_EXPLAINABLE_DEEP_LEARNING](https://arxiv.org/pdf/1907.03077.pdf)
-      - <details><summary>Maheep's Notes</summary>
-
-         The paper propose to discover key attributes that are used to associate a sample with a class. The author implements it by:
-
-         It intervenes $do(A = A')$ minimally $min ||I - I(A')||$ on the attribue $A = \{a_1, a_2, ...., a_n\}$ of original image to generate counterfactual image $I(A')$. Consequqently, unravelling the key attribute features. 
-
-         > !['The illustration of the generative counterfactual introspection concept'](images/generative_actionable_counterfactual_Explanation.png)
-         </details>          
-   
-   
-   - [Discriminative Attribution from Counterfactuals](https://arxiv.org/pdf/2109.13412.pdf)
-      - <details><summary>Maheep's Notes</summary>
-        
-        The paper proposes a novel technique to combine feature attribution with counterfactual explanations to generate attribution maps that highlight the most discriminative features between pairs of classes. This is implemented as:
-
-        They use a *cycle-GAN* to translate real images $X$ of class $Y^i$ to counterfactual images $X'$. Then both the images are fed into the *Discriminative Attribution model* which finds out the most discriminative features separting the $2$ images. The most important part $m$ of class $Y^i$ is masked out.
-        The part is extracted from the original image $X$ and is combined with the $1-m$ region of counterfactual image to generate $x_H$ of class $Y^i$. 
-      
-        !['Diagram'](images/6.png)  
-        </details> 
-
-
-   - [Counterfactual Explanation Based on Gradual Construction for Deep Networks](https://arxiv.org/pdf/2008.01897.pdf)
-      - <details><summary>Maheep's Notes</summary>
-        
-        The paper focuses on tackling the challenge of network interpretability, concentrating on the issue of avoiding generation of samples within the dataset distribution for interpretability, rather than generating adversarial samples. 
-        
-        The work employs it in two steps:
-        * **Masking Step**: It extracts the sensitive features in the sample, which are to be modified to generate the counterfactual samples.
-        * **Composition Step**: It modifies the features extracted by the **Masking Step**, s.t. it does not lie out of the current dataset distribution, which is identified using the *logits* of sample of available dataset and the counterfactual dataset. 
-        The following diagram gives a more brief idea of the overall algorithm.
-
-        > !['Overview'](images/overview.png)
-
-        In terms of algorithm it can be seen as: 
-
-        > !['Algorithm'](images/algo.png)
-
-        In the algorithm, $K$ is the number of classes, 
-        $f_{k}'$ represents a logit score for a class $k$, 
-        $X_{i,ct}$ denotes $i^{th}$ training data that is classified into
-        a target class $c_t$. 
-        
-        The overall equation looks like: 
-        
-        $$
-        X' = (1 - M) \odot X + M \odot C
-        $$
-
-        </details>
-
-   - [Counterfactual Explanation of Brain Activity Classifiers using Image-to-Image Transfer by Generative Adversarial Network](https://arxiv.org/abs/2110.14927)
-      - <details><summary>Maheep's Notes</summary>
-
-        <!-- Although the paper was not quite understood by me, can be modified in the end again. -->
-        The work mainly focuses for multi-way counterfactual class explanation. It provides the explanation for failed decision by dissecting:
-        * The features $A$ harnessed for wrong classification.
-        * The minimal features $B$ changed to generate the counterfactual image, so that model predicts as correct/true class.
-        * Find the reason for failed decision by $B - A$, highlighting positive and negative contribution. 
-        * It aims to have very less difference b.w. the generated counterfactual image and input image.
-
-        ![Model](images/37.png)
-
-        </details> 
-
-
-   - [Counterfactual Visual Explanations](https://arxiv.org/pdf/1904.07451.pdf)
-      - <details><summary>Maheep's Notes</summary>
-      
-        The paper focuses to increase the interpretability of the network by generating counterfactual sample from the input while ensuring minimal perturbation. 
-        
-        The author ask a very signifiant question while developing the technique proposed in the paper, i.e. '' *How could I minimally change the existing features of image* 
-        $I$ 
-        *of class* 
-        $C$ 
-        *using the features of image* 
-        $I'$
-        *of distractor class*
-        $C'$ *to change the label of image* $I*$ *as* $C'$
-        .'' The analogy can be more understood by dissecting the figure below:
-
-        > ![image](images/cut_paste.png)
-
-        The author implements it by: 
-        * The key discriminatory features are identified b.w. the 
-        $I$ 
-        and 
-        $I'$
-        using a CNN to get the feature space using 
-        $f(I)$
-        and 
-        $g(f(I))$
-        acting as the classification function.
-
-        >!['Dissecting the Functions'](images/feature_extraction.png)     
-
-        The author proposes two approaches to achieve the above scenario, keeping the equation below as base equation: 
-        
-        $$
-        f(I^{*}) = (1-a) \odot f(I) + a \odot P(f(I')) 
-        $$
-
-        $P(f(\odot))$ 
-        represents a permutation matrix that rearranges the spatial cells of 
-        $f(I')$ 
-        to align with spatial cells of 
-        $f(I)$.
-      
-        >![images](images/comb_perm.png)
-
-        The approaches that the paper takes are:
-        * *Greedy Sequential Exhaustive Search*: It is an exhaustive search approach keeping $a$ and $P$ binary resulting in the below equation.
-
-        $$
-         maximize_{P,a} \ \ g_{c'}((1-a) \odot f(I) + a \odot P(f(I'))) 
-        $$
-
-        $$
-         s.t. \ \ ||a||_1 = 1, \ \ a_i \in \{0,1\} \ \forall i \\
-        $$
-      
-        $$
-         P \in \mathcal{P}
-        $$
-        
-        * *Continous Relaxation*: The restriction of 
-        $a$ 
-        and 
-        $P$ 
-        are relaxed from binary value to have point on the simplex, in case of 
-        $a$
-        and a stochastic matrix in-case of
-        
-        $$
-         maximize_{P,a} \ \ g_{c'}((1-a) \odot f(I) + a \odot P(f(I'))) \\ \\
-        $$
-
-        $$
-         s.t. \ \ ||a||_1 = 1, \ \ a_i \geq \forall i \\
-        $$
-
-        $$
-         ||p_i||_1 = 1,  \forall i \ \  P_{i,j} \geq 0 \ \ \forall i,j
-        $$
-        </details>
-
-                
-   - [Fast Real-time Counterfactual Explanations](https://arxiv.org/pdf/2007.05684.pdf)
-      - <details><summary>Maheep's Notes</summary>
-
-         The paper focuses to build a transformer, i.e. trained as a residual generator conditional on a classifier constrained under a proposal perturbation loss which maintains the content information of the query image, but just the class-specific semantic information is changed as shown in the figure below:
-
-         >![image](images/archi.png)
-
-
-         The technique is implemented using several losses: 
-
-         * **Adverserial loss**: It measures whether the generated image is indistinguishable from the real world images.
-
-         $$
-         L_{adv} = \mathbb{E}_x [logD(x)] + \mathbb{E}_{x,y^c}[log(1 - D(x + G(x,y^c)))] 
-         $$
-
-         * **Domain classification loss**: It is used to render the generate image 
-         $x + G(x,y^c)$ 
-         conditional on 
-         $y^c$. 
-
-         $$
-         L = \mathbb{E}[-log(D(y^c|x + G(x,y^c)))]
-         $$ 
-
-         where $G(x, y^c)$ is the perterbuation introduced by generator to convert image from $x$ to $x^c$.
-
-         * **Reconstruction loss**: The loss focuses to have generator work propoerly so as to produce the image need to be produced as defined by the loss. 
-
-         $$
-         L = \mathbb{E}[x - (x + G(x,y^c) + G(x + G(x,y^c), y))]
-         $$
-
-         * **Explanation loss**: This is to gurantee that the generated fake image produced belongs to the distribution of $H$ 
-
-         $$
-         L = \mathbb{E}[-logH(y^c|x + G(x,y^c))]        
-         $$
-
-         * **Perturbation loss**: To have the perturbation as small as possible it is introduced. 
-
-         $$
-         L = \mathbb{E}[G(x,y^c) + G(x + G(x,y^c),y)]
-         $$
-
-         All these 5 losses are added to make the final loss with different weights.
-        </details>         
-
-
-   - [Generating Natural Counterfactual Visual Explanations](https://www.ijcai.org/proceedings/2020/0742.pdf)
-      - <details><summary>Maheep's Notes</summary>
-
-        The paper proposes to generate counterfactual image explanation.
-
-        The author creates a dataset with the class 
-        $I_A$ 
-        image with corresponding text 
-        $T_A$
-        . The images are compared using their corresponding text, i.e.
-        $D = Compared(T_A, T_B)$
-        and therefore producing the disciminatory features 
-        $D$. 
-        The $D$ is used by a text-to-image GAN model  $G$
-        generate a counterfactual image. 
-        
-        $$
-         I' = G(T_A, D)
-        $$
-        
-        They use AttGAN and StackGAN and they take the image using the function. 
-
-        >![image](images/text_to_image.png) 
-        </details> 
-
-
-   - [Interpretability through invertibility: A deep convolutional network with ideal counterfactuals and isosurfaces](https://openreview.net/pdf?id=8YFhXYe1Ps)
-      - <details><summary>Maheep's Notes</summary>
-         
-         The paper proposes a model that generates meaningful, faithful, and ideal counterfactuals. It also focuses to create “*isofactuals*”, i.e. image interpolations with the same outcome but visually meaningful different features. 
-         The author argues that a system should provide power to the users to discover hypotheses in the input space themselves with faithful counterfactuals that are ideal. 
-         
-         They author implements it using an invertible deep neural network 
-         $z = \psi(x)$ 
-         
-         and 
-         $x = \psi^{-1}(x)$
-
-         with a linear classifier $Y = W^Tz + b$
-         . They generate a counterfatual by altering a feature representation of $X$ along the direction of weight vector, 
-         $z' = z + \alpha*W$ 
-
-         where 
-         $\tilde{x} = \psi^{-1}(z + \alpha*W)$ 
-         
-         To obtain *ideal counterfactuals*, the condition of no-change to unrealted properties w.r.t. to output should be ensured. 
-         In this work the author ensures it by developing a function that extracts unrelated properties.
-         $\mathcal{E}(x) = v^{T}z$
-
-         where $v$ is orthogonal to $W$ and ensuring using the equation below:
-         
-         $$
-            \mathcal{E}(\tilde{x}) = v^T(z + \alpha W) = v^Tz = \mathcal{E}(x)
-         $$
-
-         Also, to increase the transparency of the model it creates isofactual surfaces which provides variation in the feature distribution of samples of same label. 
-         The author discovers it by removing variation from $W$
-         , using applying PCA on the simple projection
-         $Z_{p} = Z - (W^TZ/W^TW)W$
-
-         to get various principal components $e_i$ which are used to create a hyperplane 
-         
-         $$
-         \alpha W + \sum_{i}^{m-1}\beta_i e_i
-         $$
-
-         This hyperplane can also be used to create hyperplanes using
-         $\psi^{-1}(e_i + \alpha W)$.
-        </details>  
-
-
-   - [GANterfactual - Counterfactual Explanations for Medical Non-Experts using Generative Adversarial Learning](https://arxiv.org/abs/2012.11905)
-      - <details><summary>Maheep's Notes</summary>
-
-         The work proposes to create counterfactual explanation images for medical images by taking in two measures: 
-         * There should be minimal change in the original image 
-         * The classifier predicts it in to the target class. 
-         
-         The author accomplishes this goal using the image-to-image translation using StarGAN as shown in the picture below, using 2 functions, i.e. 
-         $F(\cdot)$ to convert image of domain/class $Y$ to $X$ 
-         and
-         $G(\cdot)$ to convert image of domain/class $X$ to $Y$.
-
-
-         > ![Model](images/44.png)
-
-         It accomplishes it using the $GAN$ loss for functions $F$ and $G$ with other losses defined below:
-         * *Cycle-Consistency Loss*: It monitors the convertability quality of both the functions using the equation:
-
-         $$
-            L_{cycle}(G,F) = \mathbb{E}[||F(G(X)) - X||_1] + \mathbb{E}[||G(F(Y)) - Y||_1]
-         $$
-
-         * *Counter Loss*: It monitors the confidence prediciton of generated counterfactual image w.r.t. to the target class.
-
-         $$
-            L_{counter}(G,F,C) = \mathbb{E}[||Classification(G(X)) - Logits(Y)||] + \mathbb{E}[||Classification(F(Y)) - Logits(X)||]
-         $$
-
-         * *Identity Loss*: It forces the input images to remain same after transformation, using th equation:
-
-         $$
-            L_{identity}(G,F) = \mathbb{E}[||G(Y) - Y||_1] + \mathbb{||F(X) - X||_1}
-         $$
-        </details>           
-
-
-   - [Beyond Trivial Counterfactual Explanations with Diverse Valuable Explanations](https://arxiv.org/pdf/2103.10226.pdf)
-      - <details><summary>Maheep's Notes</summary>
-
-         The paper proposes to learn explainability method that has the following capabilities:
-         * It can interpret an ML model by identifying the attributes that have the most effect on its output.
-         * Find spurious features that produce
-         non-trivial explanations.  
-         * Uncover multiple distinct valuable explanation about the model
-               
-         <br>
-
-         The author proposes: 
-         * DiVE uses an encoder, a decoder, and a fixed-weight ML model.
-         * Encoder and Decoder are trained in an unsupervised manner to approximate the data distribution on which the ML model was trained. 
-         * They optimize a set of vectors 
-         $E_i$ to perturb the latent representation z generated by the trained encoder.
-
-         >![image](images/dive.png)
-            
-         The author proposes 3 main losses to achieve the aforementioned objectives: 
-         * *Counterfatual loss* : It identifies a change of latent attributes that will cause the ML model to change it’s prediction.
-         * *Proximity loss* : The goal of this loss function is to have minimum dis-similarity b.w. the reconstructed sample by the decoder
-         $\tilde{x}$ 
-         and the input $x$ in terms of appearance and attributes. It achieves this using the equation:
-
-         $$
-            L_{prox}(x,e) = ||x - \tilde{x}||_1 + \gamma \cdot ||e||_1
-         $$
-         
-         &nbsp; &nbsp;
-         The second term forces the model to identify a 
-         sparse perturbation to the latent space so as to produce sparse explanations. 
-         * *Diversity loss* : This loss prevents the multiple explanations of the model from being identical and reconstructs different images modifing the different spurious correlations and explaing through them.
-
-         $$
-         L_{div}(\{e_i\}_{i = 1}^N) = \sqrt{\sum_{i \neq j}(\frac{e_i^T}{||e_i||_2} \cdot \frac{e_j}{||e_j||_2})^2}
-         $$
-
-         The model harnesses the Fisher information to identify the importance score of different latent factors with the basic assumption that the less important features are highly eigible to produce non-trivial features to get surprising explanations, as highly influential features are likely to be related to the main attribute used by the classifier. 
-        </details>       
-
-
-   - [COIN: Counterfactual Image Generation for VQA Interpretation](https://arxiv.org/pdf/2201.03342.pdf)
-      - <details><summary>Maheep's Notes</summary>
-
-        The paper focuses on interpretability approach for VQA models. 
-        The author tries to tackle 3 major questions during the process of counterfactual image generation. 
-        
-        * How to change the answer of a VQA model with the minimum possible edit on the input image?
-        * How to alter exclusively the region in the image on which the VQA model focuses to derive an answer to a certain question?
-        * How to generate realistic counterfactual images?
-
-        This question-critical region is identified using the Grad-CAM, acting as an attention map. It guides the counterfactual generator to apply the changes on specific regions. 
-        
-        Moreover, a weighted reconstruction loss is introduced in order to allow the counterfactual generator to make more significant changes to question-critical spatial regions than the rest of the image. 
-
-        This is implemented by instead of generating a counterfactual image         
-        $I' = G(I \odot M, A)$
-        based on the original image $I$, 
-        attention map $M$ and generator $G$.
-        The discriminator $D$ ensures that image looks realistic and reconstruction loss is used to do minimal changes. The whole process happens as shown in the figure.  
-
-        ![Model](images/32.png)
-        </details>  
-
-- [Training_calibration‐based_counterfactual_explainers_for_deep_learning](https://www.nature.com/articles/s41598-021-04529-5)
-   - <details><summary>Maheep's Notes</summary>
-
-      The paper proposes TraCE which mainly tackles the challenge of irrelevant feature manipulation for counterfactual generation in case of models' prediction are uncertain.
-      
-      The author focuses to some of the conditions to generate counterfactual:
-      * It should have the minimal features modification to generate counterfactual image 
-      $d(x, \hat{x})$.
-      * It should lie close to the original data manifold $M(x)$.
-      * Takes uncertainity into account while generating counterfactual explanation. 
-
-      The author implements it using 3 modules:
-      * *Autoencoder*: It encodes the followings: 
-         * A predictive model that takes as input the latent representations and outputs the desired target attribute (e.g., diagnosis state, age etc.) along with its prediction uncertainty 
-         * A counterfactual optimization strategy that uses an uncertainty-based calibration objective to reliably elucidate the intricate relationships between image signatures and the target attribute
-
-      >![image](images/struc.png)
-      
-      TraCE works on the following metrics to evaluate the counterfactual images, i.e. 
-
-      * **Validity**: ratio of the counterfactuals that actually have the desired target attribute to the total number of counterfactuals  
-      * The confidence of the **image** and **sparsity**, i.e. ratio of number of pixels altered to total no of pixels. 
-      * The other 2 metrcs are 
-         * **proximity** :  Average out the $l_2$ distance of each counterfactual to the K-nearest training samples in the latent space.
-         * **Realism score** : To have the generated image is close to the true data manifold.
-      * TraCE reveals attribute relationships by generating counterfactual image using the different attribute like age $A$ and diagnosis predictor $D$. 
-
-      $$
-         \delta_{A_x} = x - x_a 
-      $$
-
-      $$
-         \delta_{D_x} = x - x_d
-      $$
-
-      The $x_a$ is the counterfactual image on the basis for age and same for $x_d$. 
-
-      $$
-         x' = x + \delta_{A_x} + \delta_{D_x}
-      $$ 
-      
-      and hence atlast we evaluate the sensitivity of a feature by 
-      
-      $$
-      F_d(x') - F_d(x_d')
-      $$
-
-      , i.e. $F_d$ is the classifier of diagnosis. 
-
-      </details>  
-
-
-
-- [ECINN: Efficient Counterfactuals from Invertible Neural Networks](https://arxiv.org/pdf/2103.13701.pdf)
-   - <details><summary>Maheep's Notes</summary>
-
-        The paper utilizes the generative capacities of invertible neural networks for image classification to generate counterfactual examples efficiently. 
-        
-        The authors proposes 3 major points as a contribution to this paper:
-        * The methodology is fast and invertible, i.e. it has full information preservation between input and output layers, where the other networks are surjective in nature, therfore also making the evaluation easy. 
-        * It only class-dependent features while ignoring the class-independence features succesfully. Therfore creates two types of counterfactuals: -
-            * *Tipping-point counterfactuals*: The counterfactuals that are on the border of the two classes, they give surpirising explanation and increases the interpretability property immensely.
-            * *Convincing counterfactuals*: The counterfactuals that have high confidence when classified for the counterfactual class.
-        * It generate heatmaps to define the features responsible for the altered prediction. 
-
-        >![image](images/ecinn.png)
-
-        The author implements it by: 
-        * Generating the clusters on the basis of the classes and clusters, extracted using INN 
-        $f(X)$ 
-        using the equations given below:
-
-        $$
-         C(x) = arg max_y P_x(y|x)
-        $$
-
-        $$
-         G_j = \{x|C(x)\}
-        $$
-
-        $$
-         \overline{\mu}_j = \frac{1}{|G_j|} \sum z_j
-        $$
-
-        $$
-         \Delta_{p,q} = \overline{\mu}_q - \overline{\mu}_p
-        $$
-
-        $$
-         \hat{x} = f^{-1}(f(x) + \alpha \Delta_{p,q})
-        $$
-
-        As for *tipping-pint counterfactuals* we use $\alpha_o$ and for *convincing counterfactuals* we use $\alpha_1$, where, it is interpolated by heuristic that 
-        $\alpha_1 = \frac{4}{5} + \frac{\alpha_o}{2}$
-
-        The $\alpha_o$ can be find out by conditioning on the equation below:
-
-        $$
-         ||z + \alpha_o \Delta_{p,q} - \mu_p|| = ||z + \alpha_o \Delta_{p,q} - \mu_q||
-        $$
-
-        As for the heatmap the difference b.w. the pixels of counterfactual and original input might do the trick:
-
-        $$
-         H(x,q) = \hat{x}^q - x
-        $$
-        </details>
-
-
-- [Latent Space Explanation by Intervention](https://arxiv.org/abs/2112.04895)
-   - <details><summary>Maheep's Notes</summary>
-
-      The paper focuses to shift the prediction of the sample using the *Discrete Variational Autoencoder*(DVAE). 
-      
-      It proposes the following items as its prime contribution:
-      * Identifies discrete global concepts in a trained layer and intervene upon them.
-      * Novel Explanatory approach for explaining a given layer in human interpretable form.
-      * It proposes a regularization term that encourage high shared information b.w. discriminative and explanatory features. 
-
-      >![image](images/lsei.png)
-
-      The author implements it mainly using 2 major modules:
-      * Concepts are detected using a clustering upon the neural network 
-      $\phi(x)$
-      * Visual explanation are given by intervening upon the 
-      $Z = \{Z_1,.....,Z_n\}$
-      to get
-      $Z = \{\tilde{Z}_1,....., \tilde{Z}_n\}$
-      where different $Z_i$ represents a human interpretable concept. 
-      The DVAE learns these discrete concepts is ensured using the equation below:
-
-      $$
-         - log \ p(\phi(x)) \leq \mathbb{E}[(log \ p(\phi(x))|z)] - KL(q(z|\phi(x))||p(z))
-      $$ 
-
-      where $q(\cdot)$ is the probability distribution of $n$ dimensional boolean variable. 
-
-      The minimal reconstruction loss is ensured using:
-
-      $$
-         min \ l(g(\phi'(x)), x)
-      $$
-
-      where $g(\psi(x))$ makes it human interpretable.
-
-      The information b.w. the classifier $f(\cdot)$ and generator $g(\cdot)$ is maximized using the *Fisher Information*.
-
-      </details>  
-
-- [Translational Lung Imaging Analysis Through Disentangled Representations](https://arxiv.org/abs/2203.01668) 
-   - <details><summary>Maheep's Notes</summary>
-
-      The work focuses on causal representation learning and interpretability focused on logical lung infected by Tuberculosis for animals. 
-
-      The works orders its contribution by:
-      * Generate suitable mask and produce very accurate prediciton of the image.
-      * Generate counterfactul image of healthy version w.r.t to a damaged lung image. 
-      * Generate realistic images, controlling lung damage on each. 
-
-      > ![image](images/53.png)
-
-      The author implements the same using the DAG, which harness 3 differnet kind of animal models, namely: 
-      animal model, 
-      $A$
-      , the realtive position of axial slice, 
-      $S$ and estimated lung damage, $D$, via the hierarchy at different resolution scales $k$, where *shape* and *texture* act as the low level features. 
-      It ensures the disentangled feature representation using the *Independent Causal Mechanism*(ICM).
-      By using the Noveau VAE to extract the latent space $z$ variables to generate the mask $y$ and image $x$. 
-      The mask $y$ is generated using the shape features while the CT image $x$ is generated using botht the *shape* and *texture* features. 
-      
-      It optimizes the construction using the following equation: 
-
-      $$
-         L(x,y) = \mathbb{E}[log \ p(x|z_1)] - KL(q(z_o|x)||p(z_o)) + \mathbb{E}[log \ p(y|z_2)] - \mathbb{E}_{z_1}(KL_{z_1}) - \mathbb{E}_{z_2}(KL_{z_2}) 
-      $$
-
-      where 
-
-      $$
-         \mathbb{E}_z[KL_z] = \sum_m^M \mathbb{E}[KL(q(z_m|z_{m-1},x)||q(z_m|z_{m-1}))] 
-      $$
-      
-      </details>  
-
-- [DeDUCE: Generating Counterfactual Explanations At Scale](https://arxiv.org/pdf/2111.15639.pdf)
-   - <details><summary>Maheep's Notes</summary>
-   
-      The paper focues to generate counterfactuals to discover and modify the features that corrects the erroneous prediction by the model and output the correct label. 
-      The author accomplishes it w/o using any Generative model as used by many previous works.
-
-      >![image](images/deduce.png) 
-
-      The author accomlishes it by using the ''*[Epistemic Uncertianity](https://link.springer.com/article/10.1007/s10994-021-05946-3)*'' to generate samples similar to training data and maximizing the target class-density to minimize it.
-
-      The authors accomplishes the aim to generate counterfactual by modifying the pixels that are salient for the gradient of the loss and are changed using the equation:
-
-      $$
-         g_k = \frac{\nabla_{x_k}l_c(f(x_k), t)}{l_c(f(x_k),t)} - \frac{\nabla_{x_k}log \ p_t(f_Z(x_k))}{|log \ p_t(f_Z(x_k))|} + m \cdot g_{k-1}
-      $$    
-
-      where 
-      $l_c(f(x_k),t)$ 
-      and
-      $|log \ p_t(f_Z(x_k))|$
-      are used to normalize the both terms as they may have non-trivial difference in their magnitude, annhiliating the effect of one term.
-      The last term signifies the momentum and 
-      $l_c$ 
-      is the cross-entropy loss.
-
-      The author iteratively perturbs the input in small steps in a way that makes it more and more similar to the target class until it crosses the decision boundary. 
-      The algorithm stops when the softmax output for the target class is above 
-      $50%$ 
-      as this corresponds to the model choosing 
-      ‘*in target class*’ over ‘*not in target class*’.  
-
-      >!['Algorithm'](images/3.png)
-      </details>     
-
-- [Counterfactual Explanation and Causal Inference In Service of Robustness in Robot Control](https://arxiv.org/pdf/2009.08856.pdf)
-   - <details><summary>Maheep's Notes</summary>
-
-      The paper focuses on the building a robust robot control system by generating a counterfactual image w/ minimal modification that allows a robot to solve a control task.
-
-      The author solves it by quantifying the robustness of a robot by its distance b.w. the original and counterfactual image used to solve a task.
-      $d(x,x')$.
-      They use the architecture with a generator and a classifier as shown in the figure below:
-
-      >![image](images/struc_robot.png)
-
-      They build the loss as having minimum intervention, therefore the distance to generate a counterfactual image and the counterfactual image has the highest probability to belong to the target class 
-      $t_c$
-      . Therfore computing the overall loss as:
-
-      $$
-         L = d_g(x,x') + d_c(C(x'),t_c)
-      $$
-
-      </details>
