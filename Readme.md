@@ -2379,16 +2379,47 @@ The papers in this section focuses to use the concepts of Causality to increase 
        
    - [Using Causal Analysis for Conceptual Deep Learning Explanation](https://arxiv.org/abs/2107.06098)
       - <details><summary>Maheep's Notes</summary>
-         The work proposes to explain the model's decision using the hidden unit cells of the network in radiology. The author uses the associating the hidden units of the classifier to clinically relevant concepts using a linear sparse logistic regression. But to evaluate that the identified units truly influence the classifier’s outcome, they use mediation analysis through counterfactual interventions. A low-depth decision tree is constructed so as to translate all the discovered concepts into a straightforward decision rule, expressed to the radiologist. Technically the author implements it by using:<br>
-         1.) **Concept Associations**: The network is divided into 
+
+         The work proposes to explain the model's decision using the hidden unit cells of the network in radiology. The author uses the associating the hidden units of the classifier to clinically relevant concepts using a linear sparse logistic regression. But to evaluate that the identified units truly influence the classifier’s outcome, they use mediation analysis through counterfactual interventions. A low-depth decision tree is constructed so as to translate all the discovered concepts into a straightforward decision rule, expressed to the radiologist. Technically the author implements it by using:
+
+         * **Concept Associations**: The network is divided into          
+         $\phi_1(\cdot)$ 
+         and 
+         $\phi_2(\cdot)$ 
+         where the 
+         $\phi_1(\cdot)$ 
+         gives different concept in terms of features and $\phi_2(\cdot)$ 
+         do prediction. The output of 
+         $\phi_1(\cdot)$ gives a vector of 
+         $lbh$ dimension with each unit having a binary prediction, i.e. if concept is present or absent.
          
-         `phi1(.)` and `phi2(.)`, where the `phi1(.)` gives different concept in terms of features and `phi2(.)` do prediction. The output of `phi1(.)` gives a vector of `lbh` dimension with each unit having a binary prediction, i.e. if concept is present or absent.
-         <br>
-         2.) **Causal concept ranking**: A counterfactual `x'` for the input   `x` is generated for causal inference using a cGAN, where the concepts are denoted with `Vk(x)` and the left over hidden units are denoted by `bar(Vk(x))` and the effect is measured by: <br>
-         `A = phi2(phi1(do(Vk(x)), bar(Vk(x'))))`  
-         `B = phi2(phi1(Vk(x), bar(Vk(x))))`<br>
-         `Effect = E[A/B - 1]`<br>
-         3.) **Surrogate explanation function**: A function `g(·)` is introduced as a decision tree because many clinical decision-making procedures follow a rule-based pattern, based on the intial classifier `f(.)` based on the logits produced for different concepts.<br>
+         * **Causal concept ranking**: A counterfactual 
+         $x'$ 
+         for the input   
+         $x$ 
+         is generated for causal inference using a cGAN, where the concepts are denoted with 
+         $V_k(x)$ 
+         and the left over hidden units are denoted by 
+         $\overline{V}_k(x)$ 
+         and the effect is measured by: 
+
+         $$
+         A = \phi_2(\phi_1(do(V_k(x)), \overline{V}_k(x')))  
+         $$
+
+         $$
+         B = \phi2(\phi1(V_k(x), \overline{V}_k(x))
+         $$
+
+         $$
+         Effect = E[\frac{A}{B} - 1]
+         $$
+
+         * **Surrogate explanation function**: A function 
+         $g(\cdot)$ 
+         is introduced as a decision tree because many clinical decision-making procedures follow a rule-based pattern, based on the intial classifier 
+         $f(\cdot)$ 
+         based on the logits produced for different concepts.
 
         ![Model](images/45.png)
 
