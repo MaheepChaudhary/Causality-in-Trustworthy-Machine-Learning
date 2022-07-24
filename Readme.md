@@ -1426,6 +1426,35 @@ The papers in this section focuses to use the concepts of Causality to increase 
         </details>                
 
 
+   - [Explanatory Paradigms in Neural Networks](https://arxiv.org/pdf/2202.11838) 
+      - <details><summary>Maheep's Notes</summary>
+
+          The work present a study on explainability in Neural Networks. The author explores the *Observed Explanatory Paradigms* through reasoning using the three reasoning methods, including **Abductive Reasoning**, **Deductive Reasoning** and **Inductive Reasoning**. The author explains the **Abductive Reasoning** hypotheses to support a prediction and if seen abstractly defines it into three major fields, explained clearly by taking manifold into the picture, dealing with:
+
+          * **Observed Correlation**: It majorly deals with the question *Why class P ?* The goal here is find all the dimensions of the manifold, denoted by 
+          $T_f$ from the constructed manifold, denoted by $T$ that justifies the class $P$ classification from the network, denoted by 
+          $M_{cu}(\cdot)$
+          
+          * **Observed Counterfactual**: It majorly deals with the counterfactual question, i.e. *What if not P?*. It deals with interventions so as to change the direction of some of the dimensions by  intervention using 
+          $do(\cdot)$ 
+          calculus to indentify the most non-trivial features a specific attribute of $P$ denoted by 
+          $M_{cf}(\cdot)$
+          
+          * **Observed Contrastive Explanations**: It majorly deals with the counterfactual question, i.e. *Why P rather than Q?*. It deals with interventions so as to change the direction of some of the dimensions to chenge the prediction of network from $P$ to $Q$, to identify the most non-trivial features separating class from $P$ and $Q$ denoted by 
+          $M_{ct}(\cdot)$
+
+          The authors discusses **Probabalistic Components of Explanations** that can take into consideration the questions defined above and make explanation more substatial by:
+
+          $$
+          M_c(x) = M_{cu}(x) + M_{ct}(x) + M_{cf}(x)
+          $$
+          
+          Besides this the author discusses about the **Contrast-CAM**, **Counterfactual-CAM**, **Grad-CAM** technique which is generally used for observing Observed Correlations. The **Counterfactual-CAM** is used for **Observed Counterfactual** negates the gradient to decrease the effect of the predicted class resulting in highlighted regions in case when the object used to make the decision were not present intially. The **Contrast-CAM** is used for third scenario of **Observed Contrastive Explanations** where a loss between class $P$ and $Q$ is constructed to backpropogate it and find contrastive features. 
+
+         ![Model](images/54.png)
+        </details>  
+
+
   - [Counterfactual Samples Synthesizing and Training for Robust Visual Question Answering](https://arxiv.org/pdf/2003.06576.pdf) 
       - <details><summary>Maheep's notes </summary>
          In this research paper the author focuses on 2 major questions, i.e. <br>
@@ -2567,33 +2596,6 @@ The papers in this section focuses to use the concepts of Causality to increase 
 
         </details>  
 
-   - [Explanatory Paradigms in Neural Networks](https://arxiv.org/pdf/2202.11838) 
-      - <details><summary>Maheep's Notes</summary>
-
-          The work present a study on explainability in Neural Networks. The author explores the *Observed Explanatory Paradigms* through reasoning using the three reasoning methods, including **Abductive Reasoning**, **Deductive Reasoning** and **Inductive Reasoning**. The author explains the **Abductive Reasoning** hypotheses to support a prediction and if seen abstractly defines it into three major fields, explained clearly by taking manifold into the picture, dealing with:
-
-          * **Observed Correlation**: It majorly deals with the question *Why class P ?* The goal here is find all the dimensions of the manifold, denoted by 
-          $T_f$ from the constructed manifold, denoted by $T$ that justifies the class $P$ classification from the network, denoted by 
-          $M_{cu}(\cdot)$
-          
-          * **Observed Counterfactual**: It majorly deals with the counterfactual question, i.e. *What if not P?*. It deals with interventions so as to change the direction of some of the dimensions by  intervention using 
-          $do(\cdot)$ 
-          calculus to indentify the most non-trivial features a specific attribute of $P$ denoted by 
-          $M_{cf}(\cdot)$
-          
-          * **Observed Contrastive Explanations**: It majorly deals with the counterfactual question, i.e. *Why P rather than Q?*. It deals with interventions so as to change the direction of some of the dimensions to chenge the prediction of network from $P$ to $Q$, to identify the most non-trivial features separating class from $P$ and $Q$ denoted by 
-          $M_{ct}(\cdot)$
-
-          The authors discusses **Probabalistic Components of Explanations** that can take into consideration the questions defined above and make explanation more substatial by:
-
-          $$
-          M_c(x) = M_{cu}(x) + M_{ct}(x) + M_{cf}(x)
-          $$
-          
-          Besides this the author discusses about the **Contrast-CAM**, **Counterfactual-CAM**, **Grad-CAM** technique which is generally used for observing Observed Correlations. The **Counterfactual-CAM** is used for **Observed Counterfactual** negates the gradient to decrease the effect of the predicted class resulting in highlighted regions in case when the object used to make the decision were not present intially. The **Contrast-CAM** is used for third scenario of **Observed Contrastive Explanations** where a loss between class $P$ and $Q$ is constructed to backpropogate it and find contrastive features. 
-
-         ![Model](images/54.png)
-        </details>  
 
    - [A Closer Look at Debiased Temporal Sentence Grounding in Videos: Dataset, Metric, and Approach](https://arxiv.org/pdf/2203.05243.pdf) 
       - <details><summary>Maheep's Notes</summary>
