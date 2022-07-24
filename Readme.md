@@ -1414,11 +1414,11 @@ The papers in this section focuses to use the concepts of Causality to increase 
 
         The author uses the counterfactually inspired task to evaluate how well do feature visualization support causal understanding of CNN activations. The author implements it by using 5 kind of images, namely: 
 
-        1.) **Synthetic Reference** : These are image that are generated from optimized result of feature visualization method.<br>
-        2.) **Natural Reference** : Most strong actiavted samples are taken from the dataset.<br>
-        3.) **Mixed Reference** : 4 synthetic and 5 Natural refernce are taken, to take the best of both worlds<br>
-        4.) **Blurred Reference** : Everything is blurred, except a patch.<br>
-        5.) **No Reference** : Only query image is given and no other image.<br>
+        * **Synthetic Reference** : These are image that are generated from optimized result of feature visualization method.
+        * **Natural Reference** : Most strong actiavted samples are taken from the dataset.
+        * **Mixed Reference** : 4 synthetic and 5 Natural refernce are taken, to take the best of both worlds.
+        * **Blurred Reference** : Everything is blurred, except a patch.
+        * **No Reference** : Only query image is given and no other image.
 
         The author concludes the research by concluding that the performance of humans with visualization and no visualization did not have very significant differences.
 
