@@ -1395,7 +1395,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
    - [Causality matters in medical imaging](https://www.nature.com/articles/s41467-020-17478-w)
       - <details><summary>Maheep's Notes</summary>
         The paper focuses to provide insight about the establishment of ungeneralized training of machine learning models and their importance in Medical Imaging when looking at different field like 
-        *data scarcity, data-mismatch* etc. 
+        *data scarcity*, *data-mismatch* etc. 
 
         The author explains both *data scarcity, data-mismatch* in the stated first two points:
         * While taking a look at *Data Scarcity*, Semi-supervised learning (SSL) aims to leverage readily available unlabelled data in the hope of producing a better predictive model than is possible using only the scarce annotated data but a model trained on image-derived annotations will attempt to replicate the (most often manual) annotation process, rather than to predict some pre-imaging ground truth therefore consisting of a confounding variable that comes from the annotator. 
