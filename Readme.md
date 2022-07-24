@@ -1394,6 +1394,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
 
    - [Causality matters in medical imaging](https://www.nature.com/articles/s41467-020-17478-w)
       - <details><summary>Maheep's Notes</summary>
+        
         The paper focuses to provide insight about the establishment of ungeneralized training of machine learning models and their importance in Medical Imaging when looking at different field like 
         *data scarcity*, *data-mismatch* etc. 
 
