@@ -1837,12 +1837,14 @@ The papers in this section focuses to use the concepts of Causality to increase 
 
    - [The Intriguing Relation Between Counterfactual Explanations and Adversarial Examples](https://arxiv.org/pdf/2009.05487.pdf)
       - <details><summary>Maheep's Notes</summary>
-        The paper provides the literature regarding the difference between the Counterfactual and Adverserial Example. Some of the points are: <br>
-        1.) AEs are used to fool the classifier whereas the CRs are used to generate constructive explantions. <br> 
-        2.) AEs show where an ML model fails whereas the Explanations sheds light on how ML algorithms can be improved to make them more robust against AEs <br>
-        3.) CEs mainly low-dimensional and semantically meaningful features are used, AEs are mostly considered for high-dimensional image data with little semantic meaning of individual features. <br>
-        4.) Adversarials must be necessarily misclassified while counterfactuals are agnostic in that respect <br> 
-        5.) Closeness to the original input is usually a benefit for adversarials to make them less perceptible whereas counterfactuals focus on closeness to the original input as it plays a significant role for the causal interpretation
+
+        The paper provides the literature regarding the difference between the Counterfactual and Adverserial Example. Some of the points are: 
+
+        * AEs are used to fool the classifier whereas the CRs are used to generate constructive explantions.  
+        * AEs show where an ML model fails whereas the Explanations sheds light on how ML algorithms can be improved to make them more robust against AEs.
+        * CEs mainly low-dimensional and semantically meaningful features are used, AEs are mostly considered for high-dimensional image data with little semantic meaning of individual features. 
+        * Adversarials must be necessarily misclassified while counterfactuals are agnostic in that respect.  
+        * Closeness to the original input is usually a benefit for adversarials to make them less perceptible whereas counterfactuals focus on closeness to the original input as it plays a significant role for the causal interpretation.
         </details>  
  
 
