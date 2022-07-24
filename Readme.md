@@ -1392,6 +1392,18 @@ The papers in this section focuses to use the concepts of Causality to increase 
 
 ## Causality & Computer Vision
 
+   - [Causality matters in medical imaging](https://www.nature.com/articles/s41467-020-17478-w)
+      - <details><summary>Maheep's Notes</summary>
+        The paper focuses to provide insight about the establishment of ungeneralized training of machine learning models and their importance in Medical Imaging when looking at different field like 
+        *data scarcity, data-mismatch* etc. 
+
+        The author explains both *data scarcity, data-mismatch* in the stated first two points:
+        * While taking a look at *Data Scarcity*, Semi-supervised learning (SSL) aims to leverage readily available unlabelled data in the hope of producing a better predictive model than is possible using only the scarce annotated data but a model trained on image-derived annotations will attempt to replicate the (most often manual) annotation process, rather than to predict some pre-imaging ground truth therefore consisting of a confounding variable that comes from the annotator. 
+        * The mismatch between data distributions, typically between training and test sets or development and deployment environments, tends to hurt the generalisability of learned models. Therefore it can be said that *Dataset shift* is any situation in which the training and test data distributions disagree due to exogenous factors. Moreover when analysing dataset shift, it is helpful to conceptualise an additional variable 
+        $Z$
+        , representing the unobserved physical reality of the subject’s anatomy. 
+        * There are also another types of shifts like manifestation shift(under which the way anticausal prediction targets (e.g. disease status) physically manifest in the anatomy changes between domains), acquisition shift which result from the use of different scanners or imaging protocols and Data mismatch due to sample selection bias where the indicator variables in sample selection concern alterations in the data-gathering process rather than in the data-generating process.
+        </details>  
 
   - [Counterfactual Samples Synthesizing and Training for Robust Visual Question Answering](https://arxiv.org/pdf/2003.06576.pdf) 
       - <details><summary>Maheep's notes </summary>
@@ -1923,18 +1935,6 @@ The papers in this section focuses to use the concepts of Causality to increase 
         ![Model](images/14.png)
         </details>  
 
-
-   - [Causality matters in medical imaging](https://www.nature.com/articles/s41467-020-17478-w)
-      - <details><summary>Maheep's Notes</summary>
-        The paper focuses to provide insight about the establishment of ungeneralized training of machine learning models and their importance in Medical Imaging when looking at different field like *data scarcity, data-mismatch* etc. 
-
-        The author explains both *data scarcity, data-mismatch* in the stated first two points:
-        * While taking a look at *Data Scarcity*, Semi-supervised learning (SSL) aims to leverage readily available unlabelled data in the hope of producing a better predictive model than is possible using only the scarce annotated data but a model trained on image-derived annotations will attempt to replicate the (most often manual) annotation process, rather than to predict some pre-imaging ground truth therefore consisting of a confounding variable that comes from the annotator. 
-        * The mismatch between data distributions, typically between training and test sets or development and deployment environments, tends to hurt the generalisability of learned models. Therefore it can be said that *Dataset shift* is any situation in which the training and test data distributions disagree due to exogenous factors. Moreover when analysing dataset shift, it is helpful to conceptualise an additional variable 
-        $Z$
-        , representing the unobserved physical reality of the subject’s anatomy. 
-        * There are also another types of shifts like manifestation shift(under which the way anticausal prediction targets (e.g. disease status) physically manifest in the anatomy changes between domains), acquisition shift which result from the use of different scanners or imaging protocols and Data mismatch due to sample selection bias where the indicator variables in sample selection concern alterations in the data-gathering process rather than in the data-generating process.
-        </details>  
 
    - [TSMOBN GENERALIZATION FOR UNSEEN CLIENTS IN FEDERATED LEARNING](https://arxiv.org/abs/2110.09974)
       - <details><summary>Maheep's Notes</summary>
