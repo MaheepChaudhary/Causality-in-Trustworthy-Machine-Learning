@@ -1406,6 +1406,26 @@ The papers in this section focuses to use the concepts of Causality to increase 
         * There are also another types of shifts like manifestation shift(under which the way anticausal prediction targets (e.g. disease status) physically manifest in the anatomy changes between domains), acquisition shift which result from the use of different scanners or imaging protocols and Data mismatch due to sample selection bias where the indicator variables in sample selection concern alterations in the data-gathering process rather than in the data-generating process.
         </details>  
 
+
+   - [How Well do Feature Visualizations Support Causal Understanding of CNN Activations?](https://arxiv.org/abs/2106.12447)
+      - <details><summary>Maheep's Notes</summary>
+
+        The paper proposes to identify the benefits of providing users with visualization of image w.r.t. a unit's activation, so as to provide humans with precise information about the correlation b/w image features and unit activation. The evaluation task focuses on human understanding such as to predict ''*How occluding an image region changes a unit’s activation*''? 
+
+        The author uses the counterfactually inspired task to evaluate how well do feature visualization support causal understanding of CNN activations. The author implements it by using 5 kind of images, namely: 
+
+        1.) **Synthetic Reference** : These are image that are generated from optimized result of feature visualization method.<br>
+        2.) **Natural Reference** : Most strong actiavted samples are taken from the dataset.<br>
+        3.) **Mixed Reference** : 4 synthetic and 5 Natural refernce are taken, to take the best of both worlds<br>
+        4.) **Blurred Reference** : Everything is blurred, except a patch.<br>
+        5.) **No Reference** : Only query image is given and no other image.<br>
+
+        The author concludes the research by concluding that the performance of humans with visualization and no visualization did not have very significant differences.
+
+        ![Model](images/38.png)
+        </details>                
+
+
   - [Counterfactual Samples Synthesizing and Training for Robust Visual Question Answering](https://arxiv.org/pdf/2003.06576.pdf) 
       - <details><summary>Maheep's notes </summary>
          In this research paper the author focuses on 2 major questions, i.e. <br>
@@ -2370,22 +2390,6 @@ The papers in this section focuses to use the concepts of Causality to increase 
 
         </details> 
 
-
-   - [How Well do Feature Visualizations Support Causal Understanding of CNN Activations?](https://arxiv.org/abs/2106.12447)
-      - <details><summary>Maheep's Notes</summary>
-        The paper proposes to identify the benefits of providing users with visualization of unit's activation based on different features of the input, so as to provide humnas with precise information about the image features that casuse a unit to be activated. <br>
-        The author uses the counterfactually inspired task to evaluate how well do feature visualization support causal understanding of CNN activations. The author implements it by using 5 kiond of images, namely: <br>
-
-        1.) **Synthetic Reference** : These are image that are generated from optimized result of feature visualization method.<br>
-        2.) **Natural Reference** : Most strong actiavted samples are taken from the dataset.<br>
-        3.) **Mixed Reference** : 4 synthetic and 5 Natural refernce are taken, to take the best of both worlds<br>
-        4.) **Blurred Reference** : Everything is blurred, except a patch.<br>
-        5.) **No Reference** : Only query image is given and no other image.<br>
-
-        The author concludes the research by concluding that the performance of humans with visualization and no visualization did not have very significant differences.
-
-        ![Model](images/38.png)
-        </details>                
 
    - [CausalAF__Causal_Autoregressive_Flow_for_Goal_Directed_Safety_Critical](https://arxiv.org/abs/2110.13939)
       - <details><summary>Maheep's Notes</summary>
