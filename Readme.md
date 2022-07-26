@@ -1495,11 +1495,15 @@ The papers in this section focuses to use the concepts of Causality to increase 
          The fine-tuning of pre-trained language models has a great success in many NLP fields but it is strikingly vulnerable to adversarial examples, as it suffers severely from *catastrophic forgetting*(considerable change in behavior of model due to unbounded change in learned parameters which leads to inability in retaining the generic and robust linguistic features that have already been captured by the pre-trained model). <br>
          The proposed model <i>maximizes the mutual information between the output of an objective model and that of the pre-trained model</i> conditioned on the class label. It encourages an objective model to continuously retain useful information from the pre-trained one throughout the whole fine-tuning process. <br>
 
-         $$ I(S; Y, T ) = I(S; Y ) + I(S; T|Y ) $$
+         $$ 
+         I(S; Y, T ) = I(S; Y ) + I(S; T|Y ) 
+         $$
+         
          <p align="center">
             <img src="imgs/How_Should_Pre-Trained_Language_Models_Be_Fine-Tuned_Towards_Adversarial_Robustness/rift_objective.png" alt="rift objective"/>
          </p>
-         The author proposes by this equation that the two models overlap, i.e. the objective model and the pretrained model. S represents the features extracted the model by the objective model and T is the features extracted by the pretrained model.
+         
+         The author proposes by this equation that the two models overlap, i.e. the objective model and the pretrained model. $S$ represents the features extracted the model by the objective model and $T$ is the features extracted by the pretrained model.
 
          $$
          min_{\theta,\psi,\phi} \ Lr_{task} + \alpha Lr_{info}
