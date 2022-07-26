@@ -1501,9 +1501,20 @@ The papers in this section focuses to use the concepts of Causality to increase 
          </p>
          The author proposes by this equation that the two models overlap, i.e. the objective model and the pretrained model. S represents the features extracted the model by the objective model and T is the features extracted by the pretrained model.
 
-         $$ min _{θ,φ,ϕ} Lr_{task} + αLr_{info} $$
-             $Lr_{task}$: *For Maximizing $I(S;Y)$, formulated as lagrangian of Maximum likelihood estimation with KL-Divergence.*
-             $Lr_{info}$: *For maximizing $I(S;T| Y)$, solving a lower bound of $I(S; T|Y )$; very similar to NCE(Non-contrastive estimation).*
+         $$
+         min _{θ,φ,ϕ} Lr_{task} + αLr_{info}
+         $$
+
+         $Lr_{task}$
+         : *For Maximizing* 
+         $I(S;Y)$
+         , *formulated as lagrangian of Maximum likelihood estimation with KL-Divergence.*
+         $Lr_{info}$
+         : *For maximizing* 
+         $I(S;T| Y)$
+         *, solving a lower bound of* 
+         $I(S; T|Y )$
+         *; very similar to NCE(Non-contrastive estimation).*
          
          <p align="center">
             <img src="imgs/How_Should_Pre-Trained_Language_Models_Be_Fine-Tuned_Towards_Adversarial_Robustness/rift_algo.png" alt="rift algorithm"/>
