@@ -1502,7 +1502,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
          The author proposes by this equation that the two models overlap, i.e. the objective model and the pretrained model. S represents the features extracted the model by the objective model and T is the features extracted by the pretrained model.
 
          $$
-         min _{θ,φ,ϕ} Lr_{task} + αLr_{info}
+         min_{\theta,\psi,\phi} \ Lr_{task} + \alpha Lr_{info}
          $$
 
          $Lr_{task}$
