@@ -290,7 +290,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
 
          The author slams the above works and contends that *Counterfactual Explanation* should be contrastive, counterfactual and measurable. It focuses to generate counterfactual explanation for medical image classification.
 
-         >![image](images/overdetermination.png)
+         >![image](imgs/Contrastive_Counterfactual_Visual_Explanations_With_Overdetermination/overdetermination.png)
          
          The author proposes the following things in the paper:
 
@@ -312,7 +312,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
 
          > ![image](images/overdetermination1)
 
-         > ![image](images/overdetermination3.png)
+         > ![image](imgs/Contrastive_Counterfactual_Visual_Explanations_With_Overdetermination/overdetermination3.png)
 
          * The importance of a segment is quantified by replacing segment of image
          $x$
@@ -325,7 +325,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
          to quantify the effect of each segment on classification. 
          To limit the overdetermination, the work only replaces at-max 4 segments at a time to create a counterfacutal image.
 
-         > ![image](images/overdetermination2.png) 
+         > ![image](imgs/Contrastive_Counterfactual_Visual_Explanations_With_Overdetermination/overdetermination2.png) 
 
          * It uses regression equation
          $w^TX$
@@ -335,7 +335,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
          It can be more elaborated using the image below where
          The report identifies that substituting both segments 4 and 11 with the corresponding segments from its contrast image flips the classification probability to ’healthy’ According to the logistic regression equation these substitutions would change the probability of the X-ray being classified as ’pleural effusion’ to 0.44. However, when these segments are actually substituted and passed through the classifier, the probability changed to 0.43, hence the fidelity error is 0.01. CLEAR Image also identifies that substituting segments 3 and 11 also creates an image-counterfactual. The coefficient value becomes 0 if the segment belongs to the counterfactual image and becomes 1 if belongs to the original image. 
 
-         > ![image](images/overdetermination4.png)
+         > ![image](imgs/Contrastive_Counterfactual_Visual_Explanations_With_Overdetermination/overdetermination4.png)
 
          </details> 
 
@@ -359,13 +359,13 @@ The papers in this section focuses to use the concepts of Causality to increase 
         It uses a U-net network consisting of Encoder $E$, Generator $G$ and Discriminator $D$. 
         The combination of $E$ and $G$ produces $M_{x}$ as shown in the figure below:
 
-        > ![Encode Decoder image](images/Enc_and_Dec.png "Structure of Encoder and Decoder, where the encoding of target is transffered to the Generator to Generate Counterfactual Mask")
+        > ![Encode Decoder image](imgs/Born_Identity_Network:_Multi-way_Counterfactual_Map_Generation_to_Explain_a_Classifier’s_Decision/Enc_and_Dec.png "Structure of Encoder and Decoder, where the encoding of target is transffered to the Generator to Generate Counterfactual Mask")
 
         The above process is guided by *Target Attribution Network*(TAN), which guides the generator to produce counterfactual maps that transform an input sample to be classified as a target class.
 
         $M$ generates the image counterfactual image which is compared from the dataset distribution $P_{X}$, aiming to generate image of the same distribution, for which it uses Adversarial loss. 
 
-        > !['Full Structure'](images/full_structure.png)
+        > !['Full Structure'](imgs/Born_Identity_Network:_Multi-way_Counterfactual_Map_Generation_to_Explain_a_Classifier’s_Decision/full_structure.png)
 
         The *Cycle Consistency loss*(CCL) is used to regulate the "multi-way" counterfactual maps.
 
@@ -382,7 +382,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
 
          The paper focuses on increasing the interpretability of medical imaging classification by generating counterfactual image by perturbing the original image. 
          
-         >![image](images/bbs1.png)
+         >![image](imgs/Explaining_the_Black-box_Smoothly-A_Counterfactual_Approach/bbs1.png)
 
          It modifies the image using pre-trained function 
          $f(\cdot) \in [0,1]$
@@ -420,7 +420,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
          L_{cGAN} =  \psi(\phi(G(z);\theta_{\phi});\theta_{\psi}) + c^T V \phi(x;\theta_{\phi})
          $$
 
-         >![image](images/bbs2.png)
+         >![image](imgs/Explaining_the_Black-box_Smoothly-A_Counterfactual_Approach/bbs2.png)
 
          * **Classification model consistency**: To ensure that the generated image should give desired output, the loss is introduced as:
 
@@ -428,7 +428,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
             L := c^T V \phi(x;\theta_{\phi}) + D_{KL}(f(x')||f (x) + \delta)
          $$
 
-         >![image](images/bbs3.png)
+         >![image](imgs/Explaining_the_Black-box_Smoothly-A_Counterfactual_Approach/bbs3.png)
 
          * **Context-aware self-consistency**: The loss is defined so as to preserve the features using the reconstruction loss:
 
@@ -453,7 +453,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
          $S(\cdot)$ 
          with object detection combined in identity loss.   
          
-         >![image](images/bbs4.png)
+         >![image](imgs/Explaining_the_Black-box_Smoothly-A_Counterfactual_Approach/bbs4.png)
 
       </details>      
       
@@ -462,7 +462,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
             
          The paper tries to generate counterfactual images using a low-dimensional latent space containing the *raw features* and *attribute informed latent space*, which are continously re-iterated for modification to generate a counterfactual image.
 
-         > ![image](images/aip.png)
+         > ![image](imgs/Generative_Counterfactuals_for_Neural_Networks_via_Attribute_Informed_Perturbations/aip.png)
 
          The author highlight some of the challenges in the existing works, generating counterfactual image to increase interpretability:
          
@@ -496,7 +496,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
 
          where $L_d(\cdot)$ is the cross-entropy loss.
 
-         > ![image](images/aip1.png)
+         > ![image](imgs/Generative_Counterfactuals_for_Neural_Networks_via_Attribute_Informed_Perturbations/aip1.png)
 
          * The overall counterfactual loss can be categorized into prediction loss using cross-entropy 
          $l_d(\cdot)$ 
@@ -514,7 +514,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
 
          The overall solution can be summed up using the equation below:
             
-         > ![image](images/aip2.png)
+         > ![image](imgs/Generative_Counterfactuals_for_Neural_Networks_via_Attribute_Informed_Perturbations/aip2.png)
 
          </details>        
 
@@ -537,11 +537,11 @@ The papers in this section focuses to use the concepts of Causality to increase 
 
          * An algorithm is proposed that identifies the EdC features, that if removed can alter the prediction of the model.  
 
-         > ![image](images/evidence_counterfactual.png)
+         > ![image](imgs/EXPLAINABLE_IMAGE_CLASSIFICATION_WITH_EVIDENCE_COUNTERFACTUAL/evidence_counterfactual.png)
          
          * To unravel the EdC features the author proposes SEDC algorithm, the algorithm defined below can be used
 
-         !['Algorithm'](images/4.png)
+         !['Algorithm'](imgs/EXPLAINABLE_IMAGE_CLASSIFICATION_WITH_EVIDENCE_COUNTERFACTUAL/4.png)
 
          * But to generate the counterfactual class, the author proposes a tweaked version of the above algorithm as SEDC-T. In this secario a target class has to be specified and segments are selected based on the largest difference between the target class score and the predicted class score. In case more than one EdC is found, the EdC leading to the highest increase in target class score can be selected.
          * SEDC-T allows for the generation of more nuanced explanations, since one can find out why the model predicts a class over another class of interest. This can certainly be useful for explaining misclassifications.
@@ -549,9 +549,9 @@ The papers in this section focuses to use the concepts of Causality to increase 
             * For segmentation the author uses segmentation algorithm that uses the numerical color values to obtain a meaningful grouping in segments.
             * Alternatively, the segment replacement can be based on calculated pixel values. For example, the author suggests to use mean/mode pixel values of the image as a whole, the segment itself or the neighboring segments. Also, more advanced imputation methods for images are possible (e.g., image inpainting or blurring).
 
-         > ![image](images/evidence_counterfactual_2.png)
+         > ![image](imgs/EXPLAINABLE_IMAGE_CLASSIFICATION_WITH_EVIDENCE_COUNTERFACTUAL/evidence_counterfactual_2.png)
 
-         > ![image](images/evidence_counterfactual1.png)
+         > ![image](imgs/EXPLAINABLE_IMAGE_CLASSIFICATION_WITH_EVIDENCE_COUNTERFACTUAL/evidence_counterfactual1.png)
                
          </details>      
 
@@ -586,7 +586,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
          classes in the dataset
          $\mathcal{X}$ 
          
-         >![image](images/cocox.png)
+         >![image](imgs/CoCoX:_Generating_Conceptual_and_Counterfactual_Explanations_via_Fault-Lines/cocox.png)
 
          When a query $Q = <I,c_{pred}, c_{alt}>$ is passed to the image the model optimizes using the equation below:
 
@@ -610,7 +610,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
             P(\epsilon_{alt}|\epsilon, X, I, c_{alt}, M)
          $$
 
-         >![image](images/cocox1.png
+         >![image](imgs/CoCoX:_Generating_Conceptual_and_Counterfactual_Explanations_via_Fault-Lines/cocox1.png
          )
 
          The process of mining of the xconcepts include: 
@@ -629,7 +629,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
          $G$ 
          groups.
 
-         >!['Algorithm'](images/cocox3.png)
+         >!['Algorithm'](imgs/CoCoX:_Generating_Conceptual_and_Counterfactual_Explanations_via_Fault-Lines/cocox3.png)
 
          To get the importance of the concepts for a target class $C$
          . They compute directional derivatives 
@@ -637,7 +637,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
          to produce estimates of how important the concept X was for a CNN’s prediction of a target class $C$, as defined in the $III^{rd}$ step.
 
          The fault lines are detected using the $4^{th}$ step, where 
-         >![image](images/cocox2.png)
+         >![image](imgs/CoCoX:_Generating_Conceptual_and_Counterfactual_Explanations_via_Fault-Lines/cocox2.png)
 
          </details>
 
@@ -649,7 +649,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
 
          > ![images](images/tom)  
 
-         >![images](images/tom1.png)
+         >![images](imgs/CX-ToM:_Counterfactual_Explanations_with_Theory-of-Mind_for_Enhancing_Human_Trust_in_Image_Recognition_Models/tom1.png)
 
          The author implements it by:
          * The dialogue aims to let the machine know about the user's intention of understanding and human to know about the machine's understanding of the system.
@@ -658,7 +658,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
             * *W-QA* include question of type *what*, *why*, *where*.
             * *E-QA* include the questions which are seeking for explanation.
          
-         > ![image](images/tom3.png)
+         > ![image](imgs/CX-ToM:_Counterfactual_Explanations_with_Theory-of-Mind_for_Enhancing_Human_Trust_in_Image_Recognition_Models/tom3.png)
 
          * The machine predicts about the user's mind by building the graph
          $Pg^{UinM}$
@@ -670,7 +670,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
          $Pg^{UinM}$
          to evaluate how much has the user understood and how much machine has comprehended the user has understood.
 
-         > ![image](images/tom4.png)
+         > ![image](imgs/CX-ToM:_Counterfactual_Explanations_with_Theory-of-Mind_for_Enhancing_Human_Trust_in_Image_Recognition_Models/tom4.png)
 
          * The author uses the fault-lines to develop the understanding of the user in these places of graph to develop understanding of user. It focuses to give the fault-lines on the basis:
             * If the model thinks the user has low confidence of the model capability of classification b.w. *Person* and the *Deer* then it will highlight the fault-lines that shows the difference b.w. them but if the user have low-confidene on model capability of classification b.w. *Man* and the *Woman*, then it will show the corresponding fault-lines. 
@@ -711,7 +711,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
          * $B = a(f(h_{y^j}(x)))$: It gives the heatmaps that are informative of the counterfactual class $Y^j$.
          * $C = a(s(x))$: It is a function that gives the score for a region, w.r.t to the confidence a model has about a region importance to predict the class.
 
-         > !['Model Structure'](images/model_structure.png)
+         > !['Model Structure'](imgs/SCOUT:_Self-aware_Discriminant_Counterfactual_Explanations/model_structure.png)
          
          The $a(s(x))$ is produced as the conventional methods used the methodology of $A(1 - B)$ to highlight the discriminant features of a class w.r.t. counterfactual class. Although, this is able to highlight the desired features but only when *The classes are non-trivially different*, but fails when *they are similar*.
 
@@ -729,7 +729,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
 
          It intervenes $do(A = A')$ minimally $min ||I - I(A')||$ on the attribue $A = \{a_1, a_2, ...., a_n\}$ of original image to generate counterfactual image $I(A')$. Consequqently, unravelling the key attribute features. 
 
-         > !['The illustration of the generative counterfactual introspection concept'](images/generative_actionable_counterfactual_Explanation.png)
+         > !['The illustration of the generative counterfactual introspection concept'](imgs/GENERATIVE_COUNTERFACTUAL_INTROSPECTION_FOR_EXPLAINABLE_DEEP_LEARNING/generative_actionable_counterfactual_Explanation.png)
          </details>          
    
    
@@ -741,7 +741,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
         They use a *cycle-GAN* to translate real images $X$ of class $Y^i$ to counterfactual images $X'$. Then both the images are fed into the *Discriminative Attribution model* which finds out the most discriminative features separting the $2$ images. The most important part $m$ of class $Y^i$ is masked out.
         The part is extracted from the original image $X$ and is combined with the $1-m$ region of counterfactual image to generate $x_H$ of class $Y^i$. 
       
-        !['Diagram'](images/6.png)  
+        !['Diagram'](imgs/Discriminative_Attribution_from_Counterfactuals/6.png)  
         </details> 
 
 
@@ -755,11 +755,11 @@ The papers in this section focuses to use the concepts of Causality to increase 
         * **Composition Step**: It modifies the features extracted by the **Masking Step**, s.t. it does not lie out of the current dataset distribution, which is identified using the *logits* of sample of available dataset and the counterfactual dataset. 
         The following diagram gives a more brief idea of the overall algorithm.
 
-        > !['Overview'](images/overview.png)
+        > !['Overview'](imgs/Counterfactual_Explanation_Based_on_Gradual_Construction_for_Deep_Networks/overview.png)
 
         In terms of algorithm it can be seen as: 
 
-        > !['Algorithm'](images/algo.png)
+        > !['Algorithm'](imgs/Counterfactual_Explanation_Based_on_Gradual_Construction_for_Deep_Networks/algo.png)
 
         In the algorithm, $K$ is the number of classes, 
         $f_{k}'$ represents a logit score for a class $k$, 
@@ -784,7 +784,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
         * Find the reason for failed decision by $B - A$, highlighting positive and negative contribution. 
         * It aims to have very less difference b.w. the generated counterfactual image and input image.
 
-        ![Model](images/37.png)
+        ![Model](imgs/Counterfactual_Explanation_of_Brain_Activity_Classifiers_using_Image-to-Image_Transfer_by_Generative_Adversarial_Network/37.png)
 
         </details> 
 
@@ -804,7 +804,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
         $C'$ *to change the label of image* $I*$ *as* $C'$
         .'' The analogy can be more understood by dissecting the figure below:
 
-        > ![image](images/cut_paste.png)
+        > ![image](imgs/Counterfactual_Visual_Explanations/cut_paste.png)
 
         The author implements it by: 
         * The key discriminatory features are identified b.w. the 
@@ -817,7 +817,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
         $g(f(I))$
         acting as the classification function.
 
-        >!['Dissecting the Functions'](images/feature_extraction.png)     
+        >!['Dissecting the Functions'](imgs/Counterfactual_Visual_Explanations/feature_extraction.png)     
 
         The author proposes two approaches to achieve the above scenario, keeping the equation below as base equation: 
         
@@ -831,7 +831,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
         to align with spatial cells of 
         $f(I)$.
       
-        >![images](images/comb_perm.png)
+        >![images](imgs/Counterfactual_Visual_Explanations/comb_perm.png)
 
         The approaches that the paper takes are:
         * *Greedy Sequential Exhaustive Search*: It is an exhaustive search approach keeping $a$ and $P$ binary resulting in the below equation.
@@ -875,7 +875,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
 
          The paper focuses to build a transformer, i.e. trained as a residual generator conditional on a classifier constrained under a proposal perturbation loss which maintains the content information of the query image, but just the class-specific semantic information is changed as shown in the figure below:
 
-         >![image](images/archi.png)
+         >![image](imgs/Fast_Real-time_Counterfactual_Explanations/archi.png)
 
 
          The technique is implemented using several losses: 
@@ -941,7 +941,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
         
         They use AttGAN and StackGAN and they take the image using the function. 
 
-        >![image](images/text_to_image.png) 
+        >![image](imgs/Generating_Natural_Counterfactual_Visual_Explanations/text_to_image.png) 
         </details> 
 
 
@@ -1003,7 +1003,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
          $G(\cdot)$ to convert image of domain/class $X$ to $Y$.
 
 
-         > ![Model](images/44.png)
+         > ![Model](imgs/GANterfactual_-_Counterfactual_Explanations_for_Medical_Non-Experts_using_Generative_Adversarial_Learning/44.png)
 
          It accomplishes it using the $GAN$ loss for functions $F$ and $G$ with other losses defined below:
          * *Cycle-Consistency Loss*: It monitors the convertability quality of both the functions using the equation:
@@ -1043,7 +1043,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
          * They optimize a set of vectors 
          $E_i$ to perturb the latent representation z generated by the trained encoder.
 
-         >![image](images/dive.png)
+         >![image](imgs/Beyond_Trivial_Counterfactual_Explanations_with_Diverse_Valuable_Explanations/dive.png)
             
          The author proposes 3 main losses to achieve the aforementioned objectives: 
          * *Counterfatual loss* : It identifies a change of latent attributes that will cause the ML model to change it’s prediction.
@@ -1088,7 +1088,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
         attention map $M$ and generator $G$.
         The discriminator $D$ ensures that image looks realistic and reconstruction loss is used to do minimal changes. The whole process happens as shown in the figure.  
 
-        ![Model](images/32.png)
+        ![Model](imgs/COIN:_Counterfactual_Image_Generation_for_VQA_Interpretation/32.png)
         </details>  
 
    - [Training_calibration‐based_counterfactual_explainers_for_deep_learning](https://www.nature.com/articles/s41598-021-04529-5)
@@ -1107,7 +1107,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
             * A predictive model that takes as input the latent representations and outputs the desired target attribute (e.g., diagnosis state, age etc.) along with its prediction uncertainty 
             * A counterfactual optimization strategy that uses an uncertainty-based calibration objective to reliably elucidate the intricate relationships between image signatures and the target attribute
 
-         >![image](images/struc.png)
+         >![image](imgs/Training_calibration‐based_counterfactual_explainers_for_deep_learning/struc.png)
          
          TraCE works on the following metrics to evaluate the counterfactual images, i.e. 
 
@@ -1156,7 +1156,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
                * *Convincing counterfactuals*: The counterfactuals that have high confidence when classified for the counterfactual class.
          * It generate heatmaps to define the features responsible for the altered prediction. 
 
-         >![image](images/ecinn.png)
+         >![image](imgs/ECINN:_Efficient_Counterfactuals_from_Invertible_Neural_Networks/ecinn.png)
 
          The author implements it by: 
          * Generating the clusters on the basis of the classes and clusters, extracted using INN 
@@ -1210,7 +1210,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
          * Novel Explanatory approach for explaining a given layer in human interpretable form.
          * It proposes a regularization term that encourage high shared information b.w. discriminative and explanatory features. 
 
-         >![image](images/lsei.png)
+         >![image](imgs/Latent_Space_Explanation_by_Intervention/lsei.png)
 
          The author implements it mainly using 2 major modules:
          * Concepts are detected using a clustering upon the neural network 
@@ -1250,7 +1250,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
          * Generate counterfactul image of healthy version w.r.t to a damaged lung image. 
          * Generate realistic images, controlling lung damage on each. 
 
-         > ![image](images/53.png)
+         > ![image](imgs/Translational_Lung_Imaging_Analysis_Through_Disentangled_Representations/53.png)
 
          The author implements the same using the DAG, which harness 3 differnet kind of animal models, namely: 
          animal model, 
@@ -1281,7 +1281,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
          The paper focues to generate counterfactuals to discover and modify the features that corrects the erroneous prediction by the model and output the correct label. 
          The author accomplishes it w/o using any Generative model as used by many previous works.
 
-         >![image](images/deduce.png) 
+         >![image](imgs/DeDUCE:_Generating_Counterfactual_Explanations_At_Scale/deduce.png) 
 
          The author accomlishes it by using the ''*[Epistemic Uncertianity](https://link.springer.com/article/10.1007/s10994-021-05946-3)*'' to generate samples similar to training data and maximizing the target class-density to minimize it.
 
@@ -1306,7 +1306,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
          as this corresponds to the model choosing 
          ‘*in target class*’ over ‘*not in target class*’.  
 
-         >!['Algorithm'](images/3.png)
+         >!['Algorithm'](imgs/DeDUCE:_Generating_Counterfactual_Explanations_At_Scale/3.png)
          </details>     
 
    - [Counterfactual Explanation and Causal Inference In Service of Robustness in Robot Control](https://arxiv.org/pdf/2009.08856.pdf)
@@ -1318,7 +1318,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
          $d(x,x')$.
          They use the architecture with a generator and a classifier as shown in the figure below:
 
-         >![image](images/struc_robot.png)
+         >![image](imgs/Counterfactual_Explanation_and_Causal_Inference_In_Service_of_Robustness_in_Robot_Control/struc_robot.png)
 
          They build the loss as having minimum intervention, therefore the distance to generate a counterfactual image and the counterfactual image has the highest probability to belong to the target class 
          $t_c$
@@ -1386,7 +1386,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
          g^* = arg \ \underset{g}{\min} \sum_n \mathcal{L}(g(w_n), f(x_n))
          $$
 
-        ![Model](images/45.png)
+        ![Model](imgs/Using_Causal_Analysis_for_Conceptual_Deep_Learning_Explanation/45.png)
 
         </details>    
 
@@ -1417,7 +1417,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
           
           Besides this the author discusses about the **Contrast-CAM**, **Counterfactual-CAM**, **Grad-CAM** technique which is generally used for observing Observed Correlations. The **Counterfactual-CAM** is used for **Observed Counterfactual** negates the gradient to decrease the effect of the predicted class resulting in highlighted regions in case when the object used to make the decision were not present intially. The **Contrast-CAM** is used for third scenario of **Observed Contrastive Explanations** where a loss between class $P$ and $Q$ is constructed to backpropogate it and find contrastive features. 
 
-         ![Model](images/54.png)
+         ![Model](imgs/Explanatory_Paradigms_in_Neural_Networks/54.png)
         </details>  
 
    - [Causality matters in medical imaging](https://www.nature.com/articles/s41467-020-17478-w)
@@ -1450,7 +1450,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
 
         The author concludes the research by concluding that the performance of humans with visualization and no visualization did not have very significant differences.
 
-        ![Model](images/38.png)
+        ![Model](imgs/How_Well_do_Feature_Visualizations_Support_Causal_Understanding_of_CNN_Activations/38.png)
         </details>                
 
    - [The Intriguing Relation Between Counterfactual Explanations and Adversarial Examples](https://arxiv.org/pdf/2009.05487.pdf)
@@ -1464,75 +1464,79 @@ The papers in this section focuses to use the concepts of Causality to increase 
         * Adversarials must be necessarily misclassified while counterfactuals are agnostic in that respect.  
         * Closeness to the original input is usually a benefit for adversarials to make them less perceptible whereas counterfactuals focus on closeness to the original input as it plays a significant role for the causal interpretation.
         </details>  
+ 
+   - [Counterfactual Samples Synthesizing and Training for Robust Visual Question Answering](https://arxiv.org/pdf/2003.06576.pdf)
+      - <details><summary>Maheep's Notes</summary>
 
-  - [Counterfactual Samples Synthesizing and Training for Robust Visual Question Answering](https://arxiv.org/pdf/2003.06576.pdf) 
+        In this research paper the author focuses on two major setbacks, i.e.
+
+         * **Visual-explainability** : The model should rely on the right visual regions when making decisions.<br>
+         * **Question-sensitivity** : The model should be sensitive to the linguistic variations in questions.
+
+        The author proposes Counterfactual Samples Synthesizing and Training, i.e. CSST; a technique which consist  of CSS (for counterfactual synthesis) and CST (for counterfactual training); which do counterfactual analysis in VQA (Visual question answering); this is done in two step process; 
+          * The *CSS generates the counterfactual samples* by masking critical objects  in the images and words. The image masking is handled by V-CSS(visual) whereas the question masking is handled by Q-CSS (Question). Both of which could be represented by the following order:
+                <i>1. Object of interest selection
+                2. Local contribution calculation
+                3. Dynamic answer assignment based on selection made in prior steps</i>
+            <p align="center">
+               <img src="imgs/Counterfactual_Samples_Synthesizing_and_Training_for_Robust_Visual_Question_Answering/flow.png" alt="flow of logic"/>
+            </p>
+      
+          * The second challenge of sensitivity is handled by the CST which make the *model learn to distinguish between the origianl samples and counterfactal ones*. Addtionally it trains the model to learn both kind of samples, i.e. origianl and counterfactual ones, making  the model robust.
+
+         <p align="center">
+            <img src="imgs/Counterfactual_Samples_Synthesizing_and_Training_for_Robust_Visual_Question_Answering/css_algo.png" alt="counterfactual synthesis"/>
+         </p>
+         
+        </details>  
+
+   - [How Should Pre-Trained Language Models Be Fine-Tuned Towards Adversarial Robustness?](https://openreview.net/pdf?id=pl2WX3riyiq) 
       - <details><summary>Maheep's notes </summary>
-         In this research paper the author focuses on 2 major questions, i.e. <br>
-         1) Visual-explainable: The model should rely on the right visual regions when making decisions.<br>
-         2) Question-sensitive: The model should be sensitive to the linguistic variations in questions.<br>
-         The author proposes a technique, i.e. CSST which consist  of CSS and CST which do counterfactual in VQA as the CSS generates the counterfactual samples by masking critical objects  in the images and words. The CST model tackles the second challenge of sensitivity is handled by  the CST which make the model learn to distinguish between the origianl samples and counterfactal ones. Addtionally it trains the model to learn both kind of samples, i.e. origianl and counterfactual ones, making  the model robust. 
+         The fine-tuning of pre-trained language models has a great success in many NLP fields but it is strikingly vulnerable to adversarial examples, as it suffers severely from *catastrophic forgetting*(considerable change in behavior of model due to unbounded change in learned parameters which leads to inability in retaining the generic and robust linguistic features that have already been captured by the pre-trained model). <br>
+         The proposed model <i>maximizes the mutual information between the output of an objective model and that of the pre-trained model</i> conditioned on the class label. It encourages an objective model to continuously retain useful information from the pre-trained one throughout the whole fine-tuning process. <br>
+
+         $$ I(S; Y, T ) = I(S; Y ) + I(S; T|Y ) $$
+         <p align="center">
+            <img src="imgs/How_Should_Pre-Trained_Language_Models_Be_Fine-Tuned_Towards_Adversarial_Robustness/rift_objective.png" alt="rift objective"/>
+         </p>
+         The author proposes by this equation that the two models overlap, i.e. the objective model and the pretrained model. S represents the features extracted the model by the objective model and T is the features extracted by the pretrained model.
+
+         $$ min _{θ,φ,ϕ} Lr_{task} + αLr_{info} $$
+             $Lr_{task}$: *For Maximizing $I(S;Y)$, formulated as lagrangian of Maximum likelihood estimation with KL-Divergence.*
+             $Lr_{info}$: *For maximizing $I(S;T| Y)$, solving a lower bound of $I(S; T|Y )$; very similar to NCE(Non-contrastive estimation).*
+         
+         <p align="center">
+            <img src="imgs/How_Should_Pre-Trained_Language_Models_Be_Fine-Tuned_Towards_Adversarial_Robustness/rift_algo.png" alt="rift algorithm"/>
+         </p>
         </details>
 
-  - [How Should Pre-Trained Language Models Be Fine-Tuned Towards Adversarial Robustness?](https://openreview.net/pdf?id=pl2WX3riyiq) 
-      - <details><summary>Maheep's notes </summary>
-         The fine-tuning of pre-trained language models has a great success in many NLP fields but it is strikingly vulnerable to adversarial examples, as it suffers severely from catastrophic forgetting: failing to retain the generic and robust linguistic features that have already been captured by the pre-trained model. The proposed model maximizes the mutual information between the output of an objective model and that of the pre-trained model conditioned on the class label. It encourages an objective model to continuously retain useful information from the pre-trained one throughout the whole fine-tuning process. <br>
 
-         `I(S; Y, T ) = I(S; Y ) + I(S; T|Y ),`
-         <br>The author proposes by this equation that the two models overlap, i.e. the objective model and the pretrained model. S represents the features extracted the model by the objective model and T is the features extracted by the pretrained model.
-        </details>
-
-
-  - [Counterfactual Zero-Shot and Open-Set Visual Recognition](https://arxiv.org/pdf/2103.00887.pdf) 
+   - [Counterfactual Zero-Shot and Open-Set Visual Recognition](https://arxiv.org/pdf/2103.00887.pdf) 
       - <details><summary>Maheep's notes </summary>
          
          Generating novel samples within True Distribution has been the Holy Grail of Deep Learning. 
-         It focuses on it to solve the challenge of *Zero Shot Learning*(ZSL) and *Open Set Recognition*(OSR) using *Counterfactual Faithfulness* which guarantee that counterfactual distribution is coherent with the ground-truth seen/unseen distribution. 
+         It focuses on it to solve the challenge of *Zero Shot Learning*(ZSL) and *Open Set Recognition*(OSR) using *Counterfactual Faithfulness* which guarantee that counterfactual distribution is coherent with the ground-truth seen/unseen distribution.
+
+         <p align="center">
+            <img src="imgs/Counterfactual_Zero-Shot_and_Open-Set_Visual_Recognition/tsne-visuals.png" alt="tsne visuals"/>
+         </p> 
          
-         The *Counterfactual Faithfulness* allows the use of *Consistency Rule* which states that if the counter-fact 
+         The *Counterfactual Faithfulness* allows the use of *Consistency Rule* which states that if the counter-fact $y$ is indeed the underlying ground-truth, the counterfactual $\overline{x}$ equals to the factual $x$, i.e. 
+           $$y_{c}(x) = \textbf{y} \rightarrow X_y[z(x)] = x$$ and 
+           $$X_y[z(x)] \neq x \Rightarrow y_{c}(x) \neq \textbf{y}$$. 
          
-         $y$ is indeed the underlying ground-truth, the counterfactual 
-         $\overline{x}$ equals to the factual 
-         $x$, i.e. 
-         $y_{c}(x) = \textbf{y} \rightarrow X_y[z(x)] = x$ and 
-         $X_y[z(x)] \neq x \Rightarrow y_{c}(x) \neq \textbf{y}$. 
+         Therefore to achieve *Counterfactual Faithfulness*, it disentangles the samples based on \textit{sample-specific} $\tilde{z} = \tilde{Z}(X = x)$ and *class-specific* $y = Y(X = x)$ attributes, hence generating the counterfactual sample 
          
-         Therefore to achieve *Counterfactual Faithfulness*, it disentangles the samples based on \textit{sample-specific} 
-         $\tilde{z} = \tilde{Z}(X = x)$ and 
-         *class-specific*  
-         $y = Y(X = x)$ attributes, hence generating the counterfactual sample 
-         
-         $\overline{x} = X_y[\tilde{z}(x)]$. 
+         $$\overline{x} = X_y[\tilde{z}(x)]$$. 
          It also gives the basis for generation of unseen classes samples by taking the basis as 
-         $\tilde{Z} = \tilde{z}(x)$ where the effect of all attributes remains preserved due to disentanglement. The 
-         $z(x)$ and 
-         $y(x)$ can be obtained through posterior
-         
-         $Q_\phi(Z|X)$ and $Q_\gamma(Y|X)$, whereas 
-         $\overline{x}$ can be generated via conditional distribution 
-         $P_\theta(\overline{X}|Z = z,Y = y)$ after inferring 
-         $y$ from 
-         $X$ and 
-         $z$ is the gaussian prior. 
+         $$\tilde{Z} = \tilde{z}(x)$$ where the effect of all attributes remains preserved due to disentanglement. The $z(x)$ and $y(x)$ can be obtained through posterior $Q_\phi(Z|X)$ and $Q_\gamma(Y|X)$, whereas $\overline{x}$ can be generated via conditional distribution 
+         $P_\theta(\overline{X}|Z = z,Y = y)$ after inferring $y$ from $X$ and $z$ is the gaussian prior. 
          
          In a structural format it is done via three steps: 
-         * *Abduction*: 
-         $z(x)$ is inferred, 
-         * *Action*: infers 
-         $\textbf{y} \in \mathcal{Y_S} \cup \mathcal{Y_U}$
-         , where 
-         $\mathcal{Y}_{S}$ was dense embedding in-case of ZSL and one-hot encoding in-case of OSR. 
-         * *Prediction*: 
-         $\overline{x}$ is generated by inferred 
-         $z(x)$ 
-         and 
-         $\textbf{y}$
-         . ZSL(OSR) is evaluated in a closed(open) environment, where un-seen class is (not)available 
-         $\mathcal{Y}_U$ 
-         by the contraposition-if the feature 
-         $x$ is *dissimilar* to $\overline{x}$ generated from unseen(seen)-classes, 
-         $x$ belongs to seen(unseen) which could be easily measured using the minimum Euclidean Distance. To ensure the proper disentanglement of 
-         $z(x)$ and 
-         $y(x)$, the loss is constituted as
+         * *Abduction*: $z(x)$ is inferred, 
+         * *Action*: infers $\textbf{y} \in \mathcal{Y_S} \cup \mathcal{Y_U}$, where $\mathcal{Y}_{S}$ was dense embedding in-case of ZSL and one-hot encoding in-case of OSR. 
+         * *Prediction*: $\overline{x}$ is generated by inferred $z(x)$ and 
+         $\textbf{y}$. ZSL(OSR) is evaluated in a closed(open) environment, where un-seen class is (not)available $\mathcal{Y}_U$ by the contraposition-if the feature $x$ is *dissimilar* to $\overline{x}$ generated from unseen(seen)-classes, $x$ belongs to seen(unseen) which could be easily measured using the minimum Euclidean Distance. To ensure the proper disentanglement of $z(x)$ and $y(x)$, the loss is constituted as
 
          $$
          L = \underset{\theta, \phi}{min} L_{\tilde{Z}} + vL_Y + \underset{w}{max} \rho L_{\mathcal{F}}
@@ -1551,16 +1555,16 @@ The papers in this section focuses to use the concepts of Causality to increase 
          $$
 
          where 
-         $D_{KL}$ 
-         represents KL Divergence Loss and 
-         
-         $\widehat{x} = \alpha x + (1 - \alpha)\overline{x}$.
+         $D_{KL}$ represents *KL Divergence* Loss and $\widehat{x} = \alpha x + (1 - \alpha)\overline{x}$.
 
-         
-        </details>
+         <p align="center">
+            <img src="imgs/Counterfactual_Zero-Shot_and_Open-Set_Visual_Recognition/model_arch.png" alt="model architecture"/>
+         </p>
+
+      </details>
 
 
-  - [Counterfactual VQA: A Cause-Effect Look at Language Bias](https://arxiv.org/pdf/2006.04315.pdf) 
+   - [Counterfactual VQA: A Cause-Effect Look at Language Bias](https://arxiv.org/pdf/2006.04315.pdf) 
       - <details><summary>Maheep's notes </summary>
          Besides, counterfactual training samples generation [12, 1, 58, 19, 31] helps to balance the training data, and outperform other debiasing methods by large margins on VQA-CP.
          <br>
@@ -1621,16 +1625,25 @@ The papers in this section focuses to use the concepts of Causality to increase 
 
          But the relationship between the text and image is based on statistical relationship rather than causal relationship. 
         </details>
+
   - [Adversarial Visual Robustness by Causal Intervention](https://arxiv.org/abs/2106.09534) 
       - <details><summary>Maheep's notes </summary>
-         The paper focuses on adverserial training so as to prevent from adverserial attacks. The author use instrumental variable to achieve casual intervention.            The author proposes 2 techniques, i.e. 
+         The paper focuses on adverserial training so as to prevent from adverserial attacks. The author use instrumental variable to achieve casual intervention.          The author proposes two techniques, i.e. 
          
-         1) Augments the image with multiple retinoptic centres
+         * Augmenting the image with multiple retinoptic centres
+         <p align="center">
+            <img src="imgs/Adversarial_Visual_Robustness_by_Causal_Intervention/data_sample.png" alt="data samples"/>
+         </p> 
          
-         2) Encourage the model to learn causal features, rather than local confounding patterns.
+         * Encourage the model to learn causal features, rather than local confounding patterns.
+
+             They propose the model to be such that 
          
-         They propose the model to be such that max P (Y = ŷ|X = x + delta) - P(Y = ŷ|do(X = x + delta)), 
-         subject to P (Y = ŷ|do(X = x + delta)) = P (Y = ŷ|do(X = x)), in other words they focus on annhilating the confounders using the retinotopic centres as the instrumental variable.
+             $$ max P (Y = ŷ|X = x + delta) - P(Y = ŷ|do(X = x + delta))$$
+             subject to 
+             $$ P (Y = ŷ|do(X = x + delta)) = P (Y = ŷ|do(X = x))$$
+         
+             in other words they focus on *annhilating the confounders using the retinotopic centres* as the instrumental variable.
         </details>
 
   - [What If We Could Not See? Counterfactual Analysis for Egocentric Action Anticipation](https://vipl.ict.ac.cn/homepage/jsq/publication/2021-Zhang-IJCAI.pdf) 
@@ -1653,12 +1666,12 @@ The papers in this section focuses to use the concepts of Causality to increase 
          $k$ functions 
          ${f_i(.)}_{i = 1}^{k}$ that converts $f(X_d) = X_{d'}$ and $f^{-1}(X_{d'}) = X_{d}$, where $P(X_d) \in P(D_1); P(X_{d'}) \in P(D_2)$.
             
-            * !['K-functions'](images/k_functions.png) 
+            * !['K-functions'](imgs/Transporting_Causal_Mechanisms_for_Unsupervised_Domain_Adaptation/k_functions.png) 
 
          * Although $\{f_i(\cdot)\}_{i = 1}^{k}$ represents different confounders $C$ that makes the features of $D_1$ and $D_2$ invariant/same. But are unable to get the vector representation, therefore its characteristics to delineate $C$.
          * The characteristic of $C$(denoted by $U$ in the image) can be observed by the $X$ and the latent variable $Z$ of $X$, as shown in the image below, both containing the information encoded about $C$. 
             
-            * ![Causal Graph](images/c_graph_chracteristic.png)
+            * ![Causal Graph](imgs/Transporting_Causal_Mechanisms_for_Unsupervised_Domain_Adaptation/c_graph_chracteristic.png)
          * Therefore it defines the standard equation to solve the issue, i.e. 
          $P(Y|do(X), Domain) = \sum_u P(Y|X,C = c)P(C|Domain)$
          * to the equation 
@@ -1843,7 +1856,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
       - <details><summary>Maheep's Notes</summary>
         The paper focues on eridicating the algorithm-based counterfactual generators which makes them ineffcient for sample generation, because each new query necessitates solving one specific optimization problem at one time and propose Model-based Counterfactual Synthesizer. Existing frameworks mostly assume the same counterfactual universe for different queries. The present methods do not consider the causal dependence among attributes to account for counterfactual feasibility. To take into account the counterfactual universe for rare queries, they novelly employ the umbrella sampling technique, i.e. by using the weighted-sum technique, calculating the weight of each biased distribution, we can then reconstruct the original distribution and conduct evaluations with the umbrella samples obtained. The counterfactual can be generated by giving a specific query q0, insttead of a label using the hypthetical distribution.
 
-        !['Algorithm'](images/5.png)
+        !['Algorithm'](imgs/Model-Based_Counterfactual_Synthesizer_for_Interpretation/5.png)
         </details>  
  
 
@@ -1860,7 +1873,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
         The architecture contains a backbone network to extract the features. The extracted features are then processed into CAM module where a GAP and classifier module outputs scores which are multipluied by weights to produce class activation maps. <br>
         The features are then passed through Causal Context Pool which stores the context of all images of every class, then other CAM module repeats the same procudure as of CAM1 and outputs image with class activation map.       
 
-        !['Model'](images/7.png)
+        !['Model'](imgs/Improving_Weakly_supervised_Object_Localization_via_Causal_Intervention/7.png)
         </details>  
 
    - [COUNTERFACTUAL GENERATIVE NETWORKS](https://arxiv.org/abs/2101.06046)
@@ -1870,7 +1883,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
         3.) The third generates the background. <br>
         In this way the author makes a connection b/w the fields of causality, disentangled representaion, and invariant classifiers. The author uses cGAN with these learned IM to generate images based on the attributes given above.
 
-        !['Model'](images/8.png)
+        !['Model'](imgs/COUNTERFACTUAL_GENERATIVE_NETWORKS/8.png)
         </details>  
 
    - [Discovering Causal Signals in Images](https://arxiv.org/abs/1605.08179)
@@ -1890,7 +1903,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
         `L_c = E[-log(e^s(a,p)/e^s(a,p)+e^s(a,n))]`
         <br>
         The total loss becomes `L = lambda_1*L_c + lambda_2*L_vqa` 
-        !['Model'](images/9.png)
+        !['Model'](imgs/Learning_to_Contrast_the_Counterfactual_Samples_for_Robust_Visual_Question_Answering/9.png)
         </details>  
 
    - [Latent Causal Invariant Model](https://arxiv.org/abs/2011.02203)
@@ -1917,7 +1930,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
       - <details><summary>Maheep's Notes</summary>
         The paper aims to localize objects described in the sentence to visual regions in the video by deconfounding the object-relevant associations given the video-sentence annotations. The author argues that the frame is made up of the content(C), i.e. factors that cause the object’s visual appearances in spatial and temporal throughout the video are grouped into a category and Style(S) is the background or scenes. The author argues that the S does not play any role in object grounding and only act a confounder. In addition to that there exist one more confounder, i.e 
         
-        !['Idenfiability Diagram'](images/10.png)
+        !['Idenfiability Diagram'](imgs/Weakly-Supervised_Video_Object_Grounding_via_Causal_Intervention/10.png)
 
         `Z` that occurs due to some specific objects occuring frequently. The style confounder is replaced by using the contrastive learning, where the counterfactual examples are created by taking the vectors from a memory bank by taking the top sleected top regions for described object and then the selected regions and frames are grouped together into frame-level content(H_c) and region-level content(U_c), and the rest of the regions are grouped as U_s and H_s. These regions are the converted to counterfactual using these memory vectors which were created by taking the randomly selected regions in training set. The most similar one and replaces the original one, to generate examples to have them hard to distinguish from real ones contrastive learning is used. The equation looks like: <br>
 
@@ -1942,7 +1955,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
         4.) **Classifier**<br>
             > It is simply used for prediciton.
 
-        !['Model'](images/11.png)
+        !['Model'](imgs/Towards_Unbiased_Visual_Emotion_Recognition_via_Causal_Intervention/11.png)
         </details>  
 
    - [Human Trajectory Prediction via Counterfactual Analysis](https://openaccess.thecvf.com/content/ICCV2021/papers/Chen_Human_Trajectory_Prediction_via_Counterfactual_Analysis_ICCV_2021_paper.pdf)
@@ -1967,7 +1980,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
         `f(theta)` are produced and the main features are masked out of the image giving us `x*`. Now the loss becomes `L = sigma(l(x*,not_y;f(theta)))`<br>
         A trivbial solution can be the saliency maps copvers the whole image therefore L1-norm of saliency map is used to encourage succinct (sparse) representations. The another problem that now arises is that the model can learn a shortcut that when it get a masked image then it has to always give `not_y` as prediction, so as to counter it the author proposes to send images with random masks on them, making the loss `L = sigma(l(x',y;f(theta)))`
 
-        ![Model](images/12.png) 
+        ![Model](imgs/Proactive_Pseudo-Intervention:_Contrastive_Learning_For_Interpretable_Vision_Models/12.png) 
         </details> 
 
    - [Interventional Video Grounding with Dual Contrastive Learning](https://arxiv.org/abs/2106.11013)
@@ -1976,13 +1989,13 @@ The papers in this section focuses to use the concepts of Causality to increase 
         1) Given an input query and video, the two encoders output contextualized visual and textual representations respectively. <br>
         2) Then, these representations will be fed into two contrastive modules VV-CL and QV-CL respectively to learn high-quality representations with two contrastive losses L_vv and L_qv, where the QV-CL module focuses on increasing the Mutual information of the positive frames of video and the query. The VV-CL aims to increse the mutual information b/w the start and end boundaries of the video, which looks like as shown in the diagram below:<br>
 
-        ![Contrastive Module](images/13.png)
+        ![Contrastive Module](imgs/Interventional_Video_Grounding_with_Dual_Contrastive_Learning/13.png)
 
         3) The output of two feature encoders are fed to a fusion module with a context-query attention mechanism to capture the cross-modal interactions between visual and textual features.<br> 
         4) As the confounder is unobserved, therefore to mitigate the spurious correlations between textual and visual features, the author develops a surrogate confounder. It includes the vocabulary of roles, actions and objects extracted from captions. Based on these, it computes the prior probability of every phrase z in each set and incoporates every phrase uniformly using the Normalized Geometric Mean(NWGM).<br> 
         5) Finally, two losses L_s and L_e for the start and end boundaries are introduced.<br>
         
-        ![Model](images/14.png)
+        ![Model](imgs/Interventional_Video_Grounding_with_Dual_Contrastive_Learning/14.png)
         </details>  
 
 
@@ -1993,7 +2006,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
         
         `D_s_i` for datasets of different domain, i.e. coming from different users but used in training, `X` are the samples, `R` are the raw extracted features of `X`, `F` is the normalized feature representaiton of `R` and `Y` is the classifier. To remove the confounding effects brought by `D_u` , a direct way is using causal intervention on normalized features (i.e., do(F)) to let the feature distribution similar to training distributions. This intervention by introducing the surrogate variable `S`, which is test-specific statistics of raw features `R` during testing by obtaining the test normalized features that have similar distributions as the training normalized features. More specifically by calculating the mean and variance pair at test time in BN to normalize features. Additionally they further propose to use momentum to integrate relations among different batches, thus reducing the variances. Precisely by giving the unseen client with M batches of data to be tested in sequential manner.
 
-        ![Model](images/15.png)
+        ![Model](imgs/TSMOBN_GENERALIZATION_FOR_UNSEEN_CLIENTS_IN_FEDERATED_LEARNING/15.png)
         </details>  
 
    - [Learning Domain Invariant Relationship with Instrumental Variable for Domain Generalization](https://arxiv.org/pdf/2110.01438.pdf)
@@ -2002,7 +2015,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
         1.) It learns the conditional distribution of input features of one domain given input features of another domain with Maximum Mean Discrepancy(MMD) that minimizes the distance b/w the feature representation of two different domains.<br>
         2.) In second step it estimates the domain-invariant relationship by predicting labels with the learned conditional distribution by sampling from the first step distribtion.<br>
 
-        ![Model](images/16.png)
+        ![Model](imgs/Learning_Domain_Invariant_Relationship_with_Instrumental_Variable_for_Domain_Generalization/16.png)
         </details>  
 
 
@@ -2066,7 +2079,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
       - <details><summary>Maheep's Notes</summary>
         The paper proposes that counterfactual approach developed to deconfound linear structural causal models can still be used to deconfound the feature representations learned by deep neural network (DNN) models, so as to implement it the author argues that in a learned DNN the second last layer(just behind the softmax layer) has a very linear realtionship with the labels and can be used to intervene and generate counterfactual example to make the model robust. The author develops the causal diagram having 4 variables, P_ix, Y, C, S which represent the data distribution, label, indicates the presence of a selection mechanism generating an association between Y and C. The C represents the confounder.
 
-        ![Causality Diagram](images/18.png)
+        ![Causality Diagram](imgs/Causality-aware_counterfactual_confounding_adjustment_for_feature_representations_learned_by_deep_models/18.png)
 
         In order to remove/reduce the influence of C on the predictive performance of the classifier, they apply the causality-aware adjustment proposed to generate counterfactual features, X'. These counterfactual examples are used to train a logistic regression classifier, and then use the same algorithm to generate counterfactual in test set X_test' to generate predictions that are no longer biased by the confounder.
         </details>  
@@ -2075,7 +2088,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
       - <details><summary>Maheep's Notes</summary>
         The paper proposes MatchDG is an iterative algorithm that starts with randomly matched inputs from the same class and builds a representation using contrastive learning such that inputs sharing the same causal features are closer to one another. It is a two-phase method that first learns a representation independent of the ERM loss, so that classification loss does not interfere with the learning of stable features. The author argues that the a common objective is to learn representations independent of the domain after conditioning on the class label. They show that this objective is not sufficient: there exist counter-examples where a model fails to generalize to unseen domains even after satisfying class-conditional domain invariance. If there are 3 data-points (x_d_i, y), (x_d'_j, y) and (x_d_k, y') then the distance in causal features between x_i and x_j is smaller than distance between x_i and x_k or x_j and x_k. Based on this they represent a contrastive loss which bring lables of same class closer and increases the distances b/w different class label.
 
-        ![Algorithm](images/19.png) 
+        ![Algorithm](imgs/Domain_Generalization_using_Causal_Matching/19.png) 
         </details>  
 
    - [Counterfactual Debiasing Inference for Compositional Action Recognition](https://dl.acm.org/doi/abs/10.1145/3474085.3475472)
@@ -2085,7 +2098,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
         2.) Taking the prediction from only visual appearance and subtracting it from the output of the model considering both brances.<br>
         The only losses which gets constituted in the model are: Appearance loss, Structural Loss and fusion Loss by using the cross-entropy.
 
-        ![Model](images/17.png)
+        ![Model](imgs/Counterfactual_Debiasing_Inference_for_Compositional_Action_Recognition/17.png)
         </details>  
 
    - [Deconfounded Video Moment Retrieval with Causal Intervention](https://arxiv.org/abs/2106.01534)
@@ -2109,7 +2122,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
             where $P(l) =  \frac{1}{N}$ and $N$ total number of proposed candidates. 
             It is implemented using the Normalized Weighted Geometric Mean(NWGM).
 
-         ![Model](images/20.png)
+         ![Model](imgs/Deconfounded_Video_Moment_Retrieval_with_Causal_Intervention/20.png)
         
         </details>  
 
@@ -2122,7 +2135,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
         
         `L = L_obj + lambda*L_pred`, where `L_obj` is the cross entropy loss function to calculate the loss of classifying video object trajectories and `L_pred` is binary cross entropy loss used for predicate prediciton.
 
-        ![Model](images/21.png)
+        ![Model](imgs/Intervention_Video_Relation_Detection/21.png)
         </details>  
 
    - [Visual Commonsense R-CNN](https://arxiv.org/pdf/2002.12204.pdf)
@@ -2133,7 +2146,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
         `E[g(z)]` to get the top confounders from the dictionary. Now there is a complexity arise where the confounder is the doctionary act as the colliders therefore they are eridacted through the use of Neural Causation coefficient(NCC).
 
    
-        ![Model](images/22.png)
+        ![Model](imgs/Visual_Commonsense_R-CNN/22.png)
         </details>  
 
 
@@ -2152,7 +2165,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
 
    
    
-        ![Model](images/23.png)
+        ![Model](imgs/Causal_Attention_for_Vision-Language_Tasks/23.png)
         </details>  
 
    - [Causal Attention for Unbiased Visual Recognition](https://openaccess.thecvf.com/content/ICCV2021/papers/Wang_Causal_Attention_for_Unbiased_Visual_Recognition_ICCV_2021_paper.pdf)
@@ -2175,7 +2188,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
 
    
    
-        ![Model](images/24.png)
+        ![Model](imgs/Causal_Attention_for_Unbiased_Visual_Recognition/24.png)
         </details>  
 
 
@@ -2187,8 +2200,8 @@ The papers in this section focuses to use the concepts of Causality to increase 
         
 
 
-        ![Equation](images/26.png)
-        ![Model](images/25.png)
+        ![Equation](imgs/Causal_Intervention_for_Weakly-Supervised_Semantic_Segmentation/26.png)
+        ![Model](imgs/Causal_Intervention_for_Weakly-Supervised_Semantic_Segmentation/25.png)
         </details>  
 
    - [Confounder Identification-free Causal Visual Feature Learning](https://arxiv.org/abs/2111.13420)
@@ -2220,7 +2233,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
          g_+ = \frac{1}{M}\overset{K}{\underset{k = 1}{\sum}}\overset{N_k}{\underset{j = 1}{\sum}}g_{\tilde{x}_{j,k \in K}}
          $$
 
-         ![Clustering Algorithm](images/27.png)
+         ![Clustering Algorithm](imgs/Confounder_Identification-free_Causal_Visual_Feature_Learning/27.png)
         </details>  
 
    - [Comprehensive Knowledge Distillation with Causal Intervention](https://proceedings.neurips.cc/paper/2021/file/b9f35816f460ab999cbc168c4da26ff3-Paper.pdf)
@@ -2231,7 +2244,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
         3.) They integrate the class representations using the class shapes to incorporate it into the student model as so not to only transfer the sample representation. 
         4.) By using the backdoor adjustment the effect of the prior knowledge of the teacher model because of the object and background co-occurences by setting each item to the prior knowledge to a class.  
 
-        ![Model](images/28.png)
+        ![Model](imgs/Comprehensive_Knowledge_Distillation_with_Causal_Intervention/28.png)
         </details>  
 
    - [Counterfactual Contrastive Learning for Weakly-Supervised Vision-Language Grounding](https://papers.nips.cc/paper/2020/file/d27b95cac4c27feb850aaa4070cc4675-Paper.pdf)
@@ -2254,7 +2267,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
 
          Finally the ranking loss is used to focus on the score-based difference b.w. positive and negative results. 
 
-         !['Architecture'](images/architecture.png)
+         !['Architecture'](imgs/Counterfactual_Contrastive_Learning_for_Weakly-Supervised_Vision-Language_Grounding/architecture.png)
 
          $\psi(I,Q;\theta)$ is trained to detect most relevant proposals 
          $p$ 
@@ -2328,14 +2341,14 @@ The papers in this section focuses to use the concepts of Causality to increase 
          L_{ccl} = L_{rank} + \lambda L_{cons}
          $$
 
-        ![Model](images/29.png)
+        ![Model](imgs/Counterfactual_Contrastive_Learning_for_Weakly-Supervised_Vision-Language_Grounding/29.png)
         </details>  
 
    - [C_3 : Compositional Counterfactual Constrastive Learning for Video-grounded Dialogues](https://arxiv.org/abs/2106.08914)
       - <details><summary>Maheep's Notes</summary>
         The paper focuses on the video-grounding using the diaglouges and inputs, where the author inlcudes the turn based events which let the model give high priority to some instances rather than uniformly giving to all. Also the author separates the dialogue context and video input into object and action, through which they are able to parse through if the query is about object or any action taken, as shown in the figure below.  
         
-        ![Model](images/31.png)
+        ![Model](imgs/C_3_:_Compositional_Counterfactual_Constrastive_Learning_for_Video-grounded_Dialogues/31.png)
 
         Also they generate counterfactual scenarios by removing irrelavant objects or actions to create factual data and by removing relevant object or actions, they generate counterfactual data, finally making the equations as: 
 
@@ -2346,7 +2359,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
 
         where `H_t^-` denotes counterfactual dialogue context in instance `t` and `I^-` represents the counterfactual image input.
 
-        ![Model](images/30.png)
+        ![Model](imgs/C_3_:_Compositional_Counterfactual_Constrastive_Learning_for_Video-grounded_Dialogues/30.png)
         </details>  
 
 
@@ -2360,7 +2373,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
         `M = sigma a_i*c_i*P(c_i)`<br>
         where `a_i` is the attention for category specific entry `c_i`.  
 
-        ![Model](images/33.png)
+        ![Model](imgs/Causal_Intervention_for_Object_Detection/33.png)
         </details> 
 
    - [Efficient Counterfactual Debiasing for Visual Question Answering](https://openaccess.thecvf.com/content/WACV2022/papers/Kolling_Efficient_Counterfactual_Debiasing_for_Visual_Question_Answering_WACV_2022_paper.pdf)
@@ -2370,7 +2383,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
         2.) **ECD-Q**: The module focuses on creating the counterfactual and factual questions in the question regions by separating *question-type words* and *stop-words* to identify the critical words, which are removed to create counterfactual questions and factual are created by removing the inessential words, i.e. *question-type words* or *stop-words*.<br>
         3.) **Negative Answer Assignment**: The module assign ground-truth answers to counterfatual pairs. To make this effective the author analyzes the number of occurrences of each answer and normalize the number of occurrences of an answer for a specific question by the total number of occurrences of that question type in the training set. The top-N answers with the highest predicted probabilities are selected as A+ and the Ground-truth answers(GT) and the negative answers A- as all answers of GT but those in A+.
 
-        ![Model](images/34.png)
+        ![Model](imgs/Efficient_Counterfactual_Debiasing_for_Visual_Question_Answering/34.png)
         </details> 
 
    
@@ -2396,7 +2409,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
 
          This operation can also be interpreted as an extension to AugMix which is designed for image classification. Different from AugMix, **IPA** necessities strict spatial correspondence between pixels and labels to ensure accuracy of this pixel-wise prediction.
 
-         ![Model](images/35.png)
+         ![Model](imgs/Causality-inspired_Single-source_Domain_Generalization_for_Medical_Image_Segmentation/35.png)
       </details> 
 
    - [Distilling Causal Effect of Data in Class-Incremental Learning](https://arxiv.org/abs/2103.01737)
@@ -2414,7 +2427,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
         The paper aims to increase the value of `W(.)` expression as it depends the close similarity between the representation of the similar image in old model and new model.
         
          
-        ![Model](images/36.png)
+        ![Model](imgs/Distilling_Causal_Effect_of_Data_in_Class-Incremental_Learning/36.png)
 
 
         </details> 
@@ -2428,7 +2441,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
         1.) **COM** : It maintians the **Q** , to ensure that the cause is generated in terms of nodes only after the effect. It is also noted that the node have many parents, therefore the node is considered valid only when all of it's parents have been generated.<br> 
         2,) **CVM** : The correct order of causal order is not sufficient for causality therefore CVM is proposed so as to only consider the nodes when the information of it's parents are available and the information only flow to a node from it's parents. 
 
-        ![Model](images/39.png)
+        ![Model](imgs/CausalAF__Causal_Autoregressive_Flow_for_Goal_Directed_Safety_Critical/39.png)
 
         </details>                
 
@@ -2443,7 +2456,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
         It is expected to achieve two-conditions using this method:<br> 
         a. ) The attention model should improve the prediction based on wrong attentions as much as possible, which encourages the attention to dis- cover the most discriminative regions and avoid sub-optimal results<br> b.) The prediction based on wrong attentions is penalized, which forces the classifier to make decision based more on the main clues instead of the biased clues and reduces the influence of biased training set.
 
-        ![Model](images/40.png)
+        ![Model](imgs/Counterfactual_Attention_Learning_for_Fine-Grained_Visual_Categorization_and_Re-identification/40.png)
 
         </details>   
 
@@ -2452,7 +2465,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
       - <details><summary>Maheep's Notes</summary>
         The paper show that showing controlled counterfactual image-question examples are more effective at improving the mental model of users as compared to simply showing random examples. The statement is evaluated by asking the users to predict the model’s performance on a test counterfactual image. It is noted that, overall an improvement in users’ accuracy to predict answer change when shown counterfactual explanations. The counterfactual image is generated either by retrieving an image where the answer is different or by removing the visually important patch from the image, which is identified using the attention maps, using a GAN network. The patch with high and low attention are removed to evaluate the decision of VQA. Based on it a user can hypothetically learn whether the VAQ model is behaving rationally or not. 
 
-        ![Model](images/41.png)
+        ![Model](imgs/Improving_Users’_Mental_Model_with_Attention-directed_Counterfactual_Edits/41.png)
 
         </details>      
 
@@ -2469,7 +2482,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
         b.) **Action**: The mask sould remain unchanged from the GT of the image and should be optimal for it's value.<br>
         c.) **Prediction**: The probability distribution of the image should remian unchanged. 
 
-        ![Model](images/42.png)
+        ![Model](imgs/Free_Lunch_for_Co-Saliency_Detection:_Context_Adjustment/42.png)
 
         </details>           
 
@@ -2478,7 +2491,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
       - <details><summary>Maheep's Notes</summary>
          The work proposes to unify diagnostic model learning, visual explanation generation using the counterfactual explanation using a target class, and trained diagnostic model reinforcement guided by the visual explanation on the discriminative features extracted by the counterfactual explanation on the mSRI data for the muti-class classification. The author implements the system by learning the counterfactual map for explanation which consist of three modules **Counterfactual Map Generator(CMG)**, **Reasoning Evaluator(RE)** and a **Discriminator(DC)**, where CMG generates the counterfactual image using the U-net technique giving a Mask and adding it to the input as given in the image below. RE directly evaluates the effect of the generated counterfactual map in producing the targeted label, and Discriminator makes it sure that the generated image look realistic. The **Reinforcement Representation Learning** tries to create a guide map using the above counterfactual map which highlight the extreme regions, i.e. the normal and the regions that have high probability that are abnormal.
 
-        ![Model](images/46.png)
+        ![Model](imgs/Learn-Explain-Reinforce:_Counterfactual_Reasoning_and_Its_Guidance_to_Reinforce_an_Alzheimer’s_Disease_Diagnosis_Model/46.png)
 
         </details>    
 
@@ -2489,7 +2502,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
          1.) **Feature Extractor**: The module consist of REsNeXt and SENet to extract the features from the image using the FER model as it is and output the valence and arousal of the subject.<br>
          2.) **Causality Extractor**: It consist of a LSTM layer and two FC layers. During the integration of sequential data into the single hidden state, the LSTM layer learn the causal inference between the past facial images and the affective state. The FC layers eventually convert the single hidden state to the predicted affective state.  
 
-        ![Model](images/47.png)
+        ![Model](imgs/Causal_affect_prediction_model_using_a_facial_image_sequence/47.png)
 
         </details>  
 
@@ -2500,7 +2513,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
       - <details><summary>Maheep's Notes</summary>
          The work proposes to extract the causal events using the videos and text. The author claimes that objects in the video and time-ordered nature of events promotes causality, therefore removing bias. The author implememnts by using the architecture given below.<br>
 
-        ![Model](images/48.png)
+        ![Model](imgs/iReason:_Multimodal_Commonsense_Reasoning_using_Videos_and_Natural_Language_with_Interpretability/48.png)
 
         The CFDM module localize the said events in the video and outputs a pair of images, i.e. 
         
@@ -2526,7 +2539,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
          a.) **Toy Dataset**: It contains no confounders, agency but only causal relationship.<br>
          b.) **CausalityCity**: It contains confounders, agency and also causal relationship.
 
-        ![Model](images/49.png)
+        ![Model](imgs/CausalCity:_Complex_Simulations_with_Agency_for_Causal_Discovery_and_Reasoning/49.png)
 
         </details>  
 
@@ -2545,7 +2558,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
 
          `m` and the proxy confounder `c` to eradicate the real confounder `z_c`. In these type of systems it is to be considered that the mediator is not affected by the counfounder after the intervention. 
 
-        ![Model](images/51.png)
+        ![Model](imgs/Dependent_Multi-Task_Learning_with_Causal_Intervention_for_Image_Captioning/51.png)
 
         </details>  
 
@@ -2563,7 +2576,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
          `C`, separating them from context features `B` while computed from Grad-CAM using the Huffman encoding which increases the performance by 3% in terms of accuracy and also retains 15% less size in bit size. <br>
          The author implements it by arguing that given the just features `G = C U B` are given. By taking the analogy of the sets given below, the author extracts `B` as given in the following equations below:<br>
 
-        ![Model](images/50.png)
+        ![Model](imgs/EXTRACTING_CAUSAL_VISUAL_FEATURES_FOR_LIMITED_LABEL_CLASSIFICATION/50.png)
 
          `C_p = G_p - B_p`,.....................(1) i.e. for prediciton `p`<br>
          `B_p = C_(p,q) - C_(bar(p),bar(q)) - C_(bar(p),p)` ...................(2)<br>
@@ -2582,7 +2595,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
          `X_s` converting into the target object image `X_t`, by modifying it and quantifying the parameters via changing it's **affnity** by changing the scaling `s`, translation `∆t` and in-plane rotation `∆θ`. **Shape** acts as the second parameter by which the image is changed. The transformation takes place in the same order as if shape is changed before that it will also have the effect of changing the pose of the image. **Subtract** act as the third module to change the image via removing the background using a segmentaion model to see the apperance difference using MSE.  
 
 
-         ![Model](images/52.png)
+         ![Model](imgs/ALIGN-DEFORM-SUBTRACT:_AN_INTERVENTIONAL_FRAMEWORK_FOR_EXPLAINING_OBJECT_DIFFERENCES/52.png)
         </details>  
 
 
@@ -2612,7 +2625,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
           2.) **Memory Module**: It consist `s_i` as defined above<br>
           3.) **Confounder Priors**:  It consist of the sample distribution of different `s_i` by taking the number of (samples in that subject)/(total samples) <br>
 
-         ![Model](images/55.png)
+         ![Model](imgs/Causal_Intervention_for_Subject-deconfounded_Facial_Action_Unit_Recognition/55.png)
         </details>  
 
    - [Causal Scene BERT: Improving object detection by searching for challenging groups of data](https://arxiv.org/pdf/2202.03651) 
