@@ -1498,7 +1498,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
          $$ 
          I(S; Y, T ) = I(S; Y ) + I(S; T|Y ) 
          $$
-         
+
          <p align="center">
             <img src="imgs/How_Should_Pre-Trained_Language_Models_Be_Fine-Tuned_Towards_Adversarial_Robustness/rift_objective.png" alt="rift objective"/>
          </p>
@@ -1513,6 +1513,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
          : *For Maximizing* 
          $I(S;Y)$
          , *formulated as lagrangian of Maximum likelihood estimation with KL-Divergence.*
+         
          $Lr_{info}$
          : *For maximizing* 
          $I(S;T| Y)$
