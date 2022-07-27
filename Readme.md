@@ -1644,6 +1644,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
 
   - [Adversarial Visual Robustness by Causal Intervention](https://arxiv.org/abs/2106.09534) 
       - <details><summary>Maheep's notes </summary>
+         
          The paper focuses on adverserial training so as to prevent from adverserial attacks. The author use instrumental variable to achieve casual intervention.          The author proposes two techniques, i.e. 
          
          * Augmenting the image with multiple retinoptic centres
@@ -1686,7 +1687,13 @@ The papers in this section focuses to use the concepts of Causality to increase 
 
          * It proposes 
          $k$ functions 
-         ${f_i(.)}_{i = 1}^{k}$ that converts $f(X_d) = X_{d'}$ and $f^{-1}(X_{d'}) = X_{d}$, where $P(X_d) \in P(D_1); P(X_{d'}) \in P(D_2)$.
+         ${f_i(.)}_{i = 1}^{k}$ 
+         that converts 
+         $f(X_d) = X_{d'}$ 
+         and 
+         $f^{-1}(X_{d'}) = X_{d}$
+         , where 
+         $P(X_d) \in P(D_1); P(X_{d'}) \in P(D_2)$
             
             * !['K-functions'](imgs/Transporting_Causal_Mechanisms_for_Unsupervised_Domain_Adaptation/k_functions.png) 
 
