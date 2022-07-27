@@ -1688,7 +1688,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
          * It proposes 
          $k$ functions 
          ${f_i(\cdot)}_{i = 1}^{k}$
-          
+
          that converts 
          $f(X_d) = X_{d'}$ 
          and 
@@ -1696,7 +1696,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
          , where 
          $P(X_d) \in P(D_1); P(X_{d'}) \in P(D_2)$
             
-            * !['K-functions'](imgs/Transporting_Causal_Mechanisms_for_Unsupervised_Domain_Adaptation/k_functions.png) 
+         >!['K-functions'](imgs/Transporting_Causal_Mechanisms_for_Unsupervised_Domain_Adaptation/k_functions.png) 
 
          * Although $\{f_i(\cdot)\}_{i = 1}^{k}$ represents different confounders $C$ that makes the features of $D_1$ and $D_2$ invariant/same. But are unable to get the vector representation, therefore its characteristics to delineate $C$.
          * The characteristic of $C$(denoted by $U$ in the image) can be observed by the $X$ and the latent variable $Z$ of $X$, as shown in the image below, both containing the information encoded about $C$. 
