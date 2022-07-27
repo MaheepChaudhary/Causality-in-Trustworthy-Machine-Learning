@@ -1662,7 +1662,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
              subject to 
              
              $$ 
-             P (Y = \hat{y}|do(X = x + delta)) = P (Y = \hat{y}|do(X = x))
+             P (Y = \hat{y}|do(X = x + \delta)) = P (Y = \hat{y}|do(X = x))
              $$
          
              in other words they focus on *annhilating the confounders using the retinotopic centres* as the instrumental variable.
