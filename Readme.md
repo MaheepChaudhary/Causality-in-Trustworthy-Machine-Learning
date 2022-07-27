@@ -1655,9 +1655,15 @@ The papers in this section focuses to use the concepts of Causality to increase 
 
              They propose the model to be such that 
          
-             $$ max P (Y = ŷ|X = x + delta) - P(Y = ŷ|do(X = x + delta))$$
+             $$ 
+             max \ P (Y = \hat{y}|X = x + \delta) - P(Y = \hat{y}|do(X = x + \delta))
+             $$
+
              subject to 
-             $$ P (Y = ŷ|do(X = x + delta)) = P (Y = ŷ|do(X = x))$$
+             
+             $$ 
+             P (Y = \hat{y}|do(X = x + delta)) = P (Y = \hat{y}|do(X = x))
+             $$
          
              in other words they focus on *annhilating the confounders using the retinotopic centres* as the instrumental variable.
         </details>
