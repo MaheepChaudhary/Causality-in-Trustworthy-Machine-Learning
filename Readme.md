@@ -1687,7 +1687,8 @@ The papers in this section focuses to use the concepts of Causality to increase 
 
          * It proposes 
          $k$ functions 
-         ${f_i(.)}_{i = 1}^{k}$ 
+         ${f_i(\cdot)}_{i = 1}^{k}$
+          
          that converts 
          $f(X_d) = X_{d'}$ 
          and 
