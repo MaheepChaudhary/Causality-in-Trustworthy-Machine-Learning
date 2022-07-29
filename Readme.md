@@ -647,7 +647,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
 
          The paper proposes to enhance the explainability of the model using the fault-lines(as defined above work). The author aurgues that *understandability* and *Predictability* act as the basic pillars of explainability of a system. Therefore establishes a dialogue between a user and the machine taking Theory of Mind(ToM) as the basis of it. 
 
-         > ![images](images/tom)  
+         > ![images](img)  
 
          >![images](imgs/CX-ToM:_Counterfactual_Explanations_with_Theory-of-Mind_for_Enhancing_Human_Trust_in_Image_Recognition_Models/tom1.png)
 
@@ -1475,9 +1475,10 @@ The papers in this section focuses to use the concepts of Causality to increase 
 
         The author proposes Counterfactual Samples Synthesizing and Training, i.e. CSST; a technique which consist  of CSS (for counterfactual synthesis) and CST (for counterfactual training); which do counterfactual analysis in VQA (Visual question answering); this is done in two step process; 
           * The *CSS generates the counterfactual samples* by masking critical objects  in the images and words. The image masking is handled by V-CSS(visual) whereas the question masking is handled by Q-CSS (Question). Both of which could be represented by the following order:
-                <i>1. Object of interest selection
-                2. Local contribution calculation
-                3. Dynamic answer assignment based on selection made in prior steps</i>
+            * Object of interest selection
+            * Local contribution calculation
+            * Dynamic answer assignment based on selection made in prior steps</i>
+
             <p align="center">
                <img src="imgs/Counterfactual_Samples_Synthesizing_and_Training_for_Robust_Visual_Question_Answering/flow.png" alt="flow of logic"/>
             </p>
