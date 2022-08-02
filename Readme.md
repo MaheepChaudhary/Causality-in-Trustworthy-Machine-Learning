@@ -1670,7 +1670,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
              in other words they focus on *annhilating the confounders using the retinotopic centres* as the instrumental variable.
         </details>
 
-  - [What If We Could Not See? Counterfactual Analysis for Egocentric Action Anticipation](https://vipl.ict.ac.cn/homepage/jsq/publication/2021-Zhang-IJCAI.pdf) 
+  - [What If We Could Not See? Counterfactual Analysis for Egocentric Action Anticipation](https://www.ijcai.org/proceedings/2021/0182.pdf) 
       - <details><summary>Maheep's notes </summary>
          Egocentric action anticipation aims at predicting the near future based on past observation in first-person vision. In addition to visual features which capture spatial and temporal representations, semantic labels act as high-level abstraction about what has happened. Since egocentric action anticipation is a vision-based task, they consider that visual representation of past observation has a main causal effect on predicting the future action. In the second stage of CAEAA, we can imagine a counterfactual situation: “what action would be predicted if we had not observed any visual representation?" 
 
