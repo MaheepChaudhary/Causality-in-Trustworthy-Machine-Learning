@@ -1581,11 +1581,30 @@ The papers in this section focuses to use the concepts of Causality to increase 
       </details>
 
 
+
+
    - [Counterfactual VQA: A Cause-Effect Look at Language Bias](https://arxiv.org/pdf/2006.04315.pdf) 
       - <details><summary>Maheep's notes </summary>
-         Besides, counterfactual training samples generation [12, 1, 58, 19, 31] helps to balance the training data, and outperform other debiasing methods by large margins on VQA-CP.
-         <br>
-         The statement specifies the reason why the author in the origianl paper mentioned that we can generate missing labels with that  process in Machine Leanring. They formulate the language bias as the direct causal effect of questions on answers, and mitigate the bias by subtracting the direct language effect from the total causal effect. They  proposed a very simple method to debias the  NLP part in VQA using  the Causal Inference, i.e. they perform VQA using different layers for different part, i.e. for visual, question and visual+question which is denoted by Knowledge base K. They argue that if we train a model like this then we would have result with Z_q,k,v, then to get the Total Indirect Effect, they train another model with parameters as Z_q,v*k* and are subtracted from each other. to eliminate the biasness of the language model.     
+         
+         The statement <i>
+         counterfactual training samples generation [12, 1, 58, 19, 31] helps to balance the training data, and outperform other debiasing methods by large margins on VQA-CP.</i>
+         specifies the reason why the author in the original paper mentioned that we can generate missing labels with that process in Machine Leanring. 
+         
+         They formulate the language bias as the direct causal effect of questions on answers, and mitigate the bias by subtracting the direct language effect from the total causal effect. They  proposed a very simple method to debias the  NLP part in VQA using  the Causal Inference, i.e. they perform VQA using different layers for different part, i.e. for visual, question and visual+question which is denoted by Knowledge base K. They argue that if we train a model like this then we would have result with $Z_{q,k,v}$, then to get the Total Indirect Effect, they train another model with parameters as $Z_{q,v*,k*}$ and are subtracted from each other. to eliminate the biasness of the language model.   
+
+         $$ TE = Y_{v,q} − Y_{v∗,q∗} = Z_{q,v,k} − Z_{q∗,v∗,k∗} $$
+
+         $$ NDE = Z_{q,v∗,k∗} − Z_{q∗,v∗,k∗} $$
+
+         $$ TIE = TE − NDE = Z_{q,v,k} − Z_{q,v∗,k∗} $$
+         
+         $$ L_cls = L_{VQA}(v, q, a) + L_{QA}(q, a) + L_{VA}(v, a) $$
+               <i>where $L_{VQA}$, $L_{QA}$ and $L_{VA}$ are over $Z_{q,v,k}$, $Z_q$ and $Z_v$
+
+         <p align="center">
+            <img src="imgs/counterfactual_vqa_a_causal_effect_at_language_bias/cf-vqa_diag.png" alt=data generation"/>
+         </p>
+
         </details>
 
 
@@ -1594,11 +1613,12 @@ The papers in this section focuses to use the concepts of Causality to increase 
         
          Zero-shot semantic segmentation methods is based on the generative model, where the word embedding and visual feature of the images are mapped together for seen classes. This mapping helps to generate fake features of the classes by their word using the generator. The generator learns from the real features by generating fake features for the samples that are present in the training set. As a result it becomes capable of generating close to real features, also for the samples that were not present in the training set. 
 
-         The 
-         $C$ gets created as a result of influence of $\psi(I;\theta) \rightarrow G(W)$. 
-         Therefore, to de-bias the model they separate the 
-         $\psi(I;\theta) \rightarrow Y$ and 
-         $W \rightarrow G(W) \rightarrow Y$ outputs and fuse them together in the last. It is done by intervention and quantifying different effects by intervening on the conditional probability 
+         <p align="center">
+            <img src="imgs/counterfactual_generative_zeros_shot_semantic_segmentation/flow_diagram.png" alt="flow diagram"/>
+         </p>
+
+         The $C$ gets created as a result of influence of $\psi(I;\theta) \rightarrow G(W)$. 
+         Therefore, to de-bias the model they separate the $\psi(I;\theta) \rightarrow Y$ and $W \rightarrow G(W) \rightarrow Y$ outputs and fuse them together in the last. It is done by intervention and quantifying different effects by intervening on the conditional probability 
 
          $$
          P\{Y = y|T = w, \psi(I;\theta) = r, F = G(W = w, \psi(I;\theta) = r)\}
@@ -1620,9 +1640,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
          NIE = L_{w*, r*, F} - L_{w*, r*, F^*}
          $$
          
-         Therefore the branch for the unbiased path 
-         $W \rightarrow G(W) \rightarrow L$ is denoted by 
-         $\mathcal{Out}_{FL}$, i.e. 
+         Therefore the branch for the unbiased path $W \rightarrow G(W) \rightarrow L$ is denoted by $\mathcal{Out}_{FL}$, i.e. 
 
          $$
          \mathcal{Out}_{RL} = TE - NDE - NIE
@@ -1647,11 +1665,12 @@ The papers in this section focuses to use the concepts of Causality to increase 
       - <details><summary>Maheep's notes </summary>
          
          The paper focuses on adverserial training so as to prevent from adverserial attacks. The author use instrumental variable to achieve casual intervention.          The author proposes two techniques, i.e. 
-         
-         * Augmenting the image with multiple retinoptic centres
+
          <p align="center">
-            <img src="imgs/Adversarial_Visual_Robustness_by_Causal_Intervention/data_sample.png" alt="data samples"/>
-         </p> 
+            <img src="imgs/Adversarial_Visual_Robustness_by_Causal_Intervention/proposed_CIIV.png" alt=proposed CIIV diagram"/>
+         </p>
+         
+         * Augmenting the image with multiple retinoptic centres 
          
          * Encourage the model to learn causal features, rather than local confounding patterns.
 
@@ -1668,7 +1687,15 @@ The papers in this section focuses to use the concepts of Causality to increase 
              $$
          
              in other words they focus on *annhilating the confounders using the retinotopic centres* as the instrumental variable.
+
+         <p align="center">
+            <img src="imgs/Adversarial_Visual_Robustness_by_Causal_Intervention/data_sample.png" alt="data samples"/>
+         </p> 
         </details>
+
+
+
+
 
   - [What If We Could Not See? Counterfactual Analysis for Egocentric Action Anticipation](https://www.ijcai.org/proceedings/2021/0182.pdf) 
       - <details><summary>Maheep's notes </summary>
@@ -1711,23 +1738,55 @@ The papers in this section focuses to use the concepts of Causality to increase 
 
   - [WHEN CAUSAL INTERVENTION MEETS ADVERSARIAL EXAMPLES AND IMAGE MASKING FOR DEEP NEURAL NETWORKS](https://arxiv.org/pdf/1902.03380.pdf) 
       - <details><summary>Maheep's notes </summary>
-         To study the intervention effects on pixel-level features for causal reasoning, the authors introduce pixel-wise masking and adversarial perturbation. The authors argue that the methods such as Gradient information from a penultimate convolutional layer was used in GradCAM are good to provide  the saliency map of the image but it is not justifiable inmany situaitons as the Saliency maps onlyCAM  establish a correlation for interpretability while it is possible to trace a particular image region that is responsible for it to be correctly classified; it cannot elucidate what would happen if a certain portion of the image was masked out. 
+         The main purpose of this paper was <i>to study the intervention effects on pixel-level features for causal reasoning</i>.<br>
+         The authors introduce <i>pixel-wise masking and adversarial perturbation</i>. The authors argue that the methods such as Gradient information from a penultimate convolutional layer was used in GradCAM are good to provide  the saliency map of the image but it is <i>not justifiable in many situaitons as the Saliency maps only CAM establish a correlation for interpretability while it is possible to trace a particular image region that is responsible for it to be correctly classified; it cannot elucidate what would happen if a certain portion of the image was masked out. </i>
 
-         Effect(xi on xj , Z) = P (xj |do(xi_dash ), Z_Xi) -  P (xj |Z_Xi ) ......................................(1)
+         <p align="center">
+            <img src="imgs/When_causal_interevention_meets_adversarial_examples_and_image_masking_for_deep_nns/causal_flow.png" alt=proposed CIIV diagram"/>
+         </p>
+
+         $$Effect(xi on xj , Z) = P (xj |do(xi_dash ), Z_Xi) -  P (xj |Z_Xi ) --(1)$$
          The excepted casual effect has been defined as:
-         E_Xi[Effect(xi on xj , Z)] = (P(Xi = xi |Z)*(equation_1))
+         $$E_Xi[Effect(xi on xj , Z)] = (P(Xi = xi |Z)*(equation_1))$$
 
-         The author proposes three losses to get the above equaitons, i.e. the effect of pixels. The losses are interpretability loss, shallow reconstruction loss, and deep reconstruction loss. Shallow reconstruction loss is simply the L 1 norm of the difference between the input and output of autoencoder to represent the activations of the network. For the second equation they applied the deep reconstruction loss in the form of the KL-divergence between the output probability distribution of original and autoencoder-inserted network.
+         The author proposes three losses to get the above equaitons, i.e. the effect of pixels. The losses are <i>interpretability loss, shallow reconstruction loss, and deep reconstruction loss</i>. Shallow reconstruction loss is simply the L1 norm of the difference between the input and output of autoencoder to represent the activations of the network. For the second equation they applied the deep reconstruction loss in the form of the KL-divergence between the output probability distribution of original and autoencoder-inserted network.
+
+         <p align="center">
+            <img src="imgs/When_causal_interevention_meets_adversarial_examples_and_image_masking_for_deep_nns/framework.png" alt=proposed CIIV diagram"/>
+         </p>
 
          These losses are produced afer perturbtaing the images by maksing the images and inserting adverserial noise. 
         </details>
 
   - [Interventional Few-Shot Learning](https://arxiv.org/pdf/2009.13000.pdf) 
       - <details><summary>Maheep's notes </summary>
-         In  this paper the author argues that in the prevailing Few-Shot Learning (FSL) methods: the pre-trained knowledge of the models is used which is indeed a confounder that limits the performance. They develop three effective IFSL algorithmic implementations based on the backdoor adjustment, the fine-tuning only exploits the D’s knowledge on “what to transfer”, but neglects “how to transfer”. Though stronger pretrained model improves the performance on average, it
-         indeed degrades that of samples in Q dissimilar to S. The deficiency is expected  in the meta-learning paradigm, as fine-tune is also used in each meta-train episode
 
-         The author proposes  the solution by proposing 4 variables, i.e. "D", "X", "C", "Y" where D is the pretrained model, X is the feature representaiton of the image, C is the low dimesion representation of X and Y are the logits. The author says the D affects both the X and C, also X affects C, X and C affects the logit Y. The autho removes the affect of D on X using backdoor.  
+         In  this paper the author argues that in the <i>prevailing Few-Shot Learning (FSL) methods: the pre-trained knowledge of the models is used which is indeed a confounder that limits the performance</i>. 
+
+         <p align="center">
+            <img src="imgs/interventional_few_shot_learning/FSL_relation.png" alt="FSL_relation"/>
+         </p>
+
+         They develop three effective IFSL algorithmic implementations based on the backdoor adjustment, the fine-tuning only exploits the $D$’s knowledge on “what to transfer”, but neglects “how to transfer”. Though stronger pretrained model improves the performance on average, it
+         indeed degrades that of samples in $Q$ dissimilar to $S$. The deficiency is expected  in the meta-learning paradigm, as fine-tuning is also used in each meta-train episode.
+
+         <p align="center">
+            <img src="imgs/interventional_few_shot_learning/evidence.png" alt="evidence"/>
+         </p>
+
+         The author proposes  the solution by proposing 4 variables, i.e. $D$, $X$, $C$, $Y$ where $D$ is the pretrained model, $X$ is the feature representaiton of the image, $C$ is the low dimesion representation of $X$ and $Y$ are the logits. The author says the $D$ affects both the $X$ and $C$, also $X$ affects $C$, $X$ and $C$ affects the logit $Y$. The autho removes the affect of $D$ on $X$ using backdoor.
+
+         $$ P(Y |do(X = x)) = \frac{1}{n} \sum_{i=1}^n P(Y|[x]_c), [c = {k|k ∈ F_i ∩ I_t}].$$
+
+         $$ P(Y |do(X = x)) = \frac{1}{m} \sum_{i=1}^m P(Y |x ⊕ P (a_i|x)\bar{x_i}) ≈ P(Y |x ⊕ \frac{1}{m} \sum_{i=1}^m (a_i|x)\bar{x_i})$$
+
+         $$ P(Y |do(X = x)) ≈ \frac{1}{n} \sum_{i=1}^n P(Y |[x]_c ⊕ \frac{1}{m} \sum_{i=1}^m [P(a_j |x)\bar{x_j} ]_c), where c = {k|k ∈ F_i ∩ I_t}$$
+
+
+         <p align="center">
+            <img src="imgs/interventional_few_shot_learning/causal_graph.png" alt="causal graph" />
+         </p>
+
         </details>
 
   - [CLEVRER: COLLISION EVENTS FOR VIDEO REPRESENTATION AND REASONING](https://arxiv.org/pdf/1910.01442.pdf) 
@@ -1739,8 +1798,15 @@ The papers in this section focuses to use the concepts of Causality to increase 
          * *Predictive (‘what will happen next?’)*
          * *Counterfactual (‘what if’)*
 
-         and generating data from it. The data is created with the help of simulated motion traces and based on the counterfactual scenario where an object is replaced by another object to different size/shape/color to generate a counterfactual scenario.
+         <p align="center">
+            <img src="imgs/cleverr_collision_events/example.png" alt="example"/>
+         </p>
 
+         and generating data from it. The data is created with the help of simulated motion traces and based on the counterfactual scenario where an object is replaced by another object to different size/shape/color to generate a counterfactual scenario.
+         
+         <p align="center">
+            <img src="imgs/cleverr_collision_events/distribution.png" alt="distribution"/>
+         </p>
         </details>
 
   - [Towards Robust Classification Model by Counterfactual and Invariant Data Generation](https://openaccess.thecvf.com/content/CVPR2021/papers/Chang_Towards_Robust_Classification_Model_by_Counterfactual_and_Invariant_Data_Generation_CVPR_2021_paper.pdf) 
@@ -1750,7 +1816,25 @@ The papers in this section focuses to use the concepts of Causality to increase 
 
          They augment using the augmentaions as: None, CF(Grey), CF(Random), CF(Shuffle), CF(Tile), CF(CAGAN) 
          and the  augmentaions which alter the invariant features using: F(Random) F(Shuffle) F(Mixed-Rand) F(FGSM)
-        </details>        
+
+         The main steps in the proposed method involved, 
+         - <b><i>Generating counterfactual data: </i></b> To break the correlation between non-causal features (backgrounds) and labels, we generate counterfactuals that keep the backgrounds in data but remove foregrounds.
+            $$ φcf (x, r) = (1−r)⊙x+r⊙\hat{x} , \hat{x} ∼ p_{infill}(\hat{x}|x_{r=0}) $$ with objevctive $$Lcf = (−log(1 − Pf (\hat{y} = c|φ_{cf}(x))))$$
+
+         - <b><i>Generating factual data: </i></b> To make a classifier immune to background shifts, we augment our data by perturbing the backgrounds which generates new images with unchanged labels.
+
+         $$ Φ_f (x, r) = r⊙x+(1−r)⊙\hat{x}; xˆ ∼ p_{infill}(\hat{x}|x_{r=1}) $$ with objevctive $$L = L_{CE}(y, \hat{y}(x)) + L_{cf} + L_{CE}(y, \hat{y}(Φ_f(x, r)) $$
+
+         - <b><i>Choice of infilling value: </i></b>For producing counterfactual infilling values x_hat, methods such as Grey, Random, Shuffle, Tile are used. For same purpose they also proposed,
+           - **Mixed-Rand** that swaps the background with another randomly-chosen tiled background from images of other classes within the same training batch.
+           - **Adversarial attacks** to manipulate the noncausal features
+
+         <p align="center">
+            <img src="imgs/towards_robust_classification_model/data_gen.png" alt=data generation"/>
+         </p>
+
+        </details>       
+        
 ---
 <!--- ### Week 2 -->
 
