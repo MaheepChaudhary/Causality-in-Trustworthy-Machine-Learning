@@ -1598,7 +1598,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
 
          $$ TIE = TE − NDE = Z_{q,v,k} − Z_{q,v∗,k∗} $$
          
-         $$L_cls = L_{VQA}(v, q, a) + L_{QA}(q, a) + L_{VA}(v, a)$$
+         $$L_{cls} = L_{VQA}(v, q, a) + L_{QA}(q, a) + L_{VA}(v, a)$$
          where $L_{VQA}$, $L_{QA}$ and $L_{VA}$ are over $Z_{q,v,k}$, $Z_q$ and $Z_v$
 
          <p align="center">
@@ -1745,9 +1745,9 @@ The papers in this section focuses to use the concepts of Causality to increase 
             <img src="imgs/When_causal_interevention_meets_adversarial_examples_and_image_masking_for_deep_nns/causal_flow.png" alt=proposed CIIV diagram"/>
          </p>
 
-         $$Effect(xi on xj , Z) = P (xj |do(xi_dash ), Z_Xi) -  P (xj |Z_Xi ) --(1)$$
+         $$Effect(x_i → x_j , Z) = P (x_j |do(\tilde{x_i}), Z_{X_i}) -  P (xj |Z_{X_i}) --(1)$$
          The excepted casual effect has been defined as:
-         $$E_Xi[Effect(xi on xj , Z)] = (P(Xi = xi |Z)*(equation_1))$$
+         $$E_{X_i}[Effect(x_i → x_j , Z)] = (P(X_i = x_i |Z)*(equation_1))$$
 
          The author proposes three losses to get the above equaitons, i.e. the effect of pixels. The losses are <i>interpretability loss, shallow reconstruction loss, and deep reconstruction loss</i>. Shallow reconstruction loss is simply the L1 norm of the difference between the input and output of autoencoder to represent the activations of the network. For the second equation they applied the deep reconstruction loss in the form of the KL-divergence between the output probability distribution of original and autoencoder-inserted network.
 
