@@ -1746,7 +1746,9 @@ The papers in this section focuses to use the concepts of Causality to increase 
          </p>
 
          $$Effect(x_i → x_j , Z) = P (x_j |do(\tilde{x_i}), Z_{X_i}) -  P (xj |Z_{X_i}) --(1)$$
+         
          The excepted casual effect has been defined as:<br>
+
          $$E_{X_i}[Effect(x_i → x_j , Z)] = (P(X_i = x_i |Z)*(equation_1))$$
 
          The author proposes three losses to get the above equaitons, i.e. the effect of pixels. The losses are <i>interpretability loss, shallow reconstruction loss, and deep reconstruction loss</i>. Shallow reconstruction loss is simply the L1 norm of the difference between the input and output of autoencoder to represent the activations of the network. For the second equation they applied the deep reconstruction loss in the form of the KL-divergence between the output probability distribution of original and autoencoder-inserted network.
