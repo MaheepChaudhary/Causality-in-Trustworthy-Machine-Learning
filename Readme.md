@@ -1821,13 +1821,13 @@ The papers in this section focuses to use the concepts of Causality to increase 
          - <b><i>Generating counterfactual data: </i></b> To break the correlation between non-causal features (backgrounds) and labels, we generate counterfactuals that keep the backgrounds in data but remove foregrounds.<br>
          $$ φcf (x, r) = (1−r)⊙x+r⊙\hat{x} , \hat{x} ∼ p_{infill}(\hat{x}|x_{r=0}) $$ 
          with objevctive 
-         $$Lcf = (−log(1 − Pf (\hat{y} = c|φ_{cf}(x))))$$
+         $$ Lcf = (−log(1 − Pf (\hat{y} = c|φ_{cf}(x)))) $$
 
          - <b><i>Generating factual data: </i></b> To make a classifier immune to background shifts, we augment our data by perturbing the backgrounds which generates new images with unchanged labels.
 
          $$ Φ_f (x, r) = r⊙x+(1−r)⊙\hat{x}; xˆ ∼ p_{infill}(\hat{x}|x_{r=1}) $$ 
          with objevctive 
-         $$L = L_{CE}(y, \hat{y}(x)) + L_{cf} + L_{CE}(y, \hat{y}(Φ_f(x, r)) $$
+         $$ L = L_{CE}(y, \hat{y}(x)) + L_{cf} + L_{CE}(y, \hat{y}(Φ_f(x, r)) $$
 
          - <b><i>Choice of infilling value: </i></b>For producing counterfactual infilling values $\hat{x}$, methods such as Grey, Random, Shuffle, Tile are used. For same purpose they also proposed,
            - **Mixed-Rand** that swaps the background with another randomly-chosen tiled background from images of other classes within the same training batch.
