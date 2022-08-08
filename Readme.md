@@ -1599,7 +1599,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
          $$ TIE = TE − NDE = Z_{q,v,k} − Z_{q,v∗,k∗} $$
          
          $$ L_cls = L_{VQA}(v, q, a) + L_{QA}(q, a) + L_{VA}(v, a) $$
-         <i>where $L_{VQA}$, $L_{QA}$ and $L_{VA}$ are over $Z_{q,v,k}$, $Z_q$ and $Z_v$</i>
+         where $L_{VQA}$, $L_{QA}$ and $L_{VA}$ are over $Z_{q,v,k}$, $Z_q$ and $Z_v$
 
          <p align="center">
             <img src="imgs/counterfactual_vqa_a_causal_effect_at_language_bias/cf-vqa_diag.png" alt=data generation"/>
