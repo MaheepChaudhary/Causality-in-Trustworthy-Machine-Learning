@@ -1598,7 +1598,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
 
          $$ TIE = TE − NDE = Z_{q,v,k} − Z_{q,v∗,k∗} $$
          
-         $$ L_cls = L_{VQA}(v, q, a) + L_{QA}(q, a) + L_{VA}(v, a) $$
+         $$L_cls = L_{VQA}(v, q, a) + L_{QA}(q, a) + L_{VA}(v, a)$$
          where $L_{VQA}$, $L_{QA}$ and $L_{VA}$ are over $Z_{q,v,k}$, $Z_q$ and $Z_v$
 
          <p align="center">
@@ -1823,7 +1823,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
          with objevctive 
          $$L_{cf} = (−log(1 − Pf (\hat{y} = c|φ_{cf}(x))))$$
 
-         - <b><i>Generating factual data: </i></b> To make a classifier immune to background shifts, we augment our data by perturbing the backgrounds which generates new images with unchanged labels.
+         - <b><i>Generating factual data: </i></b> To make a classifier immune to background shifts, we augment our data by perturbing the backgrounds which generates new images with unchanged labels.<br>
 
          $$Φ_f (x, r) = r⊙x+(1−r)⊙\hat{x}; xˆ ∼ p_{infill}(\hat{x}|x_{r=1})$$ 
          with objevctive 
