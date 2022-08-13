@@ -1974,7 +1974,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
          , where $XE$ is the cross entropy loss. Further these scores are used to compute weights $W_{ID}$ and $W^{OOD}$, i.e. 
 
          $$
-         W^{OOD} = \frac{S^{OOD}}{(S_^{OOD} + S^{ID})}
+         W^{OOD} = \frac{S^{OOD}}{(S^{OOD} + S^{ID})}
          $$ 
          
          to train the model to blend the knowledge from both the OOD and ID data points. 
