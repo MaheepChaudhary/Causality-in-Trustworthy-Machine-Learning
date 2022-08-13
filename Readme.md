@@ -1968,11 +1968,11 @@ The papers in this section focuses to use the concepts of Causality to increase 
          2) Based on the above predictions the it can be easily introspected that which one of the distributions is the model exploiting more and based on it they produce the second barnch of the model that scores for $S^{ID}$ and $S^{OOD}$ that are based on the equation 
          
          $$
-         S_{ID} = 1/XE(P_{GT}, P_{ID})
+         S_{ID} = \frac{1}{XE(P_{GT}, P_{ID})}
          $$
          , where $XE$ is the cross entropy loss. Further these scores are used to compute weights $W_{ID}$ and $W^{OOD}$, i.e. 
          $$
-         W^{OOD} = S^{OOD}/(S_^{OOD} + S^{ID})
+         W^{OOD} = \frac{S^{OOD}}{(S_^{OOD} + S^{ID})}
          $$ 
          
          to train the model to blend the knowledge from both the OOD and ID data points. 
