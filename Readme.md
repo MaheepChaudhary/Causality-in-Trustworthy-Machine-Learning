@@ -1970,7 +1970,9 @@ The papers in this section focuses to use the concepts of Causality to increase 
          $$
          S_{ID} = \frac{1}{XE(P_{GT}, P_{ID})}
          $$
+         
          , where $XE$ is the cross entropy loss. Further these scores are used to compute weights $W_{ID}$ and $W^{OOD}$, i.e. 
+
          $$
          W^{OOD} = \frac{S^{OOD}}{(S_^{OOD} + S^{ID})}
          $$ 
