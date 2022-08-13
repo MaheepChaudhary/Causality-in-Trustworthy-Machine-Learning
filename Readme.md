@@ -1941,7 +1941,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
             <img src="imgs/Counterfactual Vision-and-Language Navigation via Adversarial Path Sampler/algo.png" alt="algo"/>
          </p>         
          
-        The APS samples the path based on the visual features $v_t$ which are obtained using the attention on the feature space $f_t$ and history $h_{t-1}$ and previous action taken $a_{t-1}$ to output the path using the predicted a_t and the features $f_t$.
+        The APS samples the path based on the visual features $v_t$ which are obtained using the attention on the feature space $f_t$ and history $h_{t-1}$ and previous action taken $a_{t-1}$ to output the path using the predicted $a_t$ and the features $f_t$.
 
         <p align="center">
             <img src="imgs/Counterfactual Vision-and-Language Navigation via Adversarial Path Sampler/comparison.png" alt="comparison"/>
@@ -1967,19 +1967,34 @@ The papers in this section focuses to use the concepts of Causality to increase 
                                                       \sum_{a \epsilon A} -P^{GT}(a)log P^{ID} (a)
                                                                      } 
          $$
+
+
          $$
             s^{OOD} = \sum_{a \epsilon A^{GT}}{} P^{OOD} (a) = \frac{1}{
                                                       \sum_{a \epsilon A} -P^{GT}(a)log P^{OOD} (a)
                                                                      }
          $$
+
+
          for weighing the bias,
+
+
          $$
-         w^{ID} = \frac{s^{ID^{-1}}}{s^{ID^-1} + s^{OOD^-1}} = \frac{s^{OOD}}{s^{OOD}+s^{ID}}$$, as
+         w^{ID} = \frac{s^{ID^{-1}}}{s^{ID^-1} + s^{OOD^-1}} = \frac{s^{OOD}}{s^{OOD}+s^{ID}}$$
+         
+         as
+
+
          $$
          w^{OOD} = 1 - w^{ID} = \frac{s^{ID}}{s^{ID}+s^{OOD}}
          $$
+
+
          Based on the knowledge weights, the ID-knowledge and OOD-knowledge are blended as:
+
+
          $$P^t = w^{ID}.ID-Knowledge + w^{OOD}.OOD-Knowledge$$
+         
 
          3) The model is then distilled using the knowledge distillation manner, i.e. $L = KL(P_T, P_S)$, where $P_T$ is the prediction of the teacher model and the $P_S$ is the prediction of the student model. 
 
