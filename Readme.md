@@ -1907,8 +1907,13 @@ The papers in this section focuses to use the concepts of Causality to increase 
          The counterfactual loss is computed as 
 
          $$\hat{R}^{M^*} = \underset{\theta}{\mathrm{argmin}}\hat{R}^M(θ)$$ given
+
+
          $$\hat{R}^M(θ) = \frac{1}{n}\sum_{i=1}^n l(f_\theta(q_i, v_i), a_i) * w_i(\theta)$$ where
+
+
          $$w_i(\theta) = min{M, \frac{p(a_i|{q_i,v_i,\theta})}{p^{do(I)|q,v}(a|{\bar{q},\bar{v},\theta})}}$$
+
         </details>
         
    - [Counterfactual Vision-and-Language Navigation via Adversarial Path Sampler](https://arxiv.org/pdf/1911.07308.pdf)
@@ -1921,20 +1926,22 @@ The papers in this section focuses to use the concepts of Causality to increase 
         
          To do this, the author proposes the defined techniques: - 
          
-         1) The author APS, i.e. adversarial path sampler which samples batch of paths P after augmenting them and reconstruct instructions I using Speaker. With the pairs of (P,I), so as to maximize the navigation loss L_NAV. 
+         1) The author APS, i.e. adversarial path sampler which samples batch of paths P after augmenting them and reconstruct instructions I using Speaker. With the pairs of $(P,I)$, so as to maximize the navigation loss $L_{NAV}$. 
 
          $$f_t = VisualFeature(s_t), 
          a_t = softmax(NAV(f_t, I, h_t))$$
+
          $$h_t = LSTM([v_t,a_{t-1}]|h_{t-1})$$
+
          $$v_t = \sum_{j} softmax(h_{t-1}W_h(f_{t,j} W_f)^T)f_{t,j}$$
 
-         2) The NAV, i.e. navigation model trains so as to minimize the L_Nav making the whole process more robust and increasing the performance. 
+         2) The NAV, i.e. navigation model trains so as to minimize the $L_{NAV}$ making the whole process more robust and increasing the performance. 
 
          <p align="center">
             <img src="imgs/Counterfactual Vision-and-Language Navigation via Adversarial Path Sampler/algo.png" alt="algo"/>
          </p>         
          
-        The APS samples the path based on the visual features v_t which are obtained using the attention on the feature space f_t and history h_t-1 and previous action taken a_t-1 to output the path using the predicted a_t and the features f_t.
+        The APS samples the path based on the visual features $v_t$ which are obtained using the attention on the feature space $f_t$ and history $h_{t-1}$ and previous action taken $a_{t-1}$ to output the path using the predicted a_t and the features $f_t$.
 
         <p align="center">
             <img src="imgs/Counterfactual Vision-and-Language Navigation via Adversarial Path Sampler/comparison.png" alt="comparison"/>
