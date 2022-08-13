@@ -1994,7 +1994,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
 
 
          $$P^t = w^{ID}.ID-Knowledge + w^{OOD}.OOD-Knowledge$$
-         
+
 
          3) The model is then distilled using the knowledge distillation manner, i.e. $L = KL(P_T, P_S)$, where $P_T$ is the prediction of the teacher model and the $P_S$ is the prediction of the student model. 
 
@@ -2017,14 +2017,19 @@ The papers in this section focuses to use the concepts of Causality to increase 
         The paper propses methods to preserve metrics for semantic preservation using the different methods such as ISO and LSO. The author also focuses on manifold consistency for the counterfactual image using the Deep Image Prior model. -
 
         $$\underset{\hat{x}}{\mathrm{argmin}}  d(\hat{x},x) + R(\hat{x});  s.t. F(\bar{x}) = \bar{y}$$
+
+
         $$R_{TV}(\bar{x}) = \sum_{i,j}\sqrt{(\bar{x}_{i,j+1} - \bar{x}_{i,j})^2 + (\bar{x}_{i+1,j} - \bar{x}_{i,j})^2}$$
+
+
         $$R_{l_2}(\bar{x}) = \sqrt{\sum_{i,j}{||\bar{x}_{i,j}||^2}}$$
 
-        $$ \underset{\hat{x}}{\mathrm{argmin}}
+
+        $$\underset{\hat{x}}{\mathrm{argmin}}
                \lambda_1\sum_{l}d(Ψ_l(\bar{x}), Ψ_l(x)) + 
                \lambda_2L_{mc}(\bar{x};F) + 
-               \lambda_3L_{fc}(F(\bar{x}), \bar{y})
-         $$ where
+               \lambda_3L_{fc}(F(\bar{x}), \bar{y})$$ where
+
 
         $$L_{mc} = max(K(F(\bar{x}), φ(y)) - K(F(\bar{x}, φ(\bar{y}))) + τ, 0)$$
 
