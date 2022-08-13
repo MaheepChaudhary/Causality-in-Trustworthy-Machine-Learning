@@ -2025,10 +2025,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
         $$R_{l_2}(\bar{x}) = \sqrt{\sum_{i,j}{||\bar{x}_{i,j}||^2}}$$
 
 
-        $$\underset{\hat{x}}{\mathrm{argmin}}
-               \lambda_1\sum_{l}d(Ψ_l(\bar{x}), Ψ_l(x)) + 
-               \lambda_2L_{mc}(\bar{x};F) + 
-               \lambda_3L_{fc}(F(\bar{x}), \bar{y})$$ where
+        $$\underset{\hat{x}}{\mathrm{argmin}} \lambda_1\sum_{l}d(Ψ_l(\bar{x}), Ψ_l(x)) + \lambda_2L_{mc}(\bar{x};F) + \lambda_3L_{fc}(F(\bar{x}), \bar{y})$$ where
 
 
         $$L_{mc} = max(K(F(\bar{x}), φ(y)) - K(F(\bar{x}, φ(\bar{y}))) + τ, 0)$$
