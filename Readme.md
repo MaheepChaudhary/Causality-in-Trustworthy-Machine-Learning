@@ -2073,24 +2073,57 @@ The papers in this section focuses to use the concepts of Causality to increase 
         
    - [Question-Conditioned Counterfactual Image Generation for VQA](https://arxiv.org/pdf/1911.06352.pdf)
       - <details><summary>Maheep's Notes</summary>
-        The paper on generating the counterfactual images for VQA, s.t. <br>
-        i.) the VQA model outputs a different answer<br>
-        ii.) the new image is minimally different from the original <br>
-        iii) the new image is realistic <br>
-        The author uses a LingUNet model for this and proposes three losses to make the perfect. <br>
-        1.) Negated cross entropy for VQA model. <br> 
-        2.) l2 loss b/w the generated image and the original image.
-        3.) Discriminator that penalizes unrealistic images.  
+
+        The paper on generating the counterfactual images for VQA, s.t.
+           - the VQA model outputs a different answer
+           - the new image is minimally different from the original
+           - the new image is realistic
+
+        <p align="center">
+            <img src="imgs/Question-Conditioned Counterfactual Image Generation for VQA/architecture_diag.png" alt="architecture"/>
+         </p> 
+
+         $$ I' = L(I|P) $$ where P is language prior; 
+         the final lagrangian looks like
+         
+         $$ L_{total} = D(x_{x \sim I}) + [m - D(L(x_{x \sim I}|p_{p \sim P}))] + L_{vqa}(V(q_{q \sim Q}, L(x_{x \sim I}|p_{p \sim P}), a_{a \sim A}) + log_{likelihood}(L(x_{x \sim I}|p_{p \sim P}), x_{x \sim I}) $$
+
+        The author uses a LingUNet model for this and proposes three losses to make the perfect.
+           - Negated cross entropy for VQA model.
+           - l2 loss b/w the generated image and the original image.
+           - Discriminator that penalizes unrealistic images.
+
+        <p align="center">
+            <img src="imgs/Question-Conditioned Counterfactual Image Generation for VQA/example_img.png" alt="example"/>
+         </p> 
+
         </details>           
         
 
    - [FINDING AND FIXING SPURIOUS PATTERNS WITH EXPLANATIONS](https://arxiv.org/pdf/2106.02112.pdf)
       - <details><summary>Maheep's Notes</summary>
-        The paper proposes an augmeting technique taht resamples the images in such a way to remove the spurious pattern in them, therfore they introduce their framework Spurious Pattern Identification and REpair(SPIRE). They view the dataset as Both, Just Main, Just Spurious, and Neither. SPIRE measures this probability for all (Main, Spurious) pairs, where Main and Spurious are different, and then sorts this list to find the pairs that represent the strongest patterns. After finding the pattern the dataset is redistributes as: <br>
+        The paper proposes an augmeting technique that resamples the images in such a way to remove the spurious pattern in them, therfore they introduce their framework Spurious Pattern Identification and REpair(SPIRE). They view the dataset as Both, Just Main, Just Spurious, and Neither. 
+        
+        <p align="center">
+            <img src="imgs/FINDING AND FIXING SPURIOUS PATTERNS WITH EXPLANATIONS/SPIRE.png" alt="spire"/>
+         </p> 
+        
+        SPIRE measures this probability for all (Main, Spurious) pairs, where Main and Spurious are different, and then sorts this list to find the pairs that represent the strongest patterns. After finding the pattern the dataset is redistributes as: <br>
 
-        `P(Spurious | Main) = P(Spurious | not Main) = 0.5`<br>
-        The second step consist of minimizing the potential for new SPs by setting the <br>`P(Main|Artifact) = 0.5)`. <br>
+        $$ P(Spurious | Main) = P(Spurious | not Main) = 0.5 $$
+        <br>
+        The second step consist of minimizing the potential for new SPs by setting the <br> $$ P(Main|Artifact) = 0.5) $$ . <br>
         SPIRE moves images from {Both, Neither} to {Just Main, Just Spurious} if p > 0.5, i.e. p = P(Main|Spurious) but if p < 0.5 then SPIRE moves images from {Just Main, Just Spurious} to {Both, Neither}. 
+
+        <p align="center">
+            <img src="imgs/FINDING AND FIXING SPURIOUS PATTERNS WITH EXPLANATIONS/example.png" alt="aug example"/>
+         </p> 
+
+         <p align="center">
+            <img src="imgs/FINDING AND FIXING SPURIOUS PATTERNS WITH EXPLANATIONS/splits.png" alt="splits"/>
+         </p> 
+
+
         </details>  
 
 
