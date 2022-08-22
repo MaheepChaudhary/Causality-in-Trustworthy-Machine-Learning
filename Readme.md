@@ -2083,7 +2083,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
             <img src="imgs/Question-Conditioned Counterfactual Image Generation for VQA/architecture_diag.png" alt="architecture"/>
          </p> 
 
-         $$ I' = L(I|P) $$
+         $I' = L(I|P) $
          where P is language prior; 
 
          the final lagrangian looks like
@@ -2116,7 +2116,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
 
         <br>
         The second step consist of minimizing the potential for new SPs by setting the <br> $P(Main|Artifact) = 0.5)$ . <br>
-        SPIRE moves images from {Both, Neither} to {Just Main, Just Spurious} if p > 0.5, i.e. p = P(Main|Spurious) but if p < 0.5 then SPIRE moves images from {Just Main, Just Spurious} to {Both, Neither}. 
+        SPIRE moves images from {Both, Neither} to {Just Main, Just Spurious} if $p > 0.5$, i.e. $p = P(Main|Spurious)$ but if $p < 0.5$ then SPIRE moves images from {Just Main, Just Spurious} to {Both, Neither}. 
 
         <p align="center">
             <img src="imgs/FINDING AND FIXING SPURIOUS PATTERNS WITH EXPLANATIONS/example.png" alt="aug example"/>
