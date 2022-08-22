@@ -2079,12 +2079,13 @@ The papers in this section focuses to use the concepts of Causality to increase 
            - the new image is minimally different from the original
            - the new image is realistic
 
-        <p align="center">
+         <p align="center">
             <img src="imgs/Question-Conditioned Counterfactual Image Generation for VQA/architecture_diag.png" alt="architecture"/>
          </p> 
 
-         $ I' = L(I|P) $ where P is language prior; 
-         
+         $$ I' = L(I|P) $$
+         where P is language prior; 
+
          the final lagrangian looks like
          
          $$ L_{total} = D(x_{x \sim I}) + [m - D(L(x_{x \sim I}|p_{p \sim P}))] + L_{vqa}(V(q_{q \sim Q}, L(x_{x \sim I}|p_{p \sim P}), a_{a \sim A}) + log_{likelihood}(L(x_{x \sim I}|p_{p \sim P}), x_{x \sim I}) $$
@@ -2112,6 +2113,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
         SPIRE measures this probability for all (Main, Spurious) pairs, where Main and Spurious are different, and then sorts this list to find the pairs that represent the strongest patterns. After finding the pattern the dataset is redistributes as: <br>
 
         $$ P(Spurious | Main) = P(Spurious | not Main) = 0.5 $$
+
         <br>
         The second step consist of minimizing the potential for new SPs by setting the <br> $$ P(Main|Artifact) = 0.5) $$ . <br>
         SPIRE moves images from {Both, Neither} to {Just Main, Just Spurious} if p > 0.5, i.e. p = P(Main|Spurious) but if p < 0.5 then SPIRE moves images from {Just Main, Just Spurious} to {Both, Neither}. 
