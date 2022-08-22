@@ -2115,7 +2115,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
         $$ P(Spurious | Main) = P(Spurious | not Main) = 0.5 $$
 
         <br>
-        The second step consist of minimizing the potential for new SPs by setting the <br> $$ P(Main|Artifact) = 0.5) $$ . <br>
+        The second step consist of minimizing the potential for new SPs by setting the <br> $ P(Main|Artifact) = 0.5) $ . <br>
         SPIRE moves images from {Both, Neither} to {Just Main, Just Spurious} if p > 0.5, i.e. p = P(Main|Spurious) but if p < 0.5 then SPIRE moves images from {Just Main, Just Spurious} to {Both, Neither}. 
 
         <p align="center">
