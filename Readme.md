@@ -2083,7 +2083,8 @@ The papers in this section focuses to use the concepts of Causality to increase 
             <img src="imgs/Question-Conditioned Counterfactual Image Generation for VQA/architecture_diag.png" alt="architecture"/>
          </p> 
 
-         $$ I' = L(I|P) $$ where P is language prior; 
+         $ I' = L(I|P) $ where P is language prior; 
+         
          the final lagrangian looks like
          
          $$ L_{total} = D(x_{x \sim I}) + [m - D(L(x_{x \sim I}|p_{p \sim P}))] + L_{vqa}(V(q_{q \sim Q}, L(x_{x \sim I}|p_{p \sim P}), a_{a \sim A}) + log_{likelihood}(L(x_{x \sim I}|p_{p \sim P}), x_{x \sim I}) $$
