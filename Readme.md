@@ -2033,31 +2033,41 @@ The papers in this section focuses to use the concepts of Causality to increase 
 
         The paper propses methods to preserve metrics for semantic preservation using the different methods such as ISO and LSO. The author also focuses on manifold consistency for the counterfactual image using the Deep Image Prior model. -
 
-        $$\underset{\hat{x}}{\mathrm{argmin}}  d(\hat{x},x) + R(\hat{x});  s.t. F(\bar{x}) = \bar{y}$$
+        $$
+        \underset{\hat{x}}{\mathrm{argmin}}  d(\hat{x},x) + R(\hat{x});  s.t. F(\bar{x}) = \bar{y}
+        $$
+
+        $$
+        R_{TV}(\bar{x}) = \sum_{i,j}\sqrt{(\bar{x}_{i,j+1} - \bar{x}_{i,j})^2 + (\bar{x}_{i+1,j} - \bar{x}_{i,j})^2}
+        $$
+
+        $$
+        R_{l_2}(\bar{x}) = \sqrt{\sum_{i,j}{||\bar{x}_{i,j}||^2}}
+        $$
 
 
-        $$R_{TV}(\bar{x}) = \sum_{i,j}\sqrt{(\bar{x}_{i,j+1} - \bar{x}_{i,j})^2 + (\bar{x}_{i+1,j} - \bar{x}_{i,j})^2}$$
+        $$
+        \underset{\hat{x}}{\mathrm{argmin}} \lambda_1\sum_{l}d(Ψ_l(\bar{x}), Ψ_l(x)) + \lambda_2L_{mc}(\bar{x};F) + \lambda_3L_{fc}(F(\bar{x}), \bar{y})
+        $$ 
+        
+        where
 
+        $$
+        L_{mc} = max(K(F(\bar{x}), φ(y)) - K(F(\bar{x}, φ(\bar{y}))) + τ, 0)
+        $$
 
-        $$R_{l_2}(\bar{x}) = \sqrt{\sum_{i,j}{||\bar{x}_{i,j}||^2}}$$
+        where, 
 
+        $layer_l$ :The differentiable layer "l" of the neural network, it is basically used for semantic preservation.
 
-        $$\underset{\hat{x}}{\mathrm{argmin}} \lambda_1\sum_{l}d(Ψ_l(\bar{x}), Ψ_l(x)) + \lambda_2L_{mc}(\bar{x};F) + \lambda_3L_{fc}(F(\bar{x}), \bar{y})$$ where
+        $L_{mc}$ : It penlaizes x' whcih do not lie near the manifold. L_mc can be Deterministic Uncertainty Quantification (DUQ).<br>
 
-
-        $$L_{mc} = max(K(F(\bar{x}), φ(y)) - K(F(\bar{x}, φ(\bar{y}))) + τ, 0)$$
-
-        <br>
-        where, <br>
-
-        $layer_l$ :The differentiable layer "l" of the neural network, it is basically used for semantic preservation. <br>
-
-        $L_{mc}$: It penlaizes x' whcih do not lie near the manifold. L_mc can be Deterministic Uncertainty Quantification (DUQ).<br>
-
-        $L_{fc}$: It ensures that the prediction for the counterfactual matches the desired target
+        $L_{fc}$ : It ensures that the prediction for the counterfactual matches the desired target
+         
          <p align="center">
             <img src="imgs/Designing Counterfactual Generators using Deep Model Inversion/manifold.png" alt="manifold"/>
          </p> 
+        
         </details>
         
    ---             
