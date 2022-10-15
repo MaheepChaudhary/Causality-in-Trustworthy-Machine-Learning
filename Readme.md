@@ -2,7 +2,7 @@
 
 The repository contains lists of papers on causality and how relevant techniques are being used to further enhance deep learning era computer vision solutions. 
 
-The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github.io/maheep.github.io/) and [Haohan Wang](http://www.cs.cmu.edu/~haohanw/) as an effort to collect and read relevant papers and to hopefully serve the public as a collection of relevant resources. 
+The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github.io/maheep.github.io/), [Siddhant Rai](https://www.linkedin.com/in/siddhant-rai/) and [Haohan Wang](http://www.cs.cmu.edu/~haohanw/) as an effort to collect and read relevant papers and to hopefully serve the public as a collection of relevant resources. 
 
 ## Causality 
 
