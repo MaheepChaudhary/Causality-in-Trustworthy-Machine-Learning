@@ -4,278 +4,6 @@ The repository contains lists of papers on causality and how relevant techniques
 
 The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github.io/maheep.github.io/), [Siddhant Rai](https://www.linkedin.com/in/siddhant-rai/) and [Haohan Wang](http://www.cs.cmu.edu/~haohanw/) as an effort to collect and read relevant papers and to hopefully serve the public as a collection of relevant resources. 
 
-## Causality 
-
-  - [The Seven Tools of Causal Inference with Reflections on Machine Learning](https://ftp.cs.ucla.edu/pub/stat_ser/r481.pdf) 
-      - <details><summary>Maheep's notes </summary>
-         
-         The author proposes the 7 tools based on the 3 ladder of causation, i.e. *Associaion, Intervention and Counterfactual*. the paper proposes a diagram which describes that we have some assumptions from which we answer our query and from our data we validate our assumptions, i.e. "Fit Indices".The author proposes the 7 tools as :- 
-         
-         * **Transparency and Testability** : Transparency indicates that the encoded form is easily usable and compact. The testability validates that the assumption encoded are compatible with the available data
-         
-         * **Do-Calculas and the control of Confounding** : It is used for intervention, mainly used when we are trying to shift from 1st layer to 2nd. 
-         
-         * **The Algorithmization of Counterfactuals** : When we can analyse the counterfactual reasoning using the experimental or observational studies. 
-         
-         *  **Mediation Analysis and the Assessment of Direct and  Indirect Effects** : We find out the direct and indirect effects, such as what fraction of effect does X on Y mediated by variable Z.
-         
-         * **Adaptability, External Validity and Sample Selection Bias** : Basically it deals with the robustness of the model and offers do-calculas for overcoming the bias due to environmental changes.
-         
-         * **Recovering from Missing Data** : The casual inference is made to find out the data-generating principles through probablisitic relationship and therefore promises to fill the missing data. 
-         
-         * **Causal Discovery** : The d-separation can ebable us to detect the testable implications of the casual model therefore can prune the set of compatible models
-         significantly to the point where causal queries can be estimated directly from that set.
-        
-        </details>
-
-  - [On Pearl’s Hierarchy and the Foundations of Causal Inference](https://causalai.net/r60.pdf) 
-      - <details><summary>Maheep's notes </summary>
-
-        The pearl causal hierarchy encodes different concepts like : *association. intervention and counterfactual*.
-        
-        * *Corollary1* : It is genrally impossible to draw higher-layer  inferences using only lower-layer informatio but the authors claim that they have atleast developed a framework to move from *layer 1* to *layer 2* just from the *layer 1* data using Causal Bayesian Network that uses *do-calculas*, i.e. intervention to get insight of *layer 2* using the *layer 1* data. 
-
-        <br>
-        
-        A SCM includes 4 variables: 
-        *Exongenous* 
-        $U$
-        , 
-        *Endogneous* 
-        $V$
-        , 
-        *set of functions*
-        $f$ 
-        and 
-        $P(U)$.
-
-   
-        A structural model is said to be markovian if the variable in the exogenous part are independent. 
-        
-        * *Observing* : Joint porobability distribution for the 
-        $Y(u) = y$
-
-        * *Interventional SCM* : SCM computed by fixing some varibales 
-        $X = x$ 
-        where 
-        $X$ is in 
-        $V$.
-
-        * *Potential Response* : It is the solution of 
-        $Y$ 
-        caluclated thorugh the set of eqautions of *SCM* when we intervene on it.   
-        
-        * *Intervening* : observing just when we 
-        $do(X  = x)$
-
-        * *Effectiveness* : 
-        $P(v|do(x))$ 
-        is effectiveness when for every 
-        $v$ 
-        and 
-        $P(v|do(x)) = 1$
-
-        * *Collapse* : The layers collapse when we can compute the results of the upper layer using the lower layer. For ex:- if Layer 2 collapses to layer 1, then it implies that we can draw all possible causal conculsion with mere correlation. 
-        
-        **Theorem 1** : *PCH never collapses.* 
-        It could be  easily observed/seen that SCM agrees on all lower layers but disagrees on all higher layers.  A typical rdata-generating SCM encodes rich information at all threee layers but even very small changes might have substantial effect, which is generally seen in the higher layers.  
-        
-        Truncated Factorization Product is the equation stating 
-        $P(v|do(x)) = \pi P(v|p_{ai})$
-        
-        When two variables are correlated it does not mean that one is causing the other, i.e. 
-        $P(y|do(x)) = P(y)$ 
-        and 
-        $P(x|do(y)) =P(x)$
-        , in this case what happens is there is another unobserved variable that is influencing both 
-        $x$ 
-        and 
-        $y$ 
-        variable which is often indicated by the bi-directed line in the graph.
-        
-        Factorization implied by the semi-markovian model does not act like chain rule, i.e. 
-
-        $$
-        P(e|a,b,c,d) = P(a)P(b|a)P(c|b,a)P(d|c,b,a)
-        $$
-
-        but the factorization looks something like:
-
-        $$ 
-        P(e|d,c,b,a) = P(a)P(b|a)P(c|a)P(e|b,c)
-        $$
-
-        which implies that 
-        $b$ 
-        and 
-        $c$ are only affected by a also seen by a direct edge in *SCM*. 
-          
-        </details>
-
-  - [Counterfactual Explanation and XAI](https://arxiv.org/abs/2201.13169)
-      - <details><summary>Maheep's Notes </summary>
-
-         The author mainly discusses 3 main ideas: 
-
-         * **Sufficient Explanations(SE)**
-
-            > Conditions under which an action guarantees a particular output
-         
-         * **Counterfactual Explanations(CE)**
-            
-            > An action that changes an observed input to produce a change in an already observed output.
-         
-         * **Actual Causation(AC)**
-            
-            > They are very exciting as they consist b/w the Sufficient Explanations and Counterfactual Explanations. They consist of good SE conditions but the ones for which there exist a counterfactual value that would not have made the explanation better.
-
-         As for the example in a regression model can be that a variable $P_{ai}$ in the past that has resulted in the observational data $X$ playing an important role in predicting the output $Y$. Here $X$ have counterfactual importance and also a SE but $P_{ai}$ will only have sufficient condition as $X$ has occured and no longer depends on $P_{ai}$ and not any CE, giving rise to AC. 
-
-         If we think of an example in Computer Vision then what can be the AC?
-
-         We were talking about the intervention on the event $P_{ai} \rightarrow X \rightarrow Y$ to convert it to $P_{ai} \not \rightarrow do(X = x) \rightarrow Y$ or cut off relations with the parents $P_{ai}$ and then observing the output $Y$. Now what i think this paper argues is that when we are doing an intervention on $P_{ai} \rightarrow do(X = x) \rightarrow Y$ then assign a value to that variable but do not cut off the effects from $P_{ai}$. 
-
-         The author argues that under **Independence** a variety of causal notions becomes indistinguishable, also he claims that because of it 
-
-         > *Work on action-guiding explanations in XAI has failed to take up the most relevant lesson that the literature on causation has to offer.*
-         > 
-
-         Now what can be comprehended by this sentence?
-
-         > *Prediction in its most natural application is a forward-looking notion, meaning one predicts an event before it takes place. Explanation on the other hand is a backward-looking notion, meaning that one explains an event after it has happened. Yet as many papers on XAI clearly illustrate, explanations about past events are often required precisely to inform predictions about future events. Therefore a suitable notion of causal
-         explanation, and thus also of actual causation, needs to specify how it relates to predictions.*
-         > 
-
-         Although the work is done by  `Hitchcock (2017)` but I am not able to find it as i think it is paid $$. 
-
-         The author discusses about the counterfactual scenarios by focusing on the question, i.e. *What-if-things-had-been-different?* but focuses on those factors that *may not be manipulated* for the explanation to hold, i.e. they must state which variables are to be safeguarded from intervention **which clearly does not mean that they are held fixed**. 
-
-         One of the important thing author writes in the paper is: 
-
-         > *Contrary to counterfactual explanations, actual causes do not guide you towards actions that, under the same conditions, would ensure the output to be different. But they do guide you towards actions that would not ensure the actual output under the same conditions as the actual action.*
-         > 
-
-
-         A small example of AC by the author as *Salary*
-
-         $$
-         X_1(Salary) = 250,000 
-         $$
-
-         $$
-         X_3(Deposit\_Box) = 50,000 
-         $$
-
-         $$
-         X_2(Savings) = 125,000 
-         $$
-
-         $$
-         Y = (X_1 + 5 \cdot X_2 - 225,000) > 0
-         $$
-
-         $$
-         Y = (250,000 + 625,000 - 225,000) = True
-         $$
-
-         Obviously the salary does not matter in the counterfactual scenario, as he will get the loan regardless of his salary but is a good sufficient explanation. 
-
-         The author discusses about the AC and Fairness, where he sets off from  forward-looking action-guiding explanations to explanations by backward-looking contexts. The backward-looking explanations do not mean that they are capable of inferring the future outputs as forward-looking explanations.
-
-         Also the author claims that actual causation should be used to quantify the actual fairness rather than the counterfactual explanation. 
-
-         > Interestingly though, there already is a growing consensus that counterfactual dependence is too strong a condition and should be replaced with counterfactual dependence along *unfair paths.*
-         >
-
-         </details>
-
-  - [Unit selection based on counterfactual logic](https://escholarship.org/content/qt8pw00989/qt8pw00989.pdf) 
-      - <details><summary>Maheep's notes </summary>
-         The unit selection problem entails two sub-problems, evaluation and search. The evaluation problem is to find an objective function that, ensure a counterfactual behaviour when optimized over the set of observed characteristics C for the selected group. The search task is to devise a search algorithm to select individuals based both on their observed characteristics and the objective function devised above. 
-          <br>
-         The paper only focuses on the evaluation sub-problem and focuses on the previous effort to solve this problem, i.e. A/B testing so as to maximizes the percentage of compliers and minimizes the percentages of defiers, always-takers, and never-takers. But the author argues that the proposed term for it does not satisfy the criteria as P(positive response|c, encouraged) - P(positive response|c, not encouraged) represents "compilers + always-takers" - "defiers + always-takers", therefore the author suggest to have two theorems, i.e. "monotonicity" and "gain equality" which can easily optimize the A/B testing. 
-         Monotonicity expresses the assumption that a change from X = false to X = true cannot, under any circumstance make Y change from true to false.
-         Gain-equality states that the benefit of selecting a complier and a defier is the same as the benefit of selecting an always-taker and a never-taker (i.e., β + δ = γ + θ).
-        <br>
-         Taking into account the following theorems the author proposes a alternate term of A/B testing which stands for maximizing the benefit.<br>
-
-         `argmax c βP (complier|c) + γP (always-taker|c) + θP (never-taker|c) + δP (defier|c)`<br>
-         where benefit of selecting a complier is β, the benefit of selecting an always-taker is γ, the benefit of selecting a never-taker is θ, and the benefit of selecting a defier is δ. Our objective, then, should be to find c.<br>
-         Theorem 4 says that if Y is monotonic and satisfies gain equallity then the benefit function may be defined as: -<br>
-         `(β − θ)P (y,x |z) + (γ − β)P (y,x′ |z) + θ`
-          <br>
-         "Third, the proposed approach could be used to evaluate machine learning models as well as to generate labels for machine learning models. The accuracy of such a machine learning model would be higher because it would consider the counterfactual scenarios."
-        </details>
-
-  - [Unit Selection with Causal Diagram](https://arxiv.org/pdf/2109.07556.pdf) 
-      - <details><summary>Maheep's notes </summary>
-         Same as above
-         <br>
-         Additionoal content continues here..........
-         <br>
-         After proposing the technioques to account for unit selection in general the author proposes a new kind of problem by introducing the confounders in the causal Diagram. The following discovery was partially made by the paper "Causes of Effects: Learning Individual responses from Population Data ". The author proposes a new equation to handle these scenarios.<br> 
-
-         `W + σU ≤ f ≤ W + σL if σ < 0`,
-         `W + σL ≤ f ≤ W + σU if σ > 0`,
-         where "f" is the objective function. Previously in normal case the objective fucntion is bounded by the equation: 
-         <br>
-         `max{p 1 , p 2 , p 3 , p 4 } ≤ f ≤ min{p 5 , p 6 , p 7 , p 8 } if σ < 0,`<br>
-         `max{p 5 , p 6 , p 7 , p 8 } ≤ f ≤ min{p 1 , p 2 , p 3 , p 4 } if σ > 0`,<br>
-         In the extension of the same the author proposes the new situations which arise such as the when "z" is partially observable. and if "z" is  a pure mediator. 
-          <br>
-         The author then discusses about the availablity of the observational and experimantal data. If we only have experimantal data then we can simply remove the observationa terms in the theorem <br>
-         `max{p 1 , p 2 } ≤ f ≤ min{p 3 , p 4 } if σ < 0`,<br>
-         `max{p 3 , p 4 } ≤ f ≤ min{p 1 , p 2 } if σ > 0`,<br>
-         but if we have only onservational data then we can take use of the observed back-door and front-door variables to generate the experimental data, but if we have partially observable back-dorr and front-door variables then we can use the equation: <br>
-         `LB ≤ P (y|do(x)) ≤ UB`
-          <br>
-         The last topic which author discusses about is the reduciton of the dimensionality of the variable "z" which satisfies the back-door and front-door variable by substituting the causal graph by substiuting "z" by "W" and "U" which satisfies the condition that "no_of_states_of_W *  no_of_states_of_U = no_of_states_of_z". 
-
-
-        </details>
-
-  - [The Causal-Neural Connection: Expressiveness, Learnability, and Inference](https://causalai.net/r80.pdf) 
-      - <details><summary>Maheep's notes </summary>
-        
-        The author proposes Neural Causal Models, that are a type of SCM but are capable of amending Gradient Descent. The author propses the network to solve two kinds of problems, i.e. "causal effect identification" and "estimation" simultaneously in a Neural Network as genrative model acting as a proxy for SCM.
-        <br>
-        "causal estimation" is the process of identifying the effect of different variables 
-        "Identification" is obtained when we apply backdoor criterion or any other step to get a better insight. The power of identification has been seen by us as seen in the papers of Hanwang Zhang.
-        <br>
-        Theorem 1: There exists a NCM that is in sync with the SCM on ladder 3
-        
-        </details>
-
-  - [The Causal Loss: Driving Correlation to Imply Causation(autonomus)](https://arxiv.org/abs/2110.12066) 
-      - <details><summary>Maheep's notes </summary>
-         The paper introduces a loss function known as causal loss which aims to get the intervening effect of the data and shift the model from rung1 to rung2 of ladder of causation. Also the authors propose a Causal sum Product Network(CaSPN).
-          <br>
-         Basically the causal loss measures the prob of a variable when intervened on another variable. 
-         They extend CaSPN from iSPN be reintroducing the conditional vaaribales, which are obtained when we intervene on the observational data. They argue that the CaSPN are causal losses and also are very expressive.<br>
-         The author suggests a way(taken from iSPN) consitional variables will be passed with adjacency matrix while weight training and target varibales are applied to the leaf node. 
-          <br>
-         They train the CaSPN, NN with causal loss, standard loss and standard loss + alpha*causal loss and produce the results. Also they train a Decision tree to argue that their technique also works on Non-Differential Networks, therefore they propose to  substitute the Gini Index with the Causal Decision Score which measures the average probability of a spit resulting in correct classification. 
-        </details>
-
-  - [Double Machine Learning Density Estimation for Local Treatment Effects with Instruments](https://causalai.net/r75.pdf) 
-      - <details><summary>Maheep's notes </summary>
-         The LTE measures the affect of among compilers under assumptions of monotonicity.  The paper focuses on estimating the LTE Density Function(not expected value) using the binary instrumental variable which are used to basically counteract the effect of unobserved confounders. 
-          <br>
-         Instrumental Variables : These are the variables to counteract the affect of inobserved confounders. To be an instrumental varibale these are the following conditions it should consist of: 
-          <br>
-         Relevance: The instrument Z has a causal effect on the treatment X.<br>
-         Exclusion restriction: The instrument Z affects the outcome Y only through the treatment X.<br>
-         Exchangeability (or independence): The instrument Z
-         is as good as randomly assigned (i.e., there is no confounding for the effect of Z on Y).<br>
-         Monotonicity: For all units i, Xi(z1)⩾Xi(x2) when z1⩾z2 (i.e., there are no units that always defy their assignment).
-          <br>
-         The author develops two methods to approximate the density function, i.e. kernel - smoothing and model-based approximations. For both approaches the author derive double/deboased machine learning estimators. 
-          <br>
-         Kernel Smoothing method: They smoothes the density by convoluting with a smooth kernel function............................<br>
-         Model-based approximators: It projects the density in the dfinite-dimenional density class basedon a distributional distance measure..........<br>
-
-         The author argues that by obtaining the PDF may give very valuable information as compared to only estimating the Cumlative Distribution Function. 
-        </details>
 
 
 <!--- Week 1 --> 
@@ -1389,6 +1117,282 @@ The papers in this section focuses to use the concepts of Causality to increase 
         ![Model](imgs/Using_Causal_Analysis_for_Conceptual_Deep_Learning_Explanation/45.png)
 
         </details>    
+
+
+
+## Causality 
+
+  - [The Seven Tools of Causal Inference with Reflections on Machine Learning](https://ftp.cs.ucla.edu/pub/stat_ser/r481.pdf) 
+      - <details><summary>Maheep's notes </summary>
+         
+         The author proposes the 7 tools based on the 3 ladder of causation, i.e. *Associaion, Intervention and Counterfactual*. the paper proposes a diagram which describes that we have some assumptions from which we answer our query and from our data we validate our assumptions, i.e. "Fit Indices".The author proposes the 7 tools as :- 
+         
+         * **Transparency and Testability** : Transparency indicates that the encoded form is easily usable and compact. The testability validates that the assumption encoded are compatible with the available data
+         
+         * **Do-Calculas and the control of Confounding** : It is used for intervention, mainly used when we are trying to shift from 1st layer to 2nd. 
+         
+         * **The Algorithmization of Counterfactuals** : When we can analyse the counterfactual reasoning using the experimental or observational studies. 
+         
+         *  **Mediation Analysis and the Assessment of Direct and  Indirect Effects** : We find out the direct and indirect effects, such as what fraction of effect does X on Y mediated by variable Z.
+         
+         * **Adaptability, External Validity and Sample Selection Bias** : Basically it deals with the robustness of the model and offers do-calculas for overcoming the bias due to environmental changes.
+         
+         * **Recovering from Missing Data** : The casual inference is made to find out the data-generating principles through probablisitic relationship and therefore promises to fill the missing data. 
+         
+         * **Causal Discovery** : The d-separation can ebable us to detect the testable implications of the casual model therefore can prune the set of compatible models
+         significantly to the point where causal queries can be estimated directly from that set.
+        
+        </details>
+
+  - [On Pearl’s Hierarchy and the Foundations of Causal Inference](https://causalai.net/r60.pdf) 
+      - <details><summary>Maheep's notes </summary>
+
+        The pearl causal hierarchy encodes different concepts like : *association. intervention and counterfactual*.
+        
+        * *Corollary1* : It is genrally impossible to draw higher-layer  inferences using only lower-layer informatio but the authors claim that they have atleast developed a framework to move from *layer 1* to *layer 2* just from the *layer 1* data using Causal Bayesian Network that uses *do-calculas*, i.e. intervention to get insight of *layer 2* using the *layer 1* data. 
+
+        <br>
+        
+        A SCM includes 4 variables: 
+        *Exongenous* 
+        $U$
+        , 
+        *Endogneous* 
+        $V$
+        , 
+        *set of functions*
+        $f$ 
+        and 
+        $P(U)$.
+
+   
+        A structural model is said to be markovian if the variable in the exogenous part are independent. 
+        
+        * *Observing* : Joint porobability distribution for the 
+        $Y(u) = y$
+
+        * *Interventional SCM* : SCM computed by fixing some varibales 
+        $X = x$ 
+        where 
+        $X$ is in 
+        $V$.
+
+        * *Potential Response* : It is the solution of 
+        $Y$ 
+        caluclated thorugh the set of eqautions of *SCM* when we intervene on it.   
+        
+        * *Intervening* : observing just when we 
+        $do(X  = x)$
+
+        * *Effectiveness* : 
+        $P(v|do(x))$ 
+        is effectiveness when for every 
+        $v$ 
+        and 
+        $P(v|do(x)) = 1$
+
+        * *Collapse* : The layers collapse when we can compute the results of the upper layer using the lower layer. For ex:- if Layer 2 collapses to layer 1, then it implies that we can draw all possible causal conculsion with mere correlation. 
+        
+        **Theorem 1** : *PCH never collapses.* 
+        It could be  easily observed/seen that SCM agrees on all lower layers but disagrees on all higher layers.  A typical rdata-generating SCM encodes rich information at all threee layers but even very small changes might have substantial effect, which is generally seen in the higher layers.  
+        
+        Truncated Factorization Product is the equation stating 
+        $P(v|do(x)) = \pi P(v|p_{ai})$
+        
+        When two variables are correlated it does not mean that one is causing the other, i.e. 
+        $P(y|do(x)) = P(y)$ 
+        and 
+        $P(x|do(y)) =P(x)$
+        , in this case what happens is there is another unobserved variable that is influencing both 
+        $x$ 
+        and 
+        $y$ 
+        variable which is often indicated by the bi-directed line in the graph.
+        
+        Factorization implied by the semi-markovian model does not act like chain rule, i.e. 
+
+        $$
+        P(e|a,b,c,d) = P(a)P(b|a)P(c|b,a)P(d|c,b,a)
+        $$
+
+        but the factorization looks something like:
+
+        $$ 
+        P(e|d,c,b,a) = P(a)P(b|a)P(c|a)P(e|b,c)
+        $$
+
+        which implies that 
+        $b$ 
+        and 
+        $c$ are only affected by a also seen by a direct edge in *SCM*. 
+          
+        </details>
+
+  - [Counterfactual Explanation and XAI](https://arxiv.org/abs/2201.13169)
+      - <details><summary>Maheep's Notes </summary>
+
+         The author mainly discusses 3 main ideas: 
+
+         * **Sufficient Explanations(SE)**
+
+            > Conditions under which an action guarantees a particular output
+         
+         * **Counterfactual Explanations(CE)**
+            
+            > An action that changes an observed input to produce a change in an already observed output.
+         
+         * **Actual Causation(AC)**
+            
+            > They are very exciting as they consist b/w the Sufficient Explanations and Counterfactual Explanations. They consist of good SE conditions but the ones for which there exist a counterfactual value that would not have made the explanation better.
+
+         As for the example in a regression model can be that a variable $P_{ai}$ in the past that has resulted in the observational data $X$ playing an important role in predicting the output $Y$. Here $X$ have counterfactual importance and also a SE but $P_{ai}$ will only have sufficient condition as $X$ has occured and no longer depends on $P_{ai}$ and not any CE, giving rise to AC. 
+
+         If we think of an example in Computer Vision then what can be the AC?
+
+         We were talking about the intervention on the event $P_{ai} \rightarrow X \rightarrow Y$ to convert it to $P_{ai} \not \rightarrow do(X = x) \rightarrow Y$ or cut off relations with the parents $P_{ai}$ and then observing the output $Y$. Now what i think this paper argues is that when we are doing an intervention on $P_{ai} \rightarrow do(X = x) \rightarrow Y$ then assign a value to that variable but do not cut off the effects from $P_{ai}$. 
+
+         The author argues that under **Independence** a variety of causal notions becomes indistinguishable, also he claims that because of it 
+
+         > *Work on action-guiding explanations in XAI has failed to take up the most relevant lesson that the literature on causation has to offer.*
+         > 
+
+         Now what can be comprehended by this sentence?
+
+         > *Prediction in its most natural application is a forward-looking notion, meaning one predicts an event before it takes place. Explanation on the other hand is a backward-looking notion, meaning that one explains an event after it has happened. Yet as many papers on XAI clearly illustrate, explanations about past events are often required precisely to inform predictions about future events. Therefore a suitable notion of causal
+         explanation, and thus also of actual causation, needs to specify how it relates to predictions.*
+         > 
+
+         Although the work is done by  `Hitchcock (2017)` but I am not able to find it as i think it is paid $$. 
+
+         The author discusses about the counterfactual scenarios by focusing on the question, i.e. *What-if-things-had-been-different?* but focuses on those factors that *may not be manipulated* for the explanation to hold, i.e. they must state which variables are to be safeguarded from intervention **which clearly does not mean that they are held fixed**. 
+
+         One of the important thing author writes in the paper is: 
+
+         > *Contrary to counterfactual explanations, actual causes do not guide you towards actions that, under the same conditions, would ensure the output to be different. But they do guide you towards actions that would not ensure the actual output under the same conditions as the actual action.*
+         > 
+
+
+         A small example of AC by the author as *Salary*
+
+         $$
+         X_1(Salary) = 250,000 
+         $$
+
+         $$
+         X_3(Deposit\_Box) = 50,000 
+         $$
+
+         $$
+         X_2(Savings) = 125,000 
+         $$
+
+         $$
+         Y = (X_1 + 5 \cdot X_2 - 225,000) > 0
+         $$
+
+         $$
+         Y = (250,000 + 625,000 - 225,000) = True
+         $$
+
+         Obviously the salary does not matter in the counterfactual scenario, as he will get the loan regardless of his salary but is a good sufficient explanation. 
+
+         The author discusses about the AC and Fairness, where he sets off from  forward-looking action-guiding explanations to explanations by backward-looking contexts. The backward-looking explanations do not mean that they are capable of inferring the future outputs as forward-looking explanations.
+
+         Also the author claims that actual causation should be used to quantify the actual fairness rather than the counterfactual explanation. 
+
+         > Interestingly though, there already is a growing consensus that counterfactual dependence is too strong a condition and should be replaced with counterfactual dependence along *unfair paths.*
+         >
+
+         </details>
+
+  - [Unit selection based on counterfactual logic](https://escholarship.org/content/qt8pw00989/qt8pw00989.pdf) 
+      - <details><summary>Maheep's notes </summary>
+         The unit selection problem entails two sub-problems, evaluation and search. The evaluation problem is to find an objective function that, ensure a counterfactual behaviour when optimized over the set of observed characteristics C for the selected group. The search task is to devise a search algorithm to select individuals based both on their observed characteristics and the objective function devised above. 
+          <br>
+         The paper only focuses on the evaluation sub-problem and focuses on the previous effort to solve this problem, i.e. A/B testing so as to maximizes the percentage of compliers and minimizes the percentages of defiers, always-takers, and never-takers. But the author argues that the proposed term for it does not satisfy the criteria as P(positive response|c, encouraged) - P(positive response|c, not encouraged) represents "compilers + always-takers" - "defiers + always-takers", therefore the author suggest to have two theorems, i.e. "monotonicity" and "gain equality" which can easily optimize the A/B testing. 
+         Monotonicity expresses the assumption that a change from X = false to X = true cannot, under any circumstance make Y change from true to false.
+         Gain-equality states that the benefit of selecting a complier and a defier is the same as the benefit of selecting an always-taker and a never-taker (i.e., β + δ = γ + θ).
+        <br>
+         Taking into account the following theorems the author proposes a alternate term of A/B testing which stands for maximizing the benefit.<br>
+
+         `argmax c βP (complier|c) + γP (always-taker|c) + θP (never-taker|c) + δP (defier|c)`<br>
+         where benefit of selecting a complier is β, the benefit of selecting an always-taker is γ, the benefit of selecting a never-taker is θ, and the benefit of selecting a defier is δ. Our objective, then, should be to find c.<br>
+         Theorem 4 says that if Y is monotonic and satisfies gain equallity then the benefit function may be defined as: -<br>
+         `(β − θ)P (y,x |z) + (γ − β)P (y,x′ |z) + θ`
+          <br>
+         "Third, the proposed approach could be used to evaluate machine learning models as well as to generate labels for machine learning models. The accuracy of such a machine learning model would be higher because it would consider the counterfactual scenarios."
+        </details>
+
+  - [Unit Selection with Causal Diagram](https://arxiv.org/pdf/2109.07556.pdf) 
+      - <details><summary>Maheep's notes </summary>
+         Same as above
+         <br>
+         Additionoal content continues here..........
+         <br>
+         After proposing the technioques to account for unit selection in general the author proposes a new kind of problem by introducing the confounders in the causal Diagram. The following discovery was partially made by the paper "Causes of Effects: Learning Individual responses from Population Data ". The author proposes a new equation to handle these scenarios.<br> 
+
+         `W + σU ≤ f ≤ W + σL if σ < 0`,
+         `W + σL ≤ f ≤ W + σU if σ > 0`,
+         where "f" is the objective function. Previously in normal case the objective fucntion is bounded by the equation: 
+         <br>
+         `max{p 1 , p 2 , p 3 , p 4 } ≤ f ≤ min{p 5 , p 6 , p 7 , p 8 } if σ < 0,`<br>
+         `max{p 5 , p 6 , p 7 , p 8 } ≤ f ≤ min{p 1 , p 2 , p 3 , p 4 } if σ > 0`,<br>
+         In the extension of the same the author proposes the new situations which arise such as the when "z" is partially observable. and if "z" is  a pure mediator. 
+          <br>
+         The author then discusses about the availablity of the observational and experimantal data. If we only have experimantal data then we can simply remove the observationa terms in the theorem <br>
+         `max{p 1 , p 2 } ≤ f ≤ min{p 3 , p 4 } if σ < 0`,<br>
+         `max{p 3 , p 4 } ≤ f ≤ min{p 1 , p 2 } if σ > 0`,<br>
+         but if we have only onservational data then we can take use of the observed back-door and front-door variables to generate the experimental data, but if we have partially observable back-dorr and front-door variables then we can use the equation: <br>
+         `LB ≤ P (y|do(x)) ≤ UB`
+          <br>
+         The last topic which author discusses about is the reduciton of the dimensionality of the variable "z" which satisfies the back-door and front-door variable by substituting the causal graph by substiuting "z" by "W" and "U" which satisfies the condition that "no_of_states_of_W *  no_of_states_of_U = no_of_states_of_z". 
+
+
+        </details>
+
+  - [The Causal-Neural Connection: Expressiveness, Learnability, and Inference](https://causalai.net/r80.pdf) 
+      - <details><summary>Maheep's notes </summary>
+        
+        The author proposes Neural Causal Models, that are a type of SCM but are capable of amending Gradient Descent. The author propses the network to solve two kinds of problems, i.e. "causal effect identification" and "estimation" simultaneously in a Neural Network as genrative model acting as a proxy for SCM.
+        <br>
+        "causal estimation" is the process of identifying the effect of different variables 
+        "Identification" is obtained when we apply backdoor criterion or any other step to get a better insight. The power of identification has been seen by us as seen in the papers of Hanwang Zhang.
+        <br>
+        Theorem 1: There exists a NCM that is in sync with the SCM on ladder 3
+        
+        </details>
+
+  - [The Causal Loss: Driving Correlation to Imply Causation(autonomus)](https://arxiv.org/abs/2110.12066) 
+      - <details><summary>Maheep's notes </summary>
+         The paper introduces a loss function known as causal loss which aims to get the intervening effect of the data and shift the model from rung1 to rung2 of ladder of causation. Also the authors propose a Causal sum Product Network(CaSPN).
+          <br>
+         Basically the causal loss measures the prob of a variable when intervened on another variable. 
+         They extend CaSPN from iSPN be reintroducing the conditional vaaribales, which are obtained when we intervene on the observational data. They argue that the CaSPN are causal losses and also are very expressive.<br>
+         The author suggests a way(taken from iSPN) consitional variables will be passed with adjacency matrix while weight training and target varibales are applied to the leaf node. 
+          <br>
+         They train the CaSPN, NN with causal loss, standard loss and standard loss + alpha*causal loss and produce the results. Also they train a Decision tree to argue that their technique also works on Non-Differential Networks, therefore they propose to  substitute the Gini Index with the Causal Decision Score which measures the average probability of a spit resulting in correct classification. 
+        </details>
+
+  - [Double Machine Learning Density Estimation for Local Treatment Effects with Instruments](https://causalai.net/r75.pdf) 
+      - <details><summary>Maheep's notes </summary>
+         The LTE measures the affect of among compilers under assumptions of monotonicity.  The paper focuses on estimating the LTE Density Function(not expected value) using the binary instrumental variable which are used to basically counteract the effect of unobserved confounders. 
+          <br>
+         Instrumental Variables : These are the variables to counteract the affect of inobserved confounders. To be an instrumental varibale these are the following conditions it should consist of: 
+          <br>
+         Relevance: The instrument Z has a causal effect on the treatment X.<br>
+         Exclusion restriction: The instrument Z affects the outcome Y only through the treatment X.<br>
+         Exchangeability (or independence): The instrument Z
+         is as good as randomly assigned (i.e., there is no confounding for the effect of Z on Y).<br>
+         Monotonicity: For all units i, Xi(z1)⩾Xi(x2) when z1⩾z2 (i.e., there are no units that always defy their assignment).
+          <br>
+         The author develops two methods to approximate the density function, i.e. kernel - smoothing and model-based approximations. For both approaches the author derive double/deboased machine learning estimators. 
+          <br>
+         Kernel Smoothing method: They smoothes the density by convoluting with a smooth kernel function............................<br>
+         Model-based approximators: It projects the density in the dfinite-dimenional density class basedon a distributional distance measure..........<br>
+
+         The author argues that by obtaining the PDF may give very valuable information as compared to only estimating the Cumlative Distribution Function. 
+        </details>
+
 
 ## Causality & Computer Vision
 
