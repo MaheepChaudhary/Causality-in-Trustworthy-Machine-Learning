@@ -1228,7 +1228,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
           
         </details>
 
-  - [Counterfactual Explanation and XAI](https://arxiv.org/abs/2201.13169)
+  - [Causal Explanation and XAI](https://arxiv.org/abs/2201.13169)
       - <details><summary>Maheep's Notes </summary>
 
          The author mainly discusses 3 main ideas: 
