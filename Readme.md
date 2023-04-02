@@ -1418,6 +1418,7 @@ The papers in this section focuses to use the concepts of Causality to increase 
 
         However, the case will not be true for the $H_2$ where
 
+
         $$
         p_{H_2}(y_i \perp do(X_1 = \hat{x}_1)) \neq p_G(y_i \perp do(X_1 = \hat{x}_1))
         $$
