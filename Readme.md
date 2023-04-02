@@ -1393,6 +1393,84 @@ The papers in this section focuses to use the concepts of Causality to increase 
          The author argues that by obtaining the PDF may give very valuable information as compared to only estimating the Cumlative Distribution Function. 
         </details>
 
+   - [Structural Intervention Distance(SID) for Evaluating causal Graphs](https://arxiv.org/abs/1306.1043)
+
+      <details><summary>Maheep's Notes</summary>
+
+        - This fouses on observing the distance between the two $\textsf{DAGs}$ by counting the pair of vertices $(i,j)$ for which the estimate $\mathcal{M}$ correctly predicts the intervention distribution within the class of distributions that are markov w.r.t. to it. 
+        - This work basically is build upon the Structural Hamming distance $\textsf{SHD}$ which calculates the distance between $2$ $\textsf{DAGs}$ via calculating the number of incorrect edges in the diagram. 
+        - For example in the figure given below:
+          ![SID Image](Papers/images/SID.png)
+
+
+        $$
+        SHD(G;H_1) = 1 = SHD(G;H_2) :
+        $$
+
+
+        However, the case is totally different as stated above by $\textsf{SHD}$. When computing the intervention distribution from $Y_2$ to $Y_3$ in
+        $H_1$, we adjust not only for $\{X1;X2\}$ as done in $G$ but also for the additional parent $Y_1$. Indeed,
+        since $Y2 \perp Y_1 | \{X1;X2\}$.
+
+
+        ![SID equation](Papers/images/SID_eqn.png)
+
+
+        However, the case will not be true for the $H_2$ where
+
+        $$
+        p_{H_2}(y_i \perp do(X_1 = \hat{x}_1)) \neq p_G(y_i \perp do(X_1 = \hat{x}_1))
+        $$
+
+
+        In fact, $H_2$ makes eight erroneous predictions for many
+        observational distributions, resulting in the following equation.
+
+        $$
+        \textsf{SID}(G,H_1) = 0 \neq 8 = \textsf{SID}(G,H_2)
+        $$
+
+      </details>
+
+ - [A Ladder of Causal Distances](https://arxiv.org/abs/2005.02480)
+
+    <details><summary>Maheep's Notes</summary>
+    
+      - The work is an extension of the above work and focuses to find the distance between the $\textit{Observational}$, ${Interventional}$, and ${Counterfactual}$ distribution. 
+      - It argues that the above work do not cover the counterfactual scenario. It also highlights that SID asusmes that the observational model is known. 
+      - It introduces the intervention distance by comparing all their interventional distributions. It defines Intervention Distance as the expected deviation in the interventional distributions if a node $I$ is sampled on which to intervene and sample its value according to a defined distribution.
+
+      ![intervention distance](Papers/images/CD_ID.png)
+
+      - It defines the counterfactual distribution, by quanityfing the intervention distance for all the counterfactual models induced by all possible evidences.
+
+      ![Counterfactual distance](Papers/images/CD_CD.png)
+
+    </details>
+
+  - [CausalGAN: Learning Causal Implicit Generative Models with Adversarial Training](https://arxiv.org/abs/1709.02023)
+
+    <details><summary>Maheep's Notes</summary>
+
+      - The work shows how adversarial training can be used to learn a generative model with true observational and interventional distributions. They argue that if the neural connections of the GAN are inspired by the causal model, then it can easily generate causal images. 
+      - It argues that images are made up of lables can be defined as different factors that generate different factors and eventually the output.
+
+      ![causalgan architecture](Papers/images/causalgan.png)
+
+      ![causalgan theory](Papers/images/casual_gan_1.png)
+
+      - To implement the aforementioned function, they intiailly learn the causal implicit generative model over a small set of variables. Then, learn the remaining set of variables conditioned on the first set of variables using a conditional generative network.
+
+      ![causalgan working](Papers/images/casual_gan_2.png)
+
+      - In implementation they firstly learn the model over the labels and then train a generative model for the images conditioned upon the labels.
+      - The module causal controller control which distribution the images will be sampled from when intervened or conditioned on a set of labels. 
+      - They design a new conditional GAN architecture to generate the images based on the labels of the Causal Controller.
+      - The Labeler is trained to estimate the labels of images in the dataset. The Anti-Labeler is trained to estimate the labels of the images which are sampled from the generator. The label of a generated image is the label produced by the Causal Controller.
+
+      ![causalgan architecture](Papers/images/causalgan_architecture.png)
+
+    </details>
 
 ## Causality & Computer Vision
 
