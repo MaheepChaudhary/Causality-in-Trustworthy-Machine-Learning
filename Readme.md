@@ -1,5 +1,7 @@
 # Rise of Causality in Computer Vision
 
+We are pleased to announce the launch of our comprehensive survey, titled "[Towards Trustworthy and Aligned Machine Learning: A Data-centric Survey with Causality Perspectives](https://arxiv.org/abs/2307.16851)," drawing from the papers succinctly outlined in this repository. This survey delves into the multifaceted realm of merging causality with various machine learning methodologies to attain trustworthiness, encompassing domains such as domain adaptation, domain generalization, and more. Furthermore, we explore the attributes and constraints of pre-trained large models, shedding light on their significance and limitations. Ultimately, we address the pivotal question of why causality, particularly in the context of trustworthiness, serves as a viable solution.
+
 The repository contains lists of papers on causality and how relevant techniques are being used to further enhance deep learning era computer vision solutions. 
 
 The repository is organized by [Maheep Chaudhary](https://maheepchaudhary.github.io/maheep.github.io/), and [Haohan Wang](http://www.cs.cmu.edu/~haohanw/) as an effort to collect and read relevant papers and to hopefully serve the public as a collection of relevant resources. 
